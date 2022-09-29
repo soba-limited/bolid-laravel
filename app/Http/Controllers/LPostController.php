@@ -233,4 +233,12 @@ class LPostController extends Controller
         $l_post = LPost::find($id);
         $l_post->delete();
     }
+
+    public function imgsave(Request $request)
+    {
+        return $request;
+        /*LPost::withTrashed()->count() > 0 ? $nextPost = LPost::orderBy('id', 'desc')->first()->id + 1 : $nextPost = 1;
+        if ($request->hasFile('data')) {
+        }*/
+    }
 }
