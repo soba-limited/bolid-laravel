@@ -10,6 +10,7 @@ use App\Http\Requests\StoreLPostRequest;
 use App\Http\Requests\UpdateLPostRequest;
 use App\Models\LSeries;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LPostController extends Controller
@@ -234,11 +235,14 @@ class LPostController extends Controller
         $l_post->delete();
     }
 
-    public function imgsave(Request $request)
+    public function imagesave(Request $request)
     {
-        return $request;
-        /*LPost::withTrashed()->count() > 0 ? $nextPost = LPost::orderBy('id', 'desc')->first()->id + 1 : $nextPost = 1;
-        if ($request->hasFile('data')) {
-        }*/
+        LPost::withTrashed()->count() > 0 ? $nextPost = LPost::orderBy('id', 'desc')->first()->id + 1 : $nextPost = 1;
+        if ($request->hasFile('image')) {
+            $image_name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images/l_post/'.$nextPost."/content/", $image_name, 'public');
+            $image = 'images/post/'.$nextPost."/content/".$image_name;
+            return $image;
+        }
     }
 }
