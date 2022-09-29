@@ -55,8 +55,8 @@ class LPresentController extends Controller
         $id = $l_present->id;
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/present/'.$id, $file_name, 'public');
-            $thumbs = 'images/present/'.$id."/".$file_name;
+            $request->file('thumbs')->storeAs('images/l_present/'.$id, $file_name, 'public');
+            $thumbs = 'images/l_present/'.$id."/".$file_name;
             $l_present->thumbs = $thumbs;
             $l_present->save();
         }
@@ -105,8 +105,8 @@ class LPresentController extends Controller
         //
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/present/'.$id, $file_name, 'public');
-            $thumbs = 'images/present/'.$id."/".$file_name;
+            $request->file('thumbs')->storeAs('images/l_present/'.$id, $file_name, 'public');
+            $thumbs = 'images/l_present/'.$id."/".$file_name;
         }
         $l_present = LPost::find($id)->update([
             'title' => $request->title,

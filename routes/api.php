@@ -49,6 +49,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/liondor/pickup/{id}/store', [LPickupController::class,'store'])->name('l_pickup.store');
     Route::delete('/liondor/pickup/{id}/delete', [LPickupController::class,'destroy'])->name('l_pickup.delete');
     Route::get('/liondor/admin/sidebar', [LSidebarController::class,'index'])->name('l_sidebar.index');
+    Route::post('/liondor/sidebar/imagesave', [LSidebarController::class,'imagesave'])->name('l_sidebar.imagesave');
     Route::post('/liondor/sidebar/store', [LSidebarController::class,'store'])->name('l_sidebar.store');
     Route::get('/liondor/sidebar/{id}/edit', [LSidebarController::class,'edit'])->name('l_sidebar.edit');
     Route::post('/liondor/sidebar/{id}/update', [LSidebarController::class,'update'])->name('l_sidebar.update');

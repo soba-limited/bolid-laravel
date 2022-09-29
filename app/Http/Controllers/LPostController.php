@@ -102,14 +102,14 @@ class LPostController extends Controller
         if ($request->hasFile('thumbs')) {
             $thumbs_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/l_post/'.$id, $thumbs_name, 'public');
-            $thumbs = 'images/present/'.$id."/".$thumbs_name;
+            $thumbs = 'images/l_present/'.$id."/".$thumbs_name;
             $l_post->thumbs = $thumbs;
         }
 
         if ($request->hasFile('mv')) {
             $mv_name = $request->file('mv')->getClientOriginalName();
             $request->file('mv')->storeAs('images/l_post/'.$id, $mv_name, 'public');
-            $mv = 'images/present/'.$id."/".$mv_name;
+            $mv = 'images/l_present/'.$id."/".$mv_name;
             $l_post->mv = $mv;
         }
 
@@ -198,13 +198,13 @@ class LPostController extends Controller
         if ($request->hasFile('thumbs')) {
             $thumbs_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/l_post/'.$id, $thumbs_name, 'public');
-            $thumbs = 'images/present/'.$id."/".$thumbs_name;
+            $thumbs = 'images/l_present/'.$id."/".$thumbs_name;
         }
 
         if ($request->hasFile('mv')) {
             $mv_name = $request->file('mv')->getClientOriginalName();
             $request->file('mv')->storeAs('images/l_post/'.$id, $mv_name, 'public');
-            $mv = 'images/present/'.$id."/".$mv_name;
+            $mv = 'images/l_present/'.$id."/".$mv_name;
         }
 
         $l_post->update([
@@ -241,7 +241,7 @@ class LPostController extends Controller
         if ($request->hasFile('image')) {
             $image_name = $str.$request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('images/l_post/content/', $image_name, 'public');
-            $image = 'images/post/content/'.$image_name;
+            $image = 'images/l_post/content/'.$image_name;
             return $image;
         }
     }

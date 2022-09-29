@@ -53,8 +53,8 @@ class LProfileController extends Controller
         $id = $l_profile->id;
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/present/'.$id, $file_name, 'public');
-            $thumbs = 'images/present/'.$id."/".$file_name;
+            $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
+            $thumbs = 'images/l_profile/'.$id."/".$file_name;
             $l_profile->thumbs = $thumbs;
             $l_profile->save();
         }
@@ -108,8 +108,8 @@ class LProfileController extends Controller
         $id = Auth::id();
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/present/'.$id, $file_name, 'public');
-            $thumbs = 'images/present/'.$id."/".$file_name;
+            $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
+            $thumbs = 'images/l_profile/'.$id."/".$file_name;
         }
 
         $l_profile = LProfile::find($id)->update([
