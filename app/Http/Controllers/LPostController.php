@@ -237,11 +237,11 @@ class LPostController extends Controller
 
     public function imagesave(Request $request)
     {
-        LPost::withTrashed()->count() > 0 ? $nextPost = LPost::orderBy('id', 'desc')->first()->id + 1 : $nextPost = 1;
+        $str = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789"), 0, 16);
         if ($request->hasFile('image')) {
-            $image_name = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('images/l_post/'.$nextPost."/content/", $image_name, 'public');
-            $image = 'images/post/'.$nextPost."/content/".$image_name;
+            $image_name = $str.$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images/l_post/content/', $image_name, 'public');
+            $image = 'images/post/content/'.$image_name;
             return $image;
         }
     }
