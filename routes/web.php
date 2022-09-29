@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\LFaqController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
