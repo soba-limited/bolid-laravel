@@ -103,4 +103,15 @@ class LSidebarController extends Controller
         LSidebar::find($id)->delete();
         return 'このブロックは削除されました';
     }
+
+    public function imagesave(Request $request)
+    {
+        $str = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789"), 0, 16);
+        if ($request->hasFile('image')) {
+            $image_name = $str.$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images/l_sidebar/content/', $image_name, 'public');
+            $image = 'images/l_sidebar/content/'.$image_name;
+            return $image;
+        }
+    }
 }
