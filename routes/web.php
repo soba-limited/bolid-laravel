@@ -38,8 +38,6 @@ Route::get('/liondor/present/{id}', [LPresentController::class,'show'])->name('l
 Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_series.show');
 Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
 
-Route::get('/liondor/mypage', [LProfileController::class,'show'])->name('l_profile.show');
-
 
 
 
