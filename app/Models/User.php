@@ -61,6 +61,7 @@ class User extends Authenticatable
         'point' => 'integer',
     ];
 
+    //Liondor リレーション
     public function LPost()
     {
         return $this->hasMany(LPost::class);
@@ -76,5 +77,34 @@ class User extends Authenticatable
     public function LBookmark()
     {
         return $this->belongsToMany(LPost::class, 'l_post_user', 'user_id', 'l_post_id');
+    }
+
+    //Deramall リレーション
+    public function DProfile()
+    {
+        return $this->belongsTo(Dprofile::class);
+    }
+    public function Following()
+    {
+        return $this->belongsToMany(User::class, 'd_follows', 'following_user_id', 'followed_user_id');
+    }
+    public function Followed()
+    {
+        return $this->belongsToMany(User::class, 'd_follows', 'followed_user_id', 'following_user_id');
+    }
+
+    public function DShop()
+    {
+        return $this->hasMany(DShop::class);
+    }
+
+    public function DMall()
+    {
+        return $this->hasMany(DMall::class);
+    }
+
+    public function DMallBookmark()
+    {
+        return $this->belongsToMany(User::class, 'd_mall_bookmarks', 'user_id', 'd_mall_id');
     }
 }

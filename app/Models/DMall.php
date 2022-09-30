@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LCategory extends Model
+class DMall extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,10 +17,8 @@ class LCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'name',
-        'slug',
-        'depth',
-        'parent_slug',
     ];
 
     /**
@@ -27,9 +27,8 @@ class LCategory extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'deleted_at',
         'created_at',
-        'updated_at',
-        'deleted_at'
     ];
 
     /**
@@ -38,11 +37,21 @@ class LCategory extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'depth'=>'integer',
+        'user_id'=>'integer',
     ];
 
-    public function LPost()
+    public function user()
     {
-        return $this->hasMany(\App\Models\LPost::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function DShop()
+    {
+        return $this->belongsToMany(DShop::class, 'd_maill_ins', 'd_mall_id', 'd_shop_id');
+    }
+
+    public function DMallBookmarkUser()
+    {
+        return $this->belongsToMany(User::class, 'd_mall_bookmarks', 'd_mall_id', 'user_id');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LCategory extends Model
+class DTag extends Model
 {
     use HasFactory;
 
@@ -16,9 +16,6 @@ class LCategory extends Model
      */
     protected $fillable = [
         'name',
-        'slug',
-        'depth',
-        'parent_slug',
     ];
 
     /**
@@ -28,8 +25,6 @@ class LCategory extends Model
      */
     protected $hidden = [
         'created_at',
-        'updated_at',
-        'deleted_at'
     ];
 
     /**
@@ -38,11 +33,10 @@ class LCategory extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'depth'=>'integer',
     ];
 
-    public function LPost()
+    public function DShop()
     {
-        return $this->hasMany(\App\Models\LPost::class);
+        return $this->belongsToMany(DShop::class, 'd_shop_d_tag', 'd_tag_id', 'd_shop_id');
     }
 }

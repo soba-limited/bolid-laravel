@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LCategory extends Model
+class DMallIn extends Model
 {
     use HasFactory;
 
@@ -15,10 +15,8 @@ class LCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'slug',
-        'depth',
-        'parent_slug',
+        'd_mall_id',
+        'd_shop_id',
     ];
 
     /**
@@ -28,8 +26,7 @@ class LCategory extends Model
      */
     protected $hidden = [
         'created_at',
-        'updated_at',
-        'deleted_at'
+        'updated_at'
     ];
 
     /**
@@ -38,11 +35,7 @@ class LCategory extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'depth'=>'integer',
+        'd_mall_id'=>'integer',
+        'd_shop_id'=>'integer',
     ];
-
-    public function LPost()
-    {
-        return $this->hasMany(\App\Models\LPost::class);
-    }
 }
