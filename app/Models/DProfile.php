@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LCategory extends Model
+class DProfile extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,10 +16,9 @@ class LCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'slug',
-        'depth',
-        'parent_slug',
+        'nicename',
+        'thumbs',
+        'profile',
     ];
 
     /**
@@ -27,9 +27,8 @@ class LCategory extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'profile',
         'created_at',
-        'updated_at',
-        'deleted_at'
     ];
 
     /**
@@ -38,11 +37,10 @@ class LCategory extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'depth'=>'integer',
     ];
 
-    public function LPost()
+    public function users()
     {
-        return $this->hasMany(\App\Models\LPost::class);
+        return $this->hasOne(\App\Models\User::class);
     }
 }

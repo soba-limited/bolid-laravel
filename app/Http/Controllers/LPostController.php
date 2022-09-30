@@ -145,6 +145,7 @@ class LPostController extends Controller
         ];
 
         $allarray = \Commons::LCommons($allarray);
+        echo $posts->content;
         return $this->jsonResponse($allarray);
     }
 
