@@ -32,7 +32,17 @@ class LPostController extends Controller
         } else {
             $posts = LPost::where('state', 1)->where('l_category_id', $categories->id);
         }
-        $posts = $posts->with('LCategory')->orderBy('id', 'desc')->get()->makeHidden(['discription','sub_title','content']);
+
+        $sort_key = 'id';
+        $order_key = 'desc';
+
+        if (isset($_GET['sort'])) {
+            $sort_key = $_GET['sort'];
+        }
+        if (isset($_GET['order'])) {
+            $order_key = $_GET['order'];
+        }
+        $posts = $posts->with('LCategory')->orderBy($sort_key, $order_key)->get()->makeHidden(['discription','sub_title','content']);
         //それぞれを配列に入れる
         $allarray = [
             'posts' => $posts,
@@ -145,7 +155,6 @@ class LPostController extends Controller
         ];
 
         $allarray = \Commons::LCommons($allarray);
-        echo $posts->content;
         return $this->jsonResponse($allarray);
     }
 

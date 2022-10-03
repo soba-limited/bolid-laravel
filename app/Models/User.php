@@ -105,6 +105,21 @@ class User extends Authenticatable
 
     public function DMallBookmark()
     {
-        return $this->belongsToMany(User::class, 'd_mall_bookmarks', 'user_id', 'd_mall_id');
+        return $this->belongsToMany(DMall::class, 'd_mall_bookmarks', 'user_id', 'd_mall_id');
+    }
+
+    public function DOfficial()
+    {
+        return $this->belongsToMany(DShop::class, 'd_officials', 'user_id', 'd_shop_id');
+    }
+
+    public function DShopBookmark()
+    {
+        return $this->belongsToMany(DShop::class, 'd_shop_bookmarks', 'user_id', 'd_shop_id');
+    }
+
+    public function DGoods()
+    {
+        return $this->belongsToMany(DShop::class, 'd_goods', 'user_id', 'd_shop_id');
     }
 }
