@@ -20,7 +20,7 @@ class LPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($category)
+    public function index(Request $request, $category)
     {
         //
         $categories = LCategory::where('slug', $category)->first();
@@ -36,16 +36,28 @@ class LPostController extends Controller
         $sort_key = 'id';
         $order_key = 'desc';
 
-        if (isset($_GET['sort'])) {
-            $sort_key = $_GET['sort'];
+        if (isset($request->sort)) {
+            $sort_key = $request->sort;
         }
-        if (isset($_GET['order'])) {
-            $order_key = $_GET['order'];
+        if (isset($request->order)) {
+            $order_key = $request->order;
         }
-        $posts = $posts->with('LCategory')->orderBy($sort_key, $order_key)->get()->makeHidden(['discription','sub_title','content']);
+
+        $limit = 30;
+        $skip = 0;
+
+        if (isset($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        $posts_count = $posts->count();
+        $page_max = $posts_count % $limit > 0 ? floor($posts_count / $limit) + 1: $posts_count / $limit;
+        $posts = $posts->with('LCategory')->orderBy($sort_key, $order_key)->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
+
         //それぞれを配列に入れる
         $allarray = [
             'posts' => $posts,
+            'page_max' => $page_max,
         ];
         $allarray = \Commons::LCommons($allarray);
         return $this->jsonResponse($allarray);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LPresent;
 use App\Models\LSidebar;
 use App\Models\LPickup;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreLPresentRequest;
 use App\Http\Requests\UpdateLPresentRequest;
 
@@ -15,14 +16,26 @@ class LPresentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $presents = LPresent::orderBy('id', 'desc')->get();
+
+        $limit = 30;
+        $skip = 0;
+
+        if (isset($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        $present_count = LPresent::all()->count();
+        $page_max = $present_count % $limit > 0 ? floor($present_count / $limit) + 1: $present_count / $limit;
+
+        $presents = LPresent::orderBy('id', 'desc')->skip($skip)->limit($limit)->get();
 
         //それぞれを配列に入れる
         $allarray = [
             'presents' => $presents,
+            'page_max' => $page_max,
         ];
         $allarray = \Commons::LCommons($allarray);
         return $this->jsonResponse($allarray);
