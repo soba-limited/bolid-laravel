@@ -59,4 +59,33 @@ class DShop extends Model
     {
         return $this->belongsToMany(DMall::class, 'd_maill_ins', 'd_shop_id', 'd_mall_id');
     }
+
+    public function DPickups()
+    {
+        return $this->hasMany(DPickup::class);
+    }
+    public function DOverviews()
+    {
+        return $this->hasMany(DOverview::class);
+    }
+    public function DInfos()
+    {
+        return $this->hasMany(DInfo::class);
+    }
+    public function DCoupons()
+    {
+        return $this->hasMany(DCoupon::class);
+    }
+    public function DItems()
+    {
+        return $this->hasMany(DItem::class);
+    }
+    public function DSocials()
+    {
+        return $this->hasMany(DSocial::class);
+    }
+    public function DInstaApiTokens()
+    {
+        return $this->hasMany(DInstaApiToken::class);
+    }
 }
