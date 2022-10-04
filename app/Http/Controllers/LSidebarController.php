@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LSidebar;
 use App\Http\Requests\StoreLSidebarRequest;
 use App\Http\Requests\UpdateLSidebarRequest;
+use Illuminate\Http\Request;
 
 class LSidebarController extends Controller
 {
