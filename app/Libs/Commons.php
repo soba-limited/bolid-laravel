@@ -24,7 +24,7 @@ class Commons extends Facade
         $pickup = LPickup::with(['LPost'=>function ($query) {
             $query->with(['user'=>function ($query) {
                 $query->with('LProfile');
-            }]);
+            }])->with('LCategory');
         }])->inRandomOrder()->limit(5)->orderBy('id', 'desc')->get();
         $allarray = array_merge($allarray, array('pickups'=>$pickup));
         return $allarray;
