@@ -196,10 +196,12 @@ class LPostController extends Controller
         $posts = LPost::with(['user'=>function ($query) {
             $query->with(['LProfile']);
         }])->with('LCategory')->with('LSeries')->find($id)->makeVisible(['discription','sub_title','content']);
+        $nowCatParent = $posts->LCategory->depth == 0 ? LCategory::where('slug', $posts->LCategory->slug)->first() : LCategory::where('slug', $posts->LCategory->parent_slug)->first();
         $allarray = [
             'posts' => $posts,
             'category'=>$categories,
-            'series'=>$series
+            'series'=>$series,
+            'parent_category' => $nowCatParent
         ];
         return $this->jsonResponse($allarray);
     }
