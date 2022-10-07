@@ -123,7 +123,7 @@ class LPresentController extends Controller
             $request->file('thumbs')->storeAs('images/l_present/'.$id, $file_name, 'public');
             $thumbs = 'images/l_present/'.$id."/".$file_name;
         }
-        $l_present = LPost::find($id)->update([
+        $l_present = LPresent::find($id)->update([
             'title' => $request->title,
             'offer' => $request->offer,
             'limit' => $request->limit,
