@@ -43,7 +43,7 @@ class LPresentUserController extends Controller
         if (is_array($hobbys)) {
             foreach ($hobbys as $hobby) {
                 if (isset($hobby_text)) {
-                    $hobby_text = $hobby_text."/".$hobby;
+                    $hobby_text = $hobby_text.",".$hobby;
                 } else {
                     $hobby_text = $hobby;
                 }
@@ -54,7 +54,7 @@ class LPresentUserController extends Controller
         if (is_array($brands)) {
             foreach ($brands as $brand) {
                 if (isset($brand_text)) {
-                    $brand_text = $brand_text."/".$brand;
+                    $brand_text = $brand_text.",".$brand;
                 } else {
                     $brand_text = $brand;
                 }
@@ -65,7 +65,7 @@ class LPresentUserController extends Controller
         if (is_array($cosmetics)) {
             foreach ($cosmetics as $cosmetic) {
                 if (isset($cosmetic_text)) {
-                    $cosmetic_text = $cosmetic_text."/".$cosmetic;
+                    $cosmetic_text = $cosmetic_text.",".$cosmetic;
                 } else {
                     $cosmetic_text = $cosmetic;
                 }
@@ -74,6 +74,7 @@ class LPresentUserController extends Controller
         $l_present_user = LPostUser::create([
             'user_id' => Auth::id(),
             'l_present_id' => $id,
+            'account' => $request->account,
             'hobby' => $hobby_text,
             'brand' => $brand_text,
             'cosmetic' => $cosmetic_text,

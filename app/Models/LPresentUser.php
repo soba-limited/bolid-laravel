@@ -17,6 +17,7 @@ class LPresentUser extends Model
     protected $fillable = [
         'user_id',
         'l_present_id',
+        'account',
         'marriage',
         'child',
         'income',
