@@ -101,9 +101,11 @@ class LPresentController extends Controller
      * @param  \App\Models\LPresent  $lPresent
      * @return \Illuminate\Http\Response
      */
-    public function edit(LPresent $lPresent)
+    public function edit($id)
     {
         //
+        $presents = LPresent::find($id);
+        return $this->jsonResponse($presents);
     }
 
     /**
