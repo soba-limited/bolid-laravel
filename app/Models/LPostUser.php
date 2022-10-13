@@ -14,6 +14,8 @@ class LPostUser extends Model
      *
      * @var array<int, string>
      */
+    protected $table = "l_post_user";
+
     protected $fillable = [
         'user_id',
         'l_post_id',
