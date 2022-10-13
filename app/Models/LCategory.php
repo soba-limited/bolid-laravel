@@ -14,6 +14,8 @@ class LCategory extends Model
      *
      * @var array<int, string>
      */
+    protected $table = "l_categories";
+
     protected $fillable = [
         'name',
         'slug',

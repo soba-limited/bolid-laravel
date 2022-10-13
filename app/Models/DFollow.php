@@ -14,6 +14,9 @@ class DFollow extends Model
      *
      * @var array<int, string>
      */
+
+    protected $table = "d_follows";
+
     protected $fillable = [
         'followind_user_id',
         'followed_user_id',
