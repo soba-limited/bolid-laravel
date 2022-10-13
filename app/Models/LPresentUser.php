@@ -14,6 +14,9 @@ class LPresentUser extends Model
      *
      * @var array<int, string>
      */
+
+    protected $table = 'l_present_user';
+
     protected $fillable = [
         'user_id',
         'l_present_id',
