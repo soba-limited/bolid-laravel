@@ -69,9 +69,11 @@ class LFaqController extends Controller
      * @param  \App\Models\LFaq  $lFaq
      * @return \Illuminate\Http\Response
      */
-    public function edit(LFaq $lFaq)
+    public function edit(LFaq $lFaq, $id)
     {
         //
+        $l_faq = Lfaq::find($id);
+        return $this->jsonResponse($l_faq);
     }
 
     /**
