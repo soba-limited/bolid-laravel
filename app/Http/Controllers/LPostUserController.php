@@ -39,7 +39,7 @@ class LPostUserController extends Controller
     {
         //
         $bookmark = LPostUser::crete([
-            'user_id' => Auth::id(),
+            'user_id' => $request->user_id,
             'l_post_id' => $id,
         ]);
         return 'この記事をブックマークしました';
