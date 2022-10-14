@@ -71,9 +71,11 @@ class LSeriesController extends Controller
      * @param  \App\Models\LSeries  $lSeries
      * @return \Illuminate\Http\Response
      */
-    public function edit(LSeries $lSeries)
+    public function edit(LSeries $lSeries, $id)
     {
         //
+        $l_series = LSeries::find($id);
+        return $this->jsonResponse($l_series);
     }
 
     /**
