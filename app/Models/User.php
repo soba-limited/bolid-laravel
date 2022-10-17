@@ -39,10 +39,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'account_type',
-        'l_profile_id',
-        'c_profile_id',
-        'd_profile_id',
+        //'account_type',
+        //'l_profile_id',
+        //'c_profile_id',
+        //'d_profile_id',
         'created_at',
         'updated_at'
     ];
