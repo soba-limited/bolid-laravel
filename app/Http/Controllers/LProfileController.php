@@ -52,6 +52,9 @@ class LProfileController extends Controller
             'occupation' => $request->occupation,
         ]);
         $id = $l_profile->id;
+        $user = User::find($request->user_id)::update([
+            'l_profile_id' => $id,
+        ]);
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
@@ -118,14 +121,15 @@ class LProfileController extends Controller
     public function update(UpdateLProfileRequest $request, LProfile $lProfile)
     {
         //
-        $id = Auth::id();
+        $id = $request->user_id;
+        $profile_id = User::find($id)->LProfile->l_profile_id;
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
             $thumbs = 'images/l_profile/'.$id."/".$file_name;
         }
 
-        $l_profile = LProfile::find($id)->update([
+        $l_profile = LProfile::find($profile_id)->update([
             'nicename' => $request->nicename,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
             'sex' => $request->sex,
