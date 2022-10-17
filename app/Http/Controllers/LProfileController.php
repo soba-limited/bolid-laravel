@@ -52,7 +52,7 @@ class LProfileController extends Controller
             'occupation' => $request->occupation,
         ]);
         $id = $l_profile->id;
-        $user = User::find($request->user_id)::update([
+        $user = User::find($request->user_id)->update([
             'l_profile_id' => $id,
         ]);
         if ($request->hasFile('thumbs')) {
