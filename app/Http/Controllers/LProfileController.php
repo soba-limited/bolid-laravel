@@ -99,7 +99,8 @@ class LProfileController extends Controller
             'LPresent'=> function ($query) {
                 $query->limit(3);
             }
-                ])->where('l_profile_id', $profile_id)->first()->makeVisible(['sex','zipcode','zip','other_address','age','work_type','industry','occupation']);
+                ])->where('l_profile_id', $profile_id)->first();
+        $profile->LProfile->makeVisible(['sex','zipcode','zip','other_address','age','work_type','industry','occupation']);
         return $this->jsonResponse($profile);
     }
 
