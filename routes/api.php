@@ -73,9 +73,9 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/liondor/present/app/{id}', [LPresentUserController::class,'store'])->name('l_present.store');
     Route::get('/liondor/mypage/create', [LProfileController::class,'create'])->name('l_profile.create');
-    Route::get('/liondor/mypage/edit', [LProfileController::class,'edit'])->name('l_profile.edit');
+    Route::get('/liondor/mypage/edit/{profile_id}', [LProfileController::class,'edit'])->name('l_profile.edit');
     Route::post('/liondor/mypage/store', [LProfileController::class,'store'])->name('l_profile.store');
-    Route::post('/liondor/mypage/update', [LProfileController::class,'update'])->name('l_profile.update');
+    Route::post('/liondor/mypage/update/{profile_id}', [LProfileController::class,'update'])->name('l_profile.update');
     Route::post('/liondor/post/bookmark/{id}', [LPostUserController::class,'store'])->name('l_post_user.store');
     Route::delete('/liondor/post/bookmark_remove/{id}', [LPostUserController::class,'destroy'])->name('l_post_user.delete');
     Route::post('/liondor/hasprofile/{id}', [LProfileController::class,'hasprofile'])->name('l_profile.hasprofile');
