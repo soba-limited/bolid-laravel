@@ -26,20 +26,9 @@ class LProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         //
-        $id = $request->user_id;
-        $profile = User::with('LProfile')->with([
-            'LBookmark'=> function ($query) {
-                $query->limit(3);
-            }
-        ])->with([
-            'LPresent'=> function ($query) {
-                $query->limit(3);
-            }
-                ])->find($id);
-        return $this->jsonResponse($profile);
     }
 
     /**
@@ -94,10 +83,9 @@ class LProfileController extends Controller
      * @param  \App\Models\LProfile  $lProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(LProfile $lProfile, Request $request)
+    public function edit(LProfile $lProfile, $profile_id)
     {
         //
-        $id = $request->user_id;
         $profile = User::with('LProfile')->with([
             'LBookmark'=> function ($query) {
                 $query->limit(3);
@@ -106,7 +94,7 @@ class LProfileController extends Controller
             'LPresent'=> function ($query) {
                 $query->limit(3);
             }
-                ])->find($id);
+                ])->where('l_profile_id', $profile_id)->first();
         return $this->jsonResponse($profile);
     }
 
@@ -117,7 +105,7 @@ class LProfileController extends Controller
      * @param  \App\Models\LProfile  $lProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLProfileRequest $request, LProfile $lProfile)
+    public function update(UpdateLProfileRequest $request, $profile_id, LProfile $lProfile)
     {
         //
         $id = $request->user_id;
