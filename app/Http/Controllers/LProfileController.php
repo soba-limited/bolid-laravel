@@ -40,7 +40,9 @@ class LProfileController extends Controller
     public function store(StoreLProfileRequest $request)
     {
         //
-        $l_profile = LProfile::create([
+        $test = User::find($request->user_id);
+        if (empty($test->l_profile_id)) {
+            $l_profile = LProfile::create([
             'nicename' => $request->nicename,
             'sex' => $request->sex,
             'zipcode' => $request->zipcode,
@@ -51,18 +53,21 @@ class LProfileController extends Controller
             'industry' => $request->industry,
             'occupation' => $request->occupation,
         ]);
-        $id = $l_profile->id;
-        $user = User::find($request->user_id)->update([
-            'l_profile_id' => $id,
-        ]);
-        if ($request->hasFile('thumbs')) {
-            $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
-            $thumbs = 'images/l_profile/'.$id."/".$file_name;
-            $l_profile->thumbs = $thumbs;
-            $l_profile->save();
+            $id = $l_profile->id;
+            $user = User::find($request->user_id)->update([
+                'l_profile_id' => $id,
+            ]);
+            if ($request->hasFile('thumbs')) {
+                $file_name = $request->file('thumbs')->getClientOriginalName();
+                $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
+                $thumbs = 'images/l_profile/'.$id."/".$file_name;
+                $l_profile->thumbs = $thumbs;
+                $l_profile->save();
+            }
+            return $this->jsonResponse($l_profile);
+        } else {
+            return 'すでにプロフィールは作成済みです';
         }
-        return $this->jsonResponse($l_profile);
     }
 
     /**
