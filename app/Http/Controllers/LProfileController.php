@@ -26,9 +26,20 @@ class LProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $id = $request->user_id;
+        $profile = User::with('LProfile')->with([
+            'LBookmark'=> function ($query) {
+                $query->limit(3);
+            }
+        ])->with([
+            'LPresent'=> function ($query) {
+                $query->limit(3);
+            }
+                ])->find($id);
+        return $this->jsonResponse($profile);
     }
 
     /**
@@ -76,13 +87,14 @@ class LProfileController extends Controller
         //
     }
 
-     /**
-     * Display the specified resource.
+
+    /**
+     * Show the form for editing the specified resource.
      *
      * @param  \App\Models\LProfile  $lProfile
      * @return \Illuminate\Http\Response
      */
-    public function show_load(Request $request)
+    public function edit(LProfile $lProfile, Request $request)
     {
         //
         $id = $request->user_id;
@@ -94,21 +106,8 @@ class LProfileController extends Controller
             'LPresent'=> function ($query) {
                 $query->limit(3);
             }
-        ])->find($id);
+                ])->find($id);
         return $this->jsonResponse($profile);
-    }
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\LProfile  $lProfile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LProfile $lProfile)
-    {
-        //
     }
 
     /**
