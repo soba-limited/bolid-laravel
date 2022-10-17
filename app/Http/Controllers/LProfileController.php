@@ -6,7 +6,7 @@ use App\Models\LProfile;
 use App\Models\User;
 use App\Http\Requests\StoreLProfileRequest;
 use App\Http\Requests\UpdateLProfileRequest;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LProfileController extends Controller
