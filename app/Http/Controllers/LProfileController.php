@@ -6,6 +6,7 @@ use App\Models\LProfile;
 use App\Models\User;
 use App\Http\Requests\StoreLProfileRequest;
 use App\Http\Requests\UpdateLProfileRequest;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LProfileController extends Controller
@@ -70,8 +71,18 @@ class LProfileController extends Controller
     public function show()
     {
         //
-        //$id = Auth::id();
-        $id = 1;
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\LProfile  $lProfile
+     * @return \Illuminate\Http\Response
+     */
+    public function show_load(Request $request)
+    {
+        //
+        $id = $request->user_id;
         $profile = User::with('LProfile')->with([
             'LBookmark'=> function ($query) {
                 $query->limit(3);
@@ -83,6 +94,8 @@ class LProfileController extends Controller
         ])->find($id);
         return $this->jsonResponse($profile);
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

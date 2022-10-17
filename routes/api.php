@@ -73,6 +73,7 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/liondor/present/app/{id}', [LPresentUserController::class,'store'])->name('l_present.store');
     Route::get('/liondor/mypage', [LProfileController::class,'show'])->name('l_profile.show');
+    Route::post('/liondor/mypage', [LProfileController::class,'show_load'])->name('l_profile.show_load');
     Route::post('/liondor/mypage/store', [LProfileController::class,'store'])->name('l_profile.store');
     Route::post('/liondor/mypage/update', [LProfileController::class,'update'])->name('l_profile.update');
     Route::post('/liondor/post/bookmark/{id}', [LPostUserController::class,'store'])->name('l_post_user.store');
