@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LPost;
+use App\Models\LPostUser;
 use App\Models\LCategory;
 use App\Models\LPickup;
 use App\Models\LSidebar;
@@ -154,6 +155,7 @@ class LPostController extends Controller
         $posts = LPost::with(['user'=>function ($query) {
             $query->with(['LProfile']);
         }])->with('LCategory')->find($id)->makeVisible(['discription','sub_title','content']);
+        $bookmarks = LPostUser::where('l_post_id', $id)->pluck('user_id');
         $seriesArray = [
             'series_info' => LSeries::find($posts->l_series_id),
             'prev_post' => LPost::where('l_series_id', $posts->l_series_id)->where('id', '<', $posts->id)->orderBy('id', 'desc')->first(),
@@ -164,6 +166,7 @@ class LPostController extends Controller
         $allarray = [
             'posts' => $posts,
             'series' => $seriesArray,
+            'bookmarks' => $bookmarks
         ];
 
         $allarray = \Commons::LCommons($allarray);
