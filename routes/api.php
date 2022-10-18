@@ -82,6 +82,7 @@ Route::group(['middleware'=>['api']], function () {
 
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');
+    Route::get('/liondor/search', [LPostController::class,'search'])->name('l_post.search');
     Route::get('/liondor/post/{category}', [LPostController::class,'index'])->name('l_post.index');
     Route::get('/liondor/post/show/{id}', [LPostController::class,'show'])->name('l_post.show');
     Route::get('/liondor/present', [LPresentController::class,'index'])->name('l_present.index');
