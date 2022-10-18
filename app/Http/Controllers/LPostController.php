@@ -64,6 +64,38 @@ class LPostController extends Controller
         return $this->jsonResponse($allarray);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        //
+        $posts = LPost::where('state', 1)->where('title', 'like', '%'.$request->s.'%')->orWhere('sub_title', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
+
+        $limit = 30;
+        $skip = 0;
+
+        if (isset($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        $posts_count = $posts->count();
+        $page_max = $posts_count % $limit > 0 ? floor($posts_count / $limit) + 1: $posts_count / $limit;
+        $posts = $posts->with('LCategory')->with(['user'=>function ($query) {
+            $query->with('LProfile');
+        }])->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
+
+        //それぞれを配列に入れる
+        $allarray = [
+            'posts' => $posts,
+            'page_max' => $page_max,
+        ];
+        $allarray = \Commons::LCommons($allarray);
+        return $this->jsonResponse($allarray);
+    }
+
     public function editor_index($id)
     {
         $l_posts = LPost::withTrashed()->where('user_id', $id)->orderBy('id', 'desc')->get();
