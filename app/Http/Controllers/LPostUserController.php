@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LPostUser;
 use App\Http\Requests\StoreLPostUserRequest;
 use App\Http\Requests\UpdateLPostUserRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LPostUserController extends Controller
@@ -85,10 +86,10 @@ class LPostUserController extends Controller
      * @param  \App\Models\LPostUser  $LPostUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LPostUser $LPostUser, $id)
+    public function destroy(LPostUser $LPostUser, $id, Request $request)
     {
         //
-        $l_post_user = LPostUser::where('user_id', Auth::id())->where('l_post_id', $id)->first()->delete();
+        $l_post_user = LPostUser::where('user_id', $request->user_id)->where('l_post_id', $id)->first()->delete();
         return 'この記事のブックマークを解除しました';
     }
 }
