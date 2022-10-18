@@ -39,7 +39,7 @@ class LPostUserController extends Controller
     public function store(StoreLPostUserRequest $request, $id)
     {
         //
-        $bookmark = LPostUser::crete([
+        $bookmark = LPostUser::create([
             'user_id' => $request->user_id,
             'l_post_id' => $id,
         ]);
