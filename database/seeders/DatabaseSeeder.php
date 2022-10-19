@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             LProfileSeeder::class,
             UsersTableSeeder::class,
             LSeriesSeeder::class,
-            LCategoryseeder::class,
+            LCategorySeeder::class,
             LPostSeeder::class,
             LPickupSeeder::class,
             LPresentSeeder::class,
