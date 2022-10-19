@@ -24,9 +24,9 @@
 
 
                     // ----------------------------------------------------
-                    // -- SELECT [l_Categories]--
+                    // -- SELECT [l_categories]--
                     // ----------------------------------------------------
-                    // $query = DB::table("l_Categories")
+                    // $query = DB::table("l_categories")
                     // ->get();
                     // dd($query); //For checking
                 });
@@ -39,6 +39,6 @@
              */
             public function down()
             {
-                Schema::dropIfExists("l_Categories");
+                Schema::dropIfExists("l_categories");
             }
         }

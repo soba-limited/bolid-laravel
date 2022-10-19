@@ -27,7 +27,7 @@
                     $table->timestamps();
                     $table->softDeletes();
                     $table->foreign("user_id")->references("id")->on("users")->onUpdate('CASCADE')->onDelete('CASCADE');
-                    $table->foreign("l_category_id")->references("id")->on("l_Categories")->onUpdate('CASCADE')->onDelete('CASCADE');
+                    $table->foreign("l_category_id")->references("id")->on("l_categories")->onUpdate('CASCADE')->onDelete('CASCADE');
                     $table->foreign("l_series_id")->references("id")->on("l_series")->onUpdate('CASCADE')->onDelete('CASCADE');
 
 
@@ -37,7 +37,7 @@
                     // ----------------------------------------------------
                     // $query = DB::table("l_posts")
                     // ->leftJoin("users","users.id", "=", "l_posts.user_id")
-                    // ->leftJoin("l_Categories","l_Categories.id", "=", "l_posts.l_category_id")
+                    // ->leftJoin("l_categories","l_categories.id", "=", "l_posts.l_category_id")
                     // ->leftJoin("l_series","l_series.id", "=", "l_posts.l_series_id")
                     // ->get();
                     // dd($query); //For checking

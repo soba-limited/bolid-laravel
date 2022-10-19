@@ -20,8 +20,8 @@ class LCategoryseeder extends Seeder
     {
         //
 
-        DB::table('l_Categories')->delete();
-        DB::unprepared("ALTER TABLE l_Categories AUTO_INCREMENT = 1 ");
+        DB::table('l_categories')->delete();
+        DB::unprepared("ALTER TABLE l_categories AUTO_INCREMENT = 1 ");
 
         $parents = [
             [
@@ -70,7 +70,7 @@ class LCategoryseeder extends Seeder
         foreach ($parents as $param) {
             $param['created_at'] = $now;
             $param['updated_at'] = $now;
-            DB::table('l_Categories')->insert($param);
+            DB::table('l_categories')->insert($param);
         }
 
         $children = [
@@ -296,7 +296,7 @@ class LCategoryseeder extends Seeder
         foreach ($children as $param) {
             $param['created_at'] = $now;
             $param['updated_at'] = $now;
-            DB::table('l_Categories')->insert($param);
+            DB::table('l_categories')->insert($param);
         }
     }
 }
