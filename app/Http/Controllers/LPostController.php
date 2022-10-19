@@ -72,7 +72,7 @@ class LPostController extends Controller
     public function search(Request $request)
     {
         //
-        $posts = LPost::where('state', 1)->where('title', 'like', '%'.$request->s.'%')->orWhere('sub_title', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
+        $posts = LPost::where('state', 1)->where('title', 'like', '%'.$request->s.'%')->orWhere('sub_title', 'like', '%'.$request->s.'%')->orWhere('discription', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
 
         $limit = 30;
         $skip = 0;
