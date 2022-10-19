@@ -12,7 +12,7 @@
              */
             public function up()
             {
-                Schema::create("l_Categories", function (Blueprint $table) {
+                Schema::create("l_categories", function (Blueprint $table) {
                     $table->increments('id');
                     $table->string('name', 100)->nullable();
                     $table->string('slug', 100)->nullable()->unique();
