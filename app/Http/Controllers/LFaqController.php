@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LFaq;
 use App\Http\Requests\StoreLFaqRequest;
 use App\Http\Requests\UpdateLFaqRequest;
+use Illuminate\Http\Request;
 
 class LFaqController extends Controller
 {
@@ -21,6 +22,16 @@ class LFaqController extends Controller
         $allarray = [
             'company_faq'=>$company_faq,
             'user_faq'=>$user_faq,
+        ];
+        return $this->jsonResponse($allarray);
+    }
+
+    public function admin()
+    {
+        //
+        $faq = LFaq::get();
+        $allarray = [
+            'faq' => $faq,
         ];
         return $this->jsonResponse($allarray);
     }

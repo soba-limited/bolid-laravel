@@ -96,11 +96,24 @@ class LPostController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function editor_index($id)
+    public function editor_index($id, Request $request)
     {
-        $l_posts = LPost::withTrashed()->where('user_id', $id)->orderBy('id', 'desc')->get();
+        $posts = LPost::withTrashed()->where('user_id', $id)->orderBy('id', 'desc');
+
+        $limit = 30;
+        $skip = 0;
+
+        if (isset($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        $posts_count = $posts->count();
+        $page_max = $posts_count % $limit > 0 ? floor($posts_count / $limit) + 1: $posts_count / $limit;
+        $posts = $posts->with('LCategory')->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
+
         $allarray = [
-            'posts' => $l_posts,
+            'posts' => $posts,
+            'page_max' => $page_max,
         ];
         return $this->jsonResponse($allarray);
     }
