@@ -115,7 +115,6 @@ class LProfileController extends Controller
     {
         //
         $id = $request->user_id;
-        $profile_id = User::find($id)->LProfile->l_profile_id;
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
