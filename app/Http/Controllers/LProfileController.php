@@ -91,15 +91,7 @@ class LProfileController extends Controller
     public function edit(LProfile $lProfile, $profile_id)
     {
         //
-        $profile = User::with('LProfile')->with([
-            'LBookmark'=> function ($query) {
-                $query->limit(3);
-            }
-        ])->with([
-            'LPresent'=> function ($query) {
-                $query->limit(3);
-            }
-                ])->where('l_profile_id', $profile_id)->first();
+        $profile = User::with('LProfile')->with('LBookmark')->with('LPresent')->where('l_profile_id', $profile_id)->first();
         $profile->LProfile->makeVisible(['sex','zipcode','zip','other_address','age','work_type','industry','occupation']);
         return $this->jsonResponse($profile);
     }
