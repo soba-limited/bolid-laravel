@@ -111,18 +111,18 @@ class LProfileController extends Controller
      * @param  \App\Models\LProfile  $lProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLProfileRequest $request, $profile_id, LProfile $lProfile)
+    public function update(UpdateLProfileRequest $request, $profile_id)
     {
         //
         $id = $request->user_id;
-        $profile_id = User::find($id)->LProfile->l_profile_id;
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
             $thumbs = 'images/l_profile/'.$id."/".$file_name;
         }
 
-        $l_profile = LProfile::find($profile_id)->update([
+        $l_profile = LProfile::find($profile_id);
+        $l_profile->update([
             'nicename' => $request->nicename,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
             'sex' => $request->sex,
