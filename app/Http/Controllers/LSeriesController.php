@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LSeries;
 use App\Models\LPickup;
 use App\Models\LSidebar;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreLSeriesRequest;
 use App\Http\Requests\UpdateLSeriesRequest;

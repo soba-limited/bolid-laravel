@@ -40,6 +40,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/liondor/present/edit/{id}', [LPresentController::class,'edit'])->name('l_present.edit');
     Route::post('/liondor/present/update/{id}', [LPresentController::class,'update'])->name('l_present.update');
     Route::delete('/liondor/present/delete/{id}', [LPresentController::class,'destroy'])->name('l_present.delete');
+    Route::get('/liondor/faq/admin', [LFaqController::class,'admin'])->name('l_faq.admin');
     Route::get('/liondor/faq/create', [LFaqController::class,'create'])->name('l_faq.create');
     Route::post('/liondor/faq/store', [LFaqController::class,'store'])->name('l_faq.store');
     Route::get('/liondor/faq/edit/{id}', [LFaqController::class,'edit'])->name('l_faq.edit');
@@ -53,6 +54,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/liondor/sidebar/store', [LSidebarController::class,'store'])->name('l_sidebar.store');
     Route::get('/liondor/sidebar/edit/{id}', [LSidebarController::class,'edit'])->name('l_sidebar.edit');
     Route::post('/liondor/sidebar/update/{id}', [LSidebarController::class,'update'])->name('l_sidebar.update');
+    Route::delete('/liondor/sidebar/delete/{id}', [LSidebarController::class,'destroy'])->name('l_sidebar.destroy');
 
     //liondor記事投稿者コントローラー
 
