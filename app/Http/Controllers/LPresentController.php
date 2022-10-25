@@ -123,7 +123,7 @@ class LPresentController extends Controller
     public function admin_show($id)
     {
         //
-        $presents = LPresent::with('users')->find($id);
+        $presents = LPresent::with('user')->find($id);
 
         //それぞれを配列に入れる
         $allarray = [
