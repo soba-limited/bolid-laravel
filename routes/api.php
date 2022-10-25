@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -92,4 +93,12 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_series.show');
     Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
     Route::post('/liondor/contact', [LIndexController::class,'sendMail'])->name('index.sendMail');
+
+    Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
+    Route::post('/dellamall/more/{page}', [DIndexController::class,'index_more'])->name('d_index_more');
+    Route::get('/dellamall/shop', [DShopController::class,'index']);
+    Route::post('/dellamall/shop/sort/', [DShopController::class,'sort']);
+    Route::get('/dellamall/shop/{shop_id}', [DShopController::class,'show'])->name('d_shop.show');
+    Route::post('/dellamall/shop/comment_add/{shop_id}', [DShopController::class,'comment_add'])->name('d_shop.comment_add');
+    Route::post('/dellamall/shop/mall_return/{user_id}', [DShopController::class,'return_mall']);
 });

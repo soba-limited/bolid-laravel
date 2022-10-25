@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('description')->nullable();
             $table->string('thumbs')->nullable();
             $table->integer('image_permission')->default(0);
+            $table->unsignedBigInteger('official_user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign("user_id")->references("id")->on("users")->onUpdate('CASCADE')->onDelete('CASCADE');
