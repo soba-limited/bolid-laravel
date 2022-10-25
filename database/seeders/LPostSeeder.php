@@ -21,6 +21,6 @@ class LPostSeeder extends Seeder
         DB::table('l_posts')->delete();
         DB::unprepared("ALTER TABLE l_posts AUTO_INCREMENT = 1 ");
 
-        Lpost::factory(300)->create();
+        LPost::factory(300)->create();
     }
 }
