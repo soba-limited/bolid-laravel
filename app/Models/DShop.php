@@ -23,6 +23,7 @@ class DShop extends Model
         'description',
         'thumbs',
         'image_permission',
+        'official_user_id',
     ];
 
     /**
@@ -42,7 +43,8 @@ class DShop extends Model
      */
     protected $casts = [
         'user_id'=>'integer',
-        'image_permission' => 'integer'
+        'image_permission' => 'integer',
+        'official_user_id',
     ];
 
     public function user()
@@ -58,6 +60,16 @@ class DShop extends Model
     public function DMall()
     {
         return $this->belongsToMany(DMall::class, 'd_maill_ins', 'd_shop_id', 'd_mall_id');
+    }
+
+    public function DGood()
+    {
+        return $this->belongsToMany(DGood::class, 'd_shop_bookmarks', 'd_shop_id', 'user_id');
+    }
+
+    public function DComments()
+    {
+        return $this->hasMany(DComment::class);
     }
 
     public function DPickups()

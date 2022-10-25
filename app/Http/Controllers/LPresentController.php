@@ -41,6 +41,31 @@ class LPresentController extends Controller
         return $this->jsonResponse($allarray);
     }
 
+    public function admin_index(Request $request)
+    {
+        //
+
+        $limit = 30;
+        $skip = 0;
+
+        if (isset($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        $present_count = LPresent::all()->count();
+        $page_max = $present_count % $limit > 0 ? floor($present_count / $limit) + 1: $present_count / $limit;
+
+        $presents = LPresent::orderBy('id', 'desc')->skip($skip)->limit($limit)->get();
+
+        //それぞれを配列に入れる
+        $allarray = [
+            'presents' => $presents,
+            'page_max' => $page_max,
+        ];
+        $allarray = \Commons::LCommons($allarray);
+        return $this->jsonResponse($allarray);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -86,6 +111,19 @@ class LPresentController extends Controller
     {
         //
         $presents = LPresent::find($id);
+
+        //それぞれを配列に入れる
+        $allarray = [
+            'presents' => $presents,
+        ];
+        $allarray = \Commons::LCommons($allarray);
+        return $this->jsonResponse($allarray);
+    }
+
+    public function admin_show($id)
+    {
+        //
+        $presents = LPresent::with('users')->find($id);
 
         //それぞれを配列に入れる
         $allarray = [
