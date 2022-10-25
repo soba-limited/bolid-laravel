@@ -52,6 +52,48 @@ class DShopController extends Controller
         return $this->jsonResponse($shop);
     }
 
+    public function add_shop(Request $request)
+    {
+        $shop = LShop::all();
+        if (isset($request->sort)) {
+            if ($request->sort == 'new') {
+                $shop = $shop->orderBy('id', 'desc');
+            } elseif ($request->sort == 'good') {
+                $shop = $shop->withCount('DGood')->orderBy('DGood_count', 'desc');
+            } elseif ($request->sort == 'mall') {
+                $shop = $shop->withCount('DMall')->orderBy('DMall_count', 'desc');
+            } elseif ($request->sort == 'commet') {
+                $shop = $shop->withCount('DComments')->orderBy('DComments_count', 'desc');
+            }
+        }
+        if (isset($request->acount)) {
+            if ($request->acount == 'official') {
+                $shop = $shop->where('official', '!=', null);
+            } elseif ($request->acount == 'nonofficial') {
+                $shop = $shop->where('official', null);
+            }
+        }
+
+        $limit = 28;
+        $skip = 0;
+
+        if (isset($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        $shop_count = $shop->count();
+        $page_max = $shop_count % $limit > 0 ? floor($shop_count / $limit) + 1: $shop_count / $limit;
+
+
+        $shop = $shop->limit($limit)->skip($skip)->get();
+        $allarray = [
+            'shop' => $shop,
+            'page_max' => $page_max
+        ];
+
+        return $this->jsonResponse($allarray);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -40,7 +40,7 @@ class LPresent extends Model
         'limit'=>'datetime',
     ];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
