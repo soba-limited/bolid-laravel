@@ -199,7 +199,7 @@ class LPostController extends Controller
         //
         $posts = LPost::with(['user'=>function ($query) {
             $query->with(['LProfile']);
-        }])->with('LCategory')->find($id)->makeVisible(['discription','sub_title','content']);
+        }])->with('LCategory')->with('LPickup')->find($id)->makeVisible(['discription','sub_title','content']);
         $bookmarks = LPostUser::where('l_post_id', $id)->pluck('user_id');
         $seriesArray = [
             'series_info' => LSeries::find($posts->l_series_id),
