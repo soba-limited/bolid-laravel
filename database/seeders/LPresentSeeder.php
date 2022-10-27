@@ -20,6 +20,6 @@ class LPresentSeeder extends Seeder
         DB::table('l_presents')->delete();
         DB::unprepared("ALTER TABLE l_presents AUTO_INCREMENT = 1 ");
 
-        \App\Models\LPresent::factory()->count(20)->create();
+        \App\Models\LPresent::factory()->count(50)->create();
     }
 }
