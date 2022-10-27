@@ -23,7 +23,7 @@ class LPostFactory extends Factory
     {
         return [
             //
-            'user_id' => 3,
+            'user_id' => 1,
             'l_series_id' => $this->faker->numberBetween($min=1, $max=10),
             'l_category_id' => $this->faker->numberBetween($min=1, $max=44),
             'title' => $this->faker->realText(30),
