@@ -112,7 +112,7 @@ class LProfileController extends Controller
             $request->file('thumbs')->storeAs('images/l_profile/'.$id, $file_name, 'public');
             $thumbs = 'images/l_profile/'.$id."/".$file_name;
         } elseif ($request->thumbs == 'null') {
-            $request->thumbs == null;
+            $request->thumbs = null;
         }
 
         $l_profile = LProfile::find($profile_id);
