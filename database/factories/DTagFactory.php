@@ -18,6 +18,7 @@ class DTagFactory extends Factory
     {
         return [
             //
+            'name' => $this->faker->realText(10),
         ];
     }
 }

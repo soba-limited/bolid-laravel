@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\DShop;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,6 +32,14 @@ class DatabaseSeeder extends Seeder
             LPresentSeeder::class,
             LPostUserSeeder::class,
             LFaqSeeder::class,
+            DProfileSeeder::class,
+            UsersTableSeeder::class,
+            DShopSeeder::class,
+            DMallSeeder::class,
+            DTagSeeder::class,
+            DShopDTagSeeder::class,
+            DMallInSeeder::class,
+            DCommentSeeder::class,
         ]);
     }
 }

@@ -18,6 +18,11 @@ class DShopFactory extends Factory
     {
         return [
             //
+            'user_id' => 1,
+            'url' => $this->faker->url,
+            'name' => $this->faker->realText(20),
+            'description' => $this->faker->realText(144),
+            'image_permission' => $this->faker->numberBetween($min=0, $max=1),
         ];
     }
 }

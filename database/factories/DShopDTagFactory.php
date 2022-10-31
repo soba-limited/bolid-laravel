@@ -18,6 +18,8 @@ class DShopDTagFactory extends Factory
     {
         return [
             //
+            'd_tag_id' => $this->faker->numberBetween($min=1, $max=20),
+            'd_shop_id' => $this->faker->numberBetween($min=1, $max=100),
         ];
     }
 }

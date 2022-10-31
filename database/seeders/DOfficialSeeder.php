@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DOfficialSeeder extends Seeder
 {
@@ -15,5 +17,21 @@ class DOfficialSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('d_officials')->delete();
+        DB::unprepared("ALTER TABLE d_officials AUTO_INCREMENT = 1 ");
+
+        $params = [
+            [
+                'd_shop_id' => 1,
+                'user_id' => 1
+            ]
+        ];
+
+        $now = Carbon::now();
+        foreach ($params as $param) {
+            $param['created_at'] = $now;
+            $param['updated_at'] = $now;
+            DB::table('d_officials')->insert($param);
+        }
     }
 }

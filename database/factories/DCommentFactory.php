@@ -18,6 +18,9 @@ class DCommentFactory extends Factory
     {
         return [
             //
+            'user_id' => 1,
+            'd_shop_id' => $this->faker->numberBetween($min=1, $max=100),
+            'content' => $this->faker->realText(50),
         ];
     }
 }
