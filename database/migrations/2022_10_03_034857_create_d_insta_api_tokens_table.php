@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('d_insta_api_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('d_shop_id');
+            $table->string('account_name')->nullable();
             $table->string('user_name')->nullable();
             $table->string('api_token')->nullable();
             $table->foreign('d_shop_id')->references('id')->on('d_shops')->onDelete('cascade');

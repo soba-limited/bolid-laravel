@@ -11,6 +11,7 @@ use App\Http\Controllers\LIndexController;
 use App\Http\Controllers\LPostController;
 use App\Http\Controllers\LSeriesController;
 use App\Http\Controllers\LPresentController;
+use App\Http\Controllers\DIndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::get('/liondor/present/', [LPresentController::class,'index'])->name('l_pr
 Route::get('/liondor/present/{id}', [LPresentController::class,'show'])->name('l_present.show');
 Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_series.show');
 Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
+
+Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
 
 
 

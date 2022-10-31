@@ -52,19 +52,24 @@ class DShop extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function DTag()
+    public function DTags()
     {
-        return $this->belongsToMany(DTag::class, 'd_shop_d_tag', 'd_shop_id', 'd_tag_id');
+        return $this->belongsToMany(DTag::class, 'd_shop_d_tags', 'd_shop_id', 'd_tag_id');
     }
 
-    public function DMall()
+    public function DMalls()
     {
-        return $this->belongsToMany(DMall::class, 'd_maill_ins', 'd_shop_id', 'd_mall_id');
+        return $this->belongsToMany(DMall::class, 'd_mall_ins', 'd_shop_id', 'd_mall_id');
     }
 
-    public function DGood()
+    public function DGoods()
     {
-        return $this->belongsToMany(DGood::class, 'd_shop_bookmarks', 'd_shop_id', 'user_id');
+        return $this->belongsToMany(User::class, 'd_goods', 'd_shop_id', 'user_id');
+    }
+
+    public function DShopBookmarks()
+    {
+        return $this->belongsToMany(User::class, 'd_shop_bookmarks', 'd_shop_id', 'user_id');
     }
 
     public function DComments()

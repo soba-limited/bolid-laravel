@@ -18,6 +18,8 @@ class DMallFactory extends Factory
     {
         return [
             //
+            'name' => $this->faker->realText(10),
+            'user_id' => 1,
         ];
     }
 }

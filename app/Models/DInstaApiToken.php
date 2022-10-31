@@ -16,6 +16,7 @@ class DInstaApiToken extends Model
      */
     protected $fillable = [
         'd_shop_id',
+        'account_name',
         'user_name',
         'api_token',
     ];
