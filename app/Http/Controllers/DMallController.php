@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\DMall;
+use App\Models\User;
 use App\Http\Requests\StoreDMallRequest;
 use App\Http\Requests\UpdateDMallRequest;
+use Illuminate\Http\Request;
 
 class DMallController extends Controller
 {
@@ -13,9 +15,26 @@ class DMallController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+    }
+
+    public function mycreate(Request $request)
+    {
+        $mall = DMall::where('user_id', $request->user_id)->with(['DMallIn',function ($query) {
+            $query->limit(4);
+        }])->withCount('DMallIn')->get();
+        return $this->jsonResponse($mall);
+    }
+
+    public function bookmarks(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $mall = $user->DMallBookmark->with(['DMallIn',function ($query) {
+            $query->limit(4);
+        }])->withCount('DMallIn')->with('user')->get();
+        return $this->jsonResponse($mall);
     }
 
     /**
@@ -37,6 +56,12 @@ class DMallController extends Controller
     public function store(StoreDMallRequest $request)
     {
         //
+        $d_mall = DMall::create([
+            'user_id' => $request->user_id,
+            'name' => $request->name,
+        ]);
+
+        return $this->jsonResponse($d_mall);
     }
 
     /**
@@ -45,9 +70,10 @@ class DMallController extends Controller
      * @param  \App\Models\DMall  $dMall
      * @return \Illuminate\Http\Response
      */
-    public function show(DMall $dMall)
+    public function show(DMall $dMall, $mall_id)
     {
         //
+        $mall = DMall::with('DMallIn')->with('user')->find($mall_id);
     }
 
     /**
@@ -56,9 +82,12 @@ class DMallController extends Controller
      * @param  \App\Models\DMall  $dMall
      * @return \Illuminate\Http\Response
      */
-    public function edit(DMall $dMall)
+    public function edit(DMall $dMall, $mall_id)
     {
         //
+        $d_mall = DMall::find($mall_id);
+
+        return $this->jsonResponse($d_mall);
     }
 
     /**
@@ -68,9 +97,15 @@ class DMallController extends Controller
      * @param  \App\Models\DMall  $dMall
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDMallRequest $request, DMall $dMall)
+    public function update(UpdateDMallRequest $request, DMall $dMall, $mall_id)
     {
         //
+        $d_mall = DMall::find($mall_id);
+        $d_mall = $d_mall->update([
+            'user_id' => $request->user_id,
+            'name' => $request->name,
+        ]);
+        return $this->jsonResponse($d_mall);
     }
 
     /**

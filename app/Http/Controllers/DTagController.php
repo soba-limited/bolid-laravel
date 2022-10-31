@@ -37,6 +37,13 @@ class DTagController extends Controller
     public function store(StoreDTagRequest $request)
     {
         //
+        $tags = $request->tag;
+        $tag_array = [];
+        foreach ($tags as $tag) {
+            $getTag = DTag::firstOrCreate(['name'=>$tag->name]);
+            $tag_array = array_push($tag_array, $getTag->id);
+        }
+        return $this->jsonResponse($tag_array);
     }
 
     /**
