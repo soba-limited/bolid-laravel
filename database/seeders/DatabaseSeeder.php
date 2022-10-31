@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             LProfileSeeder::class,
+            DProfileSeeder::class,
             UsersTableSeeder::class,
             LSeriesSeeder::class,
             LCategorySeeder::class,
@@ -32,8 +33,6 @@ class DatabaseSeeder extends Seeder
             LPresentSeeder::class,
             LPostUserSeeder::class,
             LFaqSeeder::class,
-            DProfileSeeder::class,
-            UsersTableSeeder::class,
             DShopSeeder::class,
             DMallSeeder::class,
             DTagSeeder::class,
