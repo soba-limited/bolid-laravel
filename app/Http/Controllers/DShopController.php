@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDShopRequest;
 use App\Http\Requests\UpdateDShopRequest;
 use App\Models\DComment;
 use App\Models\DMall;
+use App\Models\DTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -20,7 +21,7 @@ class DShopController extends Controller
     public function index(Request $request)
     {
         //
-        $shop = LShop::limit(28)->get();
+        $shop = DShop::limit(28)->get();
         $allarray = [
             'shop' => $shop,
         ];
@@ -29,7 +30,7 @@ class DShopController extends Controller
 
     public function sort(Request $request)
     {
-        $shop = LShop::all();
+        $shop = DShop::all();
         if (isset($request->sort)) {
             if ($request->sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
@@ -54,14 +55,14 @@ class DShopController extends Controller
 
     public function add_shop(Request $request)
     {
-        $shop = LShop::all();
+        $shop = DShop::all();
         if (isset($request->sort)) {
             if ($request->sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
             } elseif ($request->sort == 'good') {
-                $shop = $shop->withCount('DGood')->orderBy('DGood_count', 'desc');
+                $shop = $shop->withCount('DGoods')->orderBy('DGoods_count', 'desc');
             } elseif ($request->sort == 'mall') {
-                $shop = $shop->withCount('DMall')->orderBy('DMall_count', 'desc');
+                $shop = $shop->withCount('DMalls')->orderBy('DMalls_count', 'desc');
             } elseif ($request->sort == 'commet') {
                 $shop = $shop->withCount('DComments')->orderBy('DComments_count', 'desc');
             }
@@ -113,6 +114,35 @@ class DShopController extends Controller
     public function store(StoreDShopRequest $request)
     {
         //
+        $d_shop = DShop::create([
+            'user_id' => $request->user_id,
+            'url' => $request->url,
+            'name' => $request->name,
+            'description' => $request->description,
+            'image_permission' => 0,
+        ]);
+
+        $id = $d_shop->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/d_shop/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/d_shop/'.$id."/".$thumbs_name;
+            $d_shop->thumbs = $thumbs;
+        }
+
+        if ($request->hasFile('thumbs')) {
+            $d_shop->save();
+        }
+
+        if (isset($request->tag)) {
+            $tags = $request->tag;
+            foreach ($tags as $tag) {
+                $d_shop->DTag()->attach($tag);
+            }
+        }
+
+        return $this->jsonResponse($d_shop);
     }
 
     /**
@@ -124,7 +154,7 @@ class DShopController extends Controller
     public function show(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::with(['DTag','DComments','DGood','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id);
+        $shop = DShop::with(['DTag','DComments','DGood','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id)->makeHidden('description');
         $comments_count = $shop->DComments->count();
         $good_count = $shop->DGood->count();
         $mall_count = $shop->DMall->count();
@@ -157,9 +187,11 @@ class DShopController extends Controller
      * @param  \App\Models\DShop  $dShop
      * @return \Illuminate\Http\Response
      */
-    public function edit(DShop $dShop)
+    public function edit(DShop $dShop, $shop_id)
     {
         //
+        $shop = DShop::find($shop_id)->makeHidden('description');
+        return $this->jsonResponse($shop);
     }
 
     /**
@@ -169,9 +201,37 @@ class DShopController extends Controller
      * @param  \App\Models\DShop  $dShop
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDShopRequest $request, DShop $dShop)
+    public function update(UpdateDShopRequest $request, DShop $dShop, $shop_id)
     {
         //
+
+
+        $d_shop = DShop::find($shop_id);
+        $id = $shop_id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/d_post/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/d_post/'.$id."/".$thumbs_name;
+        }
+
+        $d_shop->update([
+            'user_id' => $request->user_id,
+            'url' => $request->url,
+            'name' => $request->name,
+            'description' => $request->description,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+            'image_permission' => $request->image_permission,
+        ]);
+
+        if (isset($request->tag)) {
+            $tags = $request->tag;
+            foreach ($tags as $tag) {
+                $d_shop->DTag()->syncWithoutDetaching($tag);
+            }
+        }
+
+        return $this->jsonResponse($d_shop);
     }
 
     /**
@@ -180,8 +240,10 @@ class DShopController extends Controller
      * @param  \App\Models\DShop  $dShop
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DShop $dShop)
+    public function destroy(DShop $dShop, $shop_id)
     {
         //
+        $d_post = DShop::find($shop_id);
+        $d_post->delete();
     }
 }
