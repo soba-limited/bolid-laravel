@@ -34,9 +34,16 @@ class DCommentController extends Controller
      * @param  \App\Http\Requests\StoreDCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDCommentRequest $request)
+    public function store(StoreDCommentRequest $request, $shop_id)
     {
         //
+        DComment::create([
+            'user_id' => $request->user_id,
+            'shop_id' => $shop_id,
+            'content' => $request->content
+        ]);
+        $comments = DComment::where('shop_id', $shop_id)->orderBy('id', 'desc')->get();
+        return $this->jsonResponse($comments);
     }
 
     /**

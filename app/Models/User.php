@@ -84,11 +84,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Dprofile::class);
     }
-    public function Following()
+    public function DFollowing()
     {
         return $this->belongsToMany(User::class, 'd_follows', 'following_user_id', 'followed_user_id');
     }
-    public function Followed()
+    public function DFollowed()
     {
         return $this->belongsToMany(User::class, 'd_follows', 'followed_user_id', 'following_user_id');
     }

@@ -13,7 +13,7 @@ class UpdateDMallBookmarksRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

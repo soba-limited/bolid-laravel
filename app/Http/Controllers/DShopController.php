@@ -154,7 +154,7 @@ class DShopController extends Controller
     public function show(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::with(['DTag','DComments','DGood','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id)->makeHidden('description');
+        $shop = DShop::with(['DTag','DComments','DGood','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id)->makeVisible('description');
         $comments_count = $shop->DComments->count();
         $good_count = $shop->DGood->count();
         $mall_count = $shop->DMall->count();
@@ -169,18 +169,6 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function comment_add($shop_id)
-    {
-        $comment = DComment::where('shop_id', $shop_id)->get();
-        return $this->jsonResponse($comment);
-    }
-
-    public function return_mall($user_id)
-    {
-        $mall = DMall::where('user_id', $user_id)->get();
-        return $this->jsonResponse($mall);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -190,7 +178,7 @@ class DShopController extends Controller
     public function edit(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::find($shop_id)->makeHidden('description');
+        $shop = DShop::find($shop_id)->makeVisible('description');
         return $this->jsonResponse($shop);
     }
 
@@ -232,6 +220,15 @@ class DShopController extends Controller
         }
 
         return $this->jsonResponse($d_shop);
+    }
+
+    public function offcial_add(Request $request, $shop_id)
+    {
+        $shop = DShop::find($shop_id);
+        $shop = $shop->update([
+            'official_user_id' => $request->official_user_id
+        ]);
+        return $this->jsonResponse($shop);
     }
 
     /**

@@ -20,6 +20,12 @@ class DMallController extends Controller
         //
     }
 
+    public function return_mall(Request $request)
+    {
+        $mall = DMall::where('user_id', $request->user_id)->get();
+        return $this->jsonResponse($mall);
+    }
+
     public function mycreate(Request $request)
     {
         $mall = DMall::where('user_id', $request->user_id)->with(['DMallIn',function ($query) {
@@ -56,11 +62,12 @@ class DMallController extends Controller
     public function store(StoreDMallRequest $request)
     {
         //
-        $d_mall = DMall::create([
+        DMall::create([
             'user_id' => $request->user_id,
             'name' => $request->name,
         ]);
 
+        $d_mall = DMall::where('user_id', $request->user_id)->get();
         return $this->jsonResponse($d_mall);
     }
 
@@ -73,7 +80,10 @@ class DMallController extends Controller
     public function show(DMall $dMall, $mall_id)
     {
         //
-        $mall = DMall::with('DMallIn')->with('user')->find($mall_id);
+        $mall = DMall::with('DMallIn')->with(['user',function ($query) {
+            $query->with('DProfile');
+        }])->find($mall_id);
+        return $this->jsonResponse($mall);
     }
 
     /**

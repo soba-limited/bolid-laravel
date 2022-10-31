@@ -13,7 +13,7 @@ class StoreDPickupRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

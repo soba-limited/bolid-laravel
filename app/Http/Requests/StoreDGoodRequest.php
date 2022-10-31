@@ -13,7 +13,7 @@ class StoreDGoodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

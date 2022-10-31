@@ -17,8 +17,8 @@ class DCoupon extends Model
     protected $fillable = [
         'd_shop_id',
         'title',
-        'banner',
         'content',
+        'limit',
     ];
 
     /**
