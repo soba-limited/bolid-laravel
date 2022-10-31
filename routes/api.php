@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +14,9 @@ use App\Http\Controllers\LProfileController;
 use App\Http\Controllers\LSeriesController;
 use App\Http\Controllers\LFaqController;
 use App\Http\Controllers\LSidebarController;
+
+use App\Http\Controllers\DIndexController;
+use App\Http\Controllers\DShopController;
 
 /*
 |--------------------------------------------------------------------------
