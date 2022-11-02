@@ -12,6 +12,7 @@ use App\Http\Controllers\LPostController;
 use App\Http\Controllers\LSeriesController;
 use App\Http\Controllers\LPresentController;
 use App\Http\Controllers\DIndexController;
+use App\Http\Controllers\DShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_s
 Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
 
 Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
+Route::get('/dellamall/shop', [DShopController::class,'index']);
+Route::get('/dellamall/shop/show/{shop_id}', [DShopController::class,'show']);
+
+
 
 
 

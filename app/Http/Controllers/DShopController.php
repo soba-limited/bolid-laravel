@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateDShopRequest;
 use App\Models\DComment;
 use App\Models\DMall;
 use App\Models\DTag;
-use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Redis;
 
 class DShopController extends Controller
@@ -154,10 +154,10 @@ class DShopController extends Controller
     public function show(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::with(['DTag','DComments','DGood','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id)->makeVisible('description');
+        $shop = DShop::with(['DTags','DComments','DGoods','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id)->makeVisible('description');
         $comments_count = $shop->DComments->count();
-        $good_count = $shop->DGood->count();
-        $mall_count = $shop->DMall->count();
+        $good_count = $shop->DGoods->count();
+        $mall_count = $shop->DMalls->count();
 
         $allarray = [
             'shop' => $shop,

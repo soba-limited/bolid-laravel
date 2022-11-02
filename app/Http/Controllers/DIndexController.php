@@ -16,12 +16,10 @@ class DIndexController extends Controller
         $pick = DPickup::with(['DShop',function ($query) {
             $query->withCount('DGoods')->withCount('DShopBookmarks')->withCount('DComments');
         }])->limit(8)->get();
-        $shop = DShop::limit(28)->withCount('DGoods')->withCount('DShopBookmarks')->withCount('DComments')->get();
 
         $allarray = [
             'popular' => $popular,
             'pick' => $pick,
-            'shop' => $shop
         ];
         return $this->jsonResponse($allarray);
     }

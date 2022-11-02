@@ -134,12 +134,12 @@ Route::group(['middleware'=>['api']], function () {
 
     //デラモール
     Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
-    Route::post('/dellamall/more/{page}', [DIndexController::class,'index_more'])->name('d_index_more');
+    Route::post('/dellamall/more/{page}', [DIndexController::class,'index_more']);
 
     Route::get('/dellamall/shop', [DShopController::class,'index']);
     Route::post('/dellamall/shop/sort/', [DShopController::class,'sort']);
     Route::post('/dellamall/shop/add_shop', [DShopController::class,'add_shop']);
-    Route::get('/dellamall/shop/show/{shop_id}', [DShopController::class,'show'])->name('d_shop.show');
+    Route::get('/dellamall/shop/show/{shop_id}', [DShopController::class,'show']);
 
     Route::get('/dellamall/mall/show/{mall_id}', [DMallController::class,'show']);
 
