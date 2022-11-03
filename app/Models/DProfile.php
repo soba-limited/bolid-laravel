@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DProfile extends Model
 {
@@ -15,6 +16,9 @@ class DProfile extends Model
      *
      * @var array<int, string>
      */
+
+    protected $table = "d_profiles";
+
     protected $fillable = [
         'nicename',
         'thumbs',

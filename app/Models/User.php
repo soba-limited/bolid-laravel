@@ -84,6 +84,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(DProfile::class);
     }
+
     public function DFollowing()
     {
         return $this->belongsToMany(User::class, 'd_follows', 'following_user_id', 'followed_user_id');
