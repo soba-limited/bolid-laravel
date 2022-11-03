@@ -35,9 +35,9 @@ class DShopController extends Controller
             if ($request->sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
             } elseif ($request->sort == 'good') {
-                $shop = $shop->withCount('DGood')->orderBy('DGood_count', 'desc');
+                $shop = $shop->withCount('DGoods')->orderBy('DGood_count', 'desc');
             } elseif ($request->sort == 'mall') {
-                $shop = $shop->withCount('DMall')->orderBy('DMall_count', 'desc');
+                $shop = $shop->withCount('DMalls')->orderBy('DMall_count', 'desc');
             } elseif ($request->sort == 'commet') {
                 $shop = $shop->withCount('DComments')->orderBy('DComments_count', 'desc');
             }
@@ -158,12 +158,14 @@ class DShopController extends Controller
         $comments_count = $shop->DComments->count();
         $good_count = $shop->DGoods->count();
         $mall_count = $shop->DMalls->count();
+        $kanren = DShop::inRandomOrder()->limit(4)->get();
 
         $allarray = [
             'shop' => $shop,
             'comments_count' => $comments_count,
             'good_count' => $good_count,
             'mall_count' => $mall_count,
+            'kanren' => $kanren,
         ];
 
         return $this->jsonResponse($allarray);

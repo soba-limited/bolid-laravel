@@ -19,6 +19,7 @@ use App\Http\Controllers\DIndexController;
 use App\Http\Controllers\DShopController;
 use App\Http\Controllers\DMallController;
 use App\Http\Controllers\DProfileController;
+use App\Http\Controllers\DGoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,8 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/dellamall/shop/comment_add/{shop_id}', [DCommentController::class,'store']);
     Route::post('/dellamall/shop/mall_return', [DMallController::class,'return_mall']);
+    Route::post('/dellamall/shop/good/store', [DGoodController::class,'store']);
+    Route::post('/dellamall/shop/good/delete', [DGoodController::class,'destroy']);
 
 
     //liondorコントローラー
