@@ -154,7 +154,9 @@ class DShopController extends Controller
     public function show(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::with(['DTags','DComments','DGoods','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->find($shop_id)->makeVisible('description');
+        $shop = DShop::with(['DTags','DGoods','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->with(['DComments'=>function ($query) {
+            $query->with('user');
+        }])->find($shop_id)->makeVisible('description');
         $comments_count = $shop->DComments->count();
         $good_count = $shop->DGoods->count();
         $mall_count = $shop->DMalls->count();
