@@ -82,7 +82,7 @@ class User extends Authenticatable
     //Deramall リレーション
     public function DProfile()
     {
-        return $this->belongsTo(Dprofile::class);
+        return $this->belongsTo(DProfile::class);
     }
     public function DFollowing()
     {
