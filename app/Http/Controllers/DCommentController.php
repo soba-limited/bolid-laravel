@@ -37,12 +37,12 @@ class DCommentController extends Controller
     public function store(StoreDCommentRequest $request, $shop_id)
     {
         //
-        DComment::create([
+        $d_comment = DComment::create([
             'user_id' => $request->user_id,
-            'shop_id' => $shop_id,
-            'content' => $request->content
+            'd_shop_id' => $shop_id,
+            'content' => $request->content,
         ]);
-        $comments = DComment::where('shop_id', $shop_id)->orderBy('id', 'desc')->get();
+        $comments = DComment::where('d_shop_id', $shop_id)->orderBy('id', 'desc')->get();
         return $this->jsonResponse($comments);
     }
 
