@@ -118,6 +118,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/shop/good/store', [DGoodController::class,'store']);
     Route::post('/dellamall/shop/good/delete', [DGoodController::class,'destroy']);
 
+    Route::post('/dellamall/hasprofile/{id}', [DProfileController::class,'hasprofile']);
+
+
 
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');
