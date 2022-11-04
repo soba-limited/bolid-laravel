@@ -154,7 +154,11 @@ class LProfileController extends Controller
     public function allways(Request $request)
     {
         $profile_id = User::find($request->id)->l_profile_id;
-        $profile = LProfile::find($profile_id);
-        return $this->jsonResponse($profile);
+        if (isset($profile_id)) {
+            $profile = LProfile::find($profile_id);
+            return $this->jsonResponse($profile);
+        } else {
+            return 'プロフィールが設定されていません';
+        }
     }
 }
