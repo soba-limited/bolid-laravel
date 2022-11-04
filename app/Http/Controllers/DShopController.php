@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateDShopRequest;
 use App\Models\DComment;
 use App\Models\DMall;
 use App\Models\DTag;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class DShopController extends Controller

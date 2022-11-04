@@ -6,7 +6,7 @@ use App\Models\DGood;
 use App\Http\Requests\StoreDGoodRequest;
 use App\Http\Requests\UpdateDGoodRequest;
 use App\Models\DShop;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class DGoodController extends Controller
 {

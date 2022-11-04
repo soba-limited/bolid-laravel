@@ -183,7 +183,8 @@ class DProfileController extends Controller
 
     public function allways(Request $request)
     {
-        $profile = DProfile::find($request->id);
+        $profile_id = User::find($request->id)->d_profile_id;
+        $profile = DProfile::find($profile_id);
         return $this->jsonResponse($profile);
     }
 }
