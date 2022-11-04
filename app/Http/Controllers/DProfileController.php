@@ -181,6 +181,12 @@ class DProfileController extends Controller
         return $this->jsonResponse($comments);
     }
 
+    public function hasprofile($id)
+    {
+        $hasprofile = User::find($id)->DProfile;
+        return isset($hasprofile) ? 1 : -1;
+    }
+
     public function allways(Request $request)
     {
         $profile_id = User::find($request->id)->d_profile_id;
