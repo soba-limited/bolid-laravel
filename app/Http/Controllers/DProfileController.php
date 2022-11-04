@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\DShop;
 use App\Http\Requests\StoreDProfileRequest;
 use App\Http\Requests\UpdateDProfileRequest;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class DProfileController extends Controller
 {
