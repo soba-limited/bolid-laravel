@@ -180,4 +180,10 @@ class DProfileController extends Controller
         }])->get();
         return $this->jsonResponse($comments);
     }
+
+    public function allways(Request $request)
+    {
+        $profile = DProfile::find($request->id);
+        return $this->jsonResponse($profile);
+    }
 }

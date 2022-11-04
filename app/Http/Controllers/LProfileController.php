@@ -150,4 +150,10 @@ class LProfileController extends Controller
         $hasprofile = User::find($id)->LProfile;
         return isset($hasprofile) ? 1 : -1;
     }
+
+    public function allways(Request $request)
+    {
+        $profile = LProfile::find($request->id);
+        return $this->jsonResponse($profile);
+    }
 }

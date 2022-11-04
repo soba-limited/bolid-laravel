@@ -20,6 +20,7 @@ use App\Http\Controllers\DShopController;
 use App\Http\Controllers\DMallController;
 use App\Http\Controllers\DProfileController;
 use App\Http\Controllers\DGoodController;
+use App\Models\DProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,4 +153,8 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/user/save_shop', [DProfileController::class,'save_shop']);
     Route::post('/dellamall/user/save_mall', [DProfileController::class,'save_mall']);
     Route::post('/dellamall/user/send_comments', [DProfileController::class,'send_comments']);
+
+    Route::post('/c_profile_get', [DProfile::class,'allways']);
+    //Route::post('/d_profile_get',[DProfile::class,'allways']);
+    Route::post('/l_profile_get', [LProfile::class,'allways']);
 });
