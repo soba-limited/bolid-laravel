@@ -116,7 +116,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/shop/comment_add/{shop_id}', [DCommentController::class,'store']);
     Route::post('/dellamall/shop/mall_return', [DMallController::class,'return_mall']);
     Route::post('/dellamall/shop/good/store', [DGoodController::class,'store']);
-    Route::post('/dellamall/shop/good/delete', [DGoodController::class,'destroy']);
+    Route::delete('/dellamall/shop/good/delete', [DGoodController::class,'destroy']);
 
     Route::post('/dellamall/hasprofile/{id}', [DProfileController::class,'hasprofile']);
 
