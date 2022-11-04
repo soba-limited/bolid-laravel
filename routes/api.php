@@ -154,7 +154,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/user/save_mall', [DProfileController::class,'save_mall']);
     Route::post('/dellamall/user/send_comments', [DProfileController::class,'send_comments']);
 
-    Route::post('/c_profile_get', [DProfile::class,'allways']);
-    //Route::post('/d_profile_get',[DProfile::class,'allways']);
+    //Route::post('/c_profile_get', [CProfile::class,'allways']);
+    Route::post('/d_profile_get', [DProfile::class,'allways']);
     Route::post('/l_profile_get', [LProfile::class,'allways']);
 });
