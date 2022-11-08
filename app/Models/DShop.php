@@ -67,10 +67,12 @@ class DShop extends Model
         return $this->belongsToMany(User::class, 'd_goods', 'd_shop_id', 'user_id');
     }
 
+    /*
     public function DShopBookmarks()
     {
         return $this->belongsToMany(User::class, 'd_shop_bookmarks', 'd_shop_id', 'user_id');
     }
+    */
 
     public function DComments()
     {

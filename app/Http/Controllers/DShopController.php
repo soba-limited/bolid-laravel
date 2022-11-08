@@ -35,11 +35,11 @@ class DShopController extends Controller
             if ($request->sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
             } elseif ($request->sort == 'good') {
-                $shop = $shop->withCount('DGoods')->orderBy('DGood_count', 'desc');
+                $shop = $shop->withCount('DGoods')->orderBy('d_goods_count', 'desc');
             } elseif ($request->sort == 'mall') {
-                $shop = $shop->withCount('DMalls')->orderBy('DMall_count', 'desc');
-            } elseif ($request->sort == 'commet') {
-                $shop = $shop->withCount('DComments')->orderBy('DComments_count', 'desc');
+                $shop = $shop->withCount('DMalls')->orderBy('d_malls_count', 'desc');
+            } elseif ($request->sort == 'comment') {
+                $shop = $shop->withCount('DComments')->orderBy('d_comments_count', 'desc');
             }
         }
         if (isset($request->acount)) {
@@ -56,7 +56,7 @@ class DShopController extends Controller
         $count = $shop->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DShopBookmarks')->withCount('DComments')->get();
+        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
 
         $allarray = [
             'shop' => $shop,
