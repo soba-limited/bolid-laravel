@@ -45,7 +45,7 @@ class DShopController extends Controller
         if (isset($request->acount)) {
             if ($request->acount == 'official') {
                 $shop = $shop->where('official', '!=', null);
-            } elseif ($request->acount == 'nonofficial') {
+            } elseif ($request->acount == 'notofficial') {
                 $shop = $shop->where('official', null);
             }
         }
