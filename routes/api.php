@@ -144,8 +144,8 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/more/{page}', [DIndexController::class,'index_more']);
 
     Route::post('/dellamall/shop', [DShopController::class,'index']);
-    Route::post('/dellamall/shop/sort/', [DShopController::class,'sort']);
-    Route::post('/dellamall/shop/search/', [DShopController::class,'search']);
+    Route::post('/dellamall/shop/sort/{page}', [DShopController::class,'sort']);
+    Route::post('/dellamall/shop/search/{page}', [DShopController::class,'search']);
     Route::post('/dellamall/shop/add_shop', [DShopController::class,'add_shop']);
     Route::get('/dellamall/shop/show/{shop_id}', [DShopController::class,'show']);
 

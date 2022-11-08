@@ -28,7 +28,7 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function sort(Request $request)
+    public function sort(Request $request, $page)
     {
         $shop = new DShop;
         if (isset($request->sort)) {
@@ -51,7 +51,7 @@ class DShopController extends Controller
         }
 
         $limit = 28;
-        $skip = ($request->page - 1) * $limit;
+        $skip = ($page - 1) * $limit;
 
         $count = $shop->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
@@ -66,7 +66,7 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $page)
     {
         $shop = new DShop;
         if (isset($request->sort)) {
@@ -89,7 +89,7 @@ class DShopController extends Controller
         }
 
         $limit = 28;
-        $skip = ($request->page - 1) * $limit;
+        $skip = ($page - 1) * $limit;
 
         $count = $shop->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
