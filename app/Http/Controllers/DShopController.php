@@ -66,43 +66,41 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function add_shop(Request $request)
+    public function search(Request $request)
     {
-        $shop = DShop::all();
+        $shop = new DShop;
         if (isset($request->sort)) {
             if ($request->sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
             } elseif ($request->sort == 'good') {
-                $shop = $shop->withCount('DGoods')->orderBy('DGoods_count', 'desc');
+                $shop = $shop->withCount('DGoods')->orderBy('d_goods_count', 'desc');
             } elseif ($request->sort == 'mall') {
-                $shop = $shop->withCount('DMalls')->orderBy('DMalls_count', 'desc');
-            } elseif ($request->sort == 'commet') {
-                $shop = $shop->withCount('DComments')->orderBy('DComments_count', 'desc');
+                $shop = $shop->withCount('DMalls')->orderBy('d_malls_count', 'desc');
+            } elseif ($request->sort == 'comment') {
+                $shop = $shop->withCount('DComments')->orderBy('d_comments_count', 'desc');
             }
         }
         if (isset($request->acount)) {
             if ($request->acount == 'official') {
                 $shop = $shop->where('official', '!=', null);
-            } elseif ($request->acount == 'nonofficial') {
+            } elseif ($request->acount == 'notofficial') {
                 $shop = $shop->where('official', null);
             }
         }
 
         $limit = 28;
-        $skip = 0;
+        $skip = ($request->page - 1) * $limit;
 
-        if (isset($request->page) && $request->page > 1) {
-            $skip = ($request->page - 1) * $limit;
-        }
+        $count = $shop->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $shop_count = $shop->count();
-        $page_max = $shop_count % $limit > 0 ? floor($shop_count / $limit) + 1: $shop_count / $limit;
+        $shop = $shop->where('name', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%');
 
+        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
 
-        $shop = $shop->limit($limit)->skip($skip)->get();
         $allarray = [
             'shop' => $shop,
-            'page_max' => $page_max
+            'page_max' => $page_max,
         ];
 
         return $this->jsonResponse($allarray);
