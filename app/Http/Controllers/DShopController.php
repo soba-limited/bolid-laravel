@@ -30,7 +30,7 @@ class DShopController extends Controller
 
     public function sort(Request $request)
     {
-        $shop = DShop::all();
+        $shop = new DShop;
         if (isset($request->sort)) {
             if ($request->sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
@@ -49,8 +49,21 @@ class DShopController extends Controller
                 $shop = $shop->where('official', null);
             }
         }
-        $shop = $shop->limit(28)->get();
-        return $this->jsonResponse($shop);
+
+        $limit = 28;
+        $skip = ($request->page - 1) * $limit;
+
+        $count = $shop->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DShopBookmarks')->withCount('DComments')->get();
+
+        $allarray = [
+            'shop' => $shop,
+            'page_max' => $page_max,
+        ];
+
+        return $this->jsonResponse($allarray);
     }
 
     public function add_shop(Request $request)
