@@ -19,6 +19,7 @@ class DMall extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'lock',
     ];
 
     /**
@@ -38,6 +39,7 @@ class DMall extends Model
      */
     protected $casts = [
         'user_id'=>'integer',
+        'lock' => 'integer'
     ];
 
     public function user()

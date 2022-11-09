@@ -65,6 +65,7 @@ class DMallController extends Controller
         DMall::create([
             'user_id' => $request->user_id,
             'name' => $request->name,
+            'lock' => $request->lock
         ]);
 
         $d_mall = DMall::where('user_id', $request->user_id)->get();
@@ -114,6 +115,7 @@ class DMallController extends Controller
         $d_mall = $d_mall->update([
             'user_id' => $request->user_id,
             'name' => $request->name,
+            'lock' => $request->lock
         ]);
         return $this->jsonResponse($d_mall);
     }
