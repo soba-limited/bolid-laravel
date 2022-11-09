@@ -28,24 +28,24 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function sort(Request $request, $page)
+    public function sort(Request $request, $page, $acount)
     {
         $shop = new DShop;
-        if (isset($request->sort)) {
-            if ($request->sort == 'new') {
+        if (isset($sort)) {
+            if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
-            } elseif ($request->sort == 'good') {
+            } elseif ($sort == 'good') {
                 $shop = $shop->withCount('DGoods')->orderBy('d_goods_count', 'desc');
-            } elseif ($request->sort == 'mall') {
+            } elseif ($sort == 'mall') {
                 $shop = $shop->withCount('DMalls')->orderBy('d_malls_count', 'desc');
-            } elseif ($request->sort == 'comment') {
+            } elseif ($sort == 'comment') {
                 $shop = $shop->withCount('DComments')->orderBy('d_comments_count', 'desc');
             }
         }
-        if (isset($request->acount)) {
-            if ($request->acount == 'official') {
+        if (isset($acount)) {
+            if ($acount == 'official') {
                 $shop = $shop->where('official', '!=', null);
-            } elseif ($request->acount == 'notofficial') {
+            } elseif ($acount == 'notofficial') {
                 $shop = $shop->where('official', null);
             }
         }
@@ -66,24 +66,24 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function search(Request $request, $page)
+    public function search(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
-        if (isset($request->sort)) {
-            if ($request->sort == 'new') {
+        if (isset($sort)) {
+            if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
-            } elseif ($request->sort == 'good') {
+            } elseif ($sort == 'good') {
                 $shop = $shop->withCount('DGoods')->orderBy('d_goods_count', 'desc');
-            } elseif ($request->sort == 'mall') {
+            } elseif ($sort == 'mall') {
                 $shop = $shop->withCount('DMalls')->orderBy('d_malls_count', 'desc');
-            } elseif ($request->sort == 'comment') {
+            } elseif ($sort == 'comment') {
                 $shop = $shop->withCount('DComments')->orderBy('d_comments_count', 'desc');
             }
         }
-        if (isset($request->acount)) {
-            if ($request->acount == 'official') {
+        if (isset($acount)) {
+            if ($acount == 'official') {
                 $shop = $shop->where('official', '!=', null);
-            } elseif ($request->acount == 'notofficial') {
+            } elseif ($acount == 'notofficial') {
                 $shop = $shop->where('official', null);
             }
         }
