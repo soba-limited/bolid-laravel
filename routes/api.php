@@ -26,6 +26,7 @@ use App\Http\Controllers\DFollowController;
 use App\Http\Controllers\DInfoController;
 use App\Http\Controllers\DInstaApiTokenController;
 use App\Http\Controllers\DItemController;
+use App\Http\Controllers\DMallBookmarksController;
 use App\Http\Controllers\DMallInController;
 use App\Http\Controllers\DOfficialController;
 use App\Http\Controllers\DOverviewController;
@@ -180,6 +181,9 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/dellamall/follow/store', [DFollowController::class,'store']);
     Route::post('/dellamall/follow/delete', [DFollowController::class,'destroy']);
+
+    Route::post('/dellamall/mall_bookmark/store', [DMallBookmarksController::class,'store']);
+    Route::post('/dellamall/mall_bookmark/delete', [DMallBookmarksController::class,'destroy']);
 
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');

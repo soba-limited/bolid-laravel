@@ -49,7 +49,7 @@ class DMall extends Model
 
     public function DMallIn()
     {
-        return $this->belongsToMany(DShop::class, 'd_maill_ins', 'd_mall_id', 'd_shop_id');
+        return $this->belongsToMany(DShop::class, 'd_mall_ins', 'd_mall_id', 'd_shop_id');
     }
 
     public function DMallBookmarkUser()

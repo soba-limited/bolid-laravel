@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DMallBookmarks;
 use App\Http\Requests\StoreDMallBookmarksRequest;
 use App\Http\Requests\UpdateDMallBookmarksRequest;
+use Illuminate\Http\Request;
 
 class DMallBookmarksController extends Controller
 {
@@ -37,6 +38,11 @@ class DMallBookmarksController extends Controller
     public function store(StoreDMallBookmarksRequest $request)
     {
         //
+        $d_mall_bookmark = DMallBookmarks::create([
+            'user_id' => $request->user_id,
+            'd_mall_id' => $request->d_mall_id,
+        ]);
+        return 'このモールをブックマークしました';
     }
 
     /**
@@ -79,8 +85,10 @@ class DMallBookmarksController extends Controller
      * @param  \App\Models\DMallBookmarks  $dMallBookmarks
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DMallBookmarks $dMallBookmarks)
+    public function destroy(DMallBookmarks $dMallBookmarks, Request $request)
     {
         //
+        $d_post = DMallBookmarks::find($request->shop_id);
+        $d_post->delete();
     }
 }

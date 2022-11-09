@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\DProfile;
 use App\Models\User;
 use App\Models\DShop;
+use App\Models\DComment;
+use App\Models\DMall;
+use App\Models\DMallBookmarks;
 use App\Http\Requests\StoreDProfileRequest;
 use App\Http\Requests\UpdateDProfileRequest;
+use App\Models\DMallIn;
 use Illuminate\Http\Request;
 
 class DProfileController extends Controller
@@ -72,7 +76,7 @@ class DProfileController extends Controller
     public function show(DProfile $dProfile, $user_id)
     {
         //
-        $profile = User::find($user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->get()->makeVisible('profile');
+        $profile = User::where('id', $user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->get();
         $create_shop = DShop::where('user_id', $user_id)->get();
         $allarray = [
             'profile' => $profile,
@@ -83,7 +87,7 @@ class DProfileController extends Controller
 
     public function mypage(Request $request)
     {
-        $profile = User::find($request->user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->get()->makeVisible('profile');
+        $profile = User::where('id', $request->user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->get();
         $create_shop = DShop::where('user_id', $request->user_id)->get();
         $allarray = [
             'profile' => $profile,
@@ -153,29 +157,32 @@ class DProfileController extends Controller
 
     public function create_mall(Request $request)
     {
-        $mall = DMall::where('user_id', $request->user_id)->orderBy('id', 'desc')->get();
+        $mall = DMall::where('user_id', $request->user_id)->orderBy('id', 'desc')->with(['DMallIn'=>function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->get();
         return $this->jsonResponse($mall);
     }
 
     public function save_shop(Request $request)
     {
-        $shop = DShop::where('user_id', $request->user_id)->with(['user',function ($query) {
-            $query->with('DProfile');
-        }])->orderBy('id', 'desc')->get();
+        $shop_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
+        $shop = DShop::whereIn('id', $shop_id)->get();
         return $this->jsonResponse($shop);
     }
 
     public function save_mall(Request $request)
     {
-        $mall = DMall::where('user_id', $request->user_id)->with(['user',function ($query) {
-            $query->with('DProfile');
-        }])->orderBy('id', 'desc')->get();
+        $mall = User::with(['DMallBookmark'=>function ($query) {
+            $query->with(['DMallIn'=>function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }])->find($request->user_id)->makeHidden(['email','account_type','l_profile_id','c_profile_id','d_profile_id','point']);
         return $this->jsonResponse($mall);
     }
 
     public function send_comments(Request $request)
     {
-        $comments = DComment::where('user_id', $request->user_id)->with(['DShop',function ($query) {
+        $comments = DComment::where('user_id', $request->user_id)->with(['DShop'=>function ($query) {
             $query->select(['id','name']);
         }])->get();
         return $this->jsonResponse($comments);
