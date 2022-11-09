@@ -74,8 +74,12 @@ class DMallController extends Controller
             'lock' => $request->lock
         ]);
 
-        $d_mall = DMall::where('user_id', $request->user_id)->get();
-        return $this->jsonResponse($d_mall);
+        $mall_in = DMallIn::where('user_id', $request->user_id)->where('d_shop_id', $request->d_shop_id)->pluck('d_mall_id');
+        $allarray = [
+            'mall' => $mall,
+            'mall_in' => $mall_in,
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     /**
