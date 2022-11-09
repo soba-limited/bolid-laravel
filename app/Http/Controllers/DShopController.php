@@ -28,7 +28,7 @@ class DShopController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function sort(Request $request, $page, $acount)
+    public function sort(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
         if (isset($sort)) {
@@ -69,6 +69,7 @@ class DShopController extends Controller
     public function search(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
+        return $sort;
         if (isset($sort)) {
             if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
