@@ -44,9 +44,9 @@ class DShopController extends Controller
         }
         if (isset($acount)) {
             if ($acount == 'official') {
-                $shop = $shop->where('official', '!=', null);
+                $shop = $shop->where('official_user_id', '!=', null);
             } elseif ($acount == 'notofficial') {
-                $shop = $shop->where('official', null);
+                $shop = $shop->where('official_user_id', null);
             }
         }
 
@@ -83,9 +83,9 @@ class DShopController extends Controller
         }
         if (isset($acount)) {
             if ($acount == 'official') {
-                $shop = $shop->where('official', '!=', null);
+                $shop = $shop->where('official_user_id', '!=', null);
             } elseif ($acount == 'notofficial') {
-                $shop = $shop->where('official', null);
+                $shop = $shop->where('official_user_id', null);
             }
         }
 
