@@ -29,6 +29,7 @@ class DMallController extends Controller
             'mall' => $mall,
             'mall_in' => $mall_in,
         ];
+        return $this->jsonResponse($allarray);
     }
 
     public function mycreate(Request $request)
