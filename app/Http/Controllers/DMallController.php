@@ -6,6 +6,7 @@ use App\Models\DMall;
 use App\Models\User;
 use App\Http\Requests\StoreDMallRequest;
 use App\Http\Requests\UpdateDMallRequest;
+use App\Models\DMallIn;
 use Illuminate\Http\Request;
 
 class DMallController extends Controller
@@ -23,7 +24,11 @@ class DMallController extends Controller
     public function return_mall(Request $request)
     {
         $mall = DMall::where('user_id', $request->user_id)->get();
-        return $this->jsonResponse($mall);
+        $mall_in = DMallIn::where('user_id', $request->user_id)->pluck('d_mall_id');
+        $allarray = [
+            'mall' => $mall,
+            'mall_in' => $mall_in,
+        ];
     }
 
     public function mycreate(Request $request)
@@ -31,7 +36,12 @@ class DMallController extends Controller
         $mall = DMall::where('user_id', $request->user_id)->with(['DMallIn',function ($query) {
             $query->limit(4);
         }])->withCount('DMallIn')->get();
-        return $this->jsonResponse($mall);
+        $mall_in = DMallIn::where('user_id', $request->user_id)->pluck('d_mall_id');
+        $allarray = [
+            'mall' => $mall,
+            'mall_in' => $mall_in,
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     public function bookmarks(Request $request)

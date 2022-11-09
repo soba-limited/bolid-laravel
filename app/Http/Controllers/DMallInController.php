@@ -37,6 +37,12 @@ class DMallInController extends Controller
     public function store(StoreDMallInRequest $request)
     {
         //
+        $d_mall_in = DMallIn::create([
+            'mall_id' => $request->mall_id,
+            'shop_id' => $request->shop_id,
+        ]);
+
+        return $this->jsonResponse($d_mall_in);
     }
 
     /**

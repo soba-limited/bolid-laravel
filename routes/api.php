@@ -26,6 +26,7 @@ use App\Http\Controllers\DFollowController;
 use App\Http\Controllers\DInfoController;
 use App\Http\Controllers\DInstaApiTokenController;
 use App\Http\Controllers\DItemController;
+use App\Http\Controllers\DMallInController;
 use App\Http\Controllers\DOfficialController;
 use App\Http\Controllers\DOverviewController;
 use App\Http\Controllers\DPickupController;
@@ -161,6 +162,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/dellamall/mall/edit/{shop_id}', [DMallController::class,'edit']);
     Route::post('/dellamall/mall/update/{shop_id}', [DMallController::class,'update']);
     Route::delete('/dellamall/mall/delete/{shop_id}', [DMallController::class,'destroy']);
+
+    Route::post('/dellamall/mall_in/store', [DMallInController::class,'store']);
+    Route::post('/dellamall/mall_in/delete', [DMallInController::class,'destroy']);
 
     Route::post('/dellamall/mypage', [DProfileController::class,'mypage']);
     Route::post('/dellamall/mypage/store', [DProfileController::class,'store']);
