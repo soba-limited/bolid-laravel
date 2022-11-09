@@ -17,6 +17,7 @@ class DMallIn extends Model
     protected $fillable = [
         'd_mall_id',
         'd_shop_id',
+        'user_id',
     ];
 
     /**
@@ -37,5 +38,6 @@ class DMallIn extends Model
     protected $casts = [
         'd_mall_id'=>'integer',
         'd_shop_id'=>'integer',
+        'user_id' => 'integer',
     ];
 }
