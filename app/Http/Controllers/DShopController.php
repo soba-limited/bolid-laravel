@@ -6,7 +6,13 @@ use App\Models\DShop;
 use App\Http\Requests\StoreDShopRequest;
 use App\Http\Requests\UpdateDShopRequest;
 use App\Models\DComment;
+use App\Models\DCoupon;
+use App\Models\DInfo;
+use App\Models\DInstaApiToken;
+use App\Models\DItem;
 use App\Models\DMall;
+use App\Models\DOverview;
+use App\Models\DSocial;
 use App\Models\DTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -278,5 +284,24 @@ class DShopController extends Controller
         //
         $d_post = DShop::find($shop_id);
         $d_post->delete();
+    }
+
+    public function official($shop_id)
+    {
+        $overview = DOverview::where('d_shop_id', $shop_id)->get();
+        $info = DInfo::where('d_shop_id', $shop_id)->get();
+        $coupon = DCoupon::where('d_shop_id', $shop_id)->get();
+        $item = DItem::where('d_shop_id', $shop_id)->get();
+        $social = DSocial::where('d_shop_id', $shop_id)->get();
+        $insta_api = DInstaApiToken::where('d_shop_id', $shop_id)->get();
+        $allarray = [
+            'overview' => $overview,
+            'info' => $info,
+            'coupon' => $coupon,
+            'item' => $item,
+            'social' => $social,
+            'insta_api' => $insta_api
+        ];
+        return $this->jsonResponse($allarray);
     }
 }

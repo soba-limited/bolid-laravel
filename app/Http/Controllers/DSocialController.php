@@ -44,7 +44,8 @@ class DSocialController extends Controller
             'name' => $request->name,
             'link' => $request->link,
         ]);
-        return $this->jsonResponse($d_social);
+        $d_socials = DSocial::where('d_shop_id', $d_social->shop_id)->get();
+        return $this->jsonResponse($d_socials);
     }
 
     /**
@@ -86,7 +87,8 @@ class DSocialController extends Controller
             'name' => $request->name,
             'link' => $request->link,
         ]);
-        return $this->jsonResponse($d_social);
+        $d_socials = DSocial::where('d_shop_id', $d_social->shop_id)->get();
+        return $this->jsonResponse($d_socials);
     }
 
     /**
@@ -99,7 +101,9 @@ class DSocialController extends Controller
     {
         //
         $d_social = DSocial::find($id);
+        $d_shop_id = $d_social->d_shop_id;
         $d_social->delete();
-        return '削除しました';
+        $d_socials = DSocial::where('d_shop_id', $d_shop_id)->get();
+        return $this->jsonResponse($d_socials);
     }
 }

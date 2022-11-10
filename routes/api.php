@@ -104,37 +104,33 @@ Route::group(['middleware'=>['api']], function () {
 
     //デラモール公式コントローラー(listとstoreはショップのID,edit以下はそれぞれのID)
 
-    Route::post('/dellamall/d_overviews/list/{shop_id}', [DOverviewController::class,'index']);
+    Route::get('/dellamall/shop/official/{shop_id}', [DShopController::class,'official']);
+
     Route::post('/dellamall/d_overviews/store/{shop_id}', [DOverviewController::class,'store']);
     Route::post('/dellamall/d_overviews/edit/{id}', [DOverviewController::class,'edit']);
     Route::post('/dellamall/d_overviews/update/{id}', [DOverviewController::class,'update']);
     Route::post('/dellamall/d_overviews/delete/{id}', [DOverviewController::class,'delete']);
 
-    Route::post('/dellamall/d_infos/list/{shop_id}', [DInfoController::class,'index']);
     Route::post('/dellamall/d_infos/store/{shop_id}', [DInfoController::class,'store']);
     Route::post('/dellamall/d_infos/edit/{id}', [DInfoController::class,'edit']);
     Route::post('/dellamall/d_infos/update/{id}', [DInfoController::class,'update']);
     Route::post('/dellamall/d_infos/delete/{id}', [DInfoController::class,'delete']);
 
-    Route::post('/dellamall/d_coupons/list/{shop_id}', [DCouponController::class,'index']);
     Route::post('/dellamall/d_coupons/store/{shop_id}', [DCouponController::class,'store']);
     Route::post('/dellamall/d_coupons/edit/{id}', [DCouponController::class,'edit']);
     Route::post('/dellamall/d_coupons/update/{id}', [DCouponController::class,'update']);
     Route::post('/dellamall/d_coupons/delete/{id}', [DCouponController::class,'delete']);
 
-    Route::post('/dellamall/d_items/list/{shop_id}', [DItemController::class,'index']);
     Route::post('/dellamall/d_items/store/{shop_id}', [DItemController::class,'store']);
     Route::post('/dellamall/d_items/edit/{id}', [DItemController::class,'edit']);
     Route::post('/dellamall/d_items/update/{id}', [DItemController::class,'update']);
     Route::post('/dellamall/d_items/delete/{id}', [DItemController::class,'delete']);
 
-    Route::post('/dellamall/d_socials/list/{shop_id}', [DSocialController::class,'index']);
     Route::post('/dellamall/d_socials/store/{shop_id}', [DSocialController::class,'store']);
     Route::post('/dellamall/d_socials/edit/{id}', [DSocialController::class,'edit']);
     Route::post('/dellamall/d_socials/update/{id}', [DSocialController::class,'update']);
     Route::post('/dellamall/d_socials/delete/{id}', [DSocialController::class,'delete']);
 
-    Route::post('/dellamall/d_insta/list/{shop_id}', [DInstaApiTokenController::class,'index']);
     Route::post('/dellamall/d_insta/store/{shop_id}', [DInstaApiTokenController::class,'store']);
     Route::post('/dellamall/d_insta/edit/{id}', [DInstaApiTokenController::class,'edit']);
     Route::post('/dellamall/d_insta/update/{id}', [DInstaApiTokenController::class,'update']);

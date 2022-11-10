@@ -55,7 +55,8 @@ class DItemController extends Controller
             $d_item->save();
         }
 
-        return $this->jsonResponse($d_item);
+        $d_items = DItem::where('d_shop_id', $d_item->shop_id)->get();
+        return $this->jsonResponse($d_items);
     }
 
     /**
@@ -106,7 +107,9 @@ class DItemController extends Controller
             'price' => $request->price,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
-        return $this->jsonResponse($d_item);
+
+        $d_items = DItem::where('d_shop_id', $d_item->shop_id)->get();
+        return $this->jsonResponse($d_items);
     }
 
     /**
@@ -119,7 +122,9 @@ class DItemController extends Controller
     {
         //
         $d_item = DItem::find($id);
+        $d_shop_id = $d_item->d_shop_id;
         $d_item->delete();
-        return '削除しました';
+        $d_items = DItem::where('d_shop_id', $d_shop_id)->get();
+        return $this->jsonResponse($d_items);
     }
 }

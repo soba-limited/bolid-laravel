@@ -45,7 +45,8 @@ class DCouponController extends Controller
             'content' => $request->content,
             'limit' => $request->limit
         ]);
-        return $this->jsonResponse($d_coupon);
+        $d_coupons = DCoupon::where('d_shop_id', $d_coupon->shop_id)->get();
+        return $this->jsonResponse($d_coupons);
     }
 
     /**
@@ -88,7 +89,8 @@ class DCouponController extends Controller
             'content' => $request->content,
             'limit' => $request->limit,
         ]);
-        return $this->jsonResponse($d_coupon);
+        $d_coupons = DCoupon::where('d_shop_id', $d_coupon->shop_id)->get();
+        return $this->jsonResponse($d_coupons);
     }
 
     /**
@@ -101,7 +103,9 @@ class DCouponController extends Controller
     {
         //
         $d_coupon = DCoupon::find($id);
+        $d_shop_id = $d_coupon->d_shop_id;
         $d_coupon->delete();
-        return '削除しました';
+        $d_coupons = DCoupon::where('d_shop_id', $d_shop_id)->get();
+        return $this->jsonResponse($d_coupons);
     }
 }

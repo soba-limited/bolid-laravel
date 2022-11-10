@@ -44,8 +44,8 @@ class DOverviewController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-
-        return $this->jsonResponse($overview);
+        $overviews = DOverview::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($overviews);
     }
 
     /**
@@ -87,7 +87,8 @@ class DOverviewController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        return $this->jsonResponse($overview);
+        $overviews = DOverview::where('d_shop_id', $overview->shop_id)->get();
+        return $this->jsonResponse($overviews);
     }
 
     /**
@@ -100,7 +101,9 @@ class DOverviewController extends Controller
     {
         //
         $overview = DOverview::find($id);
+        $d_shop_id = $overview->d_shop_id;
         $overview->delete();
-        return '削除しました';
+        $overviews = DOverview::where('d_shop_id', $d_shop_id)->get();
+        return $this->jsonResponse($overviews);
     }
 }

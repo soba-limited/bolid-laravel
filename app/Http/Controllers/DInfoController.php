@@ -44,7 +44,8 @@ class DInfoController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        return $this->jsonResponse($d_info);
+        $d_infos = DInfo::where('d_shop_id', $d_info->shop_id)->get();
+        return $this->jsonResponse($d_infos);
     }
 
     /**
@@ -86,7 +87,8 @@ class DInfoController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        return $this->jsonResponse($d_info);
+        $d_infos = DInfo::where('d_shop_id', $d_info->shop_id)->get();
+        return $this->jsonResponse($d_infos);
     }
 
     /**
@@ -99,7 +101,9 @@ class DInfoController extends Controller
     {
         //
         $d_info = DInfo::find($id);
+        $d_shop_id = $d_info->d_shop_id;
         $d_info->delete();
-        return '削除しました';
+        $d_infos = DInfo::where('d_shop_id', $d_shop_id)->get();
+        return $this->jsonResponse($d_infos);
     }
 }
