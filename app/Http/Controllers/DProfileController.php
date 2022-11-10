@@ -85,10 +85,10 @@ class DProfileController extends Controller
         return $this->jsonResponse($allarray);
     }
 
-    public function mypage(Request $request)
+    public function mypage(Request $request, $id)
     {
-        $profile = User::where('id', $request->user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->get();
-        $create_shop = DShop::where('user_id', $request->user_id)->get();
+        $profile = User::where('id', $id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->get();
+        $create_shop = DShop::where('user_id', $id)->get();
         $allarray = [
             'profile' => $profile,
             'create_shop' => $create_shop,
