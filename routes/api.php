@@ -162,9 +162,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/dellamall/shop/delete/{shop_id}', [DShopController::class,'destroy']);
 
     Route::post('/dellamall/mall/store', [DMallController::class,'store']);
-    Route::get('/dellamall/mall/edit/{shop_id}', [DMallController::class,'edit']);
-    Route::post('/dellamall/mall/update/{shop_id}', [DMallController::class,'update']);
-    Route::delete('/dellamall/mall/delete/{shop_id}', [DMallController::class,'destroy']);
+    Route::get('/dellamall/mall/edit/{mall_id}', [DMallController::class,'edit']);
+    Route::post('/dellamall/mall/update/{mall_id}', [DMallController::class,'update']);
+    Route::delete('/dellamall/mall/delete/{mall_id}', [DMallController::class,'destroy']);
 
     Route::post('/dellamall/mall_in/store', [DMallInController::class,'store']);
     Route::post('/dellamall/mall_in/delete', [DMallInController::class,'destroy']);
