@@ -20,6 +20,6 @@ class DMallInSeeder extends Seeder
         DB::table('d_mall_ins')->delete();
         DB::unprepared("ALTER TABLE d_mall_ins AUTO_INCREMENT = 1 ");
 
-        \App\Models\DMAllin::factory()->count(20)->create();
+        \App\Models\DMallIn::factory()->count(20)->create();
     }
 }
