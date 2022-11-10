@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DMallIn;
 use App\Http\Requests\StoreDMallInRequest;
 use App\Http\Requests\UpdateDMallInRequest;
+use Illuminate\Http\Request;
 
 class DMallInController extends Controller
 {
@@ -86,8 +87,11 @@ class DMallInController extends Controller
      * @param  \App\Models\DMallIn  $dMallIn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DMallIn $dMallIn)
+    public function destroy(DMallIn $dMallIn, Request $request)
     {
         //
+        $mallin = DMallIn::where('d_mall_id', $request->d_mall_id)->where('d_shop_id', $request->d_shop_id)->first();
+        $mallin->delete();
+        return '解除しました';
     }
 }
