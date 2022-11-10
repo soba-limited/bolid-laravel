@@ -13,9 +13,11 @@ class DInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($shop_id)
     {
         //
+        $d_info = DInfo::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($d_info);
     }
 
     /**
@@ -34,9 +36,15 @@ class DInfoController extends Controller
      * @param  \App\Http\Requests\StoreDInfoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDInfoRequest $request)
+    public function store(StoreDInfoRequest $request, $shop_id)
     {
         //
+        $d_info = DInfo::create([
+            'd_shop_id' => $shop_id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        return $this->jsonResponse($d_info);
     }
 
     /**
@@ -56,9 +64,11 @@ class DInfoController extends Controller
      * @param  \App\Models\DInfo  $dInfo
      * @return \Illuminate\Http\Response
      */
-    public function edit(DInfo $dInfo)
+    public function edit(DInfo $dInfo, $id)
     {
         //
+        $d_info = DInfo::find($id);
+        return $this->jsonResponse($d_info);
     }
 
     /**
@@ -68,9 +78,15 @@ class DInfoController extends Controller
      * @param  \App\Models\DInfo  $dInfo
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDInfoRequest $request, DInfo $dInfo)
+    public function update(UpdateDInfoRequest $request, DInfo $dInfo, $id)
     {
         //
+        $d_info = DInfo::find($id);
+        $d_info = $d_info->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        return $this->jsonResponse($d_info);
     }
 
     /**
@@ -79,8 +95,11 @@ class DInfoController extends Controller
      * @param  \App\Models\DInfo  $dInfo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DInfo $dInfo)
+    public function destroy(DInfo $dInfo, $id)
     {
         //
+        $d_info = DInfo::find($id);
+        $d_info->delete();
+        return '削除しました';
     }
 }

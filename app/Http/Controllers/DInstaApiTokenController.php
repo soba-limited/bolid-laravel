@@ -9,13 +9,15 @@ use App\Http\Requests\UpdateDInstaApiTokenRequest;
 class DInstaApiTokenController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+      * Display a listing of the resource.
+      *
+      * @return \Illuminate\Http\Response
+      */
+    public function index($shop_id)
     {
         //
+        $d_insta = DInstaApiToken::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($d_insta);
     }
 
     /**
@@ -34,9 +36,16 @@ class DInstaApiTokenController extends Controller
      * @param  \App\Http\Requests\StoreDInstaApiTokenRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDInstaApiTokenRequest $request)
+    public function store(StoreDInstaApiTokenRequest $request, $shop_id)
     {
         //
+        $d_insta = DInstaApiToken::create([
+            'd_shop_id' => $shop_id,
+            'account_name' => $request->account_name,
+            'user_name' => $request->user_name,
+            'api_token' => $request->api_token,
+        ]);
+        return $this->jsonResponse($d_insta);
     }
 
     /**
@@ -56,9 +65,11 @@ class DInstaApiTokenController extends Controller
      * @param  \App\Models\DInstaApiToken  $dInstaApiToken
      * @return \Illuminate\Http\Response
      */
-    public function edit(DInstaApiToken $dInstaApiToken)
+    public function edit(DInstaApiToken $dInstaApiToken, $id)
     {
         //
+        $d_insta = DInstaApiToken::find($id);
+        return $this->jsonResponse($d_insta);
     }
 
     /**
@@ -68,9 +79,16 @@ class DInstaApiTokenController extends Controller
      * @param  \App\Models\DInstaApiToken  $dInstaApiToken
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDInstaApiTokenRequest $request, DInstaApiToken $dInstaApiToken)
+    public function update(UpdateDInstaApiTokenRequest $request, DInstaApiToken $dInstaApiToken, $id)
     {
         //
+        $d_insta = DInstaApiToken::find($id);
+        $d_insta = $d_insta->update([
+            'account_name' => $request->account_name,
+            'user_name' => $request->user_name,
+            'api_token' => $request->api_token,
+        ]);
+        return $this->jsonResponse($d_insta);
     }
 
     /**
@@ -79,8 +97,11 @@ class DInstaApiTokenController extends Controller
      * @param  \App\Models\DInstaApiToken  $dInstaApiToken
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DInstaApiToken $dInstaApiToken)
+    public function destroy(DInstaApiToken $dInstaApiToken, $id)
     {
         //
+        $d_insta = DInstaApiToken::find($id);
+        $d_insta->delete();
+        return '削除しました';
     }
 }

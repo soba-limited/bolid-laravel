@@ -13,9 +13,11 @@ class DOverviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($shop_id)
     {
         //
+        $overview = DOverview::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($overview);
     }
 
     /**
@@ -34,9 +36,16 @@ class DOverviewController extends Controller
      * @param  \App\Http\Requests\StoreDOverviewRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDOverviewRequest $request)
+    public function store(StoreDOverviewRequest $request, $shop_id)
     {
         //
+        $overview = DOverview::create([
+            'd_shop_id' => $shop_id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return $this->jsonResponse($overview);
     }
 
     /**
@@ -56,9 +65,11 @@ class DOverviewController extends Controller
      * @param  \App\Models\DOverview  $dOverview
      * @return \Illuminate\Http\Response
      */
-    public function edit(DOverview $dOverview)
+    public function edit(DOverview $dOverview, $id)
     {
         //
+        $overview = DOverview::find($id);
+        return $this->jsonResponse($overview);
     }
 
     /**
@@ -68,9 +79,15 @@ class DOverviewController extends Controller
      * @param  \App\Models\DOverview  $dOverview
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDOverviewRequest $request, DOverview $dOverview)
+    public function update(UpdateDOverviewRequest $request, DOverview $dOverview, $id)
     {
         //
+        $overview = DOverview::find($id);
+        $overview = $overview::update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        return $this->jsonResponse($overview);
     }
 
     /**
@@ -79,8 +96,11 @@ class DOverviewController extends Controller
      * @param  \App\Models\DOverview  $dOverview
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DOverview $dOverview)
+    public function destroy(DOverview $dOverview, $id)
     {
         //
+        $overview = DOverview::find($id);
+        $overview->delete();
+        return '削除しました';
     }
 }

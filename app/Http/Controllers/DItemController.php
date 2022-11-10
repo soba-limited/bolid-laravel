@@ -13,9 +13,11 @@ class DItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($shop_id)
     {
         //
+        $d_item = DItem::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($d_item);
     }
 
     /**
@@ -34,9 +36,26 @@ class DItemController extends Controller
      * @param  \App\Http\Requests\StoreDItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDItemRequest $request)
+    public function store(StoreDItemRequest $request, $shop_id)
     {
         //
+        $d_item = DItem::create([
+            'd_shop_id' => $shop_id,
+            'title' => $request->title,
+            'price' => $request->price,
+        ]);
+
+        $id = $d_item->id;
+
+        if ($request->hasFile('thumbs')) {
+            $file_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/d_coupon/'.$id, $file_name, 'public');
+            $thumbs = 'images/d_item/'.$id."/".$file_name;
+            $d_item->thumbs = $thumbs;
+            $d_item->save();
+        }
+
+        return $this->jsonResponse($d_item);
     }
 
     /**
@@ -56,9 +75,11 @@ class DItemController extends Controller
      * @param  \App\Models\DItem  $dItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(DItem $dItem)
+    public function edit(DItem $dItem, $id)
     {
         //
+        $d_item = DItem::find($id);
+        return $this->jsonResponse($d_item);
     }
 
     /**
@@ -68,9 +89,24 @@ class DItemController extends Controller
      * @param  \App\Models\DItem  $dItem
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDItemRequest $request, DItem $dItem)
+    public function update(UpdateDItemRequest $request, DItem $dItem, $id)
     {
         //
+        if ($request->hasFile('thumbs')) {
+            $file_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/d_coupon/'.$id, $file_name, 'public');
+            $thumbs = 'images/d_coupon/'.$id."/".$file_name;
+        } elseif ($request->thumbs == 'null') {
+            $request->thumbs = null;
+        }
+
+        $d_item = DItem::find($id);
+        $d_item = $d_item->update([
+            'title' => $request->title,
+            'price' => $request->price,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+        ]);
+        return $this->jsonResponse($d_item);
     }
 
     /**
@@ -79,8 +115,11 @@ class DItemController extends Controller
      * @param  \App\Models\DItem  $dItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DItem $dItem)
+    public function destroy(DItem $dItem, $id)
     {
         //
+        $d_item = DItem::find($id);
+        $d_item->delete();
+        return '削除しました';
     }
 }

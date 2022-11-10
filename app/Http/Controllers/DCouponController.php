@@ -9,13 +9,15 @@ use App\Http\Requests\UpdateDCouponRequest;
 class DCouponController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+      * Display a listing of the resource.
+      *
+      * @return \Illuminate\Http\Response
+      */
+    public function index($shop_id)
     {
         //
+        $d_coupon = DCoupon::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($d_coupon);
     }
 
     /**
@@ -34,9 +36,16 @@ class DCouponController extends Controller
      * @param  \App\Http\Requests\StoreDCouponRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDCouponRequest $request)
+    public function store(StoreDCouponRequest $request, $shop_id)
     {
         //
+        $d_coupon = DCoupon::create([
+            'd_shop_id' => $shop_id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'limit' => $request->limit
+        ]);
+        return $this->jsonResponse($d_coupon);
     }
 
     /**
@@ -56,9 +65,11 @@ class DCouponController extends Controller
      * @param  \App\Models\DCoupon  $dCoupon
      * @return \Illuminate\Http\Response
      */
-    public function edit(DCoupon $dCoupon)
+    public function edit(DCoupon $dCoupon, $id)
     {
         //
+        $d_coupon = DCoupon::find($id);
+        return $this->jsonResponse($d_coupon);
     }
 
     /**
@@ -68,9 +79,16 @@ class DCouponController extends Controller
      * @param  \App\Models\DCoupon  $dCoupon
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDCouponRequest $request, DCoupon $dCoupon)
+    public function update(UpdateDCouponRequest $request, DCoupon $dCoupon, $id)
     {
         //
+        $d_coupon = DCoupon::find($id);
+        $d_coupon = $d_coupon->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'limit' => $request->limit,
+        ]);
+        return $this->jsonResponse($d_coupon);
     }
 
     /**
@@ -79,8 +97,11 @@ class DCouponController extends Controller
      * @param  \App\Models\DCoupon  $dCoupon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DCoupon $dCoupon)
+    public function destroy(DCoupon $dCoupon, $id)
     {
         //
+        $d_coupon = DCoupon::find($id);
+        $d_coupon->delete();
+        return '削除しました';
     }
 }

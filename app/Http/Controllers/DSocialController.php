@@ -9,13 +9,15 @@ use App\Http\Requests\UpdateDSocialRequest;
 class DSocialController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+      * Display a listing of the resource.
+      *
+      * @return \Illuminate\Http\Response
+      */
+    public function index($shop_id)
     {
         //
+        $d_social = DSocial::where('d_shop_id', $shop_id)->get();
+        return $this->jsonResponse($d_social);
     }
 
     /**
@@ -34,9 +36,15 @@ class DSocialController extends Controller
      * @param  \App\Http\Requests\StoreDSocialRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDSocialRequest $request)
+    public function store(StoreDSocialRequest $request, $shop_id)
     {
         //
+        $d_social = DSocial::create([
+            'd_shop_id' => $shop_id,
+            'name' => $request->name,
+            'link' => $request->link,
+        ]);
+        return $this->jsonResponse($d_social);
     }
 
     /**
@@ -56,9 +64,11 @@ class DSocialController extends Controller
      * @param  \App\Models\DSocial  $dSocial
      * @return \Illuminate\Http\Response
      */
-    public function edit(DSocial $dSocial)
+    public function edit(DSocial $dSocial, $id)
     {
         //
+        $d_social = DSocial::find($id);
+        return $this->jsonResponse($d_social);
     }
 
     /**
@@ -68,9 +78,15 @@ class DSocialController extends Controller
      * @param  \App\Models\DSocial  $dSocial
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDSocialRequest $request, DSocial $dSocial)
+    public function update(UpdateDSocialRequest $request, DSocial $dSocial, $id)
     {
         //
+        $d_social = DSocial::find($id);
+        $d_social = $d_social->update([
+            'name' => $request->name,
+            'link' => $request->link,
+        ]);
+        return $this->jsonResponse($d_social);
     }
 
     /**
@@ -79,8 +95,11 @@ class DSocialController extends Controller
      * @param  \App\Models\DSocial  $dSocial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DSocial $dSocial)
+    public function destroy(DSocial $dSocial, $id)
     {
         //
+        $d_social = DSocial::find($id);
+        $d_social->delete();
+        return '削除しました';
     }
 }
