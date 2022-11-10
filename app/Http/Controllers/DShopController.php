@@ -240,11 +240,29 @@ class DShopController extends Controller
         return $this->jsonResponse($d_shop);
     }
 
-    public function offcial_add(Request $request, $shop_id)
+    public function image_permission(Request $request)
     {
-        $shop = DShop::find($shop_id);
+        $shop = DShop::find($request->d_shop_id);
+        $shop = $shop->update([
+            'image_permission' => $request->image_permission
+        ]);
+        return $this->jsonResponse($shop);
+    }
+
+    public function official_add(Request $request)
+    {
+        $shop = DShop::find($request->d_shop_id);
         $shop = $shop->update([
             'official_user_id' => $request->official_user_id
+        ]);
+        return $this->jsonResponse($shop);
+    }
+
+    public function official_cancel(Request $request)
+    {
+        $shop = DShop::find($request->d_shop_id);
+        $shop = $shop->update([
+            'official_user_id' => null
         ]);
         return $this->jsonResponse($shop);
     }

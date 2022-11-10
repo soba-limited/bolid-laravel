@@ -79,10 +79,12 @@ Route::group(['middleware'=>['api']], function () {
 
     //デラモール運営コントローラー
 
-    Route::post('/dellamall/official/store', [DOfficialController::class,'store']);
+    Route::post('/dellamall/admin/image_permission', [DShopController::class,'image_permission']);
+    Route::post('/dellamall/admin/official_add', [DShopController::class,'official_add']);
+    Route::post('/dellamall/admin/official_cancel', [DShopController::class,'official_cancel']);
     Route::post('/dellamall/d_pickups/list', [DPickupController::class,'index']);
     Route::post('/dellamall/d_pickups/store', [DPickupController::class,'store']);
-    Route::post('/dellamall/d_pickups/delete', [DPickupController::class,'destroy']);
+    Route::delete('/dellamall/d_pickups/delete/{id}', [DPickupController::class,'destroy']);
 
 
     //liondor記事投稿者コントローラー

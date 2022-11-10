@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DPickup;
 use App\Http\Requests\StoreDPickupRequest;
 use App\Http\Requests\UpdateDPickupRequest;
+use Illuminate\Http\Request;
 
 class DPickupController extends Controller
 {
@@ -16,6 +17,8 @@ class DPickupController extends Controller
     public function index()
     {
         //
+        $pick = DPickup::with(['DShop'])->get();
+        return $this->jsonResponse($pick);
     }
 
     /**
@@ -37,6 +40,13 @@ class DPickupController extends Controller
     public function store(StoreDPickupRequest $request)
     {
         //
+        $pick = DPickup::create([
+            'd_shop_id' => $request->d_shop_id,
+            'order' => $request->order,
+            'state' => $request->state,
+        ]);
+
+        return $this->jsonResponse($pick);
     }
 
     /**
@@ -79,8 +89,11 @@ class DPickupController extends Controller
      * @param  \App\Models\DPickup  $dPickup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DPickup $dPickup)
+    public function destroy(DPickup $dPickup, $id)
     {
         //
+        $pick = DPickup::find($id);
+        $pick->delete();
+        return '削除しました';
     }
 }
