@@ -167,7 +167,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/dellamall/mall/delete/{mall_id}', [DMallController::class,'destroy']);
 
     Route::post('/dellamall/mall_in/store', [DMallInController::class,'store']);
-    Route::post('/dellamall/mall_in/delete', [DMallInController::class,'destroy']);
+    Route::delete('/dellamall/mall_in/delete', [DMallInController::class,'destroy']);
 
     Route::post('/dellamall/mypage', [DProfileController::class,'mypage']);
     Route::post('/dellamall/mypage/store', [DProfileController::class,'store']);
