@@ -38,8 +38,8 @@ class DMallInController extends Controller
     {
         //
         $d_mall_in = DMallIn::create([
-            'd_mall_id' => $request->mall_id,
-            'd_shop_id' => $request->shop_id,
+            'd_mall_id' => $request->d_mall_id,
+            'd_shop_id' => $request->d_shop_id,
             'user_id' => $request->user_id,
         ]);
 
