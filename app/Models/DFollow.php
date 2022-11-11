@@ -18,7 +18,7 @@ class DFollow extends Model
     protected $table = "d_follows";
 
     protected $fillable = [
-        'followind_user_id',
+        'following_user_id',
         'followed_user_id',
     ];
 

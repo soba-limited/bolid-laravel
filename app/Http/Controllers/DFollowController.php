@@ -40,7 +40,7 @@ class DFollowController extends Controller
         //
         $follow = DFollow::create([
             'following_user_id'=>$request->following_user_id,
-            'followed_user_id=>'=>$request->followed_user_id,
+            'followed_user_id'=>$request->followed_user_id,
         ]);
         return $this->jsonResponse($follow);
     }
