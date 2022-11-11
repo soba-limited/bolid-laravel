@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DComment;
 use App\Http\Requests\StoreDCommentRequest;
 use App\Http\Requests\UpdateDCommentRequest;
+use App\Models\DCommentGood;
 use Illuminate\Http\Request;
 
 class DCommentController extends Controller

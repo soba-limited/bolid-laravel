@@ -39,6 +39,7 @@ class DComment extends Model
         'd_shop_id'=>'integer',
     ];
 
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -47,6 +48,11 @@ class DComment extends Model
     public function DCommentGoods()
     {
         return $this->belongsToMany(User::class, 'd_comment_goods', 'd_comment_id', 'user_id');
+    }
+
+    public function DCommentGoodUsers()
+    {
+        return $this->hasMany(DCommentGood::class, 'd_comment_id');
     }
 
     public function DShop()

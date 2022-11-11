@@ -93,4 +93,10 @@ class DCommentGoodController extends Controller
         $comment_good->delete();
         return '参考になったを解除しました';
     }
+
+    public function shop_return(Request $request)
+    {
+        $mygood = DCommentGood::where('user_id', $request->user_id)->pluck('d_comment_id');
+        return $this->jsonResponse($mygood);
+    }
 }

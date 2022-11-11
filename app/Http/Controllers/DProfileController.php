@@ -184,7 +184,7 @@ class DProfileController extends Controller
     {
         $comments = DComment::where('user_id', $request->user_id)->with(['DShop'=>function ($query) {
             $query->select(['id','name']);
-        }])->get();
+        }])->withCount('DCommentGoods')->get();
         return $this->jsonResponse($comments);
     }
 
