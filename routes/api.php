@@ -182,6 +182,7 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/dellamall/follow/store', [DFollowController::class,'store']);
     Route::delete('/dellamall/follow/delete', [DFollowController::class,'destroy']);
+    Route::post('/dellamall/follow/check', [DFollowController::class,'check']);
 
     Route::post('/dellamall/d_comment_good/store', [DCommentGoodController::class,'store']);
     Route::delete('/dellamall/d_comment_good/delete', [DCommentGoodController::class,'destroy']);

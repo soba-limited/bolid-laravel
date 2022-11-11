@@ -92,4 +92,10 @@ class DFollowController extends Controller
         $follow->delete();
         return 'フォローを解除しました';
     }
+
+    public function check(Request $request)
+    {
+        $check = DFollow::where('followed_user_id', $request->user_id)->pluck('following_user_id');
+        return $this->jsonResponse($check);
+    }
 }
