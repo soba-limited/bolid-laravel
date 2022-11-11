@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DFollow;
 use App\Http\Requests\StoreDFollowRequest;
 use App\Http\Requests\UpdateDFollowRequest;
+use Illuminate\Http\Request;
 
 class DFollowController extends Controller
 {
@@ -37,6 +38,11 @@ class DFollowController extends Controller
     public function store(StoreDFollowRequest $request)
     {
         //
+        $follow = DFollow::create([
+            'following_user_id'=>$request->following_user_id,
+            'followed_user_id=>'=>$request->followed_user_id,
+        ]);
+        return $this->jsonResponse($follow);
     }
 
     /**
@@ -79,8 +85,11 @@ class DFollowController extends Controller
      * @param  \App\Models\DFollow  $dFollow
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DFollow $dFollow)
+    public function destroy(DFollow $dFollow, Request $request)
     {
         //
+        $follow = DFollow::where('following_user_id', $request->following_user_id)->where('followed_user_id', $request->followed_user_id)->first();
+        $follow->delete();
+        return 'フォローを解除しました';
     }
 }
