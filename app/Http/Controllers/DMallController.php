@@ -144,7 +144,7 @@ class DMallController extends Controller
 
     public function mall_in_all(Request $request)
     {
-        $mall_in_shop = DMall::find($request->mall_id)->DMallIn;
+        $mall_in_shop = DMall::find($request->d_mall_id)->DMallIn;
         return $this->jsonResponse($mall_in_shop);
     }
 }
