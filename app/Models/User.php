@@ -123,4 +123,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(DShop::class, 'd_goods', 'user_id', 'd_shop_id');
     }
+
+    public function DCommentGoods()
+    {
+        return $this->belongsToMany(DComment::class, 'd_comment_goods', 'user_id', 'd_comment_id');
+    }
 }

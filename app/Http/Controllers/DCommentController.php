@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DComment;
 use App\Http\Requests\StoreDCommentRequest;
 use App\Http\Requests\UpdateDCommentRequest;
+use Illuminate\Http\Request;
 
 class DCommentController extends Controller
 {
@@ -86,8 +87,21 @@ class DCommentController extends Controller
      * @param  \App\Models\DComment  $dComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DComment $dComment)
+    public function destroy(DComment $dComment, Request $request)
     {
         //
+        $comment = DComment::find($request->id);
+        $comment_id = $comment->d_shop_id;
+        $comment->delete();
+        $comments = DComment::where('d_shop_id', $comment_id)->get();
+        return $this->jsonResponse($comments);
+    }
+
+    public function official_comment($shop_id)
+    {
+        $comments = DComment::where('d_shop_id', $shop_id)->with('DShop')->with(['user'=>function ($query) {
+            $query->with('DProfile');
+        }])->withCount('DCommentGoods')->get();
+        return $this->jsonResponse($comments);
     }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\DMallController;
 use App\Http\Controllers\DProfileController;
 use App\Http\Controllers\DGoodController;
 use App\Http\Controllers\DCommentController;
+use App\Http\Controllers\DCommentGoodController;
 use App\Http\Controllers\DCouponController;
 use App\Http\Controllers\DFollowController;
 use App\Http\Controllers\DInfoController;
@@ -104,6 +105,9 @@ Route::group(['middleware'=>['api']], function () {
 
     //デラモール公式コントローラー(listとstoreはショップのID,edit以下はそれぞれのID)
 
+    Route::get('/dellamall/shop/official_comments/{shop_id}', [DCommentController::class,'official_comment']);
+    Route::delete('/dellamall/comment/delete', [DCommentController::class,'destroy']);
+
     Route::get('/dellamall/shop/official/{shop_id}', [DShopController::class,'official']);
 
     Route::post('/dellamall/d_overviews/store/{shop_id}', [DOverviewController::class,'store']);
@@ -177,10 +181,13 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/hasprofile/{id}', [DProfileController::class,'hasprofile']);
 
     Route::post('/dellamall/follow/store', [DFollowController::class,'store']);
-    Route::post('/dellamall/follow/delete', [DFollowController::class,'destroy']);
+    Route::delete('/dellamall/follow/delete', [DFollowController::class,'destroy']);
+
+    Route::post('/dellamall/d_comment_good/store', [DCommentGoodController::class,'store']);
+    Route::delete('/dellamall/d_comment_good/delete', [DCommentGoodController::class,'destroy']);
 
     Route::post('/dellamall/mall_bookmark/store', [DMallBookmarksController::class,'store']);
-    Route::post('/dellamall/mall_bookmark/delete', [DMallBookmarksController::class,'destroy']);
+    Route::delete('/dellamall/mall_bookmark/delete', [DMallBookmarksController::class,'destroy']);
 
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DComment extends Model
+class DCommentGood extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,7 @@ class DComment extends Model
      */
     protected $fillable = [
         'user_id',
-        'd_shop_id',
-        'content',
+        'd_comment_id',
     ];
 
     /**
@@ -36,21 +35,6 @@ class DComment extends Model
      */
     protected $casts = [
         'user_id'=>'integer',
-        'd_shop_id'=>'integer',
+        'd_comment_id'=>'integer',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function DCommentGoods()
-    {
-        return $this->belongsToMany(User::class, 'd_comment_goods', 'd_comment_id', 'user_id');
-    }
-
-    public function DShop()
-    {
-        return $this->belongsTo(DShop::class);
-    }
 }
