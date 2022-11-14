@@ -193,6 +193,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/comment/shop_return', [DCommentGoodController::class,'shop_return']);
     Route::post('/dellamall/mallbookmark/mall_return', [DMallBookmarksController::class,'mall_return']);
 
+    Route::post('/dellamall/shop_create_url', [DShopController::class,'shop_create_url']);
 
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');

@@ -303,4 +303,24 @@ class DShopController extends Controller
         ];
         return $this->jsonResponse($allarray);
     }
+
+    public function shop_create_url(Request $request)
+    {
+        $url = $request->url;
+        $output = mb_convert_encoding(file_get_contents($url), "utf-8", "auto");
+        preg_match('{<title>(.*?)</title>}', $output, $title);
+        preg_match('{<meta name="description" content="(.*?)"}', $output, $description);
+        preg_match('{<meta name="keywords" content="(.*?)"}', $output, $keyword);
+
+        $title = !empty($title)? $title[1]: null;
+        $description = !empty($description)? $description[1]: null;
+        $keyword = !empty($keyword)? $keyword[1]: null;
+
+        $allarray = [
+            'title'=>$title,
+            'description'=>$description,
+            'keyword'=>$keyword,
+        ];
+        return $this->jsonResponse($allarray);
+    }
 }
