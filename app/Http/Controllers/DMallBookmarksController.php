@@ -91,4 +91,10 @@ class DMallBookmarksController extends Controller
         $d_post = DMallBookmarks::find($request->shop_id);
         $d_post->delete();
     }
+
+    public function mall_return(Request $request)
+    {
+        $mybookmark = DMallBookmarks::where('user_id', $request->user_id)->pluck('d_mall_id');
+        return $this->jsonResponse($mybookmark);
+    }
 }

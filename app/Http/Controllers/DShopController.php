@@ -75,7 +75,6 @@ class DShopController extends Controller
     public function search(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
-        return $sort;
         if (isset($sort)) {
             if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');

@@ -190,6 +190,10 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/mall_bookmark/store', [DMallBookmarksController::class,'store']);
     Route::delete('/dellamall/mall_bookmark/delete', [DMallBookmarksController::class,'destroy']);
 
+    Route::post('/dellamall/comment/shop_return', [DCommentGoodController::class,'shop_return']);
+    Route::post('/dellamall/mallbookmark/mall_return', [DMallBookmarksController::class,'mall_return']);
+
+
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');
 
@@ -216,7 +220,6 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/shop/search/{page}/{sort}/{acount}', [DShopController::class,'search']);
     Route::post('/dellamall/shop/add_shop', [DShopController::class,'add_shop']);
     Route::get('/dellamall/shop/show/{shop_id}', [DShopController::class,'show']);
-    Route::post('/dellamall/comment/shop_return', [DCommentGoodController::class,'shop_return']);
 
     Route::get('/dellamall/mall/show/{mall_id}', [DMallController::class,'show']);
 
