@@ -152,7 +152,7 @@ class DShopController extends Controller
             $d_shop->save();
         }
 
-        if (isset($request->tag)) {
+        if (!empty($request->tag)) {
             $tags = $request->tag;
             foreach ($tags as $tag) {
                 $d_shop->DTag()->attach($tag);
@@ -235,7 +235,7 @@ class DShopController extends Controller
             'image_permission' => $request->image_permission,
         ]);
 
-        if (isset($request->tag)) {
+        if (!empty($request->tag)) {
             $tags = $request->tag;
             foreach ($tags as $tag) {
                 $d_shop->DTag()->syncWithoutDetaching($tag);
