@@ -54,7 +54,7 @@ class DShop extends Model
 
     public function DTags()
     {
-        return $this->belongsToMany(DTag::class, 'd_shop_d_tags', 'd_shop_id', 'd_tag_id');
+        return $this->belongsToMany(DTag::class, 'd_shop_d_tags', 'd_shop_id', 'd_tag_id')->withTimestamps();
     }
 
     public function DMalls()

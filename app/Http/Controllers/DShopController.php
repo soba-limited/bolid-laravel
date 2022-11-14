@@ -152,10 +152,20 @@ class DShopController extends Controller
             $d_shop->save();
         }
 
+        $tag_ids = [];
+
         if (!empty($request->tag)) {
-            $tags = $request->tag;
+            if ($d_shop->official_user_id == 0) {
+                $tags = explode(",", $request->tag, 3);
+            } else {
+                $tags = explode(",", $request->tag);
+            }
             foreach ($tags as $tag) {
-                $d_shop->DTag()->attach($tag);
+                $tag_single = DTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $d_shop->DTags()->attach($tag_id);
             }
         }
 
@@ -235,10 +245,20 @@ class DShopController extends Controller
             'image_permission' => $request->image_permission,
         ]);
 
+        $tag_ids = [];
+
         if (!empty($request->tag)) {
-            $tags = $request->tag;
+            if ($d_shop->official_user_id == 0) {
+                $tags = explode(",", $request->tag, 3);
+            } else {
+                $tags = explode(",", $request->tag);
+            }
             foreach ($tags as $tag) {
-                $d_shop->DTag()->syncWithoutDetaching($tag);
+                $tag_single = DTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $d_shop->DTags()->syncWithoutDetaching($tag_id);
             }
         }
 
