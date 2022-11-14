@@ -137,9 +137,11 @@ class DMallController extends Controller
      * @param  \App\Models\DMall  $dMall
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DMall $dMall)
+    public function destroy(DMall $dMall, $mall_id)
     {
         //
+        $d_mall = DMall::find($mall_id);
+        $d_mall->delete();
     }
 
     public function mall_in_all(Request $request)
