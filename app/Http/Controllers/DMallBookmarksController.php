@@ -88,7 +88,7 @@ class DMallBookmarksController extends Controller
     public function destroy(DMallBookmarks $dMallBookmarks, Request $request)
     {
         //
-        $d_post = DMallBookmarks::find($request->shop_id);
+        $d_post = DMallBookmarks::where('d_mall_id', $request->d_mall_id)->where('user_id', $request->user_id)->first();
         $d_post->delete();
     }
 
