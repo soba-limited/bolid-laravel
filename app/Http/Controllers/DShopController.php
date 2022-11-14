@@ -155,10 +155,9 @@ class DShopController extends Controller
         $tag_ids = [];
 
         if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
             if ($d_shop->official_user_id == 0) {
-                $tags = explode(",", $request->tag, 3);
-            } else {
-                $tags = explode(",", $request->tag);
+                array_splice($tags, 3);
             }
             foreach ($tags as $tag) {
                 $tag_single = DTag::firstOrCreate(['name'=>$tag]);
@@ -248,10 +247,9 @@ class DShopController extends Controller
         $tag_ids = [];
 
         if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
             if ($d_shop->official_user_id == 0) {
-                $tags = explode(",", $request->tag, 3);
-            } else {
-                $tags = explode(",", $request->tag);
+                array_splice($tags, 3);
             }
             foreach ($tags as $tag) {
                 $tag_single = DTag::firstOrCreate(['name'=>$tag]);
