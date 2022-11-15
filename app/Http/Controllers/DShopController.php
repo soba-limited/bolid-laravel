@@ -75,7 +75,7 @@ class DShopController extends Controller
     public function search(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
-        if (isset($sort)) {
+        if (!empty($sort)) {
             if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
             } elseif ($sort == 'good') {
@@ -86,7 +86,7 @@ class DShopController extends Controller
                 $shop = $shop->withCount('DComments')->orderBy('d_comments_count', 'desc');
             }
         }
-        if (isset($acount)) {
+        if (!empty($acount)) {
             if ($acount == 'official') {
                 $shop = $shop->where('official_user_id', '!=', null);
             } elseif ($acount == 'notofficial') {
@@ -210,7 +210,7 @@ class DShopController extends Controller
     public function edit(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::find($shop_id)->makeVisible('description');
+        $shop = DShop::with('DTags')->find($shop_id)->makeVisible('description');
         return $this->jsonResponse($shop);
     }
 

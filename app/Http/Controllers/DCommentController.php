@@ -88,7 +88,7 @@ class DCommentController extends Controller
      * @param  \App\Models\DComment  $dComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DComment $dComment, Request $request)
+    public function destroy(Request $request)
     {
         //
         $comment = DComment::find($request->id);
