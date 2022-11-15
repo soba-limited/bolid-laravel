@@ -304,6 +304,7 @@ class DShopController extends Controller
 
     public function official($shop_id)
     {
+        $shop = DShop::finde($shop_id);
         $overview = DOverview::where('d_shop_id', $shop_id)->get();
         $info = DInfo::where('d_shop_id', $shop_id)->get();
         $coupon = DCoupon::where('d_shop_id', $shop_id)->get();
@@ -311,6 +312,7 @@ class DShopController extends Controller
         $social = DSocial::where('d_shop_id', $shop_id)->get();
         $insta_api = DInstaApiToken::where('d_shop_id', $shop_id)->get();
         $allarray = [
+            'shop' => $shop,
             'overview' => $overview,
             'info' => $info,
             'coupon' => $coupon,
