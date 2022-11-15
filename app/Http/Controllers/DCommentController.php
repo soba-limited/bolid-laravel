@@ -91,7 +91,7 @@ class DCommentController extends Controller
     public function destroy(Request $request)
     {
         //
-        $comment = DComment::find($request->id);
+        $comment = DComment::find($request->comment_id);
         $comment_id = $comment->d_shop_id;
         $comment->delete();
         $comments = DComment::where('d_shop_id', $comment_id)->get();
