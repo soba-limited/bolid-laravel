@@ -235,13 +235,15 @@ class DShopController extends Controller
             $thumbs = 'images/d_post/'.$id."/".$thumbs_name;
         }
 
+        $imagePermisison = !empty($request->image_permission)? $request->image_permission: 0;
+
         $d_shop->update([
             'user_id' => $request->user_id,
             'url' => $request->url,
             'name' => $request->name,
             'description' => $request->description,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
-            'image_permission' => $request->image_permission,
+            'image_permission' => $imagePermisison,
         ]);
 
         $tag_ids = [];
