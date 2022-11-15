@@ -44,7 +44,7 @@ class DInfoController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        $d_infos = DInfo::where('d_shop_id', $d_info->shop_id)->get();
+        $d_infos = DInfo::where('d_shop_id', $d_info->d_shop_id)->get();
         return $this->jsonResponse($d_infos);
     }
 
@@ -87,7 +87,7 @@ class DInfoController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        $d_infos = DInfo::where('d_shop_id', $d_info->shop_id)->get();
+        $d_infos = DInfo::where('d_shop_id', $d_info->d_shop_id)->get();
         return $this->jsonResponse($d_infos);
     }
 

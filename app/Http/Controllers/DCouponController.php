@@ -45,7 +45,7 @@ class DCouponController extends Controller
             'content' => $request->content,
             'limit' => $request->limit
         ]);
-        $d_coupons = DCoupon::where('d_shop_id', $d_coupon->shop_id)->get();
+        $d_coupons = DCoupon::where('d_shop_id', $d_coupon->d_shop_id)->get();
         return $this->jsonResponse($d_coupons);
     }
 
@@ -89,7 +89,7 @@ class DCouponController extends Controller
             'content' => $request->content,
             'limit' => $request->limit,
         ]);
-        $d_coupons = DCoupon::where('d_shop_id', $d_coupon->shop_id)->get();
+        $d_coupons = DCoupon::where('d_shop_id', $d_coupon->d_shop_id)->get();
         return $this->jsonResponse($d_coupons);
     }
 

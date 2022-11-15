@@ -55,7 +55,7 @@ class DItemController extends Controller
             $d_item->save();
         }
 
-        $d_items = DItem::where('d_shop_id', $d_item->shop_id)->get();
+        $d_items = DItem::where('d_shop_id', $d_item->d_shop_id)->get();
         return $this->jsonResponse($d_items);
     }
 
@@ -108,7 +108,7 @@ class DItemController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $d_items = DItem::where('d_shop_id', $d_item->shop_id)->get();
+        $d_items = DItem::where('d_shop_id', $d_item->d_shop_id)->get();
         return $this->jsonResponse($d_items);
     }
 

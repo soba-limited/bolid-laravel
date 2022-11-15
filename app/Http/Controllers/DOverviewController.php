@@ -44,7 +44,7 @@ class DOverviewController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        $overviews = DOverview::where('d_shop_id', $shop_id)->get();
+        $overviews = DOverview::where('d_shop_id', $overview->d_shop_id)->get();
         return $this->jsonResponse($overviews);
     }
 
@@ -87,7 +87,7 @@ class DOverviewController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        $overviews = DOverview::where('d_shop_id', $overview->shop_id)->get();
+        $overviews = DOverview::where('d_shop_id', $overview->d_shop_id)->get();
         return $this->jsonResponse($overviews);
     }
 
