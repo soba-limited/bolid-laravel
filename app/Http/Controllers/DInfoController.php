@@ -83,7 +83,7 @@ class DInfoController extends Controller
     {
         //
         $d_info = DInfo::find($id);
-        $d_info = $d_info->update([
+        $d_info->update([
             'title' => $request->title,
             'content' => $request->content,
         ]);

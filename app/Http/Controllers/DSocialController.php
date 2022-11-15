@@ -83,7 +83,7 @@ class DSocialController extends Controller
     {
         //
         $d_social = DSocial::find($id);
-        $d_social = $d_social->update([
+        $d_social->update([
             'name' => $request->name,
             'link' => $request->link,
         ]);

@@ -102,7 +102,7 @@ class DItemController extends Controller
         }
 
         $d_item = DItem::find($id);
-        $d_item = $d_item->update([
+        $d_item->update([
             'title' => $request->title,
             'price' => $request->price,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,

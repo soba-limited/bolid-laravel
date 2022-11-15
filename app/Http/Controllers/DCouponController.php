@@ -84,7 +84,7 @@ class DCouponController extends Controller
     {
         //
         $d_coupon = DCoupon::find($id);
-        $d_coupon = $d_coupon->update([
+        $d_coupon->update([
             'title' => $request->title,
             'content' => $request->content,
             'limit' => $request->limit,
