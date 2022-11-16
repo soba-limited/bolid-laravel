@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class CCoupon extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'c_profile_id',
+        'title',
+        'thumbs',
+        'limit',
+    ];
+
+    public function CProfile()
+    {
+        return $this->belongsTo(CProfile::class);
+    }
 }

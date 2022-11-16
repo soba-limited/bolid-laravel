@@ -83,7 +83,7 @@ class DOverviewController extends Controller
     {
         //
         $overview = DOverview::find($id);
-        $overview::update([
+        $overview->update([
             'title' => $request->title,
             'content' => $request->content,
         ]);
