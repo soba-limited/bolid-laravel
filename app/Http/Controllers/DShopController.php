@@ -197,7 +197,7 @@ class DShopController extends Controller
     public function show(DShop $dShop, $shop_id)
     {
         //
-        $shop = DShop::with(['DTags','DGoods','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'])->with(['DComments'=>function ($query) {
+        $shop = DShop::with(['DTags','DGoods','user','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens','DPickups'])->with(['DComments'=>function ($query) {
             $query->with(['user'=>function ($query) {
                 $query->with('DProfile');
             }]);
