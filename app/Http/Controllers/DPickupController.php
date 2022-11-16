@@ -21,6 +21,12 @@ class DPickupController extends Controller
         return $this->jsonResponse($pick);
     }
 
+    public function check()
+    {
+        $pick_id_list = DPickup::pluck('id');
+        return $this->jsonResponse($pick_id_list);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,8 +48,8 @@ class DPickupController extends Controller
         //
         $pick = DPickup::create([
             'd_shop_id' => $request->d_shop_id,
-            'order' => $request->order,
-            'state' => $request->state,
+            'order' => 0,
+            'state' => 0,
         ]);
 
         return $this->jsonResponse($pick);

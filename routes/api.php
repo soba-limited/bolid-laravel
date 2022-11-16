@@ -87,6 +87,8 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/d_pickups/store', [DPickupController::class,'store']);
     Route::delete('/dellamall/d_pickups/delete/{id}', [DPickupController::class,'destroy']);
 
+    Route::post('/dellamall/pickup/check', [DPickupController::class,'check']);
+
 
     //liondor記事投稿者コントローラー
 

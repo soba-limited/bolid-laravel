@@ -128,4 +128,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(DComment::class, 'd_comment_goods', 'user_id', 'd_comment_id');
     }
+
+    //コラプラリレーション
 }
