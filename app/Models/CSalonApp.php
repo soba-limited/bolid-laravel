@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CSalonApp extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'c_salon_id',
+        'user_id',
+    ];
 }

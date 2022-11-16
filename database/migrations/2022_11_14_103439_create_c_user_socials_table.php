@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('follower');
             $table->timestamps();
 
-            $table->foreign("c_user_prifile_id")->references("id")->on("c_user_prifiles")->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign("c_user_profile_id")->references("id")->on("c_user_profiles")->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

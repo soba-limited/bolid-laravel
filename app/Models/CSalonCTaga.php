@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CSalonCTaga extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'c_salon_id',
+        'c_tag_id',
+    ];
 }

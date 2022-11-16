@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -14,8 +13,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('c_post_c_tags', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('c_post_id');
+            $table->unsignedBigInteger('c_tag_id');
             $table->timestamps();
+
+            $table->foreign("c_post_id")->references("id")->on("c_posts")->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign("c_tag_id")->references("id")->on("c_tags")->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

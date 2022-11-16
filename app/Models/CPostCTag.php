@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CPostCTag extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'c_pr_id',
+        'c_tag_id',
+    ];
 }

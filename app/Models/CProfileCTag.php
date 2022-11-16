@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CProfileCTag extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'c_profile_id',
+        'c_tag_id',
+    ];
 }
