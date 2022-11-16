@@ -49,7 +49,7 @@ class DItemController extends Controller
 
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/d_coupon/'.$id, $file_name, 'public');
+            $request->file('thumbs')->storeAs('images/d_item/'.$id, $file_name, 'public');
             $thumbs = 'images/d_item/'.$id."/".$file_name;
             $d_item->thumbs = $thumbs;
             $d_item->save();
@@ -95,8 +95,8 @@ class DItemController extends Controller
         //
         if ($request->hasFile('thumbs')) {
             $file_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/d_coupon/'.$id, $file_name, 'public');
-            $thumbs = 'images/d_coupon/'.$id."/".$file_name;
+            $request->file('thumbs')->storeAs('images/d_item/'.$id, $file_name, 'public');
+            $thumbs = 'images/d_item/'.$id."/".$file_name;
         } elseif ($request->thumbs == 'null') {
             $request->thumbs = null;
         }
