@@ -37,6 +37,16 @@ class DShopController extends Controller
     public function sort(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
+
+        if (!empty($request->s)) {
+            $shop = $shop->where('name', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%');
+        } elseif (!empty($request->tag_id)) {
+            $shop = $shop::whereHas('DTags', function ($query) use ($request) {
+                $query->where('d_tag_id', $request->tag_id);
+            });
+        }
+
+
         if (isset($sort)) {
             if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
@@ -62,7 +72,7 @@ class DShopController extends Controller
         $count = $shop->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
+        $shop = $shop->limit($limit)->skip($skip)->with('DTags')->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
 
         $allarray = [
             'shop' => $shop,
@@ -75,6 +85,14 @@ class DShopController extends Controller
     public function search(Request $request, $page, $sort, $acount)
     {
         $shop = new DShop;
+
+        if (!empty($request->s)) {
+            $shop = $shop->where('name', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%');
+        } elseif (!empty($request->tag_id)) {
+            $shop = $shop::whereHas('DTags', function ($query) use ($request) {
+                $query->where('d_tag_id', $request->tag_id);
+            });
+        }
 
         if (!empty($sort)) {
             if ($sort == 'new') {
@@ -93,14 +111,6 @@ class DShopController extends Controller
             } elseif ($acount == 'notofficial') {
                 $shop = $shop->where('official_user_id', null);
             }
-        }
-
-        if (!empty($request->s)) {
-            $shop = $shop->where('name', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%');
-        } elseif (!empty($request->tag_id)) {
-            $shop = $shop::whereHas('Tags', function ($query) use ($request) {
-                $query->where('id', $request->tag_id);
-            });
         }
 
         $limit = 28;
