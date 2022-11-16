@@ -100,6 +100,7 @@ class DPickupController extends Controller
         //
         $pick = DPickup::find($id);
         $pick->delete();
-        return '削除しました';
+        $return = DPickup::with(['DShop'])->get();
+        return $this->jsonResponse($return);
     }
 }
