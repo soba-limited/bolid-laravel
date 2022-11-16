@@ -23,7 +23,7 @@ class DPickupController extends Controller
 
     public function check()
     {
-        $pick_id_list = DPickup::pluck('id');
+        $pick_id_list = DPickup::pluck('d_shop_id');
         return $this->jsonResponse($pick_id_list);
     }
 
