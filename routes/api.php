@@ -32,6 +32,7 @@ use App\Http\Controllers\DMallInController;
 use App\Http\Controllers\DOverviewController;
 use App\Http\Controllers\DPickupController;
 use App\Http\Controllers\DSocialController;
+use App\Http\Controllers\DTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,6 +216,8 @@ Route::group(['middleware'=>['api']], function () {
     //デラモール
     Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
     Route::post('/dellamall/more/{page}', [DIndexController::class,'index_more']);
+
+    Route::post('/dellamall/tag/list', [DTagController::class,'index']);
 
     Route::post('/dellamall/shop', [DShopController::class,'index']);
     Route::post('/dellamall/shop/sort/{page}/{sort}/{acount}', [DShopController::class,'sort']);

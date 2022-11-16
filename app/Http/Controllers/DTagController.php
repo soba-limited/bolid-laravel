@@ -16,6 +16,8 @@ class DTagController extends Controller
     public function index()
     {
         //
+        $tags = DTag::withCount('DShop')->orderBy('d_shop_count', 'desc')->limit(20)->get();
+        return $this->jsonResponse($tags);
     }
 
     /**

@@ -36,6 +36,6 @@ class DTag extends Model
 
     public function DShop()
     {
-        return $this->belongsToMany(DShop::class, 'd_shop_d_tag', 'd_tag_id', 'd_shop_id');
+        return $this->belongsToMany(DShop::class, 'd_shop_d_tags', 'd_tag_id', 'd_shop_id');
     }
 }
