@@ -216,7 +216,7 @@ Route::group(['middleware'=>['api']], function () {
 
 
     //デラモール
-    Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
+    Route::get('/dellamall', [DIndexController::class,'index']);
     Route::post('/dellamall/more/{page}', [DIndexController::class,'index_more']);
 
     Route::post('/dellamall/tag/list', [DTagController::class,'index']);
