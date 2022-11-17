@@ -28,6 +28,8 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('yamauchi'),
                 'l_profile_id' => '1',
                 'd_profile_id' => '1',
+                'c_profile_id' => '1',
+                'account_type' => '3',
             ],
             [
                 'name' => 'KojiNakano',
@@ -35,6 +37,8 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('nakano'),
                 'l_profile_id' => '2',
                 'd_profile_id' => '2',
+                'c_profile_id' => '2',
+                'account_type' => '1',
             ]
         ];
 

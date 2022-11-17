@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\CCompanyProfile;
 use App\Models\DInfo;
 use App\Models\DOverview;
 use App\Models\DShop;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LProfileSeeder::class,
             DProfileSeeder::class,
+            CProfileSeeder::class,
             UsersTableSeeder::class,
             LSeriesSeeder::class,
             LCategorySeeder::class,
@@ -47,6 +49,10 @@ class DatabaseSeeder extends Seeder
             DItemSeeder::class,
             DSocialSeeder::class,
             DInstaApiTokenSeeder::class,
+            CUserProfileSeeder::class,
+            CCompanyProfileSeeder::class,
+            CUserSocialSeeder::class,
+            CCompanySocialSeeder::class,
         ]);
     }
 }

@@ -15,9 +15,9 @@ return new class extends Migration {
         Schema::create('c_user_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('c_profile_id');
-            $table->string('brand');
-            $table->string('appeal_text');
-            $table->string('appeal_image');
+            $table->string('brand')->nullable();
+            $table->string('appeal_text')->nullable();
+            $table->string('appeal_image')->nullable();
             $table->timestamps();
 
             $table->foreign("c_profile_id")->references("id")->on("c_profiles")->onUpdate('CASCADE')->onDelete('CASCADE');

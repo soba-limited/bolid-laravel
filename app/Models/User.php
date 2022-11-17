@@ -130,4 +130,64 @@ class User extends Authenticatable
     }
 
     //コラプラリレーション
+
+    public function CProfile()
+    {
+        return $this->belongsTo(CProfile::class);
+    }
+
+    public function CPosts()
+    {
+        return $this->hasMany(CPost::class);
+    }
+
+    public function CSalons()
+    {
+        return $this->hasMany(CSalon::class);
+    }
+
+    public function CPrs()
+    {
+        return $this->hasMany(CPr::class);
+    }
+
+    public function CPostApps()
+    {
+        return $this->belongsToMany(CPost::class, 'c_post_apps', 'user_id', 'c_post_id');
+    }
+
+    public function CPostBookmarks()
+    {
+        return $this->belongsToMany(CPost::class, 'c_post_bookmarks', 'user_id', 'c_post_id');
+    }
+
+    public function CSalonBookmarks()
+    {
+        return $this->belongsToMany(CSalon::class, 'c_salon_bookmarks', 'user_id', 'c_salon_id');
+    }
+
+    public function CSalonApps()
+    {
+        return $this->belongsToMany(CSalon::class, 'c_salon_apps', 'user_id', 'c_salon_id');
+    }
+
+    public function CFollowings()
+    {
+        return $this->belongsTo(User::class, 'c_follows', 'following_user_id', 'followed_user_id');
+    }
+
+    public function CFolloweds()
+    {
+        return $this->belongsTo(User::class, 'c_follows', 'followed_user_id', 'following_user_id');
+    }
+
+    public function CCommentSends()
+    {
+        return $this->belongsToMany(User::class, 'c_comments', 'user_id', 'to_user_id');
+    }
+
+    public function CCommentRevives()
+    {
+        return $this->belongsToMany(User::class, 'c_comments', 'to_user_id', 'user_id');
+    }
 }

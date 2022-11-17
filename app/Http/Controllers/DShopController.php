@@ -16,6 +16,8 @@ use App\Models\DSocial;
 use App\Models\DTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class DShopController extends Controller
 {
@@ -158,16 +160,11 @@ class DShopController extends Controller
 
         $id = $d_shop->id;
 
-        if ($request->hasFile('thumbs')) {
-            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/d_shop/'.$id, $thumbs_name, 'public');
-            $thumbs = 'images/d_shop/'.$id."/".$thumbs_name;
-            $d_shop->thumbs = $thumbs;
-        }
-
-        if ($request->hasFile('thumbs')) {
-            $d_shop->save();
-        }
+        $data = file_get_contents($request->thumbs);
+        $imgname = "images/d_post/".$id.$request->imgname;
+        file_put_contents('./storage/'.$imgname, $data);
+        $d_shop->thumbs = $imgname;
+        $d_shop->save();
 
         $tag_ids = [];
 
@@ -352,10 +349,16 @@ class DShopController extends Controller
         $description = !empty($description)? $description[1]: null;
         $keyword = !empty($keyword)? $keyword[1]: null;
 
+        $screenshot = Http::withToken("2Oe3k8aSmXT92SzL6VFmmOQjC9ettxZyooXmPVqd")->get("https://screendot.io/api/standard?url=".$request->url."&delay=1000&browserWidth=1920&width=1920&format=webp&refresh=true&fullPage=true&response=json")->body();
+
+        $imgsrc = json_decode($screenshot);
+
         $allarray = [
             'title'=>$title,
             'description'=>$description,
             'keyword'=>$keyword,
+            'imgsrc' => $imgsrc->url,
+            'imgname' => $imgsrc->id,
         ];
         return $this->jsonResponse($allarray);
     }
