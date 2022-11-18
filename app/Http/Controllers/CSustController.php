@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CSust;
 use App\Http\Requests\StoreCSustRequest;
 use App\Http\Requests\UpdateCSustRequest;
+use Illuminate\Http\Request;
 
 class CSustController extends Controller
 {
@@ -82,5 +83,11 @@ class CSustController extends Controller
     public function destroy(CSust $cSust)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $sust = CSust::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($sust);
     }
 }

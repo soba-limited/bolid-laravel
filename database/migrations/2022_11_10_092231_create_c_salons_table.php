@@ -17,10 +17,11 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('c_cat_id');
             $table->string('title');
+            $table->string('thumbs')->nullable();
             $table->string('date')->nullable();
             $table->string('plan')->nullable();
             $table->string('number_of_people')->nullable();
-            $table->string('content')->nullable();
+            $table->longText('content')->nullable();
             $table->string('stripe_api_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

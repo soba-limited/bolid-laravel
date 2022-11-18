@@ -3,8 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\CProfile;
+use App\Models\User;
 use App\Http\Requests\StoreCProfileRequest;
 use App\Http\Requests\UpdateCProfileRequest;
+use App\Models\CBusinessInformaition;
+use App\Models\CCard;
+use App\Models\CComment;
+use App\Models\CLike;
+use App\Models\CPost;
+use App\Models\CPostApp;
+use App\Models\CPr;
+use Illuminate\Http\Request;
 
 class CProfileController extends Controller
 {
@@ -50,6 +59,71 @@ class CProfileController extends Controller
         //
     }
 
+    public function company_show($user_id)
+    {
+        $user = User::find($user_id);
+        if ($user->account_type >= 1) {
+            $profile = CProfile::with(['CCompanyProfile'=>function ($query) {
+                $query->with('CCompanySocials');
+            }])->with(['CTags'])->find($user->c_profile_id);
+            $posts = CPost::where('user_id', $user_id)->get();
+            $business = CBusinessInformaition::where('c_profile_id', $profile->id)->get();
+            $pr = CPr::where('user_id', $user_id)->withCount('CPrCounts')->get();
+            $comments = CComment::where('to_user_id', $user_id)->with('user')->get();
+
+            $allarray = [
+                'user' => $user,
+                'profile' => $profile,
+                'posts' => $posts,
+                'business' => $business,
+                'pr' => $pr,
+                'comments' => $comments,
+            ];
+
+            return $this->jsonResponse($allarray);
+        } else {
+            return false;
+        }
+    }
+
+    public function user_show($user_id)
+    {
+        $user = User::find($user_id);
+        if ($user->account_type == 0) {
+            $profile = CProfile::with(['CUserProfile'=>function ($query) {
+                $query->with('CUserSocials', 'CUserSkills');
+            }])->with(['CTags'])->find($user->c_profile_id);
+
+            $posts = CPost::where('user_id', $user_id)->get();
+
+            $comments = CComment::where('to_user_id', $user_id)->with('user')->get();
+
+            $cards = CCard::where('c_profile_id', $profile->id)->get();
+            $likes = CLike::where('c_profile_id', $profile->id)->get();
+
+            $allarray = [
+                'user' => $user,
+                'profile' => $profile,
+                'posts' => $posts,
+                'comments' => $comments,
+                'cards' => $cards,
+                'likes' => $likes,
+            ];
+
+            return $this->jsonResponse($allarray);
+        } else {
+            return false;
+        }
+    }
+
+    public function matching(Request $request)
+    {
+        $myposts = CPost::where('user_id', $request->user_id)->pluck('id');
+        $apps = CPostApp::whereIn('c_post_id', $myposts)->pluck('user_id')->unique();
+        $users = User::whereIn('id', $apps)->with('CPostApps:id,title')->get();
+        return $this->jsonResponse($users);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -82,5 +156,16 @@ class CProfileController extends Controller
     public function destroy(CProfile $cProfile)
     {
         //
+    }
+
+    public function allways(Request $request)
+    {
+        $profile_id = User::find($request->id)->c_profile_id;
+        if (!empty($profile_id)) {
+            $profile = CProfile::find($profile_id);
+            return $this->jsonResponse($profile);
+        } else {
+            return false;
+        }
     }
 }

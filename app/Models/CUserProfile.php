@@ -28,6 +28,6 @@ class CUserProfile extends Model
 
     public function CUserSkills()
     {
-        return $this->belongsToMany(CUserSkill::class, 'c_user_profile_c_user_skill', 'c_user_profile_id', 'c_user_skill_id');
+        return $this->belongsToMany(CUserSkill::class, 'c_user_profile_c_user_skills', 'c_user_profile_id', 'c_user_skill_id');
     }
 }

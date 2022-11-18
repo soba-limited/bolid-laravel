@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CCoupon;
 use App\Http\Requests\StoreCCouponRequest;
 use App\Http\Requests\UpdateCCouponRequest;
+use Illuminate\Http\Request;
 
 class CCouponController extends Controller
 {
@@ -82,5 +83,11 @@ class CCouponController extends Controller
     public function destroy(CCoupon $cCoupon)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $coupon = CCoupon::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($coupon);
     }
 }

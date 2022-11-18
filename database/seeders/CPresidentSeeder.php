@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class CItemSeeder extends Seeder
+class CPresidentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,9 @@ class CItemSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('c_items')->delete();
-        DB::unprepared("ALTER TABLE c_items AUTO_INCREMENT = 1 ");
+        DB::table('c_presidents')->delete();
+        DB::unprepared("ALTER TABLE c_presidents AUTO_INCREMENT = 1 ");
 
-        \App\Models\CItem::factory()->count(12)->create();
+        \App\Models\CPresident::factory()->count(12)->create();
     }
 }

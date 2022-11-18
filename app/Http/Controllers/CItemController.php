@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CItem;
 use App\Http\Requests\StoreCItemRequest;
 use App\Http\Requests\UpdateCItemRequest;
+use Illuminate\Http\Request;
 
 class CItemController extends Controller
 {
@@ -82,5 +83,11 @@ class CItemController extends Controller
     public function destroy(CItem $cItem)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $item = CItem::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($item);
     }
 }

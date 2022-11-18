@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\CPresitent;
+use App\Models\CPrCounts;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CPresitentPolicy
+class CPrCountsPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class CPresitentPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, CPresitent $cPresitent)
+    public function view(User $user, CPrCounts $cPrCounts)
     {
         //
     }
@@ -48,10 +48,10 @@ class CPresitentPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, CPresitent $cPresitent)
+    public function update(User $user, CPrCounts $cPrCounts)
     {
         //
     }
@@ -60,10 +60,10 @@ class CPresitentPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, CPresitent $cPresitent)
+    public function delete(User $user, CPrCounts $cPrCounts)
     {
         //
     }
@@ -72,10 +72,10 @@ class CPresitentPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, CPresitent $cPresitent)
+    public function restore(User $user, CPrCounts $cPrCounts)
     {
         //
     }
@@ -84,10 +84,10 @@ class CPresitentPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, CPresitent $cPresitent)
+    public function forceDelete(User $user, CPrCounts $cPrCounts)
     {
         //
     }

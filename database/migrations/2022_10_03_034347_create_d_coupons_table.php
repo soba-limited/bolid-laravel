@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('d_shop_id');
             $table->string('title')->nullable();
-            $table->string('content')->nullable();
+            $table->longText('content')->nullable();
             $table->string('limit')->nullable();
             $table->foreign('d_shop_id')->references('id')->on('d_shops')->onDelete('cascade');
             $table->timestamps();

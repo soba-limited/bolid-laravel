@@ -18,6 +18,8 @@ class CCardFactory extends Factory
     {
         return [
             //
+            'c_profile_id' => $this->faker->numberBetween($min=13, $max=25),
+            'title' => $this->faker->realText(20),
         ];
     }
 }

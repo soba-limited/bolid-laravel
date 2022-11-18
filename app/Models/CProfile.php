@@ -41,7 +41,7 @@ class CProfile extends Model
 
     public function CPresident()
     {
-        return $this->hasOne(CPresitent::class);
+        return $this->hasOne(CPresident::class);
     }
 
     public function CLikes()

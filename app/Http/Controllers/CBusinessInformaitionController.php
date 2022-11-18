@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CBusinessInformaition;
 use App\Http\Requests\StoreCBusinessInformaitionRequest;
 use App\Http\Requests\UpdateCBusinessInformaitionRequest;
+use Illuminate\Http\Request;
 
 class CBusinessInformaitionController extends Controller
 {
@@ -82,5 +83,11 @@ class CBusinessInformaitionController extends Controller
     public function destroy(CBusinessInformaition $cBusinessInformaition)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $bi = CBusinessInformaition::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($bi);
     }
 }

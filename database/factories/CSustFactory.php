@@ -18,6 +18,8 @@ class CSustFactory extends Factory
     {
         return [
             //
+            'c_profile_id' => $this->faker->numberBetween($min=3, $max=25),
+            'title' => $this->faker->realText(10),
         ];
     }
 }

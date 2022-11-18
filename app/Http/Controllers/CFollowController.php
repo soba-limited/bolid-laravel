@@ -37,6 +37,11 @@ class CFollowController extends Controller
     public function store(StoreCFollowRequest $request)
     {
         //
+        $follow = CFollow::create([
+            'following_user_id'=>$request->following_user_id,
+            'followed_user_id'=>$request->followed_user_id,
+        ]);
+        return $this->jsonResponse($follow);
     }
 
     /**
@@ -79,8 +84,17 @@ class CFollowController extends Controller
      * @param  \App\Models\CFollow  $cFollow
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CFollow $cFollow)
+    public function destroy(Request $request)
     {
         //
+        $follow = CFollow::where('following_user_id', $request->following_user_id)->where('followed_user_id', $request->followed_user_id)->first();
+        $follow->delete();
+        return 'フォローを解除しました';
+    }
+
+    public function check(Request $request)
+    {
+        $check = CFollow::where('followed_user_id', $request->user_id)->pluck('following_user_id');
+        return $this->jsonResponse($check);
     }
 }

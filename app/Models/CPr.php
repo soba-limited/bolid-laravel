@@ -17,6 +17,10 @@ class CPr extends Model
         'content',
     ];
 
+    protected $hidden = [
+        'count'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -25,5 +29,10 @@ class CPr extends Model
     public function CTags()
     {
         return $this->belongsToMany(CTag::class, 'c_pr_c_tags', 'c_pr_id', 'c_tag_id');
+    }
+
+    public function CPrCounts()
+    {
+        return $this->belongsToMany(User::class, 'c_pr_counts', 'c_pr_id', 'user_id');
     }
 }

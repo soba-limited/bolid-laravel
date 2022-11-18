@@ -18,6 +18,9 @@ class CLikeFactory extends Factory
     {
         return [
             //
+            'c_profile_id' => $this->faker->numberBetween($min=3, $max=25),
+            'title' => $this->faker->realText(20),
+            'text' => $this->faker->realText(10),
         ];
     }
 }

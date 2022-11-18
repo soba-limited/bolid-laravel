@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CPresitentSeeder extends Seeder
+class CPrCountsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CPresitent>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CPrCounts>
  */
-class CPresitentFactory extends Factory
+class CPrCountsFactory extends Factory
 {
     /**
      * Define the model's default state.

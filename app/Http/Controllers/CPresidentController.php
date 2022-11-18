@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CPresitent;
-use App\Http\Requests\StoreCPresitentRequest;
-use App\Http\Requests\UpdateCPresitentRequest;
+use App\Models\CPresident;
+use App\Http\Requests\StoreCPresidentRequest;
+use App\Http\Requests\UpdateCPresidentRequest;
+use Illuminate\Http\Request;
 
-class CPresitentController extends Controller
+class CPresidentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class CPresitentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCPresitentRequest  $request
+     * @param  \App\Http\Requests\StoreCPresidentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCPresitentRequest $request)
+    public function store(StoreCPresidentRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class CPresitentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function show(CPresitent $cPresitent)
+    public function show(CPresident $cPresident)
     {
         //
     }
@@ -53,10 +54,10 @@ class CPresitentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function edit(CPresitent $cPresitent)
+    public function edit(CPresident $cPresident)
     {
         //
     }
@@ -64,11 +65,11 @@ class CPresitentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCPresitentRequest  $request
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Http\Requests\UpdateCPresidentRequest  $request
+     * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCPresitentRequest $request, CPresitent $cPresitent)
+    public function update(UpdateCPresidentRequest $request, CPresident $cPresident)
     {
         //
     }
@@ -76,11 +77,17 @@ class CPresitentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CPresitent  $cPresitent
+     * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CPresitent $cPresitent)
+    public function destroy(CPresident $cPresident)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $president = CPresident::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($president);
     }
 }

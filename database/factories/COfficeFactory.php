@@ -18,6 +18,10 @@ class COfficeFactory extends Factory
     {
         return [
             //
+            'c_profile_id' => $this->faker->numberBetween($min=13, $max=25),
+            'title' => $this->faker->realText(20),
+            'category' => $this->faker->realText(10),
+            'content' => $this->faker->realText(100),
         ];
     }
 }

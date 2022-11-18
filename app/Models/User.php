@@ -186,8 +186,13 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'c_comments', 'user_id', 'to_user_id');
     }
 
-    public function CCommentRevives()
+    public function CCommentRecives()
     {
         return $this->belongsToMany(User::class, 'c_comments', 'to_user_id', 'user_id');
+    }
+
+    public function CPrCounts()
+    {
+        return $this->belongsToMany(CPr::class, 'c_pr_counts', 'user_id', 'c_pr_id');
     }
 }

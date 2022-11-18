@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CCard;
-use App\Http\Requests\StoreCCardRequest;
-use App\Http\Requests\UpdateCCardRequest;
-use Illuminate\Http\Request;
+use App\Models\CPrCounts;
+use App\Http\Requests\StoreCPrCountsRequest;
+use App\Http\Requests\UpdateCPrCountsRequest;
 
-class CCardController extends Controller
+class CPrCountsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +31,10 @@ class CCardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCCardRequest  $request
+     * @param  \App\Http\Requests\StoreCPrCountsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCCardRequest $request)
+    public function store(StoreCPrCountsRequest $request)
     {
         //
     }
@@ -43,10 +42,10 @@ class CCardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CCard  $cCard
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Http\Response
      */
-    public function show(CCard $cCard)
+    public function show(CPrCounts $cPrCounts)
     {
         //
     }
@@ -54,10 +53,10 @@ class CCardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CCard  $cCard
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Http\Response
      */
-    public function edit(CCard $cCard)
+    public function edit(CPrCounts $cPrCounts)
     {
         //
     }
@@ -65,11 +64,11 @@ class CCardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCCardRequest  $request
-     * @param  \App\Models\CCard  $cCard
+     * @param  \App\Http\Requests\UpdateCPrCountsRequest  $request
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCCardRequest $request, CCard $cCard)
+    public function update(UpdateCPrCountsRequest $request, CPrCounts $cPrCounts)
     {
         //
     }
@@ -77,17 +76,11 @@ class CCardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CCard  $cCard
+     * @param  \App\Models\CPrCounts  $cPrCounts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CCard $cCard)
+    public function destroy(CPrCounts $cPrCounts)
     {
         //
-    }
-
-    public function tab_return(Request $request)
-    {
-        $card = CCard::where('c_profile_id', $request->c_profile_id)->get();
-        return $this->jsonResponse($card);
     }
 }

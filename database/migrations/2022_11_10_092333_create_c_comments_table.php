@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('to_user_id');
             $table->string('title');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
 
             $table->foreign("user_id")->references("id")->on("users")->onUpdate('CASCADE')->onDelete('CASCADE');

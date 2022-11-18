@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('content')->nullable();
+            $table->string('thumbs')->nullable();
+            $table->longText('content')->nullable();
+            $table->integer('count')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

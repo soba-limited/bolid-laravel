@@ -47,7 +47,7 @@ class CPost extends Model
 
     public function CPostApps()
     {
-        return $this->belongsToMany(User::class, 'd_post_apps', 'c_post_id', 'user_id');
+        return $this->belongsToMany(User::class, 'c_post_apps', 'c_post_id', 'user_id');
     }
 
     public function CPostBookmark()

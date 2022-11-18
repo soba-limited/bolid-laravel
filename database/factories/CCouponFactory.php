@@ -18,6 +18,9 @@ class CCouponFactory extends Factory
     {
         return [
             //
+            'c_profile_id' => 1,
+            'title' => $this->faker->realText(20),
+            'limit' => $this->faker->date('Y.m.d').'まで',
         ];
     }
 }

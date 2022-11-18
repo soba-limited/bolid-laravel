@@ -4,6 +4,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CBusinessInformaitionController;
+use App\Http\Controllers\CCardController;
+use App\Http\Controllers\CCouponController;
+use App\Http\Controllers\CFollowController;
+use App\Http\Controllers\CIndexController;
+use App\Http\Controllers\CItemController;
+use App\Http\Controllers\CLikeController;
+use App\Http\Controllers\COfficeController;
+use App\Http\Controllers\CPresidentController;
+use App\Http\Controllers\CProfileController;
+use App\Http\Controllers\CSustController;
+
 use App\Http\Controllers\LIndexController;
 use App\Http\Controllers\LPickupController;
 use App\Http\Controllers\LPostController;
@@ -198,6 +210,16 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/dellamall/shop_create_url', [DShopController::class,'shop_create_url']);
 
+
+    //corapra　会員コントローラー
+
+    Route::post('/corapura/follow/store', [CFollowController::class,'store']);
+    Route::delete('/corapura/follow/delete', [CFollowController::class,'destroy']);
+    Route::post('/corapura/follow/check', [CFollowController::class,'check']);
+
+
+
+
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');
 
@@ -237,7 +259,24 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/user/send_comments', [DProfileController::class,'send_comments']);
     Route::post('/dellamall/user/mall_click', [DMallController::class,'mall_in_all']);
 
-    //Route::post('/c_profile_get', [CProfile::class,'allways']);
+    //コラプラ
+
+    Route::get('/corapura', [CIndexController::class,'index']);
+
+    Route::get('/corapura/company/show/{user_id}', [CProfileController::class,'company_show']);
+    Route::get('/corapura/user/show/{user_id}', [CProfileController::class,'user_show']);
+    Route::post('/corapura/matching/tab_return', [CProfileController::class,'matching']);
+    Route::post('/corapura/businessinformation/tab_return', [CBusinessInformaitionController::class,'tab_return']);
+    Route::post('/corapura/office/tab_return', [COfficeController::class,'tab_return']);
+    Route::post('/corapura/president/tab_return', [CPresidentController::class,'tab_return']);
+    Route::post('/corapura/item/tab_return', [CItemController::class,'tab_return']);
+    Route::post('/corapura/sust/tab_return', [CSustController::class,'tab_return']);
+    Route::post('/corapura/card/tab_return', [CCardController::class,'tab_return']);
+    Route::post('/corapura/coupon/tab_return', [CCouponController::class,'tab_return']);
+    Route::post('/corapura/like/tab_return', [CLikeController::class,'tab_return']);
+
+
+    Route::post('/c_profile_get', [CProfileController::class,'allways']);
     Route::post('/d_profile_get', [DProfileController::class,'allways']);
     Route::post('/l_profile_get', [LProfileController::class,'allways']);
 });

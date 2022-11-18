@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CLike;
 use App\Http\Requests\StoreCLikeRequest;
 use App\Http\Requests\UpdateCLikeRequest;
+use Illuminate\Http\Request;
 
 class CLikeController extends Controller
 {
@@ -82,5 +83,11 @@ class CLikeController extends Controller
     public function destroy(CLike $cLike)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $like = CLike::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($like);
     }
 }

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CItem>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CPresident>
  */
-class CItemFactory extends Factory
+class CPresidentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +20,8 @@ class CItemFactory extends Factory
             //
             'c_profile_id' => $this->faker->numberBetween($min=13, $max=25),
             'title' => $this->faker->realText(20),
-            'category' => $this->faker->realText(10),
+            'top_text' => $this->faker->realText(144),
+            'content' => $this->faker->realText(256),
         ];
     }
 }

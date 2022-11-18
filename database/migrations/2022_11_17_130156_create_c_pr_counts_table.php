@@ -12,15 +12,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('c_offices', function (Blueprint $table) {
+        Schema::create('c_pr_counts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('c_profile_id');
-            $table->string('title');
-            $table->string('category')->nullable();
-            $table->longText('content')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('c_pr_id');
             $table->timestamps();
 
-            $table->foreign("c_profile_id")->references("id")->on("c_profiles")->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign("user_id")->references("id")->on("users")->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign("c_pr_id")->references("id")->on("c_prs")->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('c_offices');
+        Schema::dropIfExists('c_pr_counts');
     }
 };

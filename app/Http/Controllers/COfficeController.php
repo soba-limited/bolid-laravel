@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\COffice;
 use App\Http\Requests\StoreCOfficeRequest;
 use App\Http\Requests\UpdateCOfficeRequest;
+use Illuminate\Http\Request;
 
 class COfficeController extends Controller
 {
@@ -82,5 +83,11 @@ class COfficeController extends Controller
     public function destroy(COffice $cOffice)
     {
         //
+    }
+
+    public function tab_return(Request $request)
+    {
+        $office = COffice::where('c_profile_id', $request->c_profile_id)->get();
+        return $this->jsonResponse($office);
     }
 }

@@ -26,6 +26,56 @@ class CUserProfileSeeder extends Seeder
                 'brand' => 'https::example.jp/',
                 'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
             ],
+            [
+                'c_profile_id' => '3',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '4',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '5',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '6',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '7',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '8',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '9',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '10',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '11',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
+            [
+                'c_profile_id' => '12',
+                'brand' => 'https::google.jp/',
+                'appeal_text' => 'アピールテキストアピールテキストアピールテキストアピールテキストアピールテキストアピールテキスト'
+            ],
         ];
 
         $now = Carbon::now();
