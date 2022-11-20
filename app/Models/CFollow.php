@@ -13,4 +13,9 @@ class CFollow extends Model
         'following_user_id',
         'followed_user_id'
     ];
+
+    protected $casts = [
+        'following_user_id'=>'integer',
+        'followed_user_id'=>'integer',
+    ];
 }
