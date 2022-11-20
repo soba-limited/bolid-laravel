@@ -6,6 +6,7 @@ use App\Models\CBusinessInformaition;
 use App\Models\CCard;
 use App\Models\CCoupon;
 use App\Models\CItem;
+use App\Models\CLike;
 use App\Models\CPost;
 use App\Models\CPr;
 use App\Models\CPresident;
@@ -24,9 +25,11 @@ class CIndexController extends Controller
             $query->with(['CProfile']);
         }])->with('CTags', 'CCat')->limit(20)->get();
 
-        $company = User::where('account_type', '1')->where('c_profile_id', '!=', null)->limit(12)->get();
+        $company = User::where('account_type', '1')->where('c_profile_id', '!=', null)->limit(12)->with(['CProfile'=>function ($query) {
+            $query->with('CCompanyProfile', 'CTags');
+        }])->get();
 
-        $user = User::where('account_type', '0')->where('c_profile_id', '!=', null)->limit(10)->get();
+        $user = User::where('account_type', '0')->where('c_profile_id', '!=', null)->limit(10)->with('CProfile')->get();
 
         $pr = CPr::with(['user'=>function ($query) {
             $query->with('CProfile');
@@ -58,6 +61,19 @@ class CIndexController extends Controller
             $query->with('user');
         }])->limit(12)->get();
 
+        $sponsor = CLike::whereHas('CProfile', function ($query) {
+            $query->whereHas('user', function ($query) {
+                $query->where('account_type', 1);
+            });
+        })->with('CProfile')->limit(5)->get();
+
+        $like = CLike::whereHas('CProfile', function ($query) {
+            $query->whereHas('user', function ($query) {
+                $query->where('account_type', 0);
+            });
+        })->with('CProfile')->limit(5)->get();
+
+
         $allarray = [
             'post' => $posts,
             'company' => $company,
@@ -70,6 +86,8 @@ class CIndexController extends Controller
             'card' => $card,
             'item' => $item,
             'sust' => $sust,
+            'sponsor' => $sponsor,
+            'like' => $like,
         ];
 
         return $this->jsonResponse($allarray);
