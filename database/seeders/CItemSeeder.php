@@ -20,6 +20,6 @@ class CItemSeeder extends Seeder
         DB::table('c_items')->delete();
         DB::unprepared("ALTER TABLE c_items AUTO_INCREMENT = 1 ");
 
-        \App\Models\CItem::factory()->count(12)->create();
+        \App\Models\CItem::factory()->count(50)->create();
     }
 }

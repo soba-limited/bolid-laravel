@@ -20,6 +20,6 @@ class CCardSeeder extends Seeder
         DB::table('c_cards')->delete();
         DB::unprepared("ALTER TABLE c_cards AUTO_INCREMENT = 1 ");
 
-        \App\Models\CCard::factory()->count(12)->create();
+        \App\Models\CCard::factory()->count(50)->create();
     }
 }

@@ -18,7 +18,7 @@ class CPresidentFactory extends Factory
     {
         return [
             //
-            'c_profile_id' => $this->faker->numberBetween($min=13, $max=25),
+            'c_profile_id' => $this->faker->numberBetween($min=13, $max=24),
             'title' => $this->faker->realText(20),
             'top_text' => $this->faker->realText(144),
             'content' => $this->faker->realText(256),

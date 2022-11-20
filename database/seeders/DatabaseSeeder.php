@@ -66,6 +66,7 @@ class DatabaseSeeder extends Seeder
             COfficeSeeder::class,
             CLikeSeeder::class,
             CPostAppSeeder::class,
+            CCommentSeeder::class,
         ]);
     }
 }

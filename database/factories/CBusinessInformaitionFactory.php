@@ -18,7 +18,7 @@ class CBusinessInformaitionFactory extends Factory
     {
         return [
             //
-            'c_profile_id' => $this->faker->numberBetween($min=13, $max=25),
+            'c_profile_id' => $this->faker->numberBetween($min=13, $max=24),
             'title' => $this->faker->realText(20),
             'link' => $this->faker->url(),
         ];

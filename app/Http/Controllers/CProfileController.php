@@ -62,7 +62,7 @@ class CProfileController extends Controller
     public function company_show($user_id)
     {
         $user = User::withCount('CFolloweds')->find($user_id);
-        if ($user->account_type >= 1) {
+        if ($user->account_type >= 1 || $user->account_type == 3) {
             $profile = CProfile::with(['CCompanyProfile'=>function ($query) {
                 $query->with('CCompanySocials');
             }])->with(['CTags'])->find($user->c_profile_id);
@@ -89,7 +89,7 @@ class CProfileController extends Controller
     public function user_show($user_id)
     {
         $user = User::withCount('CFolloweds')->find($user_id);
-        if ($user->account_type == 0) {
+        if ($user->account_type == 0 || $user->account_type == 3) {
             $profile = CProfile::with(['CUserProfile'=>function ($query) {
                 $query->with('CUserSocials', 'CUserSkills');
             }])->with(['CTags'])->find($user->c_profile_id);

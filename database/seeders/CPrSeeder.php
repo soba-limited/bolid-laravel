@@ -20,6 +20,6 @@ class CPrSeeder extends Seeder
         DB::table('c_prs')->delete();
         DB::unprepared("ALTER TABLE c_prs AUTO_INCREMENT = 1 ");
 
-        \App\Models\CPr::factory()->count(20)->create();
+        \App\Models\CPr::factory()->count(50)->create();
     }
 }

@@ -18,7 +18,7 @@ class CCouponFactory extends Factory
     {
         return [
             //
-            'c_profile_id' => 1,
+            'c_profile_id' => $this->faker->numberBetween($min=13, $max=24),
             'title' => $this->faker->realText(20),
             'limit' => $this->faker->date('Y.m.d').'まで',
         ];
