@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('c_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nicename');
+            $table->string('title')->nullable();
             $table->string('profile')->nullable();
             $table->string('thumbs')->nullable();
             $table->string('image1')->nullable();

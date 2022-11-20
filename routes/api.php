@@ -12,6 +12,9 @@ use App\Http\Controllers\CIndexController;
 use App\Http\Controllers\CItemController;
 use App\Http\Controllers\CLikeController;
 use App\Http\Controllers\COfficeController;
+use App\Http\Controllers\CPostController;
+use App\Http\Controllers\CPrController;
+use App\Http\Controllers\CPrCountsController;
 use App\Http\Controllers\CPresidentController;
 use App\Http\Controllers\CProfileController;
 use App\Http\Controllers\CSalonController;
@@ -218,7 +221,8 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/corapura/follow/delete', [CFollowController::class,'destroy']);
     Route::post('/corapura/follow/check', [CFollowController::class,'check']);
 
-
+    Route::post('/corapura/pr/count/add', [CPrCountsController::class,'add']);
+    Route::post('/corapura/pr/count/check', [CPrCountsController::class,'check']);
 
 
     //liondorコントローラー
@@ -264,6 +268,9 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/corapura', [CIndexController::class,'index']);
 
+    Route::get('/corapura/post', [CPostController::class,'index']);
+    Route::post('/corapura/post', [CPostController::class,'search']);
+
     Route::get('/corapura/company/show/{user_id}', [CProfileController::class,'company_show']);
     Route::get('/corapura/user/show/{user_id}', [CProfileController::class,'user_show']);
     Route::post('/corapura/matching/tab_return', [CProfileController::class,'matching']);
@@ -277,8 +284,12 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/like/tab_return', [CLikeController::class,'tab_return']);
 
     Route::get('/corapura/salon', [CSalonController::class,'index']);
+    Route::post('/corapura/salon', [CSalonController::class,'search']);
     Route::get('/corapura/salon/show/{salon_id}', [CSalonController::class,'show']);
 
+    Route::get('/corapura/pr', [CPrController::class,'index']);
+    Route::post('/corapura/pr', [CPrController::class,'search']);
+    Route::get('/corapura/pr/show/{pr_id}', [CPrController::class,'show']);
 
     Route::post('/c_profile_get', [CProfileController::class,'allways']);
     Route::post('/d_profile_get', [DProfileController::class,'allways']);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\CPrCounts;
 use App\Http\Requests\StoreCPrCountsRequest;
 use App\Http\Requests\UpdateCPrCountsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class CPrCountsController extends Controller
 {
@@ -82,5 +84,25 @@ class CPrCountsController extends Controller
     public function destroy(CPrCounts $cPrCounts)
     {
         //
+    }
+
+    public function add(Request $request)
+    {
+        $add = CPrCounts::create([
+            'user_id' => $request->user_id,
+            'c_pr_id' => $request->c_pr_id,
+        ]);
+
+        return 'この記事をチェックしました';
+    }
+
+    public function check(Request $request)
+    {
+        $check = CPrCount::where('user_id', $request->user_id)->where('c_pr_id', $request->c_pr_id)->first();
+        if (!empty($check)) {
+            return $this->jsonResponse($check);
+        } else {
+            return false;
+        }
     }
 }
