@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CSalonCTaga>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CSalonCTag>
  */
-class CSalonCTagaFactory extends Factory
+class CSalonCTagFactory extends Factory
 {
     /**
      * Define the model's default state.

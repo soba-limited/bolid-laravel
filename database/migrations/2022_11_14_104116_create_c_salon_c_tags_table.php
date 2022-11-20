@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('c_salon_c_tagas', function (Blueprint $table) {
+        Schema::create('c_salon_c_tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('c_salon_id');
             $table->unsignedBigInteger('c_tag_id');

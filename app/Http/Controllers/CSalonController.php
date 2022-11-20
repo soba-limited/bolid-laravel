@@ -16,6 +16,8 @@ class CSalonController extends Controller
     public function index()
     {
         //
+        $salon = CSalon::with('CTags')->get();
+        return $this->jsonResponse($salon);
     }
 
     /**

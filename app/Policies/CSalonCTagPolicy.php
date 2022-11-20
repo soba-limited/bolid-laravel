@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\CSalonCTaga;
+use App\Models\CSalonCTag;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CSalonCTagaPolicy
+class CSalonCTagPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class CSalonCTagaPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, CSalonCTaga $cSalonCTaga)
+    public function view(User $user, CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -48,10 +48,10 @@ class CSalonCTagaPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, CSalonCTaga $cSalonCTaga)
+    public function update(User $user, CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -60,10 +60,10 @@ class CSalonCTagaPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, CSalonCTaga $cSalonCTaga)
+    public function delete(User $user, CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -72,10 +72,10 @@ class CSalonCTagaPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, CSalonCTaga $cSalonCTaga)
+    public function restore(User $user, CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -84,10 +84,10 @@ class CSalonCTagaPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, CSalonCTaga $cSalonCTaga)
+    public function forceDelete(User $user, CSalonCTag $cSalonCTag)
     {
         //
     }

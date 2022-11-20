@@ -14,6 +14,7 @@ use App\Http\Controllers\CLikeController;
 use App\Http\Controllers\COfficeController;
 use App\Http\Controllers\CPresidentController;
 use App\Http\Controllers\CProfileController;
+use App\Http\Controllers\CSalonController;
 use App\Http\Controllers\CSustController;
 
 use App\Http\Controllers\LIndexController;
@@ -274,6 +275,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/card/tab_return', [CCardController::class,'tab_return']);
     Route::post('/corapura/coupon/tab_return', [CCouponController::class,'tab_return']);
     Route::post('/corapura/like/tab_return', [CLikeController::class,'tab_return']);
+
+    Route::get('/corapura/salon', [CSalonController::class,'index']);
+    Route::get('/corapura/salon/show/{salon_id}', [CSalonController::class,'show']);
 
 
     Route::post('/c_profile_get', [CProfileController::class,'allways']);

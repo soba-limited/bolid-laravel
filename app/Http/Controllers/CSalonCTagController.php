@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CSalonCTaga;
-use App\Http\Requests\StoreCSalonCTagaRequest;
-use App\Http\Requests\UpdateCSalonCTagaRequest;
+use App\Models\CSalonCTag;
+use App\Http\Requests\StoreCSalonCTagRequest;
+use App\Http\Requests\UpdateCSalonCTagRequest;
 
-class CSalonCTagaController extends Controller
+class CSalonCTagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class CSalonCTagaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCSalonCTagaRequest  $request
+     * @param  \App\Http\Requests\StoreCSalonCTagRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCSalonCTagaRequest $request)
+    public function store(StoreCSalonCTagRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class CSalonCTagaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Http\Response
      */
-    public function show(CSalonCTaga $cSalonCTaga)
+    public function show(CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -53,10 +53,10 @@ class CSalonCTagaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Http\Response
      */
-    public function edit(CSalonCTaga $cSalonCTaga)
+    public function edit(CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -64,11 +64,11 @@ class CSalonCTagaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCSalonCTagaRequest  $request
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Http\Requests\UpdateCSalonCTagRequest  $request
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCSalonCTagaRequest $request, CSalonCTaga $cSalonCTaga)
+    public function update(UpdateCSalonCTagRequest $request, CSalonCTag $cSalonCTag)
     {
         //
     }
@@ -76,10 +76,10 @@ class CSalonCTagaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CSalonCTaga  $cSalonCTaga
+     * @param  \App\Models\CSalonCTag  $cSalonCTag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CSalonCTaga $cSalonCTaga)
+    public function destroy(CSalonCTag $cSalonCTag)
     {
         //
     }
