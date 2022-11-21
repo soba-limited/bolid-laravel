@@ -24,7 +24,7 @@ class CPostFactory extends Factory
             'c_cat_id' => $this->faker->numberBetween($min=1, $max=18),
             'date' => $this->faker->date('Y.m.d'),
             'limite_date' => $this->faker->date('Y.m.d'),
-            'reward' => '10,000円',
+            'reward' => $this->faker->numberBetween($min=1000, $max=10000),
             'number_of_people' => $this->faker->numberBetween($min=10, $max=100).'人',
             'content' => $this->faker->realText(144),
         ];

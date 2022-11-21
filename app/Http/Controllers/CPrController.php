@@ -51,7 +51,7 @@ class CPrController extends Controller
 
         if (!empty($request->sort)) {
             if ($request->sort == 'new') {
-                $pr = $pr->orderBy('order', 'desc');
+                $pr = $pr->orderBy('created_at', 'desc');
             } elseif ($request->sort == 'bookmark') {
                 $pr = $pr->orderBy('c_pr_counts_count', 'desc');
             }
