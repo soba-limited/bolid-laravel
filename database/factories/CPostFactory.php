@@ -18,7 +18,7 @@ class CPostFactory extends Factory
     {
         return [
             //
-            'user_id' => 1,
+            'user_id' => $this->faker->numberBetween($min=3, $max=24),
             'title' => $this->faker->realText(20),
             'state' => $this->faker->numberBetween($min=0, $max=1),
             'c_cat_id' => $this->faker->numberBetween($min=1, $max=18),
