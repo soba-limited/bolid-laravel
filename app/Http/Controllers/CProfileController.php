@@ -120,7 +120,7 @@ class CProfileController extends Controller
     {
         $myposts = CPost::where('user_id', $request->user_id)->pluck('id');
         $apps = CPostApp::whereIn('c_post_id', $myposts)->pluck('user_id')->unique();
-        $users = User::whereIn('id', $apps)->with('CPostApps:id,title')->get();
+        $users = User::whereIn('id', $apps)->with('CProfile')->with('CPostApps:id,title')->get();
         return $this->jsonResponse($users);
     }
 
