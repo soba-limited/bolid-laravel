@@ -16,6 +16,10 @@ class CUserSocial extends Model
         'follower',
     ];
 
+    protected $casts = [
+        'follower' => 'integer'
+    ];
+
     public function CUserProfile()
     {
         return $this->belongsTo(CUserProfile::class);

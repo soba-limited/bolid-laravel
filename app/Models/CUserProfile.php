@@ -11,6 +11,7 @@ class CUserProfile extends Model
 
     protected $fillable = [
         'c_profile_id',
+        'maximum_follower',
         'brand',
         'appeal_text',
         'appeal_image',

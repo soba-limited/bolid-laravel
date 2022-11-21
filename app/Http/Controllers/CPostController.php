@@ -6,6 +6,8 @@ use App\Models\CPost;
 use App\Models\User;
 use App\Http\Requests\StoreCPostRequest;
 use App\Http\Requests\UpdateCPostRequest;
+use App\Models\CCat;
+use App\Models\CTag;
 use Illuminate\Http\Request;
 
 class CPostController extends Controller
@@ -18,7 +20,9 @@ class CPostController extends Controller
     public function index()
     {
         //
+        $cat_list = CCat::get();
         $post = new CPost;
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         $limit = 12;
 
@@ -31,6 +35,8 @@ class CPostController extends Controller
             'post' => $post,
             'page_max' => $page_max,
             'now_page' => 1,
+            'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
         ];
 
         return $this->jsonResponse($allarray);
@@ -38,7 +44,9 @@ class CPostController extends Controller
 
     public function search(Request $request)
     {
+        $cat_list = CCat::get();
         $post = new CPost;
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         if (!empty($request->s)) {
             $post = $post->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
@@ -95,6 +103,8 @@ class CPostController extends Controller
             'post' => $post,
             'page_max' => $page_max,
             'now_page' => 1,
+            'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
             's' => $request->s,
             'zip' => $request->zip,
             'cat' => $request->cat,
@@ -134,9 +144,11 @@ class CPostController extends Controller
      * @param  \App\Models\CPost  $cPost
      * @return \Illuminate\Http\Response
      */
-    public function show(CPost $cPost)
+    public function show(CPost $cPost, $c_post_id)
     {
         //
+        $post = CPost::with('user.CProfile')->with('CTags', 'CCat')->find($c_post_id);
+        return $this->jsonResponse($post);
     }
 
     /**

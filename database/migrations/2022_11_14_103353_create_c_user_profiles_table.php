@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('c_user_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('c_profile_id');
+            $table->integer('maximum_follower')->default(0);
             $table->string('brand')->nullable();
             $table->string('appeal_text')->nullable();
             $table->string('appeal_image')->nullable();

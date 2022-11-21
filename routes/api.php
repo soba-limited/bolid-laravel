@@ -12,6 +12,7 @@ use App\Http\Controllers\CIndexController;
 use App\Http\Controllers\CItemController;
 use App\Http\Controllers\CLikeController;
 use App\Http\Controllers\COfficeController;
+use App\Http\Controllers\CPostBookmarkController;
 use App\Http\Controllers\CPostController;
 use App\Http\Controllers\CPrController;
 use App\Http\Controllers\CPrCountsController;
@@ -224,6 +225,11 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/pr/count/add', [CPrCountsController::class,'add']);
     Route::post('/corapura/pr/count/check', [CPrCountsController::class,'check']);
 
+    Route::post('/corapura/post_bookmark/store', [CPostBookmarkController::class,'store']);
+    Route::delete('/corapura/post_bookmark/delete', [CPostBookmarkController::class,'destroy']);
+    Route::post('/corapura/post_bookmark/check', [CPostBookmarkController::class,'check']);
+
+
 
     //liondorコントローラー
     Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');
@@ -270,7 +276,12 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/corapura/post', [CPostController::class,'index']);
     Route::post('/corapura/post', [CPostController::class,'search']);
+    Route::get('/corapura/post/show/{c_post_id}', [CPostController::class,'show']);
 
+    Route::get('/corapura/company', [CProfileController::class,'company_index']);
+    Route::post('/corapura/company', [CProfileController::class,'company_search']);
+    Route::get('/corapura/user', [CProfileController::class,'user_index']);
+    Route::post('/corapura/user', [CProfileController::class,'user_search']);
     Route::get('/corapura/company/show/{user_id}', [CProfileController::class,'company_show']);
     Route::get('/corapura/user/show/{user_id}', [CProfileController::class,'user_show']);
     Route::post('/corapura/matching/tab_return', [CProfileController::class,'matching']);

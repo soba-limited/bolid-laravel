@@ -94,7 +94,7 @@ class CFollowController extends Controller
 
     public function check(Request $request)
     {
-        $check = CFollow::where('followed_user_id', $request->user_id)->pluck('following_user_id');
+        $check = CFollow::where('following_user_id', $request->user_id)->pluck('followed_user_id');
         return $this->jsonResponse($check);
     }
 }

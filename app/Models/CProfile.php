@@ -54,9 +54,9 @@ class CProfile extends Model
         return $this->hasMany(CSust::class);
     }
 
-    public function COffieces()
+    public function COffices()
     {
-        return $this->hasMany(COffiece::class);
+        return $this->hasMany(COffice::class);
     }
 
     public function CCoupons()
@@ -74,8 +74,8 @@ class CProfile extends Model
         return $this->hasMany(CItem::class);
     }
 
-    public function CBusinessInformations()
+    public function CBusinessInformaitions()
     {
-        return $this->hasMany(CBusinessInformation::class);
+        return $this->hasMany(CBusinessInformaition::class);
     }
 }
