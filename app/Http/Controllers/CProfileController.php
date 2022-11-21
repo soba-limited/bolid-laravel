@@ -66,7 +66,7 @@ class CProfileController extends Controller
             $profile = CProfile::with(['CCompanyProfile'=>function ($query) {
                 $query->with('CCompanySocials');
             }])->with(['CTags'])->find($user->c_profile_id);
-            $posts = CPost::where('user_id', $user_id)->get();
+            $posts = CPost::where('user_id', $user_id)->with('CCat')->get();
             $business = CBusinessInformaition::where('c_profile_id', $profile->id)->get();
             $pr = CPr::where('user_id', $user_id)->withCount('CPrCounts')->get();
             $comments = CComment::where('to_user_id', $user_id)->with('user')->get();
@@ -94,7 +94,7 @@ class CProfileController extends Controller
                 $query->with('CUserSocials', 'CUserSkills');
             }])->with(['CTags'])->find($user->c_profile_id);
 
-            $posts = CPost::where('user_id', $user_id)->get();
+            $posts = CPost::where('user_id', $user_id)->with('CCat')->get();
 
             $comments = CComment::where('to_user_id', $user_id)->with('user')->get();
 
