@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CFollow;
 use App\Http\Requests\StoreCFollowRequest;
 use App\Http\Requests\UpdateCFollowRequest;
+use Illuminate\Http\Request;
 
 class CFollowController extends Controller
 {
