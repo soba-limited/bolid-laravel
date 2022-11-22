@@ -285,6 +285,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/corapura/company/show/{user_id}', [CProfileController::class,'company_show']);
     Route::get('/corapura/user/show/{user_id}', [CProfileController::class,'user_show']);
     Route::post('/corapura/matching/tab_return', [CProfileController::class,'matching']);
+    Route::post('/corapura/matching_user/tab_return', [CProfileController::class,'matching_user']);
     Route::post('/corapura/businessinformation/tab_return', [CBusinessInformaitionController::class,'tab_return']);
     Route::post('/corapura/office/tab_return', [COfficeController::class,'tab_return']);
     Route::post('/corapura/president/tab_return', [CPresidentController::class,'tab_return']);

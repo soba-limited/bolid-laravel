@@ -363,6 +363,13 @@ class CProfileController extends Controller
         return $this->jsonResponse($users);
     }
 
+    public function matching_user(Request $request)
+    {
+        $myposts = User::with('CPostApps.user.CProfile')->find($request->user_id);
+        return $this->jsonResponse($myposts);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
