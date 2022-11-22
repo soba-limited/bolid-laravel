@@ -308,7 +308,7 @@ class CProfileController extends Controller
             $companys = CPost::where('user_id', $user_id)->with('CCat')->get();
             $business = CBusinessInformaition::where('c_profile_id', $profile->id)->get();
             $pr = CPr::where('user_id', $user_id)->withCount('CPrCounts')->get();
-            $comments = CComment::where('to_user_id', $user_id)->with('user')->get();
+            $comments = CComment::where('to_user_id', $user_id)->with('user.CProfile')->get();
 
             $allarray = [
                 'user' => $user,
@@ -335,7 +335,7 @@ class CProfileController extends Controller
 
             $companys = CPost::where('user_id', $user_id)->with('CCat')->get();
 
-            $comments = CComment::where('to_user_id', $user_id)->with('user')->get();
+            $comments = CComment::where('to_user_id', $user_id)->with('user.CProfile')->get();
 
             $cards = CCard::where('c_profile_id', $profile->id)->get();
             $likes = CLike::where('c_profile_id', $profile->id)->get();
