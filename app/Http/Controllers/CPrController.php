@@ -157,9 +157,11 @@ class CPrController extends Controller
         //
         $pr = CPr::find($pr_id);
         $user = User::with('CProfile')->find($pr->user_id);
+        $pr_new_list = CPr::limit(5)->orderBy('id', 'desc')->get();
         $allarray = [
             'pr' => $pr,
             'user' => $user,
+            'pr_new_list' => $pr_new_list,
         ];
         $pr->count = intval($pr->count) + 1;
         $pr->save();
