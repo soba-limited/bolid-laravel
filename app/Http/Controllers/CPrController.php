@@ -67,7 +67,7 @@ class CPrController extends Controller
             });
         }
 
-        $limit = 12;
+        $limit = 20;
 
         if (!empty($request->page)) {
             $skip = ($request->page - 1) * $limit;
