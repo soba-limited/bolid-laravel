@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CSalonApp;
 use App\Http\Requests\StoreCSalonAppRequest;
 use App\Http\Requests\UpdateCSalonAppRequest;
+use Illuminate\Http\Request;
 
 class CSalonAppController extends Controller
 {
@@ -37,6 +38,12 @@ class CSalonAppController extends Controller
     public function store(StoreCSalonAppRequest $request)
     {
         //
+        $c_salon_app = CSalonApp::create([
+            'user_id'=>$request->user_id,
+            'c_salon_id'=>$request->c_salon_id,
+        ]);
+        $c_salon_apps = CSalonApp::where('user_id', $request->user_id)->pluck('c_salon_id');
+        return $this->jsonResponse($c_salon_apps);
     }
 
     /**
@@ -79,8 +86,18 @@ class CSalonAppController extends Controller
      * @param  \App\Models\CSalonApp  $cSalonApp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CSalonApp $cSalonApp)
+    public function destroy(CSalonApp $cSalonApp, Request $request)
     {
         //
+        $c_salon_app = CSalonApp::where('user_id', $request->user_id)->where('c_salon_id', $request->c_salon_id)->first();
+        $c_salon_app->delete();
+        $c_salon_apps = CSalonApp::where('user_id', $request->user_id)->pluck('c_salon_id');
+        return $this->jsonResponse($c_salon_apps);
+    }
+
+    public function check(Request $request)
+    {
+        $c_salon_app = CSalonApp::where('user_id', $request->user_id)->pluck('c_salon_id');
+        return $this->jsonResponse($c_salon_app);
     }
 }

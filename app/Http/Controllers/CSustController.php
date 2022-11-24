@@ -38,6 +38,23 @@ class CSustController extends Controller
     public function store(StoreCSustRequest $request)
     {
         //
+        $c_sust = CSust::create([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+        ]);
+
+        $id = $c_sust->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_sust/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_sust/'.$id."/".$thumbs_name;
+            $c_sust->thumbs = $thumbs;
+            $c_sust->save();
+        }
+
+        $c_susts = CSust::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_susts);
     }
 
     /**
@@ -69,9 +86,28 @@ class CSustController extends Controller
      * @param  \App\Models\CSust  $cSust
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCSustRequest $request, CSust $cSust)
+    public function update(UpdateCSustRequest $request, CSust $cSust, $c_sust_id)
     {
         //
+        $c_sust = CSust::find($c_sust_id);
+        $id = $c_sust->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_sust/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_sust/'.$id."/".$thumbs_name;
+            $c_sust->thumbs = $thumbs;
+        }
+
+        $c_sust->update([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'text' => $request->text,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+        ]);
+
+        $c_susts = CSust::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_susts);
     }
 
     /**
@@ -80,9 +116,14 @@ class CSustController extends Controller
      * @param  \App\Models\CSust  $cSust
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CSust $cSust)
+    public function destroy(CSust $cSust, Request $request)
     {
         //
+        $c_sust = CSust::find($request->c_sust_id);
+        $c_profile_id = $c_sust->c_profile_id;
+        $c_sust->delete();
+        $c_susts = CSust::where('c_profile_id', $c_profile_id);
+        return $this->jsonResponse($c_susts);
     }
 
     public function tab_return(Request $request)

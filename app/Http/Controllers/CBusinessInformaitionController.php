@@ -38,6 +38,13 @@ class CBusinessInformaitionController extends Controller
     public function store(StoreCBusinessInformaitionRequest $request)
     {
         //
+        $c_bi = CBusinessInformaition::create([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'link' => $request->link,
+        ]);
+        $c_bis = CBusinessInformaition::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_bis);
     }
 
     /**
@@ -69,9 +76,17 @@ class CBusinessInformaitionController extends Controller
      * @param  \App\Models\CBusinessInformaition  $cBusinessInformaition
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCBusinessInformaitionRequest $request, CBusinessInformaition $cBusinessInformaition)
+    public function update(UpdateCBusinessInformaitionRequest $request, CBusinessInformaition $cBusinessInformaition, $c_business_information_id)
     {
         //
+        $c_bi = CBusinessInformaition::find($c_business_information_id);
+        $c_bi->update([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'link' => $request->link,
+        ]);
+        $c_bis = CBusinessInformaition::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_bis);
     }
 
     /**
@@ -80,9 +95,14 @@ class CBusinessInformaitionController extends Controller
      * @param  \App\Models\CBusinessInformaition  $cBusinessInformaition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CBusinessInformaition $cBusinessInformaition)
+    public function destroy(CBusinessInformaition $cBusinessInformaition, Request $request)
     {
         //
+        $c_bi = CBusinessInformaition::find($request->c_business_information_id);
+        $c_profile_id = $c_bi->c_profile_id;
+        $c_bi->delete();
+        $c_bis = CBusinessInformaition::where('c_profile_id', $c_profile_id);
+        return $this->jsonResponse($c_bis);
     }
 
     public function tab_return(Request $request)

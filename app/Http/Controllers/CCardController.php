@@ -38,6 +38,23 @@ class CCardController extends Controller
     public function store(StoreCCardRequest $request)
     {
         //
+        $c_card = CCard::create([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+        ]);
+
+        $id = $c_card->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_card/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_card/'.$id."/".$thumbs_name;
+            $c_card->thumbs = $thumbs;
+            $c_card->save();
+        }
+
+        $c_cards = CCard::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_cards);
     }
 
     /**
@@ -69,9 +86,27 @@ class CCardController extends Controller
      * @param  \App\Models\CCard  $cCard
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCCardRequest $request, CCard $cCard)
+    public function update(UpdateCCardRequest $request, CCard $cCard, $c_card_id)
     {
         //
+        $c_card = CCard::find($c_card_id);
+        $id = $c_card->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_card/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_card/'.$id."/".$thumbs_name;
+            $c_card->thumbs = $thumbs;
+        }
+
+        $c_card->update([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+        ]);
+
+        $c_cards = CCard::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_cards);
     }
 
     /**
@@ -80,9 +115,14 @@ class CCardController extends Controller
      * @param  \App\Models\CCard  $cCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CCard $cCard)
+    public function destroy(CCard $cCard, Request $request)
     {
         //
+        $c_card = CCard::find($request->c_card_id);
+        $c_profile_id = $c_card->c_profile_id;
+        $c_card->delete();
+        $c_cards = CCard::where('c_profile_id', $c_profile_id);
+        return $this->jsonResponse($c_cards);
     }
 
     public function tab_return(Request $request)

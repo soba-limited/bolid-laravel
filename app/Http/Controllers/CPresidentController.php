@@ -38,6 +38,25 @@ class CPresidentController extends Controller
     public function store(StoreCPresidentRequest $request)
     {
         //
+        $c_president = CPresident::create([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'top_text' => $request->top_text,
+            'content' => $request->content,
+        ]);
+
+        $id = $c_president->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_president/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_president/'.$id."/".$thumbs_name;
+            $c_president->thumbs = $thumbs;
+            $c_president->save();
+        }
+
+        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_presidents);
     }
 
     /**
@@ -69,9 +88,29 @@ class CPresidentController extends Controller
      * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCPresidentRequest $request, CPresident $cPresident)
+    public function update(UpdateCPresidentRequest $request, CPresident $cPresident, $c_president_id)
     {
         //
+        $c_president = CPresident::find($c_president_id);
+        $id = $c_president->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_president$c_president/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_president$c_president/'.$id."/".$thumbs_name;
+            $c_president->thumbs = $thumbs;
+        }
+
+        $c_president->update([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'top_text' => $request->top_text,
+            'content' => $request->content,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+        ]);
+
+        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_presidents);
     }
 
     /**
@@ -80,9 +119,14 @@ class CPresidentController extends Controller
      * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CPresident $cPresident)
+    public function destroy(CPresident $cPresident, Request $request)
     {
         //
+        $c_president = CPresident::find($request->c_president_id);
+        $c_profile_id = $c_president->c_profile_id;
+        $c_president->delete();
+        $c_presidents = CPresident::where('c_profile_id', $c_profile_id);
+        return $this->jsonResponse($c_presidents);
     }
 
     public function tab_return(Request $request)

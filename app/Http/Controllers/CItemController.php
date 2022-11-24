@@ -38,6 +38,24 @@ class CItemController extends Controller
     public function store(StoreCItemRequest $request)
     {
         //
+        $c_item = CItem::create([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'category' => $request->category,
+        ]);
+
+        $id = $c_item->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_item/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_item/'.$id."/".$thumbs_name;
+            $c_item->thumbs = $thumbs;
+            $c_item->save();
+        }
+
+        $c_items = CItem::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_items);
     }
 
     /**
@@ -69,9 +87,28 @@ class CItemController extends Controller
      * @param  \App\Models\CItem  $cItem
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCItemRequest $request, CItem $cItem)
+    public function update(UpdateCItemRequest $request, CItem $cItem, $c_item_id)
     {
         //
+        $c_item = CItem::find($c_item_id);
+        $id = $c_item->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_item/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_item/'.$id."/".$thumbs_name;
+            $c_item->thumbs = $thumbs;
+        }
+
+        $c_item->update([
+            'c_profile_id' => $request->c_profile_id,
+            'title' => $request->title,
+            'category' => $request->category,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+        ]);
+
+        $c_items = CItem::where('c_profile_id', $request->c_profile_id);
+        return $this->jsonResponse($c_items);
     }
 
     /**
@@ -80,9 +117,14 @@ class CItemController extends Controller
      * @param  \App\Models\CItem  $cItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CItem $cItem)
+    public function destroy(CItem $cItem, Request $request)
     {
         //
+        $c_item = CItem::find($request->c_item_id);
+        $c_profile_id = $c_item->c_profile_id;
+        $c_item->delete();
+        $c_items = CItem::where('c_profile_id', $c_profile_id);
+        return $this->jsonResponse($c_items);
     }
 
     public function tab_return(Request $request)
