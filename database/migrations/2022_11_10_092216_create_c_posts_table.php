@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('thumbs')->nullable();
             $table->string('date')->nullable();
             $table->string('limite_date')->nullable();
-            $table->string('reward')->nullable();
+            $table->integer('reward')->nullable();
             $table->string('hope_reward')->nullable();
             $table->string('number_of_people')->nullable();
             $table->string('recruitment_quota')->nullable();

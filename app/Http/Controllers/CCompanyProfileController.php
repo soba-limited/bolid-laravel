@@ -68,9 +68,25 @@ class CCompanyProfileController extends Controller
      * @param  \App\Models\CCompanyProfile  $cCompanyProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCCompanyProfileRequest $request, CCompanyProfile $cCompanyProfile)
+    public function update(UpdateCCompanyProfileRequest $request, CCompanyProfile $cCompanyProfile, $c_company_profile_id)
     {
         //
+        $c_company_profile = CUserProfile::find($c_company_profile_id);
+
+        $c_company_profile->update([
+            'c_profile_id'=>$request->c_profile_id,
+            'president'=>$request->president,
+            'maked'=>$request->maked,
+            'jojo'=>$request->jojo,
+            'capital'=>$request->capital,
+            'zipcode'=>$request->zipcode,
+            'address'=>$request->address,
+            'tel'=>$request->tel,
+            'site_url'=>$request->site_url,
+            'shop_url'=>$request->shop_url,
+        ]);
+
+        return $this->jsonResponse($c_company_profile);
     }
 
     /**

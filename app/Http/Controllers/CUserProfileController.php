@@ -56,7 +56,7 @@ class CUserProfileController extends Controller
      * @param  \App\Models\CUserProfile  $cUserProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(CUserProfile $cUserProfile, $c_user_profile_id)
+    public function edit(CUserProfile $cUserProfile)
     {
         //
     }
@@ -68,9 +68,27 @@ class CUserProfileController extends Controller
      * @param  \App\Models\CUserProfile  $cUserProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCUserProfileRequest $request, CUserProfile $cUserProfile)
+    public function update(UpdateCUserProfileRequest $request, CUserProfile $cUserProfile, $c_user_profile_id)
     {
         //
+        $c_user_profile = CUserProfile::find($c_user_profile_id);
+
+        $id = $c_user_profile->id;
+
+        if ($request->hasFile('appeal_image')) {
+            $appeal_image_name = $request->file('appeal_image')->getClientOriginalName();
+            $request->file('appeal_image')->storeAs('images/c_user_profile/'.$id, $appeal_image_name, 'public');
+            $appeal_image = 'images/c_user_profile/'.$id."/".$appeal_image_name;
+            $c_user_profile->appeal_image = $appeal_image;
+        }
+
+        $c_user_profile->update([
+            'brand' => $request->brand,
+            'appeal_text' => $request->appeal_text,
+            'appeal_image' => $request->hasFile('appeal_image') ? $appeal_image : $request->appeal_image,
+        ]);
+
+        return $this->jsonResponse($c_user_profile);
     }
 
     /**

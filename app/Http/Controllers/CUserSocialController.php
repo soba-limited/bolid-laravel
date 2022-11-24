@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\CUserSocial;
 use App\Http\Requests\StoreCUserSocialRequest;
 use App\Http\Requests\UpdateCUserSocialRequest;
+use App\Models\CUserProfile;
+use Illuminate\Http\Request;
 
 class CUserSocialController extends Controller
 {
@@ -37,6 +39,19 @@ class CUserSocialController extends Controller
     public function store(StoreCUserSocialRequest $request)
     {
         //
+        $c_user_social = CUserSocial::create([
+            'c_user_profile_id' => $request->c_user_profile_id,
+            'name' => $request->name,
+            'url' => $request->url,
+            'follower' => $request->follower,
+        ]);
+        $c_user_socials = CUserSocial::where('c_user_profile_id', $request->c_user_profile_id)->get();
+
+        $max_follower = CUserSocial::where('c_user_profile_id', $request->c_user_profile_id)->max('follower');
+        $c_user_profile = CUserProfile::find($request->c_user_profile_id);
+        $c_user_profile->maximum_follower = intval($max_follower);
+        $c_user_profile->save();
+        return $this->jsonResponse($c_user_socials);
     }
 
     /**
@@ -68,9 +83,23 @@ class CUserSocialController extends Controller
      * @param  \App\Models\CUserSocial  $cUserSocial
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCUserSocialRequest $request, CUserSocial $cUserSocial)
+    public function update(UpdateCUserSocialRequest $request, CUserSocial $cUserSocial, $c_user_social_id)
     {
         //
+        $c_user_social = CUserSocial::find($c_user_social_id);
+
+        $c_user_social->update([
+            'name' => $request->name,
+            'url' => $request->url,
+        ]);
+        $c_user_socials = CUserSocial::where('c_user_profile_id', $c_user_social->c_user_profile_id)->get();
+
+        $max_follower = CUserSocial::where('c_user_profile_id', $c_user_social->c_user_profile_id)->max('follower');
+        $c_user_profile = CUserProfile::find($c_user_social->c_user_profile_id);
+        $c_user_profile->maximum_follower = intval($max_follower);
+        $c_user_profile->save();
+
+        return $this->jsonResponse($c_user_socials);
     }
 
     /**
@@ -79,8 +108,20 @@ class CUserSocialController extends Controller
      * @param  \App\Models\CUserSocial  $cUserSocial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CUserSocial $cUserSocial)
+    public function destroy(CUserSocial $cUserSocial, Request $request)
     {
         //
+        $c_user_social = CUserSocial::find($request->c_user_social_id);
+        $c_user_profile_id = $c_user_social->c_user_profile_id;
+        $c_user_social->delete();
+
+        $c_user_socials = CUserSocial::where('c_user_profile_id', $c_user_profile_id)->get();
+
+        $max_follower = CUserSocial::where('c_user_profile_id', $c_user_profile_id)->max('follower');
+        $c_user_profile = CUserProfile::find($c_user_profile_id);
+        $c_user_profile->maximum_follower = intval($max_follower);
+        $c_user_profile->save();
+
+        return $this->jsonResponse($c_user_socials);
     }
 }

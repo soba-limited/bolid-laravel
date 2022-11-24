@@ -8,6 +8,7 @@ use App\Http\Controllers\CBusinessInformaitionController;
 use App\Http\Controllers\CCardController;
 use App\Http\Controllers\CCommentController;
 use App\Http\Controllers\CCompanyProfileController;
+use App\Http\Controllers\CCompanySocialController;
 use App\Http\Controllers\CCouponController;
 use App\Http\Controllers\CFollowController;
 use App\Http\Controllers\CIndexController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\CSalonBookmarkController;
 use App\Http\Controllers\CSalonController;
 use App\Http\Controllers\CSustController;
 use App\Http\Controllers\CUserProfileController;
+use App\Http\Controllers\CUserSocialController;
 use App\Http\Controllers\LIndexController;
 use App\Http\Controllers\LPickupController;
 use App\Http\Controllers\LPostController;
@@ -278,7 +280,15 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/mypage/edit/{c_profile_id}', [CProfileController::class,'edit']);
     Route::post('/corapura/mypage/update/{c_profile_id}', [CProfileController::class,'update']);
     Route::post('/corapura/mypage/c_user_profile/update/{c_user_profile_id}', [CUserProfileController::class,'update']);
+
+    Route::post('/corapura/mypage/c_user_social/store/', [CUserSocialController::class,'store']);
+    Route::post('/corapura/mypage/c_user_social/update/{c_user_social_id}', [CUserSocialController::class,'update']);
+    Route::delete('/corapura/mypage/c_user_social/delete', [CUserSocialController::class,'destroy']);
+
     Route::post('/corapura/mypage/c_company_profile/update/{c_company_profile_id}', [CCompanyProfileController::class,'update']);
+    Route::post('/corapura/mypage/c_company_social/store/', [CCompanySocialController::class,'store']);
+    Route::post('/corapura/mypage/c_company_social/update/{c_company_social_id}', [CCompanySocialController::class,'update']);
+    Route::delete('/corapura/mypage/c_company_social/delete', [CCompanySocialController::class,'destroy']);
 
 
     //liondorコントローラー

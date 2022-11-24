@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CCompanySocial;
 use App\Http\Requests\StoreCCompanySocialRequest;
 use App\Http\Requests\UpdateCCompanySocialRequest;
+use Illuminate\Http\Request;
 
 class CCompanySocialController extends Controller
 {
@@ -37,6 +38,13 @@ class CCompanySocialController extends Controller
     public function store(StoreCCompanySocialRequest $request)
     {
         //
+        $c_company_social = CCompanySocial::create([
+            'c_company_profile_id' => $request->c_company_profile_id,
+            'name' => $request->name,
+            'url' => $request->url,
+        ]);
+        $c_company_socials = CCompanySocial::where('c_company_profile_id', $request->c_company_profile_id)->get();
+        return $this->jsonResponse($c_company_socials);
     }
 
     /**
@@ -68,9 +76,17 @@ class CCompanySocialController extends Controller
      * @param  \App\Models\CCompanySocial  $cCompanySocial
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCCompanySocialRequest $request, CCompanySocial $cCompanySocial)
+    public function update(UpdateCCompanySocialRequest $request, CCompanySocial $cCompanySocial, $c_company_social_id)
     {
         //
+        $c_company_social = CCompanySocial::find($c_company_social_id);
+        $c_company_social->update([
+            'c_company_profile_id' => $request->c_company_profile_id,
+            'name' => $request->name,
+            'url' => $request->url,
+        ]);
+        $c_company_socials = CCompanySocial::where('c_company_profile_id', $c_company_social->c_company_profile_id)->get();
+        return $this->jsonResponse($c_company_socials);
     }
 
     /**
@@ -79,8 +95,13 @@ class CCompanySocialController extends Controller
      * @param  \App\Models\CCompanySocial  $cCompanySocial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CCompanySocial $cCompanySocial)
+    public function destroy(CCompanySocial $cCompanySocial, Request $request)
     {
         //
+        $c_company_social = CCompanySocial::find($request->c_company_social_id);
+        $c_company_profile_id = $c_company_social->c_company_profile_id;
+        $c_company_social->delete();
+        $c_company_socials = CCompanySocial::where('c_company_profile_id', $c_company_profile_id)->get();
+        return $this->jsonResponse($c_company_socials);
     }
 }
