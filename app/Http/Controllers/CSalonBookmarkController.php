@@ -89,7 +89,7 @@ class CSalonBookmarkController extends Controller
     public function destroy(CSalonBookmark $cSalonBookmark, Request $request)
     {
         //
-        $c_salon_bookmark = CSalonBookmark::find($request->c_salon_bookmark_id);
+        $c_salon_bookmark = CSalonBookmark::where('user_id', $request->user_id)->where('c_salon_id', $request->c_salon_id)->first();
         $c_salon_bookmark->delete();
         $c_salon_bookmarks = CSalonBookmark::where('user_id', $request->user_id)->pluck('c_salon_id');
         return $this->jsonResponse($c_salon_bookmarks);
