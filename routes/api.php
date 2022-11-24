@@ -12,12 +12,14 @@ use App\Http\Controllers\CIndexController;
 use App\Http\Controllers\CItemController;
 use App\Http\Controllers\CLikeController;
 use App\Http\Controllers\COfficeController;
+use App\Http\Controllers\CPostAppController;
 use App\Http\Controllers\CPostBookmarkController;
 use App\Http\Controllers\CPostController;
 use App\Http\Controllers\CPrController;
 use App\Http\Controllers\CPrCountsController;
 use App\Http\Controllers\CPresidentController;
 use App\Http\Controllers\CProfileController;
+use App\Http\Controllers\CSalonBookmarkController;
 use App\Http\Controllers\CSalonController;
 use App\Http\Controllers\CSustController;
 
@@ -235,23 +237,35 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/corapura/post_bookmark/delete', [CPostBookmarkController::class,'destroy']);
     Route::post('/corapura/post_bookmark/check', [CPostBookmarkController::class,'check']);
 
-    Route::post('/corapura/salon_bookmark/store', [CSalonBookmark::class,'store']);
-    Route::delete('/corapura/salon_bookmark/delete', [CSalonBookmark::class,'destroy']);
-    Route::post('/corapura/salon_bookmark/check', [CSalonBookmark::class,'check']);
+    Route::post('/corapura/salon_bookmark/store', [CSalonBookmarkController::class,'store']);
+    Route::delete('/corapura/salon_bookmark/delete', [CSalonBookmarkController::class,'destroy']);
+    Route::post('/corapura/salon_bookmark/check', [CSalonBookmarkController::class,'check']);
 
 
     Route::get('/corapura/post/create', [CPostController::class,'create']);
     Route::post('/corapura/post/store', [CPostController::class,'store']);
     Route::post('/corapura/post/edit/{c_post_id}', [CPostController::class,'edit']);
     Route::post('/corapura/post/update/{c_post_id}', [CPostController::class,'update']);
-    Route::delete('/corapura/post/delete', [CPostController::class,'delete']);
+    Route::delete('/corapura/post/delete', [CPostController::class,'destroy']);
+
+    Route::post('/corapura/post_app/list', [CPostAppController::class,'index']);
+    Route::post('/corapura/post_app/add', [CPostAppController::class,'store']);
+    Route::post('/corapura/post_app/check', [CPostAppController::class,'check']);
+    Route::post('/corapura/post_app/state_change/{app_id}', [CPostAppController::class,'update']);
+    Route::delete('/corapura/post_app/delete', [CPostAppController::class,'destroy']);
 
     Route::get('/corapura/salon/create', [CSalonController::class,'create']);
     Route::post('/corapura/salon/store', [CSalonController::class,'store']);
     Route::post('/corapura/salon/edit/{c_salon_id}', [CSalonController::class,'edit']);
     Route::post('/corapura/salon/update/{c_salon_id}', [CSalonController::class,'update']);
-    Route::delete('/corapura/salon/delete', [CSalonController::class,'delete']);
+    Route::delete('/corapura/salon/delete', [CSalonController::class,'destroy']);
 
+    Route::get('/corapura/pr/create', [CPrController::class,'create']);
+    Route::post('/corapura/pr/store', [CPrController::class,'store']);
+    Route::post('/corapura/pr/edit/{c_pr_id}', [CPrController::class,'edit']);
+    Route::post('/corapura/pr/update/{c_pr_id}', [CPrController::class,'update']);
+    Route::post('/corapura/pr/update/{c_pr_id}', [CPrController::class,'update']);
+    Route::delete('/corapura/pr/delete', [CPrController::class,'destroy']);
 
 
     //liondorコントローラー

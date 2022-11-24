@@ -124,6 +124,8 @@ class CSalonController extends Controller
                 $c_salon->CTags()->attach($tag_id);
             }
         }
+
+        return $this->jsonResponse($c_salon);
     }
 
     /**
@@ -210,6 +212,14 @@ class CSalonController extends Controller
             }
         }
 
+        return $this->jsonResponse($c_salon);
+    }
+
+    public function admin_update($c_salon_id, Request $request)
+    {
+        $c_salon = CSalon::find($c_salon_id);
+        $c_salon->stripe_api_id = $request->stripe_api_id;
+        $c_salon->save();
         return $this->jsonResponse($c_salon);
     }
 

@@ -181,6 +181,8 @@ class CPostController extends Controller
                 $c_post->CTags()->attach($tag_id);
             }
         }
+
+        return $this->jsonResponse($c_post);
     }
 
     /**
