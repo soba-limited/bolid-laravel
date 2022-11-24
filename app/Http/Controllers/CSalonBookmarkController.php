@@ -97,7 +97,7 @@ class CSalonBookmarkController extends Controller
 
     public function check(Request $request)
     {
-        $c_salon_bookmark = CPostBookmark::where('user_id', $request->user_id)->pluck('c_salon_id');
+        $c_salon_bookmark = CSalonBookmark::where('user_id', $request->user_id)->pluck('c_salon_id');
         return $this->jsonResponse($c_salon_bookmark);
     }
 }
