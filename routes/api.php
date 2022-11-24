@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CBusinessInformaitionController;
 use App\Http\Controllers\CCardController;
+use App\Http\Controllers\CCommentController;
+use App\Http\Controllers\CCompanyProfileController;
 use App\Http\Controllers\CCouponController;
 use App\Http\Controllers\CFollowController;
 use App\Http\Controllers\CIndexController;
@@ -22,7 +24,7 @@ use App\Http\Controllers\CProfileController;
 use App\Http\Controllers\CSalonBookmarkController;
 use App\Http\Controllers\CSalonController;
 use App\Http\Controllers\CSustController;
-
+use App\Http\Controllers\CUserProfileController;
 use App\Http\Controllers\LIndexController;
 use App\Http\Controllers\LPickupController;
 use App\Http\Controllers\LPostController;
@@ -241,6 +243,10 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/corapura/salon_bookmark/delete', [CSalonBookmarkController::class,'destroy']);
     Route::post('/corapura/salon_bookmark/check', [CSalonBookmarkController::class,'check']);
 
+    Route::post('/corapura/comment/send_list', [CCommentController::class,'send_list']);
+    Route::post('/corapura/comment/recive_list', [CCommentController::class,'recive_list']);
+    Route::post('/corapura/comment/store', [CCommentController::class,'store']);
+    Route::delete('/corapura/comment/delete', [CCommentController::class,'destroy']);
 
     Route::get('/corapura/post/create', [CPostController::class,'create']);
     Route::post('/corapura/post/store', [CPostController::class,'store']);
@@ -266,6 +272,13 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/pr/update/{c_pr_id}', [CPrController::class,'update']);
     Route::post('/corapura/pr/update/{c_pr_id}', [CPrController::class,'update']);
     Route::delete('/corapura/pr/delete', [CPrController::class,'destroy']);
+
+    Route::get('/corapura/mypage/create', [CProfileController::class,'create']);
+    Route::post('/corapura/mypage/store', [CProfileController::class,'store']);
+    Route::post('/corapura/mypage/edit/{c_profile_id}', [CProfileController::class,'edit']);
+    Route::post('/corapura/mypage/update/{c_profile_id}', [CProfileController::class,'update']);
+    Route::post('/corapura/mypage/c_user_profile/update/{c_user_profile_id}', [CUserProfileController::class,'update']);
+    Route::post('/corapura/mypage/c_company_profile/update/{c_company_profile_id}', [CCompanyProfileController::class,'update']);
 
 
     //liondorコントローラー

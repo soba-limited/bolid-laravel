@@ -6,6 +6,7 @@ use App\Models\CPr;
 use App\Models\User;
 use App\Http\Requests\StoreCPrRequest;
 use App\Http\Requests\UpdateCPrRequest;
+use App\Models\CTag;
 use Illuminate\Http\Request;
 
 class CPrController extends Controller
@@ -29,10 +30,13 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
 
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+
         $allarray = [
             'pr' => $pr,
             'page_max' => $page_max,
             'now_page' => 1,
+            'tags' => $tags,
         ];
 
         return $this->jsonResponse($allarray);
@@ -76,6 +80,8 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
 
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+
         $allarray = [
             'pr' => $pr,
             'page_max' => $page_max,
@@ -83,6 +89,7 @@ class CPrController extends Controller
             'sort' => $request->sort,
             'tag_id' => $request->tag_id,
             's' => $request->s,
+            'tags' => $tags,
         ];
 
         return $this->jsonResponse($allarray);

@@ -56,7 +56,7 @@ class CUserProfileController extends Controller
      * @param  \App\Models\CUserProfile  $cUserProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(CUserProfile $cUserProfile)
+    public function edit(CUserProfile $cUserProfile, $c_user_profile_id)
     {
         //
     }

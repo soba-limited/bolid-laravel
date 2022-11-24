@@ -271,7 +271,7 @@ class CProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -285,6 +285,71 @@ class CProfileController extends Controller
     public function store(StoreCProfileRequest $request)
     {
         //
+        $c_profile = CProfile::create([
+            'nicename' => $request->nicename,
+            'profile' => $request->profile,
+            'zip' => $request->zip,
+        ]);
+
+        $id = $c_profile->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_profile/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_profile/'.$id."/".$thumbs_name;
+            $c_profile->thumbs = $thumbs;
+        }
+
+        if ($request->hasFile('image1')) {
+            $image1_name = $request->file('image1')->getClientOriginalName();
+            $request->file('image1')->storeAs('images/c_profile/'.$id, $image1_name, 'public');
+            $image1 = 'images/c_profile/'.$id."/".$image1_name;
+            $c_profile->image1 = $image1;
+        }
+
+        if ($request->hasFile('image2')) {
+            $image2_name = $request->file('image2')->getClientOriginalName();
+            $request->file('image2')->storeAs('images/c_profile/'.$id, $image2_name, 'public');
+            $image2 = 'images/c_profile/'.$id."/".$image2_name;
+            $c_profile->image2 = $image2;
+        }
+
+        if ($request->hasFile('image3')) {
+            $image3_name = $request->file('image3')->getClientOriginalName();
+            $request->file('image3')->storeAs('images/c_profile/'.$id, $image3_name, 'public');
+            $image3 = 'images/c_profile/'.$id."/".$image3_name;
+            $c_profile->image3 = $image3;
+        }
+
+        if ($request->hasFile('thumbs') || $request->hasFile('image1') || $request->hasFile('image2') || $request->hasFile('image3')) {
+            $c_profile->save();
+        }
+
+        $tag_ids = [];
+
+        if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
+            foreach ($tags as $tag) {
+                $tag_single = CTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $c_profile->CTags()->attach($tag_id);
+            }
+        }
+
+
+        if ($c_profile->user->account_type == '0') {
+            $c_user_profile = CUserProfile::create([
+                'c_profile_id' => $id,
+            ]);
+        } elseif ($c_profile->user->account_type == '1') {
+            $c_company_profile = CCompanyProfile::create([
+                'c_profile_id' => $id,
+            ]);
+        }
+
+        return $this->jsonResponse($c_profile);
     }
 
     /**
@@ -376,9 +441,23 @@ class CProfileController extends Controller
      * @param  \App\Models\CProfile  $cProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(CProfile $cProfile)
+    public function edit(CProfile $cProfile, $c_profile_id)
     {
         //
+        $c_profile = CProfile::find($c_profile_id);
+        $c_profile_option = null;
+        if ($c_profile->user->account_type == 0) {
+            $c_profile_option = CUserProfile::where('c_profile_id', $c_profile->id)->with('CUserSocials', 'CUserSkills')->first();
+        } elseif ($c_profile->user->account_type == 1) {
+            $c_profile_option = CCompanyProfile::where('c_profile_id', $c_profile->id)->with('CCompanySocials')->first();
+        }
+
+        $allarray = [
+            'c_profile' => $c_profile,
+            'c_profile_option' => $c_profile_option,
+        ];
+
+        return $this->jsonResponse($allarray);
     }
 
     /**
@@ -388,9 +467,70 @@ class CProfileController extends Controller
      * @param  \App\Models\CProfile  $cProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCProfileRequest $request, CProfile $cProfile)
+    public function update(UpdateCProfileRequest $request, CProfile $cProfile, $c_profile_id)
     {
         //
+        $c_profile = CProfile::find($c_profile_id);
+
+        $id = $c_profile->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_profile/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_profile/'.$id."/".$thumbs_name;
+            $c_profile->thumbs = $thumbs;
+        }
+
+        if ($request->hasFile('image1')) {
+            $image1_name = $request->file('image1')->getClientOriginalName();
+            $request->file('image1')->storeAs('images/c_profile/'.$id, $image1_name, 'public');
+            $image1 = 'images/c_profile/'.$id."/".$image1_name;
+            $c_profile->image1 = $image1;
+        }
+
+        if ($request->hasFile('image2')) {
+            $image2_name = $request->file('image2')->getClientOriginalName();
+            $request->file('image2')->storeAs('images/c_profile/'.$id, $image2_name, 'public');
+            $image2 = 'images/c_profile/'.$id."/".$image2_name;
+            $c_profile->image2 = $image2;
+        }
+
+        if ($request->hasFile('image3')) {
+            $image3_name = $request->file('image3')->getClientOriginalName();
+            $request->file('image3')->storeAs('images/c_profile/'.$id, $image3_name, 'public');
+            $image3 = 'images/c_profile/'.$id."/".$image3_name;
+            $c_profile->image3 = $image3;
+        }
+
+        $c_profile->update([
+            'nicename' => $request->nicename,
+            'profile' => $request->profile,
+            'zip' => $request->zip,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+            'image1' => $request->hasFile('image1') ? $image1 : $request->image1,
+            'image2' => $request->hasFile('image2') ? $image2 : $request->image2,
+            'image3' => $request->hasFile('image3') ? $image3 : $request->image3,
+        ]);
+
+        $tag_ids = [];
+
+        if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
+            foreach ($tags as $tag) {
+                $tag_single = CTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $c_profile->CTags()->syncWithoutDetaching($tag_id);
+            }
+        }
+
+        $allarray = [
+            'c_profile' => $c_profile,
+            'c_tags' => $c_profile->CTags
+        ];
+
+        return $this->jsonResponse($allarray);
     }
 
     /**

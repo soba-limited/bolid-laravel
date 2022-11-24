@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CComment;
 use App\Http\Requests\StoreCCommentRequest;
 use App\Http\Requests\UpdateCCommentRequest;
+use Illuminate\Http\Request;
 
 class CCommentController extends Controller
 {
@@ -16,6 +17,18 @@ class CCommentController extends Controller
     public function index()
     {
         //
+    }
+
+    public function to_list(Request $request)
+    {
+        $comments = CComment::with('to_user.CProfile')->where('user_id', $request->user_id)->get();
+        return $this->jsonResponse($comments);
+    }
+
+    public function recive_list(Request $request)
+    {
+        $comments = CComment::with('user.CProfile')->where('to_user_id', $request->to_user_id)->get();
+        return $this->jsonResponse($comments);
     }
 
     /**
@@ -37,6 +50,13 @@ class CCommentController extends Controller
     public function store(StoreCCommentRequest $request)
     {
         //
+        $comment = CComment::create([
+            'user_id' => $request->user_id,
+            'to_user_id' => $request->to_user_id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        return $this->jsonResponse($comment);
     }
 
     /**
@@ -79,8 +99,11 @@ class CCommentController extends Controller
      * @param  \App\Models\CComment  $cComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CComment $cComment)
+    public function destroy(CComment $cComment, Request $request)
     {
         //
+        $comment = CComment::find($request->c_comment_id);
+        $comment->delete();
+        return 'コメントを削除しました';
     }
 }
