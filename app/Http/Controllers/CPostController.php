@@ -125,6 +125,11 @@ class CPostController extends Controller
     public function create()
     {
         //
+        $cat = CCat::get();
+        $allarray = [
+            'cat' => $cat,
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     /**
@@ -136,6 +141,46 @@ class CPostController extends Controller
     public function store(StoreCPostRequest $request)
     {
         //
+        $c_post = CPost::create([
+            'user_id' =>$request->user_id,
+            'title' =>$request->title,
+            'state' =>$request->state,
+            'c_cat_id' =>$request->c_cat_id,
+            'date' =>$request->date,
+            'limite_date' =>$request->limite_date,
+            'reward' =>$request->reward,
+            'hope_reward' =>$request->hope_reward,
+            'number_of_people' =>$request->number_of_people,
+            'recruitment_quota' =>$request->recruitment_quota,
+            'speciality' =>$request->speciality,
+            'suporter' =>$request->suporter,
+            'amount_of_suport' =>$request->amount_of_suport,
+            'medium' =>$request->medium,
+            'content' =>$request->content,
+        ]);
+
+        $id = $c_post->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_post/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_post/'.$id."/".$thumbs_name;
+            $c_post->thumbs = $thumbs;
+            $c_post->save();
+        }
+
+        $tag_ids = [];
+
+        if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
+            foreach ($tags as $tag) {
+                $tag_single = CTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $c_post->CTags()->attach($tag_id);
+            }
+        }
     }
 
     /**
@@ -157,9 +202,16 @@ class CPostController extends Controller
      * @param  \App\Models\CPost  $cPost
      * @return \Illuminate\Http\Response
      */
-    public function edit(CPost $cPost)
+    public function edit(CPost $cPost, $c_post_id)
     {
         //
+        $c_post = CPost::with('CCat', 'CTags')->find($c_post_id);
+        $cat = CCat::get();
+        $allarray = [
+            'c_post' => $c_post,
+            'cat' => $cat,
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     /**
@@ -169,9 +221,50 @@ class CPostController extends Controller
      * @param  \App\Models\CPost  $cPost
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCPostRequest $request, CPost $cPost)
+    public function update(UpdateCPostRequest $request, CPost $cPost, $c_post_id)
     {
         //
+        $c_post = CPost::find($c_post_id);
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_post/'.$c_post_id, $thumbs_name, 'public');
+            $thumbs = 'images/c_post/'.$c_post_id."/".$thumbs_name;
+        }
+
+        $c_post->update([
+            'user_id' =>$request->user_id,
+            'title' =>$request->title,
+            'state' =>$request->state,
+            'c_cat_id' =>$request->c_cat_id,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+            'date' =>$request->date,
+            'limite_date' =>$request->limite_date,
+            'reward' =>$request->reward,
+            'hope_reward' =>$request->hope_reward,
+            'number_of_people' =>$request->number_of_people,
+            'recruitment_quota' =>$request->recruitment_quota,
+            'speciality' =>$request->speciality,
+            'suporter' =>$request->suporter,
+            'amount_of_suport' =>$request->amount_of_suport,
+            'medium' =>$request->medium,
+            'content' =>$request->content,
+        ]);
+
+        $tag_ids = [];
+
+        if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
+            foreach ($tags as $tag) {
+                $tag_single = CTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $c_post->CTags()->syncWithoutDetaching($tag_id);
+            }
+        }
+
+        return $this->jsonResponse($c_post);
     }
 
     /**
@@ -180,8 +273,12 @@ class CPostController extends Controller
      * @param  \App\Models\CPost  $cPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CPost $cPost)
+    public function destroy(CPost $cPost, Request $request)
     {
         //
+        $c_post = CPost::find($request->c_post_id);
+        $c_post->delete();
+        $c_posts = CPost::with('CCat', 'CTags')->with(['user.CProfile'])->where('user_id', $request->user_id);
+        return $this->jsonResponse($c_posts);
     }
 }

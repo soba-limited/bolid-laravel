@@ -50,6 +50,8 @@ use App\Http\Controllers\DOverviewController;
 use App\Http\Controllers\DPickupController;
 use App\Http\Controllers\DSocialController;
 use App\Http\Controllers\DTagController;
+use App\Models\CSalonBookmark;
+use App\Models\CSalonCTag;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +107,10 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/dellamall/d_pickups/delete/{id}', [DPickupController::class,'destroy']);
 
     Route::post('/dellamall/pickup/check', [DPickupController::class,'check']);
+
+    //コラプラ運営コントローラー
+
+    Route::post('/coprapura/admin/salon/update/{c_salon_id}', [CSalonController::class,'admin_update']);
 
 
     //liondor記事投稿者コントローラー
@@ -228,6 +234,23 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/post_bookmark/store', [CPostBookmarkController::class,'store']);
     Route::delete('/corapura/post_bookmark/delete', [CPostBookmarkController::class,'destroy']);
     Route::post('/corapura/post_bookmark/check', [CPostBookmarkController::class,'check']);
+
+    Route::post('/corapura/salon_bookmark/store', [CSalonBookmark::class,'store']);
+    Route::delete('/corapura/salon_bookmark/delete', [CSalonBookmark::class,'destroy']);
+    Route::post('/corapura/salon_bookmark/check', [CSalonBookmark::class,'check']);
+
+
+    Route::get('/corapura/post/create', [CPostController::class,'create']);
+    Route::post('/corapura/post/store', [CPostController::class,'store']);
+    Route::post('/corapura/post/edit/{c_post_id}', [CPostController::class,'edit']);
+    Route::post('/corapura/post/update/{c_post_id}', [CPostController::class,'update']);
+    Route::delete('/corapura/post/delete', [CPostController::class,'delete']);
+
+    Route::get('/corapura/salon/create', [CSalonController::class,'create']);
+    Route::post('/corapura/salon/store', [CSalonController::class,'store']);
+    Route::post('/corapura/salon/edit/{c_salon_id}', [CSalonController::class,'edit']);
+    Route::post('/corapura/salon/update/{c_salon_id}', [CSalonController::class,'update']);
+    Route::delete('/corapura/salon/delete', [CSalonController::class,'delete']);
 
 
 

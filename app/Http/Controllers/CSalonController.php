@@ -6,6 +6,7 @@ use App\Models\CSalon;
 use App\Models\User;
 use App\Http\Requests\StoreCSalonRequest;
 use App\Http\Requests\UpdateCSalonRequest;
+use App\Models\CCat;
 use Illuminate\Http\Request;
 
 class CSalonController extends Controller
@@ -75,6 +76,11 @@ class CSalonController extends Controller
     public function create()
     {
         //
+        $cat = CCat::get();
+        $allarray = [
+            'cat' => $cat,
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     /**
@@ -86,6 +92,38 @@ class CSalonController extends Controller
     public function store(StoreCSalonRequest $request)
     {
         //
+        $c_salon = CSalon::create([
+            'user_id' => $request->user_id,
+            'c_cat_id' => $request->c_cat_id,
+            'title' => $request->title,
+            'date' => $request->date,
+            'plan' => $request->plan,
+            'number_of_people' => $request->number_of_people,
+            'content' => $request->content,
+        ]);
+
+        $id = $c_salon->id;
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_salon/'.$id, $thumbs_name, 'public');
+            $thumbs = 'images/c_salon/'.$id."/".$thumbs_name;
+            $c_salon->thumbs = $thumbs;
+            $c_salon->save();
+        }
+
+        $tag_ids = [];
+
+        if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
+            foreach ($tags as $tag) {
+                $tag_single = CTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $c_salon->CTags()->attach($tag_id);
+            }
+        }
     }
 
     /**
@@ -97,7 +135,7 @@ class CSalonController extends Controller
     public function show(CSalon $cSalon, $salon_id)
     {
         //
-        $salon = CSalon::find($salon_id);
+        $salon = CSalon::with('CCat', 'CTags')->find($salon_id);
         $user = null;
         if ($salon->user->account_type == 0) {
             $user = User::with('CProfile.CUserProfile.CUserSocials')->find($salon->user->id);
@@ -117,9 +155,16 @@ class CSalonController extends Controller
      * @param  \App\Models\CSalon  $cSalon
      * @return \Illuminate\Http\Response
      */
-    public function edit(CSalon $cSalon)
+    public function edit(CSalon $cSalon, $c_salon_id)
     {
         //
+        $c_salon = CSalon::with('CCat', 'CTags')->find($c_salon_id);
+        $cat = CCat::get();
+        $allarray = [
+            'c_salon' => $c_salon,
+            'cat' => $cat,
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     /**
@@ -129,9 +174,43 @@ class CSalonController extends Controller
      * @param  \App\Models\CSalon  $cSalon
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCSalonRequest $request, CSalon $cSalon)
+    public function update(UpdateCSalonRequest $request, CSalon $cSalon, $c_salon_id)
     {
         //
+
+        $c_salon = CSalon::find($c_salon_id);
+
+        if ($request->hasFile('thumbs')) {
+            $thumbs_name = $request->file('thumbs')->getClientOriginalName();
+            $request->file('thumbs')->storeAs('images/c_salon/'.$c_salon_id, $thumbs_name, 'public');
+            $thumbs = 'images/c_salon/'.$c_salon_id."/".$thumbs_name;
+        }
+
+        $c_salon->update([
+            'user_id' => $request->user_id,
+            'c_cat_id' => $request->c_cat_id,
+            'title' => $request->title,
+            'date' => $request->date,
+            'plan' => $request->plan,
+            'number_of_people' => $request->number_of_people,
+            'content' => $request->content,
+            'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
+        ]);
+
+        $tag_ids = [];
+
+        if (!empty($request->tag)) {
+            $tags = explode(",", $request->tag);
+            foreach ($tags as $tag) {
+                $tag_single = CTag::firstOrCreate(['name'=>$tag]);
+                array_push($tag_ids, $tag_single->id);
+            }
+            foreach ($tag_ids as $tag_id) {
+                $c_salon->CTags()->syncWithoutDetaching($tag_id);
+            }
+        }
+
+        return $this->jsonResponse($c_salon);
     }
 
     /**
@@ -140,8 +219,12 @@ class CSalonController extends Controller
      * @param  \App\Models\CSalon  $cSalon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CSalon $cSalon)
+    public function destroy(CSalon $cSalon, Request $request)
     {
         //
+        $c_salon = CSalon::find($request->c_salon_id);
+        $c_salon->delete();
+        $c_salons = CSalon::with('CCat', 'CTags')->with(['user.CProfile'])->where('user_id', $request->user_id);
+        return $this->jsonResponse($c_salons);
     }
 }

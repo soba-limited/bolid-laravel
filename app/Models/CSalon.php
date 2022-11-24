@@ -15,6 +15,7 @@ class CSalon extends Model
         'user_id',
         'c_cat_id',
         'title',
+        'thumbs',
         'date',
         'plan',
         'number_of_people',
