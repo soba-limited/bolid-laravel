@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Mail\ContactMail;
+use App\Models\CSalon;
 use Mail;
 
 class LIndexController extends Controller
@@ -28,6 +29,7 @@ class LIndexController extends Controller
         $fortune = \Commons::LPost_Category('fortune');
         $video = \Commons::LPost_Category('video');
         $present = LPresent::limit(5)->orderBy('id', 'desc')->get();
+        $salon = CSalon::limit(5)->orderBy('id', 'desc')->get();
         $special = LPickup::with(['LPost'=>function ($query) {
             $query->with(['user'=>function ($query) {
                 $query->with('LProfile');
@@ -46,6 +48,7 @@ class LIndexController extends Controller
             'fortunes' => $fortune,
             'videos' => $video,
             'presents' => $present,
+            'salon' => $salon,
         ];
 
         $allarray = \Commons::LCommons($allarray);

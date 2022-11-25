@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DShop;
 use App\Http\Requests\StoreDShopRequest;
 use App\Http\Requests\UpdateDShopRequest;
+use App\Models\CSalon;
 use App\Models\DComment;
 use App\Models\DCoupon;
 use App\Models\DInfo;
@@ -203,6 +204,10 @@ class DShopController extends Controller
         $good_count = $shop->DGoods->count();
         $mall_count = $shop->DMalls->count();
         $kanren = DShop::inRandomOrder()->limit(4)->get();
+        $salon = null;
+        if (!empty($shop->official_user_id)) {
+            $salon = CSalon::where('user_id', $shop->official_user_id)->get();
+        }
 
         $allarray = [
             'shop' => $shop,
@@ -210,6 +215,7 @@ class DShopController extends Controller
             'good_count' => $good_count,
             'mall_count' => $mall_count,
             'kanren' => $kanren,
+            'salon' => $salon,
         ];
 
         return $this->jsonResponse($allarray);
