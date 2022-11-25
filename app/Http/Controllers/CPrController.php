@@ -155,9 +155,9 @@ class CPrController extends Controller
     public function show(CPr $cPr, $pr_id)
     {
         //
-        $pr = CPr::find($pr_id);
+        $pr = CPr::with('CTags')->find($pr_id);
         $user = User::with('CProfile')->find($pr->user_id);
-        $pr_new_list = CPr::limit(5)->orderBy('id', 'desc')->get();
+        $pr_new_list = CPr::limit(5)->with('user.CProfile')->orderBy('id', 'desc')->get();
         $allarray = [
             'pr' => $pr,
             'user' => $user,
