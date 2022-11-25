@@ -98,7 +98,7 @@ class CPrCountsController extends Controller
 
     public function check(Request $request)
     {
-        $check = CPrCount::where('user_id', $request->user_id)->where('c_pr_id', $request->c_pr_id)->first();
+        $check = CPrCounts::where('user_id', $request->user_id)->where('c_pr_id', $request->c_pr_id)->first();
         if (!empty($check)) {
             return $this->jsonResponse($check);
         } else {
