@@ -285,6 +285,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/mypage/store', [CProfileController::class,'store']);
     Route::post('/corapura/mypage/edit/{c_profile_id}', [CProfileController::class,'edit']);
     Route::post('/corapura/mypage/update/{c_profile_id}', [CProfileController::class,'update']);
+
     Route::post('/corapura/mypage/c_user_profile/update/{c_user_profile_id}', [CUserProfileController::class,'update']);
 
     Route::post('/corapura/mypage/c_user_social/store/', [CUserSocialController::class,'store']);

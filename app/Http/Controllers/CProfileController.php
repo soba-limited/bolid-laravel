@@ -74,6 +74,8 @@ class CProfileController extends Controller
 
         $company = $company->withCount('CSusts')->withCount('CLikes')->withCount('COffices')->withCount('CCards')->withCount('CCoupons')->withCount('CItems')->withCount('CPresident')->withCount('CBusinessInformaitions');
 
+        //dd($company);
+
         if (!empty($request->s)) {
             $company = $company->where('nicename', 'like', '%'.$request->s.'%')->orWhere('profile', 'like', '%'.$request->s.'%');
         }
@@ -83,31 +85,31 @@ class CProfileController extends Controller
         }
 
         if (!empty($request->office)) {
-            $company = $company->where('c_offices_count', '>', '0');
+            $company = $company->having('c_offices_count', '>', 0);
         }
 
         if (!empty($request->president)) {
-            $company = $company->where('c_presidents_count', '>', '0');
+            $company = $company->having('c_presidents_count', '>', 0);
         }
 
         if (!empty($request->item)) {
-            $company = $company->where('c_items_count', '>', '0');
+            $company = $company->having('c_items_count', '>', 0);
         }
 
         if (!empty($request->sust)) {
-            $company = $company->where('c_susts_count', '>', '0');
+            $company = $company->having('c_susts_count', '>', 0);
         }
 
         if (!empty($request->card)) {
-            $company = $company->where('c_cards_count', '>', '0');
+            $company = $company->having('c_cards_count', '>', 0);
         }
 
         if (!empty($request->like)) {
-            $company = $company->where('c_likes_count', '>', '0');
+            $company = $company->having('c_likes_count', '>', 0);
         }
 
         if (!empty($request->business_informaition)) {
-            $company = $company->where('c_business_informaitions_count', '>', '0');
+            $company = $company->having('c_business_informaitions_count', '>', 0);
         }
 
         if (!empty($request->tag)) {
