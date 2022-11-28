@@ -76,10 +76,6 @@ class CProfileController extends Controller
 
         //dd($company);
 
-        if (!empty($request->s)) {
-            $company = $company->where('nicename', 'like', '%'.$request->s.'%')->orWhere('profile', 'like', '%'.$request->s.'%');
-        }
-
         if (!empty($request->zip)) {
             $company = $company->where('zip', $request->zip);
         }
@@ -130,6 +126,12 @@ class CProfileController extends Controller
             }
         }
 
+        if (!empty($request->s)) {
+            $company = $company->where('nicename', 'like', '%'.$request->s.'%')->orWhere('profile', 'like', '%'.$request->s.'%');
+        }
+
+
+        //dd($company->get());
 
         $limit = 20;
 
