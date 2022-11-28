@@ -134,16 +134,18 @@ class CProfileController extends Controller
         //dd($company->get());
 
         $limit = 20;
+        $page = $request->page;
+        $skip = ($page - 1) * $limit;
 
         $count = $company->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $company = $company->with('CTags', 'CCompanyProfile')->limit($limit)->get();
+        $company = $company->with('CTags', 'CCompanyProfile')->limit($limit)->skip($skip)->get();
 
         $allarray = [
             'company' => $company,
             'page_max' => $page_max,
-            'now_page' => 1,
+            'now_page' => $page,
             'tag_list' => $tag_list,
         ];
 
@@ -244,12 +246,14 @@ class CProfileController extends Controller
         }
 
         $limit = 20;
+        $page = $request->page;
+        $skip = ($page - 1) * $limit;
 
         $count = $user->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
 
-        $user = $user->with('CTags')->limit($limit)->get();
+        $user = $user->with('CTags')->limit($limit)->skip($skip)->get();
 
         if ($request->sort == 'follow') {
             $user = $user->sortByDesc('user.c_followeds_count')->values();
@@ -262,7 +266,7 @@ class CProfileController extends Controller
         $allarray = [
             'user' => $user,
             'page_max' => $page_max,
-            'now_page' => 1,
+            'now_page' => $page,
             'skill' => $skill,
             'tag_list' => $tag_list,
         ];

@@ -93,16 +93,19 @@ class CPostController extends Controller
         }
 
         $limit = 12;
+        $page = $request->page;
+        $skip = ($page - 1) * $limit;
+
 
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
+        $post = $post->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
 
         $allarray = [
             'post' => $post,
             'page_max' => $page_max,
-            'now_page' => 1,
+            'now_page' => $page,
             'cat_list' => $cat_list,
             'tag_list' => $tag_list,
             's' => $request->s,
