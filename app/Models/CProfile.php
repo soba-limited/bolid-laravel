@@ -17,6 +17,7 @@ class CProfile extends Model
         'image2',
         'image3',
         'zip',
+        'title',
     ];
 
     public function user()
