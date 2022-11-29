@@ -85,7 +85,7 @@ class CProfileController extends Controller
         }
 
         if (!empty($request->president)) {
-            $company = $company->having('c_presidents_count', '>', 0);
+            $company = $company->having('c_president_count', '>', 0);
         }
 
         if (!empty($request->item)) {
