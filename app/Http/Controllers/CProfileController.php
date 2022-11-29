@@ -12,6 +12,7 @@ use App\Models\CBusinessInformaition;
 use App\Models\CCard;
 use App\Models\CComment;
 use App\Models\CLike;
+use App\Models\COffice;
 use App\Models\CPost;
 use App\Models\CPostApp;
 use App\Models\CPr;
@@ -297,6 +298,7 @@ class CProfileController extends Controller
             'nicename' => $request->nicename,
             'profile' => $request->profile,
             'zip' => $request->zip,
+            'title' => $request->title,
         ]);
 
         $id = $c_profile->id;
@@ -454,16 +456,40 @@ class CProfileController extends Controller
         //
         $c_profile = CProfile::find($c_profile_id);
         $c_profile_option = null;
+        $allarray = [];
         if ($c_profile->user->account_type == 0) {
             $c_profile_option = CUserProfile::where('c_profile_id', $c_profile->id)->with('CUserSocials', 'CUserSkills')->first();
+            $c_cards = CCard::where('c_profile_id', $c_profile->id)->get();
+            $c_likes = CLike::where('c_profile_id', $c_profile->id)->get();
+            $allarray = [
+                'c_profile' => $c_profile,
+                'c_profile_option' => $c_profile_option,
+                'c_cards' => $c_cards,
+                'c_likes' => $c_likes,
+            ];
         } elseif ($c_profile->user->account_type == 1) {
             $c_profile_option = CCompanyProfile::where('c_profile_id', $c_profile->id)->with('CCompanySocials')->first();
-        }
+            $c_president = CPresident::where('c_profile_id', $c_profile->id)->get();
+            $c_likes = CLike::where('c_profile_id', $c_profile->id)->get();
+            $c_susts = CSust::where('c_profile_id', $c_profile->id)->get();
+            $c_offices = COffice::where('c_profile_id', $c_profile->id)->get();
+            $c_coupons = CCoupon::where('c_profile_id', $c_profile->id)->get();
+            $c_cards = CCard::where('c_profile_id', $c_profile->id)->get();
+            $c_items = CItem::where('c_profile_id', $c_profile->id)->get();
+            $c_business_informations = CBusinessInformaition::where('c_profile_id', $c_profile->id)->get();
 
-        $allarray = [
-            'c_profile' => $c_profile,
-            'c_profile_option' => $c_profile_option,
-        ];
+            $allarray = [
+                'c_profile' => $c_profile,
+                'c_profile_option' => $c_profile_option,
+                'c_president' => $c_president,
+                'c_susts' => $c_susts,
+                'c_offices' => $c_offices,
+                'c_coupons' => $c_coupons,
+                'c_cards' => $c_cards,
+                'c_items' => $c_items,
+                'c_business_informations' => $c_business_informations,
+            ];
+        }
 
         return $this->jsonResponse($allarray);
     }
