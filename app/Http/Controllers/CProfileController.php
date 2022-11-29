@@ -303,6 +303,11 @@ class CProfileController extends Controller
 
         $id = $c_profile->id;
 
+        $user = User::find($request->user_id)->update([
+                'c_profile_id' => $id,
+        ]);
+
+
         if ($request->hasFile('thumbs')) {
             $thumbs_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/c_profile/'.$id, $thumbs_name, 'public');
