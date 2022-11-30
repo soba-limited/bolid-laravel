@@ -462,7 +462,7 @@ class CProfileController extends Controller
     public function edit(CProfile $cProfile, $c_profile_id)
     {
         //
-        $c_profile = CProfile::find($c_profile_id);
+        $c_profile = CProfile::with('CTags')->find($c_profile_id);
         $c_profile_option = null;
         $allarray = [];
         if ($c_profile->user->account_type == 0) {
