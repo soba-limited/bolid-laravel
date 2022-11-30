@@ -495,6 +495,7 @@ class CProfileController extends Controller
                 'c_coupons' => $c_coupons,
                 'c_cards' => $c_cards,
                 'c_items' => $c_items,
+                'c_likes' => $c_likes,
                 'c_business_informations' => $c_business_informations,
             ];
         }
