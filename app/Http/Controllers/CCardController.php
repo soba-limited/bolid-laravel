@@ -74,9 +74,11 @@ class CCardController extends Controller
      * @param  \App\Models\CCard  $cCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(CCard $cCard)
+    public function edit(CCard $cCard, $c_card_id)
     {
         //
+        $c_card = CCard::find($c_card_id);
+        return $this->jsonResponse($c_card);
     }
 
     /**

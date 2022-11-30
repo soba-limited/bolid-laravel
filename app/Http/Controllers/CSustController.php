@@ -74,9 +74,11 @@ class CSustController extends Controller
      * @param  \App\Models\CSust  $cSust
      * @return \Illuminate\Http\Response
      */
-    public function edit(CSust $cSust)
+    public function edit(CSust $cSust, $c_sust_id)
     {
         //
+        $c_sust = CSust::find($c_sust_id);
+        return $this->jsonResponse($c_sust);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CPresident;
 use App\Http\Requests\StoreCPresidentRequest;
 use App\Http\Requests\UpdateCPresidentRequest;
+use App\Models\COffice;
 use Illuminate\Http\Request;
 
 class CPresidentController extends Controller
@@ -76,9 +77,11 @@ class CPresidentController extends Controller
      * @param  \App\Models\CPresident  $cPresident
      * @return \Illuminate\Http\Response
      */
-    public function edit(CPresident $cPresident)
+    public function edit(CPresident $cPresident, $c_president_id)
     {
         //
+        $c_president = COffice::find($c_president_id);
+        return $this->jsonResponse($c_president);
     }
 
     /**

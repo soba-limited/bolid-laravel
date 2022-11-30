@@ -66,9 +66,11 @@ class COfficeController extends Controller
      * @param  \App\Models\COffice  $cOffice
      * @return \Illuminate\Http\Response
      */
-    public function edit(COffice $cOffice)
+    public function edit(COffice $cOffice, $c_office_id)
     {
         //
+        $c_office = COffice::find($c_office_id);
+        return $this->jsonResponse($c_office);
     }
 
     /**

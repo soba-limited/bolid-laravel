@@ -57,6 +57,7 @@ use App\Http\Controllers\DOverviewController;
 use App\Http\Controllers\DPickupController;
 use App\Http\Controllers\DSocialController;
 use App\Http\Controllers\DTagController;
+use App\Models\CPostBookmark;
 use App\Models\CSalonBookmark;
 use App\Models\CSalonCTag;
 
@@ -298,34 +299,42 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/corapura/mypage/c_company_social/delete', [CCompanySocialController::class,'destroy']);
 
     Route::post('/corapura/businessinformation/store', [CBusinessInformaitionController::class,'store']);
+    Route::post('/corapura/businessinformation/edit/{c_business_information_id}', [CBusinessInformaitionController::class,'edit']);
     Route::post('/corapura/businessinformation/update/{c_business_information_id}', [CBusinessInformaitionController::class,'update']);
     Route::post('/corapura/businessinformation/delete', [CBusinessInformaitionController::class,'destroy']);
 
     Route::post('/corapura/card/store', [CCardController::class,'store']);
     Route::post('/corapura/card/update/{c_card_id}', [CCardController::class,'update']);
+    Route::post('/corapura/card/update/{c_card_id}', [CCardController::class,'update']);
     Route::post('/corapura/card/delete', [CCardController::class,'destroy']);
 
     Route::post('/corapura/coupon/store', [CCouponController::class,'store']);
+    Route::post('/corapura/coupon/update/{c_coupon_id}', [CCouponController::class,'update']);
     Route::post('/corapura/coupon/update/{c_coupon_id}', [CCouponController::class,'update']);
     Route::post('/corapura/coupon/delete', [CCouponController::class,'destroy']);
 
     Route::post('/corapura/item/store', [CItemController::class,'store']);
     Route::post('/corapura/item/update/{c_item_id}', [CItemController::class,'update']);
+    Route::post('/corapura/item/update/{c_item_id}', [CItemController::class,'update']);
     Route::post('/corapura/item/delete', [CItemController::class,'destroy']);
 
     Route::post('/corapura/like/store', [CLikeController::class,'store']);
+    Route::post('/corapura/like/update/{c_like_id}', [CLikeController::class,'update']);
     Route::post('/corapura/like/update/{c_like_id}', [CLikeController::class,'update']);
     Route::post('/corapura/like/delete', [CLikeController::class,'destroy']);
 
     Route::post('/corapura/office/store', [COfficeController::class,'store']);
     Route::post('/corapura/office/update/{c_office_id}', [COfficeController::class,'update']);
+    Route::post('/corapura/office/update/{c_office_id}', [COfficeController::class,'update']);
     Route::post('/corapura/office/delete', [COfficeController::class,'destroy']);
 
     Route::post('/corapura/president/store', [CPresidentController::class,'store']);
     Route::post('/corapura/president/update/{c_president_id}', [CPresidentController::class,'update']);
+    Route::post('/corapura/president/update/{c_president_id}', [CPresidentController::class,'update']);
     Route::post('/corapura/president/delete', [CPresidentController::class,'destroy']);
 
     Route::post('/corapura/sust/store', [CSustController::class,'store']);
+    Route::post('/corapura/sust/update/{c_sust_id}', [CSustController::class,'update']);
     Route::post('/corapura/sust/update/{c_sust_id}', [CSustController::class,'update']);
     Route::post('/corapura/sust/delete', [CSustController::class,'destroy']);
 
@@ -376,6 +385,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/corapura/post', [CPostController::class,'index']);
     Route::post('/corapura/post', [CPostController::class,'search']);
     Route::get('/corapura/post/show/{c_post_id}', [CPostController::class,'show']);
+
+    Route::get('/corapura/post_bookmark/{user_id}', [CPostBookmark::class,'index']);
+    Route::post('/corapura/post_bookmark/{user_id}', [CPostBookmark::class,'search']);
 
     Route::get('/corapura/company', [CProfileController::class,'company_index']);
     Route::post('/corapura/company', [CProfileController::class,'company_search']);

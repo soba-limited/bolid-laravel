@@ -64,9 +64,11 @@ class CBusinessInformaitionController extends Controller
      * @param  \App\Models\CBusinessInformaition  $cBusinessInformaition
      * @return \Illuminate\Http\Response
      */
-    public function edit(CBusinessInformaition $cBusinessInformaition)
+    public function edit(CBusinessInformaition $cBusinessInformaition, $c_business_information_id)
     {
         //
+        $c_business_information = CBusinessInformaition::find($c_business_information_id);
+        return $this->jsonResponse($c_business_information);
     }
 
     /**

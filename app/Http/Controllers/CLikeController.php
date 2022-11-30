@@ -75,9 +75,11 @@ class CLikeController extends Controller
      * @param  \App\Models\CLike  $cLike
      * @return \Illuminate\Http\Response
      */
-    public function edit(CLike $cLike)
+    public function edit(CLike $cLike, $c_like_id)
     {
         //
+        $c_like = CLike::find($c_like_id);
+        return $this->jsonResponse($c_like);
     }
 
     /**

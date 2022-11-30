@@ -75,9 +75,11 @@ class CCouponController extends Controller
      * @param  \App\Models\CCoupon  $cCoupon
      * @return \Illuminate\Http\Response
      */
-    public function edit(CCoupon $cCoupon)
+    public function edit(CCoupon $cCoupon, $c_coupon_id)
     {
         //
+        $c_coupon = CCoupon::find($c_coupon_id);
+        return $this->jsonResponse($c_coupon);
     }
 
     /**

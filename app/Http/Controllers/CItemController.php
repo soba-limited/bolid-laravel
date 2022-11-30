@@ -75,9 +75,11 @@ class CItemController extends Controller
      * @param  \App\Models\CItem  $cItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(CItem $cItem)
+    public function edit(CItem $cItem, $c_item_id)
     {
         //
+        $c_item = CItem::find($c_item_id);
+        return $this->jsonResponse($c_item);
     }
 
     /**

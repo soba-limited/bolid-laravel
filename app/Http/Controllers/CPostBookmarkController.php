@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\CPostBookmark;
 use App\Http\Requests\StoreCPostBookmarkRequest;
 use App\Http\Requests\UpdateCPostBookmarkRequest;
+use App\Models\CCat;
+use App\Models\CTag;
 use Illuminate\Http\Request;
 
 class CPostBookmarkController extends Controller
@@ -14,9 +16,64 @@ class CPostBookmarkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
         //
+        $cat_list = CCat::get();
+        $post = new CPost;
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+
+        $post = $post->whereHas('CPostBookmarks', function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        });
+
+        $limit = 12;
+
+        $count = $post->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $post = $post->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
+
+        $allarray = [
+            'post' => $post,
+            'page_max' => $page_max,
+            'now_page' => 1,
+            'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
+        ];
+
+        return $this->jsonResponse($allarray);
+    }
+
+    public function search(Request $request, $user_id)
+    {
+        $cat_list = CCat::get();
+        $post = new CPost;
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+
+        $post = $post->whereHas('CPostBookmarks', function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        });
+
+
+        $limit = 12;
+        $page = $request->page;
+        $skip = ($page - 1) * $limit;
+
+        $count = $post->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $post = $post->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+
+        $allarray = [
+            'post' => $post,
+            'page_max' => $page_max,
+            'now_page' => $page,
+            'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
+        ];
+
+        return $this->jsonResponse($allarray);
     }
 
     /**
