@@ -23,7 +23,7 @@ class CPostBookmarkController extends Controller
         $post = new CPost;
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
-        $post = $post->whereHas('CPostBookmarks', function ($query) use ($user_id) {
+        $post = $post->whereHas('CPostBookmark', function ($query) use ($user_id) {
             $query->where('user_id', $user_id);
         });
 
@@ -51,7 +51,7 @@ class CPostBookmarkController extends Controller
         $post = new CPost;
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
-        $post = $post->whereHas('CPostBookmarks', function ($query) use ($user_id) {
+        $post = $post->whereHas('CPostBookmark', function ($query) use ($user_id) {
             $query->where('user_id', $user_id);
         });
 
