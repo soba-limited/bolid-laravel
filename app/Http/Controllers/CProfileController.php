@@ -311,7 +311,6 @@ class CProfileController extends Controller
                 'c_profile_id' => $id,
         ]);
 
-
         if ($request->hasFile('thumbs')) {
             $thumbs_name = $request->file('thumbs')->getClientOriginalName();
             $request->file('thumbs')->storeAs('images/c_profile/'.$id, $thumbs_name, 'public');
@@ -549,6 +548,7 @@ class CProfileController extends Controller
             'nicename' => $request->nicename,
             'profile' => $request->profile,
             'zip' => $request->zip,
+            'title' => $request->title,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
             'image1' => $request->hasFile('image1') ? $image1 : $request->image1,
             'image2' => $request->hasFile('image2') ? $image2 : $request->image2,
