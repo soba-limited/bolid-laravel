@@ -386,8 +386,8 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/post', [CPostController::class,'search']);
     Route::get('/corapura/post/show/{c_post_id}', [CPostController::class,'show']);
 
-    Route::get('/corapura/post_bookmark/{user_id}', [CPostBookmark::class,'index']);
-    Route::post('/corapura/post_bookmark/{user_id}', [CPostBookmark::class,'search']);
+    Route::get('/corapura/post_bookmark/{user_id}', [CPostBookmarkController::class,'index']);
+    Route::post('/corapura/post_bookmark/{user_id}', [CPostBookmarkController::class,'search']);
 
     Route::get('/corapura/company', [CProfileController::class,'company_index']);
     Route::post('/corapura/company', [CProfileController::class,'company_search']);

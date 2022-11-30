@@ -6,6 +6,7 @@ use App\Models\CPostBookmark;
 use App\Http\Requests\StoreCPostBookmarkRequest;
 use App\Http\Requests\UpdateCPostBookmarkRequest;
 use App\Models\CCat;
+use App\Models\CPost;
 use App\Models\CTag;
 use Illuminate\Http\Request;
 
