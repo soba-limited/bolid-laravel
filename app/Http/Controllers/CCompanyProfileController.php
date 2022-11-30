@@ -71,7 +71,7 @@ class CCompanyProfileController extends Controller
     public function update(UpdateCCompanyProfileRequest $request, CCompanyProfile $cCompanyProfile, $c_company_profile_id)
     {
         //
-        $c_company_profile = CUserProfile::find($c_company_profile_id);
+        $c_company_profile = CCompanyProfile::find($c_company_profile_id);
 
         $c_company_profile->update([
             'c_profile_id'=>$request->c_profile_id,
