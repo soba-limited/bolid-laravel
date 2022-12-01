@@ -80,7 +80,7 @@ class CPresidentController extends Controller
     public function edit(CPresident $cPresident, $c_president_id)
     {
         //
-        $c_president = COffice::find($c_president_id);
+        $c_president = CPresident::find($c_president_id);
         return $this->jsonResponse($c_president);
     }
 
