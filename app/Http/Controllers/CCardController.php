@@ -53,7 +53,7 @@ class CCardController extends Controller
             $c_card->save();
         }
 
-        $c_cards = CCard::where('c_profile_id', $request->c_profile_id);
+        $c_cards = CCard::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_cards);
     }
 
@@ -107,7 +107,7 @@ class CCardController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_cards = CCard::where('c_profile_id', $request->c_profile_id);
+        $c_cards = CCard::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_cards);
     }
 
@@ -123,7 +123,7 @@ class CCardController extends Controller
         $c_card = CCard::find($request->c_card_id);
         $c_profile_id = $c_card->c_profile_id;
         $c_card->delete();
-        $c_cards = CCard::where('c_profile_id', $c_profile_id);
+        $c_cards = CCard::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_cards);
     }
 

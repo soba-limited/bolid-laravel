@@ -43,7 +43,7 @@ class CBusinessInformaitionController extends Controller
             'title' => $request->title,
             'link' => $request->link,
         ]);
-        $c_bis = CBusinessInformaition::where('c_profile_id', $request->c_profile_id);
+        $c_bis = CBusinessInformaition::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_bis);
     }
 
@@ -87,7 +87,7 @@ class CBusinessInformaitionController extends Controller
             'title' => $request->title,
             'link' => $request->link,
         ]);
-        $c_bis = CBusinessInformaition::where('c_profile_id', $request->c_profile_id);
+        $c_bis = CBusinessInformaition::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_bis);
     }
 
@@ -103,7 +103,7 @@ class CBusinessInformaitionController extends Controller
         $c_bi = CBusinessInformaition::find($request->c_business_information_id);
         $c_profile_id = $c_bi->c_profile_id;
         $c_bi->delete();
-        $c_bis = CBusinessInformaition::where('c_profile_id', $c_profile_id);
+        $c_bis = CBusinessInformaition::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_bis);
     }
 

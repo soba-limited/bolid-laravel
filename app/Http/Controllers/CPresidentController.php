@@ -56,7 +56,7 @@ class CPresidentController extends Controller
             $c_president->save();
         }
 
-        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id);
+        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_presidents);
     }
 
@@ -112,7 +112,7 @@ class CPresidentController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id);
+        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_presidents);
     }
 
@@ -128,7 +128,7 @@ class CPresidentController extends Controller
         $c_president = CPresident::find($request->c_president_id);
         $c_profile_id = $c_president->c_profile_id;
         $c_president->delete();
-        $c_presidents = CPresident::where('c_profile_id', $c_profile_id);
+        $c_presidents = CPresident::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_presidents);
     }
 

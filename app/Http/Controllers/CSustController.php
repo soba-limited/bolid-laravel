@@ -53,7 +53,7 @@ class CSustController extends Controller
             $c_sust->save();
         }
 
-        $c_susts = CSust::where('c_profile_id', $request->c_profile_id);
+        $c_susts = CSust::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_susts);
     }
 
@@ -108,7 +108,7 @@ class CSustController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_susts = CSust::where('c_profile_id', $request->c_profile_id);
+        $c_susts = CSust::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_susts);
     }
 
@@ -124,7 +124,7 @@ class CSustController extends Controller
         $c_sust = CSust::find($request->c_sust_id);
         $c_profile_id = $c_sust->c_profile_id;
         $c_sust->delete();
-        $c_susts = CSust::where('c_profile_id', $c_profile_id);
+        $c_susts = CSust::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_susts);
     }
 

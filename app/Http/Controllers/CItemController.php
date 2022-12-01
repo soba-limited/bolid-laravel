@@ -54,7 +54,7 @@ class CItemController extends Controller
             $c_item->save();
         }
 
-        $c_items = CItem::where('c_profile_id', $request->c_profile_id);
+        $c_items = CItem::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_items);
     }
 
@@ -109,7 +109,7 @@ class CItemController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_items = CItem::where('c_profile_id', $request->c_profile_id);
+        $c_items = CItem::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_items);
     }
 
@@ -125,7 +125,7 @@ class CItemController extends Controller
         $c_item = CItem::find($request->c_item_id);
         $c_profile_id = $c_item->c_profile_id;
         $c_item->delete();
-        $c_items = CItem::where('c_profile_id', $c_profile_id);
+        $c_items = CItem::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_items);
     }
 

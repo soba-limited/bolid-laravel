@@ -45,7 +45,7 @@ class COfficeController extends Controller
             'content' => $request->content,
         ]);
 
-        $c_offices = COffice::where('c_profile_id', $request->c_profile_id);
+        $c_offices = COffice::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_offices);
     }
 
@@ -92,7 +92,7 @@ class COfficeController extends Controller
             'content' => $request->content,
         ]);
 
-        $c_offices = COffice::where('c_profile_id', $request->c_profile_id);
+        $c_offices = COffice::where('c_profile_id', $request->c_profile_id)->get();
         return $this->jsonResponse($c_offices);
     }
 
@@ -108,7 +108,7 @@ class COfficeController extends Controller
         $c_office = CLike::find($request->c_office_id);
         $c_profile_id = $c_office->c_profile_id;
         $c_office->delete();
-        $c_offices = CLike::where('c_profile_id', $c_profile_id);
+        $c_offices = CLike::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_offices);
     }
 
