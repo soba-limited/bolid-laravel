@@ -301,42 +301,42 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/businessinformation/store', [CBusinessInformaitionController::class,'store']);
     Route::post('/corapura/businessinformation/edit/{c_business_information_id}', [CBusinessInformaitionController::class,'edit']);
     Route::post('/corapura/businessinformation/update/{c_business_information_id}', [CBusinessInformaitionController::class,'update']);
-    Route::post('/corapura/businessinformation/delete', [CBusinessInformaitionController::class,'destroy']);
+    Route::delete('/corapura/businessinformation/delete', [CBusinessInformaitionController::class,'destroy']);
 
     Route::post('/corapura/card/store', [CCardController::class,'store']);
     Route::post('/corapura/card/edit/{c_card_id}', [CCardController::class,'edit']);
     Route::post('/corapura/card/update/{c_card_id}', [CCardController::class,'update']);
-    Route::post('/corapura/card/delete', [CCardController::class,'destroy']);
+    Route::delete('/corapura/card/delete', [CCardController::class,'destroy']);
 
     Route::post('/corapura/coupon/store', [CCouponController::class,'store']);
     Route::post('/corapura/coupon/edit/{c_coupon_id}', [CCouponController::class,'edit']);
     Route::post('/corapura/coupon/update/{c_coupon_id}', [CCouponController::class,'update']);
-    Route::post('/corapura/coupon/delete', [CCouponController::class,'destroy']);
+    Route::delete('/corapura/coupon/delete', [CCouponController::class,'destroy']);
 
     Route::post('/corapura/item/store', [CItemController::class,'store']);
     Route::post('/corapura/item/edit/{c_item_id}', [CItemController::class,'edit']);
     Route::post('/corapura/item/update/{c_item_id}', [CItemController::class,'update']);
-    Route::post('/corapura/item/delete', [CItemController::class,'destroy']);
+    Route::delete('/corapura/item/delete', [CItemController::class,'destroy']);
 
     Route::post('/corapura/like/store', [CLikeController::class,'store']);
     Route::post('/corapura/like/edit/{c_like_id}', [CLikeController::class,'edit']);
     Route::post('/corapura/like/update/{c_like_id}', [CLikeController::class,'update']);
-    Route::post('/corapura/like/delete', [CLikeController::class,'destroy']);
+    Route::delete('/corapura/like/delete', [CLikeController::class,'destroy']);
 
     Route::post('/corapura/office/store', [COfficeController::class,'store']);
     Route::post('/corapura/office/edit/{c_office_id}', [COfficeController::class,'edit']);
     Route::post('/corapura/office/update/{c_office_id}', [COfficeController::class,'update']);
-    Route::post('/corapura/office/delete', [COfficeController::class,'destroy']);
+    Route::delete('/corapura/office/delete', [COfficeController::class,'destroy']);
 
     Route::post('/corapura/president/store', [CPresidentController::class,'store']);
     Route::post('/corapura/president/edit/{c_president_id}', [CPresidentController::class,'edit']);
     Route::post('/corapura/president/update/{c_president_id}', [CPresidentController::class,'update']);
-    Route::post('/corapura/president/delete', [CPresidentController::class,'destroy']);
+    Route::delete('/corapura/president/delete', [CPresidentController::class,'destroy']);
 
     Route::post('/corapura/sust/store', [CSustController::class,'store']);
     Route::post('/corapura/sust/edit/{c_sust_id}', [CSustController::class,'edit']);
     Route::post('/corapura/sust/update/{c_sust_id}', [CSustController::class,'update']);
-    Route::post('/corapura/sust/delete', [CSustController::class,'destroy']);
+    Route::delete('/corapura/sust/delete', [CSustController::class,'destroy']);
 
 
     //liondorコントローラー
