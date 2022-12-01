@@ -105,10 +105,10 @@ class COfficeController extends Controller
     public function destroy(COffice $cOffice, Request $request)
     {
         //
-        $c_office = CLike::find($request->c_office_id);
+        $c_office = COffice::find($request->c_office_id);
         $c_profile_id = $c_office->c_profile_id;
         $c_office->delete();
-        $c_offices = CLike::where('c_profile_id', $c_profile_id)->get();
+        $c_offices = COffice::where('c_profile_id', $c_profile_id)->get();
         return $this->jsonResponse($c_offices);
     }
 
