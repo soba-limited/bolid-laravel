@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CUserProfile;
 use App\Http\Requests\StoreCUserProfileRequest;
 use App\Http\Requests\UpdateCUserProfileRequest;
+use App\Models\CUserSkill;
 
 class CUserProfileController extends Controller
 {
@@ -87,6 +88,20 @@ class CUserProfileController extends Controller
             'appeal_text' => $request->appeal_text,
             'appeal_image' => $request->hasFile('appeal_image') ? $appeal_image : $request->appeal_image,
         ]);
+
+        $skill_ids = [];
+
+        if (!empty($request->skill)) {
+            $skills = explode(",", $request->skill);
+            foreach ($skills as $skill) {
+                $skill_single = CUserSkill::firstOrCreate(['name'=>$skill]);
+                array_push($skill_ids, $skill_single->id);
+            }
+            foreach ($skill_ids as $skill_id) {
+                $c_user_profile->CUserSkills()->attach($skill_id);
+            }
+        }
+
 
         return $this->jsonResponse($c_user_profile);
     }
