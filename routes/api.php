@@ -290,11 +290,14 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/mypage/c_user_profile/update/{c_user_profile_id}', [CUserProfileController::class,'update']);
 
     Route::post('/corapura/mypage/c_user_social/store/', [CUserSocialController::class,'store']);
+    Route::post('/corapura/mypage/c_user_social/edit/{c_user_social_id}', [CUserSocialController::class,'edit']);
     Route::post('/corapura/mypage/c_user_social/update/{c_user_social_id}', [CUserSocialController::class,'update']);
     Route::delete('/corapura/mypage/c_user_social/delete', [CUserSocialController::class,'destroy']);
 
     Route::post('/corapura/mypage/c_company_profile/update/{c_company_profile_id}', [CCompanyProfileController::class,'update']);
+
     Route::post('/corapura/mypage/c_company_social/store/', [CCompanySocialController::class,'store']);
+    Route::post('/corapura/mypage/c_company_social/edit/{c_company_social_id}', [CCompanySocialController::class,'edit']);
     Route::post('/corapura/mypage/c_company_social/update/{c_company_social_id}', [CCompanySocialController::class,'update']);
     Route::delete('/corapura/mypage/c_company_social/delete', [CCompanySocialController::class,'destroy']);
 

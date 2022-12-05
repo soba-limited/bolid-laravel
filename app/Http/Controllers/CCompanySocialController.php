@@ -64,9 +64,11 @@ class CCompanySocialController extends Controller
      * @param  \App\Models\CCompanySocial  $cCompanySocial
      * @return \Illuminate\Http\Response
      */
-    public function edit(CCompanySocial $cCompanySocial)
+    public function edit(CCompanySocial $cCompanySocial, $c_company_social_id)
     {
         //
+        $c_company_social = CCompanySocial::find($c_company_social_id);
+        return $this->jsonResponse($c_company_social);
     }
 
     /**

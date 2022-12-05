@@ -71,9 +71,11 @@ class CUserSocialController extends Controller
      * @param  \App\Models\CUserSocial  $cUserSocial
      * @return \Illuminate\Http\Response
      */
-    public function edit(CUserSocial $cUserSocial)
+    public function edit(CUserSocial $cUserSocial, $c_user_social_id)
     {
         //
+        $c_user_social = CUserSocial::find($c_user_social_id);
+        return $this->jsonResponse($c_user_social);
     }
 
     /**
