@@ -93,7 +93,9 @@ class CUserSocialController extends Controller
         $c_user_social->update([
             'name' => $request->name,
             'url' => $request->url,
+            'follower' => $request->follower,
         ]);
+
         $c_user_socials = CUserSocial::where('c_user_profile_id', $c_user_social->c_user_profile_id)->get();
 
         $max_follower = CUserSocial::where('c_user_profile_id', $c_user_social->c_user_profile_id)->max('follower');
