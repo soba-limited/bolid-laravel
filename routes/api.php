@@ -57,6 +57,8 @@ use App\Http\Controllers\DOverviewController;
 use App\Http\Controllers\DPickupController;
 use App\Http\Controllers\DSocialController;
 use App\Http\Controllers\DTagController;
+use App\Http\Controllers\LCollectionController;
+use App\Http\Controllers\LFirstController;
 use App\Models\CPostBookmark;
 use App\Models\CSalonBookmark;
 use App\Models\CSalonCTag;
@@ -104,6 +106,17 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/liondor/sidebar/edit/{id}', [LSidebarController::class,'edit'])->name('l_sidebar.edit');
     Route::post('/liondor/sidebar/update/{id}', [LSidebarController::class,'update'])->name('l_sidebar.update');
     Route::delete('/liondor/sidebar/delete/{id}', [LSidebarController::class,'destroy'])->name('l_sidebar.destroy');
+
+    Route::get('/liondor/admin/collection/create', [LCollectionController::class,'create']);
+    Route::post('/liondor/admin/collection/store', [LCollectionController::class,'store']);
+    Route::get('/liondor/admin/collection/edit/{l_collection_id}', [LCollectionController::class,'edit']);
+    Route::post('/liondor/admin/collection/update/{l_collection_id}', [LCollectionController::class,'update']);
+
+    Route::get('/liondor/admin/first/create', [LFirstController::class,'create']);
+    Route::post('/liondor/admin/first/store', [LFirstController::class,'store']);
+    Route::get('/liondor/admin/first/edit/{l_first_id}', [LFirstController::class,'edit']);
+    Route::post('/liondor/admin/first/update/{l_first_id}', [LFirstController::class,'update']);
+
 
     //デラモール運営コントローラー
 

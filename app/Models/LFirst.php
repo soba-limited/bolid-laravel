@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CFirstclass extends Model
+class LFirst extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'thumbs',
         'title',
-        'url',
-        'category_id',
         'user_id',
+        'l_category_id',
+        'thumbs',
+        'url',
         'view_date',
     ];
 
@@ -22,6 +22,7 @@ class CFirstclass extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function LCategory()
     {
         return $this->belongsTo(LCategory::class);

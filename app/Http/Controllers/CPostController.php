@@ -211,7 +211,7 @@ class CPostController extends Controller
     public function edit(CPost $cPost, $c_post_id)
     {
         //
-        $c_post = CPost::with('CCat', 'CTags')->find($c_post_id);
+        $c_post = CPost::with('CCat', 'CTags')->withCount('CPostApps')->find($c_post_id);
         $cat = CCat::get();
         $allarray = [
             'c_post' => $c_post,
@@ -242,7 +242,6 @@ class CPostController extends Controller
             'user_id' =>$request->user_id,
             'title' =>$request->title,
             'state' =>$request->state,
-            'c_cat_id' =>$request->c_cat_id,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
             'date' =>$request->date != 'null' ? $request->date : null,
             'limite_date' =>$request->limite_date != 'null' ? $request->limite_date : null,

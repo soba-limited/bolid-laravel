@@ -12,15 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('l_collections', function (Blueprint $table) {
+        Schema::create('l_firsts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('l_category_id');
-            $table->string('image1')->nullable();
-            $table->string('image2')->nullable();
-            $table->string('image3')->nullable();
-            $table->string('image4')->nullable();
+            $table->string('thumbs')->nullable();
             $table->string('url')->nullable();
             $table->string('view_date')->nullable();
             $table->timestamps();
@@ -37,6 +34,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('l_collections');
+        Schema::dropIfExists('l_firsts');
     }
 };
