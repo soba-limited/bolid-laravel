@@ -144,22 +144,23 @@ class CPostController extends Controller
     public function store(StoreCPostRequest $request)
     {
         //
+        //dd($request);
         $c_post = CPost::create([
             'user_id' =>$request->user_id,
             'title' =>$request->title,
             'state' =>$request->state,
             'c_cat_id' =>$request->c_cat_id,
-            'date' =>$request->date,
-            'limite_date' =>$request->limite_date,
-            'reward' =>$request->reward,
-            'hope_reward' =>$request->hope_reward,
-            'number_of_people' =>$request->number_of_people,
-            'recruitment_quota' =>$request->recruitment_quota,
-            'speciality' =>$request->speciality,
-            'suporter' =>$request->suporter,
-            'amount_of_suport' =>$request->amount_of_suport,
-            'medium' =>$request->medium,
-            'content' =>$request->content,
+            'date' =>$request->date != 'null' ? $request->date : null,
+            'limite_date' =>$request->limite_date != 'null' ? $request->limite_date : null,
+            'reward' =>$request->reward != 'null' ? $request->reward : null,
+            'hope_reward' =>$request->hope_reward != 'null' ? $request->hope_reward : null,
+            'number_of_people' =>$request->number_of_people != 'null' ? $request->number_of_people : null,
+            'recruitment_quota' =>$request->recruitment_quota != 'null' ? $request->recruitment_quota : null,
+            'speciality' =>$request->speciality != 'null' ? $request->speciality : null,
+            'suporter' =>$request->suporter != 'null' ? $request->suporter : null,
+            'amount_of_suport' =>$request->amount_of_suport != 'null' ? $request->amount_of_suport : null,
+            'medium' =>$request->medium != 'null' ? $request->medium : null,
+            'content' =>$request->content != 'null' ? $request->content : null,
         ]);
 
         $id = $c_post->id;
@@ -243,17 +244,17 @@ class CPostController extends Controller
             'state' =>$request->state,
             'c_cat_id' =>$request->c_cat_id,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
-            'date' =>$request->date,
-            'limite_date' =>$request->limite_date,
-            'reward' =>$request->reward,
-            'hope_reward' =>$request->hope_reward,
-            'number_of_people' =>$request->number_of_people,
-            'recruitment_quota' =>$request->recruitment_quota,
-            'speciality' =>$request->speciality,
-            'suporter' =>$request->suporter,
-            'amount_of_suport' =>$request->amount_of_suport,
-            'medium' =>$request->medium,
-            'content' =>$request->content,
+            'date' =>$request->date != 'null' ? $request->date : null,
+            'limite_date' =>$request->limite_date != 'null' ? $request->limite_date : null,
+            'reward' =>$request->reward != 'null' ? $request->reward : null,
+            'hope_reward' =>$request->hope_reward != 'null' ? $request->hope_reward : null,
+            'number_of_people' =>$request->number_of_people != 'null' ? $request->number_of_people : null,
+            'recruitment_quota' =>$request->recruitment_quota != 'null' ? $request->recruitment_quota : null,
+            'speciality' =>$request->speciality != 'null' ? $request->speciality : null,
+            'suporter' =>$request->suporter != 'null' ? $request->suporter : null,
+            'amount_of_suport' =>$request->amount_of_suport != 'null' ? $request->amount_of_suport : null,
+            'medium' =>$request->medium != 'null' ? $request->medium : null,
+            'content' =>$request->content != 'null' ? $request->content : null,
         ]);
 
         $tag_ids = [];
