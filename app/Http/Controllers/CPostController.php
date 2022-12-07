@@ -286,4 +286,15 @@ class CPostController extends Controller
         $c_posts = CPost::with('CCat', 'CTags')->with(['user.CProfile'])->where('user_id', $request->user_id);
         return $this->jsonResponse($c_posts);
     }
+
+    public function imagesave(Request $request)
+    {
+        $str = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789"), 0, 16);
+        if ($request->hasFile('image')) {
+            $image_name = $str.$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images/c_post/content/', $image_name, 'public');
+            $image = 'images/c_post/content/'.$image_name;
+            return $image;
+        }
+    }
 }
