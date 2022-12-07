@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('title');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('l_category_id');
+            $table->unsignedInteger('l_category_id');
             $table->string('image1')->nullable();
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();

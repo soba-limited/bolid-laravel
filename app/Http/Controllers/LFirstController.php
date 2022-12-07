@@ -58,23 +58,14 @@ class LFirstController extends Controller
             'url' => $request->url,
             'view_date' => $request->view_date,
         ]);
-        $id = $l_first->id;
+
+        $l_first_id = $l_first->id;
 
         if ($request->hasFile('thumbs')) {
             $thumbs_name = $request->file('thumbs')->getClientOriginalName();
-            $request->file('thumbs')->storeAs('images/l_first/'.$id, $thumbs_name, 'public');
-            $thumbs = 'images/l_first/'.$id."/".$thumbs_name;
+            $request->file('thumbs')->storeAs('images/l_first/'.$l_first_id, $thumbs_name, 'public');
+            $thumbs = 'images/l_first/'.$l_first_id."/".$thumbs_name;
             $l_first->thumbs = $thumbs;
-        }
-
-        if ($request->hasFile('mv')) {
-            $mv_name = $request->file('mv')->getClientOriginalName();
-            $request->file('mv')->storeAs('images/l_first/'.$id, $mv_name, 'public');
-            $mv = 'images/l_first/'.$id."/".$mv_name;
-            $l_first->mv = $mv;
-        }
-
-        if ($request->hasFile('thumbs') || $request->hasFile('mv')) {
             $l_first->save();
         }
 
