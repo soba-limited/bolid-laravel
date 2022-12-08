@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Requests\StoreCSalonRequest;
 use App\Http\Requests\UpdateCSalonRequest;
 use App\Models\CCat;
+use App\Models\CTag;
 use Illuminate\Http\Request;
 
 class CSalonController extends Controller
