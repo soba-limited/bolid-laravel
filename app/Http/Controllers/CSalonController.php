@@ -21,12 +21,14 @@ class CSalonController extends Controller
         //
         $salon = new CSalon;
 
+        $salon = $salon->where('state', '>', 0);
+
         $limit = 12;
 
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->where('state', '>', 0)->with('CTags')->get();
+        $salon = $salon->limit($limit)->with('CTags')->get();
 
         $allarray = [
             'salon' => $salon,
@@ -41,6 +43,8 @@ class CSalonController extends Controller
     {
         //
         $salon = new CSalon;
+
+        $salon = $salon->where('state', '>', 0);
 
         if (!empty($request->s)) {
             $salon = $salon->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');

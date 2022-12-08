@@ -21,14 +21,14 @@ class CPrController extends Controller
         //
         $pr = new CPr;
 
-        $pr = $pr->withCount('CPrCounts');
+        $pr = $pr->where('state', '>', 0)->withCount('CPrCounts');
 
         $limit = 20;
 
         $count = $pr->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $pr = $pr->limit($limit)->with('CTags')->where('state', '>', 0)->with(['user.CProfile'])->get();
+        $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
 
         $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
 
@@ -47,7 +47,7 @@ class CPrController extends Controller
         //
         $pr = new CPr;
 
-        $pr = $pr->withCount('CPrCounts');
+        $pr = $pr->where('state', '>', 0)->withCount('CPrCounts');
 
         if (!empty($request->s)) {
             $pr = $pr->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
@@ -78,7 +78,7 @@ class CPrController extends Controller
         $count = $pr->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $pr = $pr->limit($limit)->skip($skip)->where('state', '>', 0)->with('CTags')->with(['user.CProfile'])->get();
+        $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
 
         $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
 
