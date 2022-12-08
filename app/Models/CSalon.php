@@ -13,7 +13,7 @@ class CSalon extends Model
 
     protected $fillable = [
         'user_id',
-        'c_cat_id',
+        'state',
         'title',
         'thumbs',
         'date',
@@ -26,11 +26,6 @@ class CSalon extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function CCat()
-    {
-        return $this->belongsTo(CCat::class);
     }
 
     public function CTags()

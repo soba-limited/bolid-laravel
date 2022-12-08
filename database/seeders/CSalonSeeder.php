@@ -22,7 +22,7 @@ class CSalonSeeder extends Seeder
         $params = [
             [
                 'user_id' => '1',
-                'c_cat_id' => '1',
+                'state' => '1',
                 'title' => 'テストサロン1',
                 'date' => '開催未定',
                 'plan' => '月額100万円',
@@ -31,7 +31,7 @@ class CSalonSeeder extends Seeder
             ],
             [
                 'user_id' => '2',
-                'c_cat_id' => '2',
+                'state' => '1',
                 'title' => 'テストサロン2',
                 'date' => '開催未定',
                 'plan' => '月額100万円',
@@ -40,7 +40,7 @@ class CSalonSeeder extends Seeder
             ],
             [
                 'user_id' => '3',
-                'c_cat_id' => '3',
+                'state' => '1',
                 'title' => 'テストサロン3',
                 'date' => '開催未定',
                 'plan' => '月額100万円',
@@ -49,7 +49,7 @@ class CSalonSeeder extends Seeder
             ],
             [
                 'user_id' => '4',
-                'c_cat_id' => '4',
+                'state' => '1',
                 'title' => 'テストサロン4',
                 'date' => '開催未定',
                 'plan' => '月額100万円',
@@ -58,7 +58,7 @@ class CSalonSeeder extends Seeder
             ],
             [
                 'user_id' => '5',
-                'c_cat_id' => '5',
+                'state' => '1',
                 'title' => 'テストサロン5',
                 'date' => '開催未定',
                 'plan' => '月額100万円',

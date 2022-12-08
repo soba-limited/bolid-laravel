@@ -19,6 +19,7 @@ class CPrFactory extends Factory
         return [
             //
             'user_id' => $this->faker->numberBetween($min=13, $max=24),
+            'state' => $this->faker->numberBetween($min=0, $max=1),
             'title' => $this->faker->realText(20),
             'content' => $this->faker->realText(144),
         ];

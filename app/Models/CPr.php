@@ -14,6 +14,7 @@ class CPr extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'state',
         'content',
     ];
 

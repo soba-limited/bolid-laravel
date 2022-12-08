@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('c_salons', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('c_cat_id');
+            $table->integer('state')->default(0);
             $table->string('title');
             $table->string('thumbs')->nullable();
             $table->string('date')->nullable();
@@ -27,7 +27,6 @@ return new class extends Migration {
             $table->softDeletes();
 
             $table->foreign("user_id")->references("id")->on("users")->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign("c_cat_id")->references("id")->on("c_cats")->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

@@ -26,7 +26,7 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->with('CTags')->get();
+        $salon = $salon->limit($limit)->where('state', '>', 0)->with('CTags')->get();
 
         $allarray = [
             'salon' => $salon,
@@ -57,7 +57,7 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->skip($skip)->with('CTags')->get();
+        $salon = $salon->limit($limit)->skip($skip)->where('state', '>', 0)->with('CTags')->get();
 
         $allarray = [
             'salon' => $salon,
@@ -76,11 +76,6 @@ class CSalonController extends Controller
     public function create()
     {
         //
-        $cat = CCat::get();
-        $allarray = [
-            'cat' => $cat,
-        ];
-        return $this->jsonResponse($allarray);
     }
 
     /**
@@ -94,8 +89,8 @@ class CSalonController extends Controller
         //
         $c_salon = CSalon::create([
             'user_id' => $request->user_id,
-            'c_cat_id' => $request->c_cat_id,
             'title' => $request->title,
+            'state' => $request->state,
             'date' => $request->date,
             'plan' => $request->plan,
             'number_of_people' => $request->number_of_people,
@@ -161,10 +156,8 @@ class CSalonController extends Controller
     {
         //
         $c_salon = CSalon::with('CCat', 'CTags')->find($c_salon_id);
-        $cat = CCat::get();
         $allarray = [
             'c_salon' => $c_salon,
-            'cat' => $cat,
         ];
         return $this->jsonResponse($allarray);
     }
@@ -190,8 +183,8 @@ class CSalonController extends Controller
 
         $c_salon->update([
             'user_id' => $request->user_id,
-            'c_cat_id' => $request->c_cat_id,
             'title' => $request->title,
+            'state' => $request->state,
             'date' => $request->date,
             'plan' => $request->plan,
             'number_of_people' => $request->number_of_people,

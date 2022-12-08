@@ -30,7 +30,7 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->where('state', '>', 0)->orderBy('c_prs_count', 'desc')->limit(10)->get();
 
         $allarray = [
             'pr' => $pr,
@@ -80,7 +80,7 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->where('state', '>', 0)->orderBy('c_prs_count', 'desc')->limit(10)->get();
 
         $allarray = [
             'pr' => $pr,
@@ -116,6 +116,7 @@ class CPrController extends Controller
         //
         $c_pr = CPr::create([
             'user_id'=>$request->user_id,
+            'state' => $request->state,
             'title'=>$request->title,
             'content'=>$request->content,
         ]);
@@ -202,6 +203,7 @@ class CPrController extends Controller
         $c_pr->update([
             'user_id'=>$request->user_id,
             'title'=>$request->title,
+            'state' => $request->state,
             'content'=>$request->content,
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
