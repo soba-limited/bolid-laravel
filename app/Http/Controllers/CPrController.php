@@ -80,7 +80,7 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->skip($skip)->where('state', '>', 0)->with('CTags')->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')>orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
 
         $allarray = [
             'pr' => $pr,
