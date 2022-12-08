@@ -28,9 +28,9 @@ class CPrController extends Controller
         $count = $pr->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
+        $pr = $pr->limit($limit)->with('CTags')->where('state', '>', 0)->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')->where('state', '>', 0)->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
 
         $allarray = [
             'pr' => $pr,
@@ -78,9 +78,9 @@ class CPrController extends Controller
         $count = $pr->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+        $pr = $pr->limit($limit)->skip($skip)->where('state', '>', 0)->with('CTags')->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')->where('state', '>', 0)->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')>orderBy('c_prs_count', 'desc')->limit(10)->get();
 
         $allarray = [
             'pr' => $pr,
@@ -192,7 +192,7 @@ class CPrController extends Controller
     public function update(UpdateCPrRequest $request, CPr $cPr, $c_pr_id)
     {
         //
-        $c_pr = CSalon::find($c_pr_id);
+        $c_pr = CPr::find($c_pr_id);
 
         if ($request->hasFile('thumbs')) {
             $thumbs_name = $request->file('thumbs')->getClientOriginalName();
