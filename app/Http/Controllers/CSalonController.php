@@ -6,7 +6,6 @@ use App\Models\CSalon;
 use App\Models\User;
 use App\Http\Requests\StoreCSalonRequest;
 use App\Http\Requests\UpdateCSalonRequest;
-use App\Models\CCat;
 use App\Models\CTag;
 use Illuminate\Http\Request;
 
@@ -133,7 +132,7 @@ class CSalonController extends Controller
     public function show(CSalon $cSalon, $salon_id)
     {
         //
-        $salon = CSalon::with('CCat', 'CTags')->find($salon_id);
+        $salon = CSalon::with('CTags')->find($salon_id);
         $user = null;
         if ($salon->user->account_type == 0) {
             $user = User::with('CProfile.CUserProfile.CUserSocials')->find($salon->user->id);
@@ -228,7 +227,7 @@ class CSalonController extends Controller
         //
         $c_salon = CSalon::find($request->c_salon_id);
         $c_salon->delete();
-        $c_salons = CSalon::with('CCat', 'CTags')->with(['user.CProfile'])->where('user_id', $request->user_id);
+        $c_salons = CSalon::with('CTags')->with(['user.CProfile'])->where('user_id', $request->user_id);
         return $this->jsonResponse($c_salons);
     }
 
