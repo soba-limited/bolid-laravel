@@ -156,7 +156,7 @@ class CSalonController extends Controller
     public function edit(CSalon $cSalon, $c_salon_id)
     {
         //
-        $c_salon = CSalon::with('CCat', 'CTags')->find($c_salon_id);
+        $c_salon = CSalon::with('CTags')->find($c_salon_id);
         $allarray = [
             'c_salon' => $c_salon,
         ];
