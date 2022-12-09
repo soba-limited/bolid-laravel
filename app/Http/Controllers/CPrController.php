@@ -113,7 +113,11 @@ class CPrController extends Controller
         $count = $pr->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+        if ($request->page > 1) {
+            $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+        } else {
+            $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
+        }
 
         $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
 

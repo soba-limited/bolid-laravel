@@ -90,7 +90,11 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->skip($skip)->with('CTags')->get();
+        if ($request->page > 1) {
+            $salon = $salon->limit($limit)->skip($skip)->with('CTags')->get();
+        } else {
+            $salon = $salon->limit($limit)->with('CTags')->get();
+        }
 
         $allarray = [
             'salon' => $salon,
