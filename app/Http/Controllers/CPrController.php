@@ -95,6 +95,37 @@ class CPrController extends Controller
         return $this->jsonResponse($allarray);
     }
 
+    public function mypr(Request $request)
+    {
+        //
+        $pr = new CPr;
+
+        $pr = $pr->where('user_id', $request->user_id)->withCount('CPrCounts')->orderBy('created_at', 'desc');
+
+        $limit = 20;
+
+        if (!empty($request->page)) {
+            $skip = ($request->page - 1) * $limit;
+        } else {
+            $skip = 0;
+        }
+
+        $count = $pr->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+
+        $allarray = [
+            'pr' => $pr,
+            'page_max' => $page_max,
+            'now_page' => $request->page,
+        ];
+
+        return $this->jsonResponse($allarray);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

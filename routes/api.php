@@ -402,6 +402,7 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/corapura/post', [CPostController::class,'index']);
     Route::post('/corapura/post', [CPostController::class,'search']);
+    Route::post('/corapura/post/mypost', [CPostController::class,'mypost']);
     Route::get('/corapura/post/show/{c_post_id}', [CPostController::class,'show']);
 
     Route::get('/corapura/post_bookmark/{user_id}', [CPostBookmarkController::class,'index']);
@@ -426,10 +427,12 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/corapura/salon', [CSalonController::class,'index']);
     Route::post('/corapura/salon', [CSalonController::class,'search']);
+    Route::post('/corapura/salon/mysalon', [CSalonController::class,'search']);
     Route::get('/corapura/salon/show/{salon_id}', [CSalonController::class,'show']);
 
     Route::get('/corapura/pr', [CPrController::class,'index']);
     Route::post('/corapura/pr', [CPrController::class,'search']);
+    Route::post('/corapura/pr/mypr', [CPrController::class,'mypr']);
     Route::get('/corapura/pr/show/{pr_id}', [CPrController::class,'show']);
 
     Route::post('/c_profile_get', [CProfileController::class,'allways']);

@@ -61,7 +61,36 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->skip($skip)->where('state', '>', 0)->with('CTags')->get();
+        $salon = $salon->limit($limit)->skip($skip)->with('CTags')->get();
+
+        $allarray = [
+            'salon' => $salon,
+            'page_max' => $page_max,
+            'now_page' => $request->page,
+        ];
+
+        return $this->jsonResponse($allarray);
+    }
+
+    public function mysalon(Request $request)
+    {
+        //
+        $salon = new CSalon;
+
+        $salon = $salon->where('user_id', $request->user_id);
+
+        $limit = 12;
+
+        if (!empty($request->page)) {
+            $skip = ($request->page - 1) * $limit;
+        } else {
+            $skip = 0;
+        }
+
+        $count = $salon->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $salon = $salon->limit($limit)->skip($skip)->with('CTags')->get();
 
         $allarray = [
             'salon' => $salon,
