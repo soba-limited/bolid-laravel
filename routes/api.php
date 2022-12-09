@@ -427,7 +427,7 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/corapura/salon', [CSalonController::class,'index']);
     Route::post('/corapura/salon', [CSalonController::class,'search']);
-    Route::post('/corapura/salon/mysalon', [CSalonController::class,'search']);
+    Route::post('/corapura/salon/mysalon', [CSalonController::class,'mysalon']);
     Route::get('/corapura/salon/show/{salon_id}', [CSalonController::class,'show']);
 
     Route::get('/corapura/pr', [CPrController::class,'index']);
