@@ -65,14 +65,14 @@ class LCollectionController extends Controller
             $thumbs_name = $request->file('image1')->getClientOriginalName();
             $request->file('image1')->storeAs('images/l_collection/'.$l_collection_id, $thumbs_name, 'public');
             $thumbs = 'images/l_collection/'.$l_collection_id."/".$thumbs_name;
-            $l_collection->thumbs = $thumbs;
+            $l_collection->image1 = $thumbs;
         }
 
         if ($request->hasFile('image2')) {
             $thumbs_name = $request->file('image2')->getClientOriginalName();
             $request->file('image2')->storeAs('images/l_collection/'.$l_collection_id, $thumbs_name, 'public');
             $thumbs = 'images/l_collection/'.$l_collection_id."/".$thumbs_name;
-            $l_collection->thumbs = $thumbs;
+            $l_collection->image2 = $thumbs;
         }
 
 
@@ -80,7 +80,7 @@ class LCollectionController extends Controller
             $thumbs_name = $request->file('image3')->getClientOriginalName();
             $request->file('image3')->storeAs('images/l_collection/'.$l_collection_id, $thumbs_name, 'public');
             $thumbs = 'images/l_collection/'.$l_collection_id."/".$thumbs_name;
-            $l_collection->thumbs = $thumbs;
+            $l_collection->image3 = $thumbs;
         }
 
 
@@ -88,7 +88,7 @@ class LCollectionController extends Controller
             $thumbs_name = $request->file('image4')->getClientOriginalName();
             $request->file('image4')->storeAs('images/l_collection/'.$l_collection_id, $thumbs_name, 'public');
             $thumbs = 'images/l_collection/'.$l_collection_id."/".$thumbs_name;
-            $l_collection->thumbs = $thumbs;
+            $l_collection->image4 = $thumbs;
         }
 
 
