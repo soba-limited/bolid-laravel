@@ -134,7 +134,7 @@ class LCollectionController extends Controller
 
         $l_collection = LCollection::with(['user'=>function ($query) {
             $query->with(['LProfile']);
-        }])->with('LCategory')->with('LSeries')->find($l_collection_id);
+        }])->with('LCategory')->find($l_collection_id);
         $nowCatParent = $l_collection->LCategory->depth == 0 ? LCategory::where('slug', $l_collection->LCategory->slug)->first() : LCategory::where('slug', $l_collection->LCategory->parent_slug)->first();
         $allarray = [
             'posts' => $l_collection,

@@ -107,7 +107,7 @@ class LFirstController extends Controller
 
         $l_first = LFirst::with(['user'=>function ($query) {
             $query->with(['LProfile']);
-        }])->with('LCategory')->with('LSeries')->find($l_first_id);
+        }])->with('LCategory')->find($l_first_id);
         $nowCatParent = $l_first->LCategory->depth == 0 ? LCategory::where('slug', $l_first->LCategory->slug)->first() : LCategory::where('slug', $l_first->LCategory->parent_slug)->first();
         $allarray = [
             'posts' => $l_first,
