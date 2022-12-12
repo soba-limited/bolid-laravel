@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Mail\ContactMail;
 use App\Models\CSalon;
+use App\Models\LCollection;
+use App\Models\LFirst;
 use Mail;
 
 class LIndexController extends Controller
@@ -35,6 +37,8 @@ class LIndexController extends Controller
                 $query->with('LProfile');
             }])->with('LCategory');
         }])->limit(12)->orderBy('id', 'desc')->get();
+        $first = LFirst::get();
+        $collection = LCollection::get();
 
         //それぞれを配列に入れる
         $allarray = [
@@ -49,6 +53,8 @@ class LIndexController extends Controller
             'videos' => $video,
             'presents' => $present,
             'salon' => $salon,
+            'first' => $first,
+            'collection' => $collection,
         ];
 
         $allarray = \Commons::LCommons($allarray);
