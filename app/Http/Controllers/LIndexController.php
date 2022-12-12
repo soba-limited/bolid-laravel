@@ -37,7 +37,7 @@ class LIndexController extends Controller
                 $query->with('LProfile');
             }])->with('LCategory');
         }])->limit(12)->orderBy('id', 'desc')->get();
-        $first = LFirst::with('LCategory')->get();
+        $first = LFirst::with('LCategory')->with('user.LProfile')->get();
         $collection = LCollection::get();
 
         //それぞれを配列に入れる
