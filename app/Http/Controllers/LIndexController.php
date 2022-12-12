@@ -38,7 +38,7 @@ class LIndexController extends Controller
             }])->with('LCategory');
         }])->limit(12)->orderBy('id', 'desc')->get();
         $first = LFirst::with('LCategory')->with('user.LProfile')->get();
-        $collection = LCollection::get();
+        $collection = LCollection::with('LCategory')->with('user.LProfile')->get();
 
         //それぞれを配列に入れる
         $allarray = [
