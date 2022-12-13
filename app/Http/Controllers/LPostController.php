@@ -105,6 +105,8 @@ class LPostController extends Controller
         $limit = 30;
         $skip = 0;
 
+        $category = LCategory::get();
+
         if (!empty($request->page) && $request->page > 1) {
             $skip = ($request->page - 1) * $limit;
         }
@@ -115,6 +117,7 @@ class LPostController extends Controller
 
         $allarray = [
             'posts' => $posts,
+            'category' =>$category,
             'page_max' => $page_max,
         ];
         return $this->jsonResponse($allarray);
