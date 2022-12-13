@@ -119,7 +119,7 @@ class LPostController extends Controller
             'posts' => $posts,
             'category' =>$category,
             'page_max' => $page_max,
-            'nox_page' => $request->page,
+            'now_page' => $request->page,
         ];
         return $this->jsonResponse($allarray);
     }
@@ -147,6 +147,7 @@ class LPostController extends Controller
         $allarray = [
             'posts' => $posts,
             'page_max' => $page_max,
+            'now_page' => $request->page,
         ];
         return $this->jsonResponse($allarray);
     }
