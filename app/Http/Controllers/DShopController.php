@@ -50,7 +50,7 @@ class DShopController extends Controller
         }
 
 
-        if (isset($sort)) {
+        if (!empty($sort)) {
             if ($sort == 'new') {
                 $shop = $shop->orderBy('id', 'desc');
             } elseif ($sort == 'good') {
@@ -61,7 +61,7 @@ class DShopController extends Controller
                 $shop = $shop->withCount('DComments')->orderBy('d_comments_count', 'desc');
             }
         }
-        if (isset($acount)) {
+        if (!empty($acount)) {
             if ($acount == 'official') {
                 $shop = $shop->where('official_user_id', '!=', null);
             } elseif ($acount == 'notofficial') {

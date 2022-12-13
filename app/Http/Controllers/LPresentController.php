@@ -23,7 +23,7 @@ class LPresentController extends Controller
         $limit = 30;
         $skip = 0;
 
-        if (isset($request->page) && $request->page > 1) {
+        if (!empty($request->page) && $request->page > 1) {
             $skip = ($request->page - 1) * $limit;
         }
 
@@ -48,7 +48,7 @@ class LPresentController extends Controller
         $limit = 30;
         $skip = 0;
 
-        if (isset($request->page) && $request->page > 1) {
+        if (!empty($request->page) && $request->page > 1) {
             $skip = ($request->page - 1) * $limit;
         }
 

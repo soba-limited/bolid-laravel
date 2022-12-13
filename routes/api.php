@@ -136,7 +136,8 @@ Route::group(['middleware'=>['api']], function () {
 
     //liondor記事投稿者コントローラー
 
-    Route::get('/liondor/post/editor_index/{id}', [LPostController::class,'editor_index'])->name('l_post.editor_index');
+    Route::get('/liondor/post/editor_index/{id}', [LPostController::class,'editor_index']);
+    Route::post('/liondor/post/editor_index/{id}', [LPostController::class,'editor_index_post']);
     Route::get('/liondor/post/create', [LPostController::class,'create'])->name('l_post.create');
     Route::post('/liondor/post/imagesave', [LPostController::class,'imagesave'])->name('l_post.imagesave');
     Route::post('/liondor/post/store', [LPostController::class,'store'])->name('l_post.store');

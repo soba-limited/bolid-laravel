@@ -37,17 +37,17 @@ class LPostController extends Controller
         $sort_key = 'id';
         $order_key = 'desc';
 
-        if (isset($request->sort)) {
+        if (!empty($request->sort)) {
             $sort_key = $request->sort;
         }
-        if (isset($request->order)) {
+        if (!empty($request->order)) {
             $order_key = $request->order;
         }
 
         $limit = 30;
         $skip = 0;
 
-        if (isset($request->page) && $request->page > 1) {
+        if (!empty($request->page) && $request->page > 1) {
             $skip = ($request->page - 1) * $limit;
         }
 
@@ -77,7 +77,7 @@ class LPostController extends Controller
         $limit = 30;
         $skip = 0;
 
-        if (isset($request->page) && $request->page > 1) {
+        if (!empty($request->page) && $request->page > 1) {
             $skip = ($request->page - 1) * $limit;
         }
 
@@ -105,8 +105,35 @@ class LPostController extends Controller
         $limit = 30;
         $skip = 0;
 
-        if (isset($request->page) && $request->page > 1) {
+        if (!empty($request->page) && $request->page > 1) {
             $skip = ($request->page - 1) * $limit;
+        }
+
+        $posts_count = $posts->count();
+        $page_max = $posts_count % $limit > 0 ? floor($posts_count / $limit) + 1: $posts_count / $limit;
+        $posts = $posts->with('LCategory')->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
+
+        $allarray = [
+            'posts' => $posts,
+            'page_max' => $page_max,
+        ];
+        return $this->jsonResponse($allarray);
+    }
+
+    public function editor_index_post($id, Request $request)
+    {
+        $posts = new LPost;
+        $posts = $posts->withTrashed()->where('user_id', $id)->orderBy('id', 'desc');
+
+        $limit = 30;
+        $skip = 0;
+
+        if (!empty($request->page) && $request->page > 1) {
+            $skip = ($request->page - 1) * $limit;
+        }
+
+        if (!empty($request->l_category_id)) {
+            $posts = $posts->where('l_category_id', $request->l_category_id);
         }
 
         $posts_count = $posts->count();
@@ -165,7 +192,7 @@ class LPostController extends Controller
             'sub_title' => $request->sub_title,
             'discription' => $request->discription,
             'content' => $request->content,
-            'state' => isset($request->state) ? $request->state : 0,
+            'state' => !empty($request->state) ? $request->state : 0,
         ]);
         $id = $l_post->id;
 

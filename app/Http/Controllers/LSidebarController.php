@@ -43,8 +43,8 @@ class LSidebarController extends Controller
         $l_sidebar = LSidebar::create([
             'title' => $request->title,
             'content' => $request->content,
-            'order' => isset($request->order) ? $request->order : 0,
-            'state' => isset($request->state) ? $request->state : 0,
+            'order' => !empty($request->order) ? $request->order : 0,
+            'state' => !empty($request->state) ? $request->state : 0,
         ]);
         return $this->jsonResponse($l_sidebar);
     }
@@ -86,8 +86,8 @@ class LSidebarController extends Controller
         $l_sideebar = LSidebar::find($id)->update([
             'title' => $request->title,
             'content' => $request->content,
-            'order' => isset($request->order) ? $request->order : 0,
-            'state' => isset($request->state) ? $request->state : 0,
+            'order' => !empty($request->order) ? $request->order : 0,
+            'state' => !empty($request->state) ? $request->state : 0,
         ]);
         return $this->jsonResponse($l_sideebar);
     }
