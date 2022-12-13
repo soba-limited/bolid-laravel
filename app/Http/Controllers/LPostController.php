@@ -119,6 +119,7 @@ class LPostController extends Controller
             'posts' => $posts,
             'category' =>$category,
             'page_max' => $page_max,
+            'nox_page' => $request->page,
         ];
         return $this->jsonResponse($allarray);
     }
