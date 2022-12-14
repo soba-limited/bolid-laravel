@@ -198,6 +198,7 @@ class LPostController extends Controller
             'discription' => $request->discription,
             'content' => $request->content,
             'state' => !empty($request->state) ? $request->state : 0,
+            'view_date' => $request->view_date,
         ]);
         $id = $l_post->id;
 
@@ -324,6 +325,7 @@ class LPostController extends Controller
             'discription' => $request->discription,
             'content' => $request->content,
             'state' => $request->state,
+            'view_date' => $request->view_date,
         ]);
         return $this->jsonResponse($l_post);
     }

@@ -10,6 +10,7 @@ use App\Models\DMall;
 use App\Models\DMallBookmarks;
 use App\Http\Requests\StoreDProfileRequest;
 use App\Http\Requests\UpdateDProfileRequest;
+use App\Models\DInfo;
 use App\Models\DMallIn;
 use Illuminate\Http\Request;
 
@@ -203,5 +204,12 @@ class DProfileController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function mynews(Request $request)
+    {
+        $my_shop_save_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
+        $news = DInfo::whereIn('d_shop_id', $my_shop_save_id)->orderBy('updated_at', 'desc')->get();
+        return $this->jsonResponse($news);
     }
 }

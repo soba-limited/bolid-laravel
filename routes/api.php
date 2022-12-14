@@ -243,6 +243,8 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/dellamall/shop_create_url', [DShopController::class,'shop_create_url']);
 
+    Route::post('/dellamall/mynews', [DProfileController::class,'mynews']);
+
 
     //corapra　会員コントローラー
 

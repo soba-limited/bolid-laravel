@@ -27,6 +27,7 @@ class LPost extends Model
         'discription',
         'content',
         'state',
+        'view_date',
     ];
 
     /**
