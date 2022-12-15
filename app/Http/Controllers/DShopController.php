@@ -200,6 +200,7 @@ class DShopController extends Controller
                 $query->with('DProfile');
             }]);
         }])->find($shop_id)->makeVisible('description');
+        $user_id = $shop->user->id;
         $comments_count = $shop->DComments->count();
         $good_count = $shop->DGoods->count();
         $mall_count = $shop->DMalls->count();
