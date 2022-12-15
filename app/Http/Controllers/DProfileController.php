@@ -177,7 +177,7 @@ class DProfileController extends Controller
             $query->with(['DMallIn'=>function ($query) {
                 $query->orderBy('created_at', 'desc');
             }]);
-        }])->with('d_profile')->find($request->user_id)->makeHidden(['email','account_type','l_profile_id','c_profile_id','d_profile_id','point']);
+        }])->with('DProfile')->find($request->user_id)->makeHidden(['email','account_type','l_profile_id','c_profile_id','d_profile_id','point']);
         return $this->jsonResponse($mall);
     }
 
