@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::table('l_posts', function (Blueprint $table) {
             //
-            $table->string('view_date')->after('state')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('view_date')->after('state')->default('2022-12-08 02:52:22');
         });
     }
 
