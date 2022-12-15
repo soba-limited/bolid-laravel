@@ -176,8 +176,8 @@ class DProfileController extends Controller
         $mall = User::with(['DMallBookmark'=>function ($query) {
             $query->with(['DMallIn'=>function ($query) {
                 $query->orderBy('created_at', 'desc');
-            }]);
-        }])->with('DProfile')->find($request->user_id)->makeHidden(['email','account_type','l_profile_id','c_profile_id','d_profile_id','point']);
+            }])->with('user.DProfile');
+        }])->find($request->user_id)->makeHidden(['email','account_type','l_profile_id','c_profile_id','d_profile_id','point']);
         return $this->jsonResponse($mall);
     }
 
