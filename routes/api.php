@@ -427,6 +427,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/card/tab_return', [CCardController::class,'tab_return']);
     Route::post('/corapura/coupon/tab_return', [CCouponController::class,'tab_return']);
     Route::post('/corapura/like/tab_return', [CLikeController::class,'tab_return']);
+    Route::post('/corapura/salon/tab_return', [CSalonController::class,'tab_return']);
 
     Route::get('/corapura/salon', [CSalonController::class,'index']);
     Route::post('/corapura/salon', [CSalonController::class,'search']);

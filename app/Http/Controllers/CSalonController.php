@@ -278,4 +278,10 @@ class CSalonController extends Controller
             return $image;
         }
     }
+
+    public function tab_return(Request $request)
+    {
+        $salon = CSalon::where('user_id', $request->user_id)->get();
+        return $this->jsonResponse($salon);
+    }
 }
