@@ -132,6 +132,7 @@ Route::group(['middleware'=>['api']], function () {
     //コラプラ運営コントローラー
 
     Route::post('/coprapura/admin/salon/update/{c_salon_id}', [CSalonController::class,'admin_update']);
+    Route::delete('/corapura/comment/delete', [CCommentController::class,'destroy']);
 
 
     //liondor記事投稿者コントローラー
@@ -267,11 +268,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::delete('/corapura/salon_app/delete', [CSalonAppController::class,'destroy']);
     Route::post('/corapura/salon_app/check', [CSalonAppController::class,'check']);
 
-
     Route::post('/corapura/comment/send_list', [CCommentController::class,'send_list']);
     Route::post('/corapura/comment/recive_list', [CCommentController::class,'recive_list']);
     Route::post('/corapura/comment/store', [CCommentController::class,'store']);
-    Route::delete('/corapura/comment/delete', [CCommentController::class,'destroy']);
 
     Route::get('/corapura/post/create', [CPostController::class,'create']);
     Route::post('/corapura/post/store', [CPostController::class,'store']);
