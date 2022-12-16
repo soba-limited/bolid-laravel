@@ -347,7 +347,15 @@ class DShopController extends Controller
     public function shop_create_url(Request $request)
     {
         $url = $request->url;
-        $output = mb_convert_encoding(file_get_contents($url), "utf-8", "auto");
+        $ctx = stream_context_create(
+            array(
+                'http' => array(
+                            'method' => 'GET',
+                            'header' => 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko')
+                )
+        );
+
+        $output = mb_convert_encoding(file_get_contents($url, false, $ctx), "utf-8", "auto");
         preg_match('{<title>(.*?)</title>}', $output, $title);
         preg_match('{<meta name="description" content="(.*?)"}', $output, $description);
         preg_match('{<meta name="keywords" content="(.*?)"}', $output, $keyword);
