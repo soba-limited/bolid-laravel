@@ -358,7 +358,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/sust/update/{c_sust_id}', [CSustController::class,'update']);
     Route::delete('/corapura/sust/delete', [CSustController::class,'destroy']);
 
-    Route::post('/corapura/mypost/compleate/{user_id}', [CPostAppController::class,'my_compleate_post']);
+    Route::get('/corapura/mypost/compleate/{user_id}', [CPostAppController::class,'my_compleate_post']);
     Route::post('/corapura/c_post_app/state_change_comment_compleate/{c_post_app_id}', [CPostAppController::class,'comment_compleate']);
 
 
