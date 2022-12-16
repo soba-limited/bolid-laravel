@@ -20,7 +20,7 @@ class CPostAppFactory extends Factory
             //
             'user_id' => $this->faker->numberBetween($min=2, $max=24),
             'c_post_id' => $this->faker->numberBetween($min=1, $max=100),
-            'state' => 3,
+            'state' => $this->faker->numberBetween($min=0, $max=2),
             'comment' => $this->faker->realText('30'),
         ];
     }

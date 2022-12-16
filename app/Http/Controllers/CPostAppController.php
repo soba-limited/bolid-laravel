@@ -22,6 +22,12 @@ class CPostAppController extends Controller
         return $this->jsonResponse($app_user);
     }
 
+    public function my_compleate_post($user_id)
+    {
+        $app = CPostApp::where('user_id', $user_id)->where('state', 1)->with('CPost')->get();
+        return $this->jsonResponse($app);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -91,6 +97,15 @@ class CPostAppController extends Controller
         $app->state = $request->state;
         $app->save();
         $apps = CPost::with('CPostApps.CProfile')->where('id', $app->c_post_id)->get();
+        return $this->jsonResponse($apps);
+    }
+
+    public function comment_compleate($c_post_app_id)
+    {
+        $app = CPostApp::find($c_post_app_id);
+        $app->state = 2;
+        $app->save();
+        $apps = CPostApp::where('user_id', $app->user_id)->where('state', 1)->with('CPost')->get();
         return $this->jsonResponse($apps);
     }
 

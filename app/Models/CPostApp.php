@@ -15,4 +15,14 @@ class CPostApp extends Model
         'state',
         'comment',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function CPost()
+    {
+        return $this->belongsTo(CPost::class);
+    }
 }
