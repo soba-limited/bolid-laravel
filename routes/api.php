@@ -59,6 +59,7 @@ use App\Http\Controllers\DSocialController;
 use App\Http\Controllers\DTagController;
 use App\Http\Controllers\LCollectionController;
 use App\Http\Controllers\LFirstController;
+use App\Models\CPost;
 use App\Models\CPostBookmark;
 use App\Models\CSalonBookmark;
 use App\Models\CSalonCTag;
@@ -283,6 +284,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/post_app/add', [CPostAppController::class,'store']);
     Route::post('/corapura/post_app/check', [CPostAppController::class,'check']);
     Route::post('/corapura/post_app/state_change/{app_id}', [CPostAppController::class,'update']);
+    Route::post('/corapura/post/compleate/{c_post_id}', [CPostController::class,'compleate']);
     Route::delete('/corapura/post_app/delete', [CPostAppController::class,'destroy']);
 
     Route::get('/corapura/salon/create', [CSalonController::class,'create']);

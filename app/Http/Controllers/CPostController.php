@@ -303,6 +303,14 @@ class CPostController extends Controller
         return $this->jsonResponse($c_post);
     }
 
+    public function compleate(Request $request, $c_post_id)
+    {
+        $c_post = CPost::find($c_post_id);
+        $c_post->state = $request->state;
+        $c_post->save();
+        return $this->jsonResponse($c_post);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
