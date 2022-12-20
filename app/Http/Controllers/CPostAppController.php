@@ -18,7 +18,7 @@ class CPostAppController extends Controller
     public function index(Request $request)
     {
         //
-        $app_user = CPost::with('CPostApps.CProfile')->where('id', $request->c_post_id)->get();
+        $app_user = CPost::with('CPostApps.CProfile')->where('id', $request->c_post_id)->first();
         return $this->jsonResponse($app_user);
     }
 
