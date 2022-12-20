@@ -197,14 +197,14 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'testuser22',
                 'email' => 'm.office4@bolides.co.jp',
-                'password' => Hash::make('testuser10'),
+                'password' => Hash::make('bolidestest'),
                 'c_profile_id' => '25',
                 'account_type' => '0',
             ],
             [
                 'name' => 'testuser22',
                 'email' => 'm.office5@bolides.co.jp',
-                'password' => Hash::make('testuser10'),
+                'password' => Hash::make('bolidestest'),
                 'l_profile_id' => '3',
                 'account_type' => '2',
             ],
