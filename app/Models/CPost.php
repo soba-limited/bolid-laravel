@@ -47,7 +47,7 @@ class CPost extends Model
 
     public function CPostApps()
     {
-        return $this->belongsToMany(User::class, 'c_post_apps', 'c_post_id', 'user_id')->withPivot('state');
+        return $this->belongsToMany(User::class, 'c_post_apps', 'c_post_id', 'user_id')->withPivot('state', 'id');
     }
 
     public function CPostBookmark()
