@@ -355,7 +355,7 @@ class DShopController extends Controller
                 )
         );
 
-        $output = mb_convert_encoding(file_get_contents($url, false, $ctx), "utf-8", "auto");
+        $output = mb_convert_encoding(file_get_contents($url, false, $ctx), 'UTF-8', 'ASCII, JIS, UTF-8, SJIS');
 
         preg_match('{<title>(.*?)</title>}s', $output, $title);
         preg_match('{<meta name="description" content="(.*?)"}s', $output, $description);
