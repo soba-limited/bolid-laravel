@@ -121,7 +121,7 @@ class CPostAppController extends Controller
         $app = CPostApp::find($request->app_id);
         $c_post_id = $app->c_post_id;
         $app->delete();
-        $apps = CPost::with('CPostApps.CProfile')->where('id', $c_post_id)->get();
+        $apps = CPost::with('CPostApps.CProfile')->where('id', $c_post_id)->first();
         return $this->jsonResponse($apps);
     }
 }
