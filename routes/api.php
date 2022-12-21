@@ -80,6 +80,16 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware'=>['api']], function () {
+    //stripe
+    Route::get('/subscription/{user_id}', 'User\SubscriptionController@index');
+    Route::get('/subscription/status/{user_id}', 'User\Ajax\SubscriptionController@status');
+    Route::post('/subscription/subscribe/{user_id}', 'User\Ajax\SubscriptionController@subscribe');
+    Route::post('/subscription/cancel/{user_id}', 'User\Ajax\SubscriptionController@cancel');
+    Route::post('/subscription/resume/{user_id}', 'User\Ajax\SubscriptionController@resume');
+    Route::post('/subscription/change_plan/{user_id}', 'User\Ajax\SubscriptionController@change_plan');
+    Route::post('/subscription/update_card/{user_id}', 'User\Ajax\SubscriptionController@update_card');
+
+
     //liondor管理者コントローラー
 
     Route::get('/liondor/admin/present', [LPresentController::class,'admin_index'])->name('l_present.admin_index');

@@ -32,22 +32,13 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/liondor', [LIndexController::class,'index'])->name('l_index');
-Route::get('/liondor/post/create', [LPostController::class,'create'])->name('l_post.create');
-Route::get('/liondor/post/show/{id}', [LPostController::class,'show'])->name('l_post.show');
-Route::get('/liondor/post/{category}', [LPostController::class,'index'])->name('l_post.index');
-Route::get('/liondor/present/', [LPresentController::class,'index'])->name('l_present.index');
-Route::get('/liondor/present/{id}', [LPresentController::class,'show'])->name('l_present.show');
-Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_series.show');
-Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
-
-Route::get('/dellamall', [DIndexController::class,'index'])->name('d_index');
-Route::get('/dellamall/shop', [DShopController::class,'index']);
-Route::get('/dellamall/shop/show/{shop_id}', [DShopController::class,'show']);
-
-
-
-
+Route::get('subscription', 'User\SubscriptionController@index');
+Route::get('ajax/subscription/status', 'User\Ajax\SubscriptionController@status');
+Route::post('ajax/subscription/subscribe', 'User\Ajax\SubscriptionController@subscribe');
+Route::post('ajax/subscription/cancel', 'User\Ajax\SubscriptionController@cancel');
+Route::post('ajax/subscription/resume', 'User\Ajax\SubscriptionController@resume');
+Route::post('ajax/subscription/change_plan', 'User\Ajax\SubscriptionController@change_plan');
+Route::post('ajax/subscription/update_card', 'User\Ajax\SubscriptionController@update_card');
 
 
 require __DIR__.'/auth.php';
