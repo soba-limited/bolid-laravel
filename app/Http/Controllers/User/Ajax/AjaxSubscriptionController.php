@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller
+class AjaxSubscriptionController extends Controller
 {
     // 課金を実行
     public function subscribe(Request $request, $user_id)

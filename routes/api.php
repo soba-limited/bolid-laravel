@@ -59,6 +59,8 @@ use App\Http\Controllers\DSocialController;
 use App\Http\Controllers\DTagController;
 use App\Http\Controllers\LCollectionController;
 use App\Http\Controllers\LFirstController;
+use App\Http\Controllers\User\SubscriptionController;
+use App\Http\Controllers\User\Ajax\AjaxSubscriptionController;
 use App\Models\CPost;
 use App\Models\CPostBookmark;
 use App\Models\CSalonBookmark;
@@ -81,13 +83,14 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::group(['middleware'=>['api']], function () {
     //stripe
-    Route::get('/subscription/{user_id}', 'User\SubscriptionController@index');
-    Route::get('/subscription/status/{user_id}', 'User\Ajax\SubscriptionController@status');
-    Route::post('/subscription/subscribe/{user_id}', 'User\Ajax\SubscriptionController@subscribe');
-    Route::post('/subscription/cancel/{user_id}', 'User\Ajax\SubscriptionController@cancel');
-    Route::post('/subscription/resume/{user_id}', 'User\Ajax\SubscriptionController@resume');
-    Route::post('/subscription/change_plan/{user_id}', 'User\Ajax\SubscriptionController@change_plan');
-    Route::post('/subscription/update_card/{user_id}', 'User\Ajax\SubscriptionController@update_card');
+    Route::get('/subscription/{user_id}', [SubscriptionController::class,'index']);
+    Route::get('/subscription/status/{user_id}', [AjaxSubscriptionController::class,'status']);
+    Route::post('/subscription/subscribe/{user_id}', [AjaxSubscriptionController::class,'subscribe']);
+    Route::post('/subscription/cancel/{user_id}', [AjaxSubscriptionController::class,'cancel']);
+    Route::post('/subscription/resume/{user_id}', [AjaxSubscriptionController::class,'resume']);
+    Route::post('/subscription/change_plan/{user_id}', [AjaxSubscriptionController::class,'change_plan']);
+    Route::post('/subscription/update_card/{user_id}', [AjaxSubscriptionController::class,'update_card']);
+
 
 
     //liondor管理者コントローラー
