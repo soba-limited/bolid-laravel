@@ -13,6 +13,6 @@ class SubscriptionController extends Controller
     {
         $user = User::find($user_id);
         $intent = $user->createSetupIntent();
-        return $this->jsonResponse($intent);
+        return $intent;
     }
 }
