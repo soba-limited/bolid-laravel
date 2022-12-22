@@ -13,6 +13,10 @@ class SubscriptionController extends Controller
     {
         $user = User::find($user_id);
         $intent = $user->createSetupIntent();
-        return $intent;
+        $stripeCustomer = $user->createAsStripeCustomer();
+        $allarray = [
+            'intent' => $intent,
+            'stripeCustomer' => $stripeCustomer,
+        ];
     }
 }
