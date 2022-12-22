@@ -13,10 +13,15 @@ class SubscriptionController extends Controller
     {
         $user = User::find($user_id);
         $intent = $user->createSetupIntent();
-        $stripeCustomer = $user->createAsStripeCustomer();
+        if ($user->stripe_id != null) {
+            $stripeCustomer = $user->stripe_id;
+        } else {
+            $stripeCustomer = $user->createAsStripeCustomer()->id;
+        }
         $allarray = [
             'intent' => $intent,
             'stripeCustomer' => $stripeCustomer,
         ];
+        return $this->jsonResponse($allarray);
     }
 }
