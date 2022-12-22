@@ -19,7 +19,7 @@ class AjaxSubscriptionController extends Controller
             $user->newSubscription($request->db_name, $plan)->create($payment_method);
         }
 
-        return $this->status($user_id);
+        return $this->status($user_id, $request->db_name);
     }
 
     // 課金をキャンセル
@@ -27,7 +27,7 @@ class AjaxSubscriptionController extends Controller
     {
         User::find($user_id)->subscription($request->db_name)
             ->cancel();
-        return $this->status($user_id);
+        return $this->status($user_id, $request->db_name);
     }
 
     // キャンセルしたものをもとに戻す
@@ -35,7 +35,7 @@ class AjaxSubscriptionController extends Controller
     {
         User::find($user_id)->subscription($request->db_name)
             ->resume();
-        return $this->status($user_id);
+        return $this->status($user_id, $request->db_name);
     }
 
     // プランを変更する
@@ -44,7 +44,7 @@ class AjaxSubscriptionController extends Controller
         $plan = $request->plan;
         User::find($user_id)->subscription($request->db_name)
             ->swap($plan);
-        return $this->status($user_id);
+        return $this->status($user_id, $request->db_name);
     }
 
     // カードを変更する
@@ -52,25 +52,25 @@ class AjaxSubscriptionController extends Controller
     {
         $payment_method = $request->payment_method;
         User::find($user_id)->updateDefaultPaymentMethod($payment_method);
-        return $this->status($user_id);
+        return $this->status($user_id, $request->db_name);
     }
 
     // 課金状態を返す
-    public function status($user_id)
+    public function status($user_id, $db_name)
     {
         $status = 'unsubscribed';
         $user = User::find($user_id);
         $details = [];
 
-        if ($user->subscribed($request->db_name)) { // 課金履歴あり
-            if ($user->subscription($request->db_name)->cancelled()) {  // キャンセル済み
+        if ($user->subscribed($db_name)) { // 課金履歴あり
+            if ($user->subscription($db_name)->cancelled()) {  // キャンセル済み
                 $status = 'cancelled';
             } else {    // 課金中
                 $status = 'subscribed';
             }
 
-            $subscription = $user->subscriptions->first(function ($value) {
-                return ($value->name === $request->db_name);
+            $subscription = $user->subscriptions->first(function ($value) use ($db_name) {
+                return ($value->name === $db_name);
             })->only('ends_at', 'stripe_plan');
 
             $details = [

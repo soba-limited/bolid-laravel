@@ -84,7 +84,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::group(['middleware'=>['api']], function () {
     //stripe
     Route::get('/subscription/{user_id}', [SubscriptionController::class,'index']);
-    Route::get('/subscription/status/{user_id}', [AjaxSubscriptionController::class,'status']);
+    Route::get('/subscription/status/{user_id}/{db_name}', [AjaxSubscriptionController::class,'status']);
     Route::post('/subscription/subscribe/{user_id}', [AjaxSubscriptionController::class,'subscribe']);
     Route::post('/subscription/cancel/{user_id}', [AjaxSubscriptionController::class,'cancel']);
     Route::post('/subscription/resume/{user_id}', [AjaxSubscriptionController::class,'resume']);
