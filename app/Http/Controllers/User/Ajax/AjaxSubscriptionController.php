@@ -69,12 +69,12 @@ class AjaxSubscriptionController extends Controller
 
             $subscription = $user->subscriptions->first(function ($value) use ($db_name) {
                 return ($value->name === $db_name);
-            })->only('ends_at', 'stripe_plan');
+            })->only('ends_at', 'stripe_price');
 
             $details = [
                 'end_date' => ($subscription['ends_at']) ? $subscription['ends_at']->format('Y-m-d') : null,
-                'plan' => \Arr::get(config('services.stripe.plans'), $subscription['stripe_plan']),
-                'card_last_four' => $user->card_last_four
+                'plan' => \Arr::get(config('services.stripe.plans'), $subscription['stripe_price']),
+                'pm_last_four' => $user->pm_last_four
             ];
         }
 
@@ -83,5 +83,15 @@ class AjaxSubscriptionController extends Controller
             'status' => $status,
             'details' => $details
         ];
+    }
+
+    public function use_check(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user->subscription($request->db_name)->stripe_status == 'active') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

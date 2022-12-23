@@ -91,7 +91,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/subscription/change_plan/{user_id}', [AjaxSubscriptionController::class,'change_plan']);
     Route::post('/subscription/update_card/{user_id}', [AjaxSubscriptionController::class,'update_card']);
 
-
+    Route::post('/subscription/use_check/', [AjaxSubscriptionController::class,'use_check']);
 
     //liondor管理者コントローラー
 
