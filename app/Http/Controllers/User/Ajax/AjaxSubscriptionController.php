@@ -18,6 +18,8 @@ class AjaxSubscriptionController extends Controller
             $plan = $request->plan;
             if ($request->coupon == "U2S6GWTR") {
                 $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MHR9kLPvAJPNlRsUHx8pewj')->create($payment_method);
+            } elseif ($request->coupon == "B1N4F5AP") {
+                $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MI7x2LPvAJPNlRsoNhtsTkp')->create($payment_method);
             } else {
                 $user->newSubscription($request->db_name, $plan)->create($payment_method);
             }

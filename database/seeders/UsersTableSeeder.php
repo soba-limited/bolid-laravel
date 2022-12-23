@@ -18,10 +18,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('users')->delete();
-        DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 1 ");
+        //DB::table('users')->delete();
+        //DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 1 ");
 
         $params = [
+            /*
             [
                 'name' => 'MaoYamauchi',
                 'email' => 'yamauchi@ai-communication.jp',
@@ -207,6 +208,7 @@ class UsersTableSeeder extends Seeder
                 'l_profile_id' => '3',
                 'account_type' => '2',
             ],
+            */
             [
                 'name' => 'testuser25',
                 'email' => 'm.office7@bolides.co.jp',
