@@ -17,7 +17,7 @@ class AjaxSubscriptionController extends Controller
             $payment_method = $request->payment_method;
             $plan = $request->plan;
             $user->newSubscription($request->db_name, $plan)->create($payment_method);
-            $user->load($request->db_name);
+            //$user->load($request->db_name);
         }
 
         return $this->status($user_id, $request->db_name);
