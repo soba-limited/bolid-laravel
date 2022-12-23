@@ -63,13 +63,9 @@ class AjaxSubscriptionController extends Controller
         $user = User::find($user_id);
         $details = [];
 
-        /*
+
         if ($user->subscribed($db_name)) { // 課金履歴あり
-            if ($user->subscription($db_name)->cancelled()) {  // キャンセル済み
-                $status = 'cancelled';
-            } else {    // 課金中
-                $status = 'subscribed';
-            }
+            $status = 'subscribed';
 
             $subscription = $user->subscriptions->first(function ($value) use ($db_name) {
                 return ($value->name === $db_name);
@@ -81,7 +77,7 @@ class AjaxSubscriptionController extends Controller
                 'card_last_four' => $user->card_last_four
             ];
         }
-        */
+
 
         return [
             'status' => $status,
