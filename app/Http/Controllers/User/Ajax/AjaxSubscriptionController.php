@@ -16,7 +16,11 @@ class AjaxSubscriptionController extends Controller
         if (!$user->subscribed($request->db_name)) {
             $payment_method = $request->payment_method;
             $plan = $request->plan;
-            $user->newSubscription($request->db_name, $plan)->create($payment_method);
+            if ($request->coupon == "U2S6GWTR") {
+                $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MHR9kLPvAJPNlRsUHx8pewj')->create($payment_method);
+            } else {
+                $user->newSubscription($request->db_name, $plan)->create($payment_method);
+            }
             //$user->load($request->db_name);
         }
 
@@ -88,8 +92,12 @@ class AjaxSubscriptionController extends Controller
     public function use_check(Request $request)
     {
         $user = User::find($request->user_id);
-        if ($user->subscription($request->db_name)->stripe_status == 'active') {
-            return true;
+        if ($user->subscribed($request->db_name)) {
+            if ($user->subscription($request->db_name)->stripe_status == 'active' && $user->subscription($request->db_name)->ends_at == null) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
