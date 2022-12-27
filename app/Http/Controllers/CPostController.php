@@ -30,9 +30,9 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags')->whereHas(['user',function ($query) {
+        $post = $post->limit($limit)->with('CTags')->whereHas('user', function ($query) {
             $query->where('account_type', 1)->with('CProfile');
-        }])->get();
+        })->get();
 
         $allarray = [
             'post' => $post,
@@ -105,9 +105,9 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags')->whereHas(['user',function ($query) {
+        $post = $post->limit($limit)->skip($skip)->with('CTags')->whereHas('user', function ($query) {
             $query->where('account_type', 1)->with('CProfile');
-        }])->get();
+        })->get();
 
         $allarray = [
             'post' => $post,
@@ -140,9 +140,9 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags')->whereHas(['user',function ($query) {
+        $post = $post->limit($limit)->with('CTags')->whereHas('user', function ($query) {
             $query->where('account_type', 0)->with('CProfile');
-        }])->get();
+        })->get();
 
         $allarray = [
             'post' => $post,
@@ -215,9 +215,9 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags')->whereHas(['user',function ($query) {
+        $post = $post->limit($limit)->skip($skip)->with('CTags')->whereHas('user', function ($query) {
             $query->where('account_type', 1)->with('CProfile');
-        }])->get();
+        })->get();
 
         $allarray = [
             'post' => $post,
