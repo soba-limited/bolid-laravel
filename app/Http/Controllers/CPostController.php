@@ -30,7 +30,9 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
+        $post = $post->limit($limit)->with('CTags')->with(['user'=>function ($query) {
+            $query->where('account_type', 1)->with('CProfile');
+        }])->get();
 
         $allarray = [
             'post' => $post,
@@ -103,7 +105,119 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+        $post = $post->limit($limit)->skip($skip)->with('CTags')->with(['user'=>function ($query) {
+            $query->where('account_type', 1)->with('CProfile');
+        }])->get();
+
+        $allarray = [
+            'post' => $post,
+            'page_max' => $page_max,
+            'now_page' => $page,
+            'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
+            's' => $request->s,
+            'zip' => $request->zip,
+            'cat' => $request->cat,
+            'reward' => $request->reward,
+            'tag' => $request->tag,
+            'sort' => $request->sort,
+            'state' => $request->state,
+        ];
+
+        return $this->jsonResponse($allarray);
+    }
+
+    public function user_index()
+    {
+        //
+        $cat_list = CCat::get();
+        $post = new CPost;
+        $post = $post->where('state', '>', 0);
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+
+        $limit = 12;
+
+        $count = $post->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $post = $post->limit($limit)->with('CTags')->with(['user'=>function ($query) {
+            $query->where('account_type', 0)->with('CProfile');
+        }])->get();
+
+        $allarray = [
+            'post' => $post,
+            'page_max' => $page_max,
+            'now_page' => 1,
+            'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
+        ];
+
+        return $this->jsonResponse($allarray);
+    }
+
+    public function user_search(Request $request)
+    {
+        $cat_list = CCat::get();
+        $post = new CPost;
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+
+        if (!empty($request->s)) {
+            $post = $post->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
+        }
+
+        if (!empty($request->zip)) {
+            $post = $post->whereHas('user', function ($query) use ($request) {
+                $query->whereHas('CProfile', function ($query) use ($request) {
+                    $query->where('zip', $request->zip);
+                });
+            });
+        }
+
+        if (!empty($request->cat)) {
+            $post = $post->where('c_cat_id', $request->cat);
+        }
+
+        if (!empty($request->reward)) {
+            $post = $post->where('reward', ">=", $request->reward);
+        }
+
+        if (!empty($request->tag)) {
+            $post = $post->whereHas('CTags', function ($query) use ($request) {
+                $query->where('c_tag_id', $request->tag);
+            });
+        }
+
+        if (!empty($request->sort)) {
+            if ($request->sort == 'new') {
+                $post = $post->orderBy('id', 'desc');
+            } elseif ($request->sort == 'old') {
+                $post = $post->orderBy('id', 'asc');
+            } elseif ($request->sort == 'reward') {
+                $post = $post->orderBy('reward', 'desc');
+            } elseif ($request->sort == 'limit_asc') {
+                $post= $post->orderBy(CPost::raw('abs(datediff(CURDATE(), limite_date))'), "ASC");
+            } elseif ($request->sort == 'limit_desc') {
+                $post= $post->orderBy(CPost::raw('abs(datediff(CURDATE(), limite_date))'), "DESC");
+            }
+        }
+
+        if (!empty($request->state)) {
+            $post = $post->where('state', 1);
+        } else {
+            $post = $post->where('state', '>', 0);
+        }
+
+        $limit = 12;
+        $page = $request->page;
+        $skip = ($page - 1) * $limit;
+
+
+        $count = $post->count();
+        $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        $post = $post->limit($limit)->skip($skip)->with('CTags')->with(['user'=>function ($query) {
+            $query->where('account_type', 0)->with('CProfile');
+        }])->get();
 
         $allarray = [
             'post' => $post,

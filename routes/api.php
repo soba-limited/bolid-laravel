@@ -422,6 +422,8 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/corapura/post', [CPostController::class,'index']);
     Route::post('/corapura/post', [CPostController::class,'search']);
+    Route::get('/corapura/user_post', [CPostController::class,'user_index']);
+    Route::post('/corapura/user_post', [CPostController::class,'user_search']);
     Route::post('/corapura/post/mypost', [CPostController::class,'mypost']);
     Route::get('/corapura/post/show/{c_post_id}', [CPostController::class,'show']);
 
