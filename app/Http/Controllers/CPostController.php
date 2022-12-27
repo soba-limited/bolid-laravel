@@ -22,6 +22,10 @@ class CPostController extends Controller
         //
         $cat_list = CCat::get();
         $post = new CPost;
+        $post = $post->whereHas('user', function ($query) {
+            $query->where('account_type', 1)->with('CProfile');
+        });
+
         $post = $post->where('state', '<', 4);
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
@@ -30,9 +34,7 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags', 'user.CProfile')->whereHas('user', function ($query) {
-            $query->where('account_type', 1)->with('CProfile');
-        })->get();
+        $post = $post->limit($limit)->with('CTags', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
@@ -49,6 +51,10 @@ class CPostController extends Controller
     {
         $cat_list = CCat::get();
         $post = new CPost;
+        $post = $post->whereHas('user', function ($query) {
+            $query->where('account_type', 1)->with('CProfile');
+        });
+
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         if (!empty($request->s)) {
@@ -105,9 +111,7 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->whereHas('user', function ($query) {
-            $query->where('account_type', 1)->with('CProfile');
-        })->get();
+        $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
@@ -132,6 +136,9 @@ class CPostController extends Controller
         //
         $cat_list = CCat::get();
         $post = new CPost;
+        $post = $post->whereHas('user', function ($query) {
+            $query->where('account_type', 0)->with('CProfile');
+        });
         $post = $post->where('state', '<', 4);
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
@@ -140,9 +147,7 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags', 'user.CProfile')->whereHas('user', function ($query) {
-            $query->where('account_type', 0)->with('CProfile');
-        })->get();
+        $post = $post->limit($limit)->with('CTags', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
@@ -159,6 +164,9 @@ class CPostController extends Controller
     {
         $cat_list = CCat::get();
         $post = new CPost;
+        $post = $post->whereHas('user', function ($query) {
+            $query->where('account_type', 0)->with('CProfile');
+        });
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         if (!empty($request->s)) {
@@ -215,9 +223,7 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->whereHas('user', function ($query) {
-            $query->where('account_type', 0)->with('CProfile');
-        })->get();
+        $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
