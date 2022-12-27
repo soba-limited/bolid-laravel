@@ -22,7 +22,7 @@ class CPostController extends Controller
         //
         $cat_list = CCat::get();
         $post = new CPost;
-        $post = $post->where('state', '>', 0);
+        $post = $post->where('state', '<', 4);
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         $limit = 12;
@@ -92,9 +92,9 @@ class CPostController extends Controller
         }
 
         if (!empty($request->state)) {
-            $post = $post->where('state', 1);
+            $post = $post->where('state', 0);
         } else {
-            $post = $post->where('state', '>', 0);
+            $post = $post->where('state', '<', 4);
         }
 
         $limit = 12;
@@ -132,7 +132,7 @@ class CPostController extends Controller
         //
         $cat_list = CCat::get();
         $post = new CPost;
-        $post = $post->where('state', '>', 0);
+        $post = $post->where('state', '<', 4);
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         $limit = 12;
@@ -202,9 +202,9 @@ class CPostController extends Controller
         }
 
         if (!empty($request->state)) {
-            $post = $post->where('state', 1);
+            $post = $post->where('state', 0);
         } else {
-            $post = $post->where('state', '>', 0);
+            $post = $post->where('state', '<', 4);
         }
 
         $limit = 12;
