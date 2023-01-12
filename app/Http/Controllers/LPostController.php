@@ -141,9 +141,9 @@ class LPostController extends Controller
             $categories = LCategory::find($request->l_category_id);
             if ($categories->depth == 0) {
                 $category_array = LCategory::select('id')->where('parent_slug', $categories->slug)->orWhere('slug', $categories->slug);
-                $posts = LPost::whereIn('l_category_id', $category_array);
+                $posts = $posts->whereIn('l_category_id', $category_array);
             } else {
-                $posts = LPost::where('l_category_id', $categories->id);
+                $posts = $posts->where('l_category_id', $categories->id);
             }
         }
 
