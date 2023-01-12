@@ -137,7 +137,14 @@ class LPostController extends Controller
         }
 
         if (!empty($request->l_category_id)) {
-            $posts = $posts->where('l_category_id', $request->l_category_id);
+            //$posts = $posts->where('l_category_id', $request->l_category_id);
+            $categories = LCategory::find($request->l_category_id);
+            if ($categories->depth == 0) {
+                $category_array = LCategory::select('id')->where('parent_slug', $categories->slug)->orWhere('slug', $categories->slug);
+                $posts = LPost::whereIn('l_category_id', $category_array);
+            } else {
+                $posts = LPost::where('l_category_id', $categories->id);
+            }
         }
 
         $posts_count = $posts->count();
