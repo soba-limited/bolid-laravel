@@ -12,6 +12,7 @@ use App\Models\CBusinessInformaition;
 use App\Models\CCard;
 use App\Models\CComment;
 use App\Models\CCoupon;
+use App\Models\CFollow;
 use App\Models\CItem;
 use App\Models\CLike;
 use App\Models\COffice;
@@ -597,5 +598,31 @@ class CProfileController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function follower($user_id)
+    {
+        $follower = CFollow::where('followed_user_id', $user_id)->with('Following.CProfile')->orderBy('id', 'desc')->limit(20)->get();
+        return $this->jsonResponse($follower);
+    }
+
+    public function follower_more($user_id, Request $request)
+    {
+        $skip = ($request->page - 1) * 20;
+        $follower = CFollow::where('followed_user_id', $user_id)->with('Following.CProfile')->orderBy('id', 'desc')->limit(20)->skip($skip)->get();
+        return $this->jsonResponse($follower);
+    }
+
+    public function following($user_id)
+    {
+        $following = CFollow::where('following_user_id', $user_id)->with('Followed.CProfile')->orderBy('id', 'desc')->limit(20)->get();
+        return $this->jsonResponse($following);
+    }
+
+    public function following_more($user_id, Request $request)
+    {
+        $skip = ($request->page - 1) * 20;
+        $following = CFollow::where('following_user_id', $user_id)->with('Followed.CProfile')->orderBy('id', 'desc')->limit(20)->skip($skip)->get();
+        return $this->jsonResponse($following);
     }
 }

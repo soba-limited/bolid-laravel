@@ -40,4 +40,14 @@ class DFollow extends Model
         'following_user_id'=>'integer',
         'followed_user_id'=>'integer',
     ];
+
+    public function Following()
+    {
+        return $this->belongsTo(User::class, 'following_user_id');
+    }
+
+    public function Followed()
+    {
+        return $this->belongsTo(User::class, 'followed_user_id');
+    }
 }

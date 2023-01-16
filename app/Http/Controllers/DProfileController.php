@@ -10,6 +10,7 @@ use App\Models\DMall;
 use App\Models\DMallBookmarks;
 use App\Http\Requests\StoreDProfileRequest;
 use App\Http\Requests\UpdateDProfileRequest;
+use App\Models\DFollow;
 use App\Models\DInfo;
 use App\Models\DMallIn;
 use Illuminate\Http\Request;
@@ -211,5 +212,31 @@ class DProfileController extends Controller
         $my_shop_save_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
         $news = DInfo::whereIn('d_shop_id', $my_shop_save_id)->orderBy('updated_at', 'desc')->get();
         return $this->jsonResponse($news);
+    }
+
+    public function follower($user_id)
+    {
+        $follower = DFollow::where('followed_user_id', $user_id)->with('Following.DProfile')->orderBy('id', 'desc')->limit(20)->get();
+        return $this->jsonResponse($follower);
+    }
+
+    public function follower_more($user_id, Request $request)
+    {
+        $skip = ($request->page - 1) * 20;
+        $follower = DFollow::where('followed_user_id', $user_id)->with('Following.DProfile')->orderBy('id', 'desc')->limit(20)->skip($skip)->get();
+        return $this->jsonResponse($follower);
+    }
+
+    public function following($user_id)
+    {
+        $following = DFollow::where('following_user_id', $user_id)->with('Followed.DProfile')->orderBy('id', 'desc')->limit(20)->get();
+        return $this->jsonResponse($following);
+    }
+
+    public function following_more($user_id, Request $request)
+    {
+        $skip = ($request->page - 1) * 20;
+        $following = DFollow::where('following_user_id', $user_id)->with('Followed.DProfile')->orderBy('id', 'desc')->limit(20)->skip($skip)->get();
+        return $this->jsonResponse($following);
     }
 }

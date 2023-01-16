@@ -236,6 +236,12 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/mypage/edit/{profile_id}', [DProfileController::class,'edit']);
     Route::post('/dellamall/mypage/update/{profile_id}', [DProfileController::class,'update']);
 
+    Route::get('/dellamall/mypage/follower/{user_id}', [DProfileController::class,'follower']);
+    Route::post('/dellamall/mypage/follower/{user_id}', [DProfileController::class,'follower_more']);
+
+    Route::get('/dellamall/mypage/following/{user_id}', [DProfileController::class,'following']);
+    Route::post('/dellamall/mypage/following/{user_id}', [DProfileController::class,'following_more']);
+
     Route::post('/dellamall/shop/comment_add/{shop_id}', [DCommentController::class,'store']);
     Route::post('/dellamall/shop/mall_return', [DMallController::class,'return_mall']);
     Route::post('/dellamall/shop/good/store', [DGoodController::class,'store']);
@@ -259,6 +265,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/shop_create_url', [DShopController::class,'shop_create_url']);
 
     Route::post('/dellamall/mynews', [DProfileController::class,'mynews']);
+
 
 
     //corapra　会員コントローラー
@@ -318,6 +325,11 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/mypage/store', [CProfileController::class,'store']);
     Route::get('/corapura/mypage/edit/{c_profile_id}', [CProfileController::class,'edit']);
     Route::post('/corapura/mypage/update/{c_profile_id}', [CProfileController::class,'update']);
+
+    Route::get('/corapura/mypage/follower/{user_id}', [CProfileController::class,'follower']);
+    Route::post('/corapura/mypage/follower/{user_id}', [CProfileController::class,'follower_more']);
+    Route::get('/corapura/mypage/following/{user_id}', [CProfileController::class,'following']);
+    Route::post('/corapura/mypage/following/{user_id}', [CProfileController::class,'following_more']);
 
     Route::post('/corapura/mypage/c_user_profile/update/{c_user_profile_id}', [CUserProfileController::class,'update']);
 
