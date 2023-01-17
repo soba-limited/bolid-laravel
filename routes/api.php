@@ -238,7 +238,6 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::get('/dellamall/mypage/follower/{user_id}', [DProfileController::class,'follower']);
     Route::post('/dellamall/mypage/follower/{user_id}', [DProfileController::class,'follower_more']);
-
     Route::get('/dellamall/mypage/following/{user_id}', [DProfileController::class,'following']);
     Route::post('/dellamall/mypage/following/{user_id}', [DProfileController::class,'following_more']);
 
