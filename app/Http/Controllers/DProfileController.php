@@ -216,27 +216,51 @@ class DProfileController extends Controller
 
     public function follower($user_id)
     {
-        $follower = DFollow::where('followed_user_id', $user_id)->with('Following.DProfile')->orderBy('id', 'desc')->limit(20)->get();
-        return $this->jsonResponse($follower);
+        $follower = DFollow::where('followed_user_id', $user_id)->with('Following.DProfile')->orderBy('id', 'desc');
+        $max_count = $follower->count();
+        $follows = $follower->limit()->get();
+        $allarray = [
+            'follows' => $follows,
+            'max_count' => $max_count
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     public function follower_more($user_id, Request $request)
     {
         $skip = ($request->page - 1) * 20;
-        $follower = DFollow::where('followed_user_id', $user_id)->with('Following.DProfile')->orderBy('id', 'desc')->limit(20)->skip($skip)->get();
-        return $this->jsonResponse($follower);
+        $follower = DFollow::where('followed_user_id', $user_id)->with('Following.DProfile')->orderBy('id', 'desc');
+        $max_count = $follower->count();
+        $follows = $follower->skip($skip)->limit()->get();
+        $allarray = [
+            'follows' => $follows,
+            'max_count' => $max_count
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     public function following($user_id)
     {
-        $following = DFollow::where('following_user_id', $user_id)->with('Followed.DProfile')->orderBy('id', 'desc')->limit(20)->get();
-        return $this->jsonResponse($following);
+        $following = DFollow::where('following_user_id', $user_id)->with('Followed.DProfile')->orderBy('id', 'desc');
+        $max_count = $following->count();
+        $follows = $following->limit()->get();
+        $allarray = [
+            'follows' => $follows,
+            'max_count' => $max_count
+        ];
+        return $this->jsonResponse($allarray);
     }
 
     public function following_more($user_id, Request $request)
     {
         $skip = ($request->page - 1) * 20;
-        $following = DFollow::where('following_user_id', $user_id)->with('Followed.DProfile')->orderBy('id', 'desc')->limit(20)->skip($skip)->get();
-        return $this->jsonResponse($following);
+        $following = DFollow::where('following_user_id', $user_id)->with('Followed.DProfile')->orderBy('id', 'desc');
+        $max_count = $following->count();
+        $follows = $following->skip($skip)->limit()->get();
+        $allarray = [
+            'follows' => $follows,
+            'max_count' => $max_count
+        ];
+        return $this->jsonResponse($allarray);
     }
 }
