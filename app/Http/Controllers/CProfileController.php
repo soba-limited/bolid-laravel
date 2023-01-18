@@ -604,7 +604,7 @@ class CProfileController extends Controller
     {
         $follower = CFollow::where('followed_user_id', $user_id)->with('Following.CProfile')->orderBy('id', 'desc');
         $max_count = $follower->count();
-        $follows = $follower->limit()->get();
+        $follows = $follower->limit(20)->get();
         $allarray = [
             'follows' => $follows,
             'max_count' => $max_count
@@ -617,7 +617,7 @@ class CProfileController extends Controller
         $skip = ($request->page - 1) * 20;
         $follower = CFollow::where('followed_user_id', $user_id)->with('Following.CProfile')->orderBy('id', 'desc');
         $max_count = $follower->count();
-        $follows = $follower->skip($skip)->limit()->get();
+        $follows = $follower->skip($skip)->limit(20)->get();
         $allarray = [
             'follows' => $follows,
             'max_count' => $max_count
@@ -629,7 +629,7 @@ class CProfileController extends Controller
     {
         $following = CFollow::where('following_user_id', $user_id)->with('Followed.CProfile')->orderBy('id', 'desc');
         $max_count = $following->count();
-        $follows = $following->limit()->get();
+        $follows = $following->limit(20)->get();
         $allarray = [
             'follows' => $follows,
             'max_count' => $max_count
@@ -642,7 +642,7 @@ class CProfileController extends Controller
         $skip = ($request->page - 1) * 20;
         $following = CFollow::where('following_user_id', $user_id)->with('Followed.CProfile')->orderBy('id', 'desc');
         $max_count = $following->count();
-        $follows = $following->skip($skip)->limit()->get();
+        $follows = $following->skip($skip)->limit(20)->get();
         $allarray = [
             'follows' => $follows,
             'max_count' => $max_count
