@@ -223,7 +223,7 @@ class DProfileController extends Controller
         $follows = $follower->limit($limit)->get();
         $allarray = [
             'follows' => $follows,
-            'max_count' => $page_max
+            'page_max' => $page_max
         ];
         return $this->jsonResponse($allarray);
     }
@@ -238,7 +238,7 @@ class DProfileController extends Controller
         $follows = $follower->skip($skip)->limit($limit)->get();
         $allarray = [
             'follows' => $follows,
-            'max_count' => $page_max
+            'page_max' => $page_max
         ];
         return $this->jsonResponse($allarray);
     }
@@ -252,7 +252,7 @@ class DProfileController extends Controller
         $follows = $following->limit($limit)->get();
         $allarray = [
             'follows' => $follows,
-            'max_count' => $page_max
+            'page_max' => $page_max
         ];
         return $this->jsonResponse($allarray);
     }
@@ -267,7 +267,7 @@ class DProfileController extends Controller
         $follows = $following->skip($skip)->limit($limit)->get();
         $allarray = [
             'follows' => $follows,
-            'max_count' => $page_max
+            'page_max' => $page_max
         ];
         return $this->jsonResponse($allarray);
     }
