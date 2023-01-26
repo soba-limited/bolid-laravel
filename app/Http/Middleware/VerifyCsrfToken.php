@@ -14,5 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'stripe/*',
+        'l_post.imagesave',
+        'c_post.imagesave',
     ];
 }

@@ -296,7 +296,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/post/store', [CPostController::class,'store']);
     Route::get('/corapura/post/edit/{c_post_id}', [CPostController::class,'edit']);
     Route::post('/corapura/post/update/{c_post_id}', [CPostController::class,'update']);
-    Route::post('/corapura/post/imagesave', [CPostController::class,'imagesave']);
+    Route::post('/corapura/post/imagesave', [CPostController::class,'imagesave'])->name('c_post.imagesave');
     Route::delete('/corapura/post/delete', [CPostController::class,'destroy']);
 
     Route::post('/corapura/post_app/list', [CPostAppController::class,'index']);
@@ -310,14 +310,14 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/corapura/salon/store', [CSalonController::class,'store']);
     Route::get('/corapura/salon/edit/{c_salon_id}', [CSalonController::class,'edit']);
     Route::post('/corapura/salon/update/{c_salon_id}', [CSalonController::class,'update']);
-    Route::post('/corapura/salon/imagesave', [CSalonController::class,'imagesave']);
+    Route::post('/corapura/salon/imagesave', [CSalonController::class,'imagesave'])->name('c_salon.imagesave');
     Route::delete('/corapura/salon/delete', [CSalonController::class,'destroy']);
 
     Route::get('/corapura/pr/create', [CPrController::class,'create']);
     Route::post('/corapura/pr/store', [CPrController::class,'store']);
     Route::get('/corapura/pr/edit/{c_pr_id}', [CPrController::class,'edit']);
     Route::post('/corapura/pr/update/{c_pr_id}', [CPrController::class,'update']);
-    Route::post('/corapura/pr/imagesave', [CPrController::class,'imagesave']);
+    Route::post('/corapura/pr/imagesave', [CPrController::class,'imagesave'])->name('c_pr.imagesave');
     Route::delete('/corapura/pr/delete', [CPrController::class,'destroy']);
 
     Route::get('/corapura/mypage/create', [CProfileController::class,'create']);
