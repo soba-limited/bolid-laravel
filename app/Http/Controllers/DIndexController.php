@@ -14,7 +14,7 @@ class DIndexController extends Controller
     {
         $popular = DShop::limit(10)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
         $pick = DPickup::with(['DShop'=>function ($query) {
-            $query->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->orderBy('id', 'desc');
+            $query->withCount('DGoods')->withCount('DMalls')->withCount('DComments');
         }])->limit(8)->get();
 
         $allarray = [
