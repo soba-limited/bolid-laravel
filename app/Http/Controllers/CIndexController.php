@@ -23,55 +23,55 @@ class CIndexController extends Controller
     {
         $posts = CPost::with(['user'=>function ($query) {
             $query->with(['CProfile']);
-        }])->with('CTags', 'CCat')->limit(20)->get();
+        }])->with('CTags', 'CCat')->orderBy('id', 'desc')->limit(20)->get();
 
         $company = User::where('account_type', '1')->where('c_profile_id', '!=', null)->limit(12)->with(['CProfile'=>function ($query) {
             $query->with('CCompanyProfile', 'CTags');
-        }])->get();
+        }])->orderBy('id', 'desc')->get();
 
-        $user = User::where('account_type', '0')->where('c_profile_id', '!=', null)->limit(10)->with('CProfile')->get();
+        $user = User::where('account_type', '0')->where('c_profile_id', '!=', null)->orderBy('id', 'desc')->limit(10)->with('CProfile')->get();
 
         $pr = CPr::with(['user'=>function ($query) {
             $query->with('CProfile');
-        }])->withCount('CPrCounts')->with('CTags')->limit(12)->get();
+        }])->withCount('CPrCounts')->with('CTags')->orderBy('id', 'desc')->limit(12)->get();
 
         $salon = CSalon::limit(5)->get();
 
         $coupon = CCoupon::with(['CProfile'=>function ($query) {
             $query->with('user');
-        }])->limit(12)->get();
+        }])->orderBy('id', 'desc')->limit(12)->get();
 
         $president = CPresident::with(['CProfile'=>function ($query) {
             $query->with('user');
-        }])->limit(12)->get();
+        }])->orderBy('id', 'desc')->limit(12)->get();
 
         $bi = CBusinessInformaition::with(['CProfile'=>function ($query) {
             $query->with('user');
-        }])->limit(12)->get();
+        }])->orderBy('id', 'desc')->limit(12)->get();
 
         $card = CCard::with(['CProfile'=>function ($query) {
             $query->with('user');
-        }])->limit(12)->get();
+        }])->orderBy('id', 'desc')->limit(12)->get();
 
         $item = CItem::with(['CProfile'=>function ($query) {
             $query->with('user');
-        }])->limit(12)->get();
+        }])->orderBy('id', 'desc')->limit(12)->get();
 
         $sust = CSust::with(['CProfile'=>function ($query) {
             $query->with('user');
-        }])->limit(12)->get();
+        }])->orderBy('id', 'desc')->limit(12)->get();
 
         $sponsor = CLike::whereHas('CProfile', function ($query) {
             $query->whereHas('user', function ($query) {
                 $query->where('account_type', 1);
             });
-        })->with('CProfile')->limit(5)->get();
+        })->with('CProfile')->orderBy('id', 'desc')->limit(5)->get();
 
         $like = CLike::whereHas('CProfile', function ($query) {
             $query->whereHas('user', function ($query) {
                 $query->where('account_type', 0);
             });
-        })->with('CProfile')->limit(5)->get();
+        })->with('CProfile')->orderBy('id', 'desc')->limit(5)->get();
 
 
         $allarray = [
