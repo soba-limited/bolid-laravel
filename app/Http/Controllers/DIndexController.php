@@ -14,7 +14,7 @@ class DIndexController extends Controller
     {
         $popular = DShop::limit(10)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
         $pick = DPickup::with(['DShop'=>function ($query) {
-            $query->withCount('DGoods')->withCount('DMalls')->withCount('DComments');
+            $query->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->orderBy('id', 'desc');
         }])->limit(8)->get();
 
         $allarray = [
@@ -31,7 +31,7 @@ class DIndexController extends Controller
 
         $count = DShop::all()->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
-        $add_page = DShop::skip($skip)->limit($limit)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
+        $add_page = DShop::orderBy('id', 'desc')->skip($skip)->limit($limit)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
 
         $allarray = [
             'add_page' => $add_page,
