@@ -42,7 +42,7 @@ class LIndexController extends Controller
 
         //それぞれを配列に入れる
         $allarray = [
-            //'special' => $special,
+            'special' => $special,
             'fashions' => $fashion,
             'beautys' => $beauty,
             'trends' => $trend,
