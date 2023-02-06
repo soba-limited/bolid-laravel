@@ -58,7 +58,7 @@ class LIndexController extends Controller
         ];
 
         $allarray = \Commons::LCommons($allarray);
-        return $this->jsonResponse($allarray);
+        return 'test';
     }
 
     public function sendMail(Request $request)
