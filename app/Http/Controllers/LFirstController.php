@@ -6,6 +6,7 @@ use App\Models\LFirst;
 use App\Http\Requests\StoreLFirstRequest;
 use App\Http\Requests\UpdateLFirstRequest;
 use App\Models\LCategory;
+use App\Models\LCollection;
 
 class LFirstController extends Controller
 {
@@ -155,5 +156,15 @@ class LFirstController extends Controller
     public function destroy(LFirst $lFirst)
     {
         //
+    }
+
+    public function check()
+    {
+        $first = LFirst::first();
+        if (!empty($first->id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

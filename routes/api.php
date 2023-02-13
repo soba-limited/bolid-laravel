@@ -404,6 +404,9 @@ Route::group(['middleware'=>['api']], function () {
 
     Route::post('/liondor/contact', [LIndexController::class,'sendMail'])->name('index.sendMail');
 
+    Route::post('/liondor/firstclass/check', [LFirstController::class,'check']);
+    Route::post('/liondor/collection/check', [LCollectionController::class,'check']);
+
 
     //デラモール
     Route::get('/dellamall', [DIndexController::class,'index']);

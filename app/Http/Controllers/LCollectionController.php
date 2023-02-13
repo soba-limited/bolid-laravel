@@ -202,4 +202,14 @@ class LCollectionController extends Controller
     {
         //
     }
+
+    public function check()
+    {
+        $collection = LCollection::first();
+        if (!empty($collection->id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
