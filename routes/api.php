@@ -15,6 +15,7 @@ use App\Http\Controllers\CIndexController;
 use App\Http\Controllers\CItemController;
 use App\Http\Controllers\CLikeController;
 use App\Http\Controllers\COfficeController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CPostAppController;
 use App\Http\Controllers\CPostBookmarkController;
 use App\Http\Controllers\CPostController;
@@ -82,6 +83,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware'=>['api']], function () {
+    //user root
+
+    Route::delete('/delete/user/{user_id}', [Controller::class,'user_destroy']);
+
     //stripe
     Route::get('/subscription/{user_id}', [SubscriptionController::class,'index']);
     Route::get('/subscription/status/{user_id}/{db_name}', [AjaxSubscriptionController::class,'status']);
