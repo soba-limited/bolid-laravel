@@ -134,7 +134,7 @@ class CPresidentController extends Controller
 
     public function tab_return(Request $request)
     {
-        $president = CPresident::where('c_profile_id', $request->c_profile_id)->get();
+        $president = CPresident::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($president);
     }
 }

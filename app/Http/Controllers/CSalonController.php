@@ -28,7 +28,7 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->with('CTags')->get();
+        $salon = $salon->orderBy('created_at', 'desc')->limit($limit)->with('CTags')->get();
 
         $allarray = [
             'salon' => $salon,
@@ -61,7 +61,7 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->limit($limit)->skip($skip)->with('CTags')->get();
+        $salon = $salon->orderBy('created_at', 'desc')->limit($limit)->skip($skip)->with('CTags')->get();
 
         $allarray = [
             'salon' => $salon,
@@ -281,7 +281,7 @@ class CSalonController extends Controller
 
     public function tab_return(Request $request)
     {
-        $salon = CSalon::where('user_id', $request->user_id)->get();
+        $salon = CSalon::where('user_id', $request->user_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($salon);
     }
 }

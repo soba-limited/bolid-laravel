@@ -74,24 +74,28 @@ class CCatSeeder extends Seeder
                 'slug' => 'c_cat13',
             ],
             [
-                'name' => 'その他',
+                'name' => 'アンケート/モニター案件',
                 'slug' => 'c_cat14',
             ],
             [
-                'name' => 'アンケート/モニター案件',
+                'name' => '見積り募集します',
                 'slug' => 'c_cat15',
             ],
             [
-                'name' => '見積り募集します',
+                'name' => 'クラウドファンディング',
                 'slug' => 'c_cat16',
             ],
             [
-                'name' => 'クラウドファンディング',
+                'name' => '相互フォローします！',
                 'slug' => 'c_cat17',
             ],
             [
-                'name' => '相互フォローします！',
+                'name' => '告知',
                 'slug' => 'c_cat18',
+            ],
+            [
+                'name' => 'その他',
+                'slug' => 'c_cat19',
             ],
         ];
 

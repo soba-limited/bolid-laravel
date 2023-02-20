@@ -131,7 +131,7 @@ class CCouponController extends Controller
 
     public function tab_return(Request $request)
     {
-        $coupon = CCoupon::where('c_profile_id', $request->c_profile_id)->get();
+        $coupon = CCoupon::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($coupon);
     }
 }

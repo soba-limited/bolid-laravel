@@ -131,7 +131,7 @@ class CItemController extends Controller
 
     public function tab_return(Request $request)
     {
-        $item = CItem::where('c_profile_id', $request->c_profile_id)->get();
+        $item = CItem::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($item);
     }
 }

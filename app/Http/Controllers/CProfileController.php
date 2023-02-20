@@ -389,10 +389,10 @@ class CProfileController extends Controller
             $profile = CProfile::with(['CCompanyProfile'=>function ($query) {
                 $query->with('CCompanySocials');
             }])->with(['CTags'])->find($user->c_profile_id);
-            $companys = CPost::where('user_id', $user_id)->with('CCat')->get();
-            $business = CBusinessInformaition::where('c_profile_id', $profile->id)->get();
-            $pr = CPr::where('user_id', $user_id)->withCount('CPrCounts')->get();
-            $comments = CComment::where('to_user_id', $user_id)->with('user.CProfile')->get();
+            $companys = CPost::where('user_id', $user_id)->with('CCat')->orderBy('created_at', 'desc')->get();
+            $business = CBusinessInformaition::where('c_profile_id', $profile->id)->orderBy('created_at', 'desc')->get();
+            $pr = CPr::where('user_id', $user_id)->withCount('CPrCounts')->orderBy('created_at', 'desc')->get();
+            $comments = CComment::where('to_user_id', $user_id)->with('user.CProfile')->orderBy('created_at', 'desc')->get();
 
             $allarray = [
                 'user' => $user,
@@ -417,12 +417,12 @@ class CProfileController extends Controller
                 $query->with('CUserSocials', 'CUserSkills');
             }])->with(['CTags'])->find($user->c_profile_id);
 
-            $companys = CPost::where('user_id', $user_id)->with('CCat')->get();
+            $companys = CPost::where('user_id', $user_id)->with('CCat')->orderBy('created_at', 'desc')->get();
 
-            $comments = CComment::where('to_user_id', $user_id)->with('user.CProfile')->get();
+            $comments = CComment::where('to_user_id', $user_id)->with('user.CProfile')->orderBy('created_at', 'desc')->get();
 
-            $cards = CCard::where('c_profile_id', $profile->id)->get();
-            $likes = CLike::where('c_profile_id', $profile->id)->get();
+            $cards = CCard::where('c_profile_id', $profile->id)->orderBy('created_at', 'desc')->get();
+            $likes = CLike::where('c_profile_id', $profile->id)->orderBy('created_at', 'desc')->get();
 
             $allarray = [
                 'user' => $user,
