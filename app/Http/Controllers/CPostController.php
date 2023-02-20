@@ -22,8 +22,8 @@ class CPostController extends Controller
         //
         $cat_list = CCat::get();
         $post = new CPost;
-        $post = $post->whereHas('user', function ($query) {
-            $query->where('account_type', 1)->with('CProfile');
+        $post = $post->whereIn('user_id', function ($query) {
+            $query->from('users')->select('id')->where('account_type', 1);
         });
 
         $post = $post->where('state', '<', 4);
@@ -51,8 +51,8 @@ class CPostController extends Controller
     {
         $cat_list = CCat::get();
         $post = new CPost;
-        $post = $post->whereHas('user', function ($query) {
-            $query->where('account_type', 1)->with('CProfile');
+        $post = $post->whereIn('user_id', function ($query) {
+            $query->from('users')->select('id')->where('account_type', 1);
         });
 
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
@@ -136,9 +136,10 @@ class CPostController extends Controller
         //
         $cat_list = CCat::get();
         $post = new CPost;
-        $post = $post->whereHas('user', function ($query) {
-            $query->where('account_type', 0)->with('CProfile');
+        $post = $post->whereIn('user_id', function ($query) {
+            $query->from('users')->select('id')->where('account_type', 0);
         });
+
         $post = $post->where('state', '<', 4);
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
@@ -164,9 +165,10 @@ class CPostController extends Controller
     {
         $cat_list = CCat::get();
         $post = new CPost;
-        $post = $post->whereHas('user', function ($query) {
-            $query->where('account_type', 0)->with('CProfile');
+        $post = $post->whereIn('user_id', function ($query) {
+            $query->from('users')->select('id')->where('account_type', 0);
         });
+
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
         if (!empty($request->s)) {
