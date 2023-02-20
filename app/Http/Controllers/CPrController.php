@@ -193,7 +193,7 @@ class CPrController extends Controller
         //
         $pr = CPr::with('CTags')->find($pr_id);
         $user = User::with('CProfile')->find($pr->user_id);
-        $pr_new_list = CPr::limit(5)->with('user.CProfile')->withCount('CPrCounts')->orderBy('id', 'desc')->get();
+        $pr_new_list = CPr::where('state', '>', 0)->limit(5)->with('user.CProfile')->withCount('CPrCounts')->orderBy('id', 'desc')->get();
         $allarray = [
             'pr' => $pr,
             'user' => $user,
