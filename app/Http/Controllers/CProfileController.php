@@ -236,6 +236,15 @@ class CProfileController extends Controller
             });
         }
 
+        if (!empty($request->card)) {
+            $user = $user->having('c_cards_count', '>', 0);
+        }
+
+        if (!empty($request->like)) {
+            $user = $user->having('c_likes_count', '>', 0);
+        }
+
+
 
         if (!empty($request->tag)) {
             $user = $user->whereHas('CTags', function ($query) use ($request) {
