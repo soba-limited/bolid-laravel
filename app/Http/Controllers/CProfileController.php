@@ -244,8 +244,6 @@ class CProfileController extends Controller
             $user = $user->having('c_likes_count', '>', 0);
         }
 
-
-
         if (!empty($request->tag)) {
             $user = $user->whereHas('CTags', function ($query) use ($request) {
                 $query->where('c_tag_id', $request->tag);
@@ -602,7 +600,9 @@ class CProfileController extends Controller
     {
         $profile_id = User::find($request->id)->c_profile_id;
         if (!empty($profile_id)) {
-            $profile = CProfile::find($profile_id);
+            $profile = CProfile::with(['user'=>function ($query) {
+                $query->withCount('CFolloweds')->withCount('CFollowings');
+            }])->where('id', $profile_id)->first();
             return $this->jsonResponse($profile);
         } else {
             return false;
