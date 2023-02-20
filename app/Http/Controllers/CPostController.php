@@ -57,10 +57,6 @@ class CPostController extends Controller
 
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
 
-        if (!empty($request->s)) {
-            $post = $post->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
-        }
-
         if (!empty($request->zip)) {
             $post = $post->whereHas('user', function ($query) use ($request) {
                 $query->whereHas('CProfile', function ($query) use ($request) {
@@ -110,6 +106,12 @@ class CPostController extends Controller
 
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+        if (!empty($request->s)) {
+            $post = $post->where(function ($query) use ($request) {
+                $query->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
+            });
+        }
 
         $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->get();
 
@@ -165,15 +167,12 @@ class CPostController extends Controller
     {
         $cat_list = CCat::get();
         $post = new CPost;
+
         $post = $post->whereIn('user_id', function ($query) {
             $query->from('users')->select('id')->where('account_type', 0);
         });
 
         $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
-
-        if (!empty($request->s)) {
-            $post = $post->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
-        }
 
         if (!empty($request->zip)) {
             $post = $post->whereHas('user', function ($query) use ($request) {
@@ -224,6 +223,13 @@ class CPostController extends Controller
 
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
+
+
+        if (!empty($request->s)) {
+            $post = $post->where(function ($query) use ($request) {
+                $query->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
+            });
+        }
 
         $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->get();
 
