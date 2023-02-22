@@ -348,41 +348,45 @@ class DShopController extends Controller
     {
         $url = $request->url;
         $page_check = DShop::where('url', $url)->first();
-        $ctx = stream_context_create(
-            array(
-                'http' => array(
-                            'method' => 'GET',
-                            'header' => 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko')
-                )
-        );
+        if (!empty($page_check->id)) {
+            return "すでにショップがあります";
+        } else {
+            $ctx = stream_context_create(
+                array(
+                    'http' => array(
+                                'method' => 'GET',
+                                'header' => 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko')
+                    )
+            );
 
-        $output = mb_convert_encoding(file_get_contents($url, false, $ctx), 'UTF-8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS,SJIS-WIN');
+            $output = mb_convert_encoding(file_get_contents($url, false, $ctx), 'UTF-8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS,SJIS-WIN');
 
-        preg_match('{<title>(.*?)</title>}s', $output, $title);
-        preg_match('{<meta name="description" content="(.*?)"}s', $output, $description);
-        preg_match('{<meta name="keywords" content="(.*?)"}s', $output, $keyword);
+            preg_match('{<title>(.*?)</title>}s', $output, $title);
+            preg_match('{<meta name="description" content="(.*?)"}s', $output, $description);
+            preg_match('{<meta name="keywords" content="(.*?)"}s', $output, $keyword);
 
-        $title = !empty($title)? $title[1]: null;
-        $description = !empty($description)? $description[1]: null;
-        $keyword = !empty($keyword)? $keyword[1]: null;
+            $title = !empty($title)? $title[1]: null;
+            $description = !empty($description)? $description[1]: null;
+            $keyword = !empty($keyword)? $keyword[1]: null;
 
-        $allarray = [
-            'title'=>$title,
-            'description'=>$description,
-            'keyword'=>$keyword,
-        ];
+            $allarray = [
+                'title'=>$title,
+                'description'=>$description,
+                'keyword'=>$keyword,
+            ];
 
-        $screenshot = Http::withToken("2Oe3k8aSmXT92SzL6VFmmOQjC9ettxZyooXmPVqd")->get("https://screendot.io/api/standard?url=".$url."&delay=5000&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
+            $screenshot = Http::withToken("2Oe3k8aSmXT92SzL6VFmmOQjC9ettxZyooXmPVqd")->get("https://screendot.io/api/standard?url=".$request->url."&delay=5000&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
 
-        $imgsrc = json_decode($screenshot);
+            $imgsrc = json_decode($screenshot);
 
-        $allarray = [
-            'title'=>$title,
-            'description'=>$description,
-            'keyword'=>$keyword,
-            'imgsrc' => $imgsrc->url,
-            'imgname' => $imgsrc->id,
-        ];
-        return $this->jsonResponse($allarray);
+            $allarray = [
+                'title'=>$title,
+                'description'=>$description,
+                'keyword'=>$keyword,
+                'imgsrc' => $imgsrc->url,
+                'imgname' => $imgsrc->id,
+            ];
+            return $this->jsonResponse($allarray);
+        }
     }
 }
