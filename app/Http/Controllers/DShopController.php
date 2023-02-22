@@ -375,13 +375,6 @@ class DShopController extends Controller
 
         $imgsrc = json_decode($screenshot);
 
-        $allarray = [
-            'title'=>$title,
-            'description'=>$description,
-            'keyword'=>$keyword,
-            'imgsrc' => $imgsrc->url,
-            'imgname' => $imgsrc->id,
-        ];
-        return $this->jsonResponse($allarray);
+        return $imgsrc;
     }
 }
