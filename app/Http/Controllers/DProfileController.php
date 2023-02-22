@@ -79,7 +79,7 @@ class DProfileController extends Controller
     {
         //
         $profile = User::where('id', $user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->first();
-        $create_shop = DShop::where('user_id', $user_id)->get();
+        $create_shop = DShop::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
         $allarray = [
             'profile' => $profile,
             'create_shop' => $create_shop,
@@ -90,7 +90,7 @@ class DProfileController extends Controller
     public function mypage(Request $request, $id)
     {
         $profile = User::where('id', $id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->first();
-        $create_shop = DShop::where('user_id', $id)->get();
+        $create_shop = DShop::where('user_id', $id)->orderBy('created_at', 'desc')->get();
         $allarray = [
             'profile' => $profile,
             'create_shop' => $create_shop,
@@ -153,13 +153,13 @@ class DProfileController extends Controller
 
     public function create_shop(Request $request)
     {
-        $shop = DShop::where('user_id', $request->user_id)->orderBy('id', 'desc')->get();
+        $shop = DShop::where('user_id', $request->user_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($shop);
     }
 
     public function create_mall(Request $request)
     {
-        $mall = DMall::where('user_id', $request->user_id)->orderBy('id', 'desc')->with(['DMallIn'=>function ($query) {
+        $mall = DMall::where('user_id', $request->user_id)->orderBy('created_at', 'desc')->with(['DMallIn'=>function ($query) {
             $query->orderBy('created_at', 'desc');
         }])->get();
         return $this->jsonResponse($mall);
@@ -168,7 +168,7 @@ class DProfileController extends Controller
     public function save_shop(Request $request)
     {
         $shop_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
-        $shop = DShop::whereIn('id', $shop_id)->get();
+        $shop = DShop::whereIn('id', $shop_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($shop);
     }
 
@@ -177,7 +177,7 @@ class DProfileController extends Controller
         $mall = User::with(['DMallBookmark'=>function ($query) {
             $query->with(['DMallIn'=>function ($query) {
                 $query->orderBy('created_at', 'desc');
-            }])->with('user.DProfile');
+            }])->with('user.DProfile')->orderBy('created_at', 'desc');
         }])->find($request->user_id)->makeHidden(['email','account_type','l_profile_id','c_profile_id','d_profile_id','point']);
         return $this->jsonResponse($mall);
     }
@@ -210,7 +210,7 @@ class DProfileController extends Controller
     public function mynews(Request $request)
     {
         $my_shop_save_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
-        $news = DInfo::whereIn('d_shop_id', $my_shop_save_id)->orderBy('updated_at', 'desc')->get();
+        $news = DInfo::whereIn('d_shop_id', $my_shop_save_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($news);
     }
 
