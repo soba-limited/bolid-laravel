@@ -355,6 +355,8 @@ class DShopController extends Controller
                  )
         );
 
-        return dump($ctx);
+        $output = mb_convert_encoding(file_get_contents($url, false, $ctx), 'UTF-8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS,SJIS-WIN');
+
+        return $output;
     }
 }
