@@ -365,7 +365,7 @@ class DShopController extends Controller
         $description = !empty($description)? $description[1]: null;
         $keyword = !empty($keyword)? $keyword[1]: null;
 
-        $screenshot = Http::withToken("mSg80X4ZLeCtBmW94xGvDSx5gqRRyoci2aTSKKrw")->get("https://screendot.io/api/standard?url=".$url."&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
+        $screenshot = Http::withToken("xlbYNVjnspZDsengFs4F6FmNuhjPMduZtYOhWeUh")->get("https://screendot.io/api/standard?url=".$url."&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
 
         $imgsrc = json_decode($screenshot);
 
