@@ -355,6 +355,6 @@ class DShopController extends Controller
                  )
         );
 
-        return $ctx;
+        return dump($ctx);
     }
 }
