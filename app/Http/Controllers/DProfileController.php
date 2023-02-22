@@ -210,7 +210,7 @@ class DProfileController extends Controller
     public function mynews(Request $request)
     {
         $my_shop_save_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
-        $news = DInfo::whereIn('d_shop_id', $my_shop_save_id)->orderBy('created_at', 'desc')->get();
+        $news = DInfo::whereIn('d_shop_id', $my_shop_save_id)->orderBy('created_at', 'asc')->get();
         return $this->jsonResponse($news);
     }
 
