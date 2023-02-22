@@ -357,6 +357,25 @@ class DShopController extends Controller
 
         $output = mb_convert_encoding(file_get_contents($url, false, $ctx), 'UTF-8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS,SJIS-WIN');
 
-        return $output;
+        preg_match('{<title>(.*?)</title>}s', $output, $title);
+        preg_match('{<meta name="description" content="(.*?)"}s', $output, $description);
+        preg_match('{<meta name="keywords" content="(.*?)"}s', $output, $keyword);
+
+        $title = !empty($title)? $title[1]: null;
+        $description = !empty($description)? $description[1]: null;
+        $keyword = !empty($keyword)? $keyword[1]: null;
+
+        $screenshot = Http::withToken("mSg80X4ZLeCtBmW94xGvDSx5gqRRyoci2aTSKKrw")->get("https://screendot.io/api/standard?url=".$url."&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
+
+        $imgsrc = json_decode($screenshot);
+
+        $allarray = [
+            'title'=>$title,
+            'description'=>$description,
+            'keyword'=>$keyword,
+            'imgsrc' => $imgsrc->url,
+            'imgname' => $imgsrc->id,
+        ];
+        return $this->jsonResponse($allarray);
     }
 }
