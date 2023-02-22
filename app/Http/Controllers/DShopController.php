@@ -373,15 +373,6 @@ class DShopController extends Controller
 
         $screenshot = Http::withToken("mSg80X4ZLeCtBmW94xGvDSx5gqRRyoci2aTSKKrw")->get("https://screendot.io/api/standard?url=".$url."&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
 
-        $imgsrc = json_decode($screenshot);
-
-        $allarray = [
-            'title'=>$title,
-            'description'=>$description,
-            'keyword'=>$keyword,
-            'imgsrc' => $imgsrc->url,
-            'imgname' => $imgsrc->id,
-        ];
-        return $this->jsonResponse($allarray);
+        return $screenshot;
     }
 }
