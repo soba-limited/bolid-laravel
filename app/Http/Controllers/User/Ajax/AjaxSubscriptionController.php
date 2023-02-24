@@ -96,7 +96,7 @@ class AjaxSubscriptionController extends Controller
         $user = User::find($request->user_id);
         if ($user->subscribed($request->db_name)) {
             if ($user->subscription($request->db_name)->stripe_status == 'active' && $user->subscription($request->db_name)->ends_at == null) {
-                return $this->jsonResponse($user->subscribed($request->db_name));
+                return $this->jsonResponse($user->subscription($request->db_name));
             } else {
                 return false;
             }
