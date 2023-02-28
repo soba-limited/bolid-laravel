@@ -10,7 +10,8 @@ use App\Models\LSidebar;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Mail\ContactMail;
+use App\Mail\LiondorContactMail;
+use App\Mail\LiondorAdMail;
 use App\Models\CSalon;
 use App\Models\LCollection;
 use App\Models\LFirst;
@@ -64,7 +65,14 @@ class LIndexController extends Controller
     public function sendMail(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new ContactMail($data));
+        Mail::to('yamauchi@ai-communication.jp')->send(new LiondorContactMail($data));
+        return 'メールが送信されました';
+    }
+
+    public function sendMail_ad(Request $request)
+    {
+        $data = $request;
+        Mail::to('yamauchi@ai-communication.jp')->send(new LiondorAdMail($data));
         return 'メールが送信されました';
     }
 }

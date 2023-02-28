@@ -7,6 +7,11 @@ use App\Http\Requests\StoreCPostAppRequest;
 use App\Http\Requests\UpdateCPostAppRequest;
 use App\Models\CPost;
 use Illuminate\Http\Request;
+use Mail;
+use App\Mail\CorapuraMatchingMail;
+use App\Mail\CorapuraAppMail;
+use App\Mail\CorapuraDeleteMail;
+use App\Models\User;
 
 class CPostAppController extends Controller
 {
@@ -52,6 +57,15 @@ class CPostAppController extends Controller
             'user_id' => $request->user_id,
             'comment' => $request->comment
         ]);
+
+        // メール送信
+        $c_post = CPost::find($apps->c_post_id);
+        $user = User::find($apps->user_id);
+        $data['title'] = $c_post->title;
+        $data['url'] = "https://bolides-japan.com/corapura/matter/".$c_post->id;
+        $data['user_name'] = $user->CProfile->nicename;
+        Mail::to($c_post->user->email)->send(new CorapuraAppMail($data));
+
         return $this->jsonResponse($apps);
     }
 
@@ -95,6 +109,17 @@ class CPostAppController extends Controller
         //
         $app = CPostApp::find($app_id);
         $app->state = $request->state;
+
+        //メール送信
+
+        if ($request->state == 3) {
+            $c_post = CPost::find($app->c_post_id);
+            $user = User::find($app->user_id);
+            $data['title'] = $c_post->title;
+            $data['url'] = "https://bolides-japan.com/corapura/matter/".$c_post->id;
+            Mail::to($user->email)->send(new CorapuraMatchingMail($data));
+        }
+
         $app->save();
         $apps = CPost::with('CPostApps.CProfile')->where('id', $app->c_post_id)->get();
         return $this->jsonResponse($apps);
@@ -120,6 +145,15 @@ class CPostAppController extends Controller
         //
         $app = CPostApp::find($request->app_id);
         $c_post_id = $app->c_post_id;
+
+        //メール送信
+        $c_post = CPost::find($app->c_post_id);
+        $user = User::find($app->user_id);
+        $data['title'] = $c_post->title;
+        $data['url'] = "https://bolides-japan.com/corapura/matter/".$c_post->id;
+        Mail::to($user->email)->send(new CorapuraDeleteMail($data));
+
+
         $app->delete();
         $apps = CPost::with('CPostApps.CProfile')->where('id', $c_post_id)->first();
         return $this->jsonResponse($apps);

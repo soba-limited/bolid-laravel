@@ -29,6 +29,7 @@ class User extends Authenticatable
         'c_profile_id',
         'd_profile_id',
         'point',
+        'coupon',
     ];
 
     /**

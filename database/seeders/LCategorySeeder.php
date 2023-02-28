@@ -249,8 +249,8 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'wedding'
             ],
             [
-                'name' => 'Bresent',
-                'slug' => 'bresent',
+                'name' => 'Present',
+                'slug' => 'present',
                 'depth' => '1',
                 'parent_slug' => 'wedding'
             ],

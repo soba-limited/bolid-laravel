@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BolidesJapanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,7 @@ use App\Http\Controllers\DInstaApiTokenController;
 use App\Http\Controllers\DItemController;
 use App\Http\Controllers\DMallBookmarksController;
 use App\Http\Controllers\DMallInController;
+use App\Http\Controllers\DOfficialController;
 use App\Http\Controllers\DOverviewController;
 use App\Http\Controllers\DPickupController;
 use App\Http\Controllers\DSocialController;
@@ -62,10 +64,6 @@ use App\Http\Controllers\LCollectionController;
 use App\Http\Controllers\LFirstController;
 use App\Http\Controllers\User\SubscriptionController;
 use App\Http\Controllers\User\Ajax\AjaxSubscriptionController;
-use App\Models\CPost;
-use App\Models\CPostBookmark;
-use App\Models\CSalonBookmark;
-use App\Models\CSalonCTag;
 
 /*
 |--------------------------------------------------------------------------
@@ -403,11 +401,15 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/liondor/present', [LPresentController::class,'index'])->name('l_present.index');
     Route::get('/liondor/present/{id}', [LPresentController::class,'show'])->name('l_present.show');
 
+    Route::post('/liondor/present/{id}/mail', [LPresentController::class,'sendMail']);
+
     Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_series.show');
 
     Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
 
     Route::post('/liondor/contact', [LIndexController::class,'sendMail'])->name('index.sendMail');
+
+    Route::post('/liondor/ad', [LIndexController::class,'sendMail_ad']);
 
     Route::post('/liondor/firstclass/check', [LFirstController::class,'check']);
     Route::post('/liondor/collection/check', [LCollectionController::class,'check']);
@@ -434,6 +436,13 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/dellamall/user/save_mall', [DProfileController::class,'save_mall']);
     Route::post('/dellamall/user/send_comments', [DProfileController::class,'send_comments']);
     Route::post('/dellamall/user/mall_click', [DMallController::class,'mall_in_all']);
+
+    Route::post('/dellamall/contact', [DIndexController::class,'sendMail']);
+
+    Route::post('/dellamall/officialRequest', [DOfficialController::class,'sendMail']);
+    Route::post('/dellamall/report', [DIndexController::class,'sendMail_report']);
+
+
 
     //コラプラ
 
@@ -480,4 +489,9 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/c_profile_get', [CProfileController::class,'allways']);
     Route::post('/d_profile_get', [DProfileController::class,'allways']);
     Route::post('/l_profile_get', [LProfileController::class,'allways']);
+
+    //bjc
+
+    Route::post('/bolides_japan/plan_add', [BolidesJapanController::class,'plan_add']);
+    Route::post('/bolides_japan/plan_change', [BolidesJapanController::class,'plan_change']);
 });

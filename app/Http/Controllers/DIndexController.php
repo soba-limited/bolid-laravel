@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DellamallContactMail;
+use App\Mail\DellamallReportMail;
 use App\Models\DPickup;
 use App\Models\DShop;
 use Illuminate\Http\Request;
+use Mail;
 
 class DIndexController extends Controller
 {
@@ -39,5 +42,19 @@ class DIndexController extends Controller
         ];
 
         return $this->jsonResponse($allarray);
+    }
+
+    public function sendMail(Request $request)
+    {
+        $data = $request;
+        Mail::to('yamauchi@ai-communication.jp')->send(new DellamallContactMail($data));
+        return 'メールが送信されました';
+    }
+
+    public function sendMail_report(Request $request)
+    {
+        $data = $request;
+        Mail::to('yamauchi@ai-communication.jp')->send(new DellamallReportMail($data));
+        return 'メールが送信されました';
     }
 }

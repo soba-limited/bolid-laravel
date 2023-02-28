@@ -18,10 +18,13 @@ class AjaxSubscriptionController extends Controller
             $plan = $request->plan;
             if ($request->coupon == "U2S6GWTR") {
                 $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MHR9kLPvAJPNlRsUHx8pewj')->create($payment_method);
+                $user->fill(['coupon' => '1'])->save();
             } elseif ($request->coupon == "B1N4F5AP") {
                 $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MI7x2LPvAJPNlRsoNhtsTkp')->create($payment_method);
+                $user->fill(['coupon' => '2'])->save();
             } else {
                 $user->newSubscription($request->db_name, $plan)->create($payment_method);
+                $user->fill(['coupon' => '3'])->save();
             }
             //$user->load($request->db_name);
         }
@@ -49,8 +52,24 @@ class AjaxSubscriptionController extends Controller
     public function change_plan(Request $request, $user_id)
     {
         $plan = $request->plan;
-        User::find($user_id)->subscription($request->db_name)
-            ->swap($plan);
+
+        $user = User::find($user_id);
+
+        if ($request->coupon == "U2S6GWTR") {
+            $user->subscription($request->db_name)->swap($plan, [
+                'coupon' => 'promo_1MHR9kLPvAJPNlRsUHx8pewj'
+            ]);
+            $user->fill(['coupon' => '1'])->save();
+        } elseif ($request->coupon == "B1N4F5AP") {
+            $user->subscription($request->db_name)->swap($plan, [
+                'coupon' => 'promo_1MI7x2LPvAJPNlRsoNhtsTkp'
+            ]);
+            $user->fill(['coupon' => '2'])->save();
+        } else {
+            $user->subscription($request->db_name)->swap($plan);
+            $user->fill(['coupon' => '3'])->save();
+        }
+
         return $this->status($user_id, $request->db_name);
     }
 

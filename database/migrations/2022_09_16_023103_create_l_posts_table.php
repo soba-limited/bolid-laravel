@@ -16,7 +16,7 @@
                     $table->bigIncrements('id');
                     $table->bigInteger('user_id')->nullable()->unsigned();
                     $table->integer('l_category_id')->nullable()->unsigned();
-                    $table->bigInteger('l_series_id')->nullable()->unsigned();
+                    $table->bigInteger('l_series_id')->nullable();
                     $table->string('title', 255)->nullable();
                     $table->string('thumbs', 255)->nullable();
                     $table->string('mv', 255)->nullable();
@@ -28,9 +28,6 @@
                     $table->softDeletes();
                     $table->foreign("user_id")->references("id")->on("users")->onUpdate('CASCADE')->onDelete('CASCADE');
                     $table->foreign("l_category_id")->references("id")->on("l_categories")->onUpdate('CASCADE')->onDelete('CASCADE');
-                    $table->foreign("l_series_id")->references("id")->on("l_series")->onUpdate('CASCADE')->onDelete('CASCADE');
-
-
 
                     // ----------------------------------------------------
                     // -- SELECT [l_posts]--

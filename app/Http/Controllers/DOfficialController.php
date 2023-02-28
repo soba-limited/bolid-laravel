@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DOfficial;
 use App\Http\Requests\StoreDOfficialRequest;
 use App\Http\Requests\UpdateDOfficialRequest;
+use Mail;
+use App\Mail\DellamallOfficialRequestMail;
 
 class DOfficialController extends Controller
 {
@@ -82,5 +84,12 @@ class DOfficialController extends Controller
     public function destroy(DOfficial $dOfficial)
     {
         //
+    }
+
+    public function sendMail(Request $request)
+    {
+        $data = $request;
+        Mail::to('yamauchi@ai-communication.jp')->send(new DellamallOfficialRequestMail($data));
+        return 'メールが送信されました';
     }
 }

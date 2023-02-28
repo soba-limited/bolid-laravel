@@ -19,7 +19,7 @@ class Commons extends Facade
 {
     public static function LCommons($allarray)
     {
-        $side = LSidebar::where('state', 1)->orderBy('order', 'desc')->limit(5)->get();
+        $side = LSidebar::where('state', 1)->orderBy('order', 'asc')->limit(5)->get();
         $allarray = array_merge($allarray, array('sidebars'=>$side));
         $pickup = LPickup::with(['LPost'=>function ($query) {
             $query->with(['user'=>function ($query) {
@@ -36,7 +36,7 @@ class Commons extends Facade
         $categorysingle = LCategory::where('slug', $category)->first();
         $posts = LPost::with('LCategory')->with(['user'=>function ($query) {
             $query->with(['LProfile']);
-        }])->whereIn('l_category_id', $categoryIds)->where('state', 1)->limit(10)->orderBy('id', 'desc')->get();
+        }])->whereIn('l_category_id', $categoryIds)->where('state', 1)->limit(10)->orderBy('view_date', 'desc')->get();
         $return =[
             'id' => $categorysingle->id,
             'name' => $categorysingle->name,

@@ -34,7 +34,7 @@ class LPostController extends Controller
             $posts = LPost::where('state', 1)->where('l_category_id', $categories->id);
         }
 
-        $sort_key = 'id';
+        $sort_key = 'view_date';
         $order_key = 'desc';
 
         if (!empty($request->sort)) {
@@ -72,7 +72,7 @@ class LPostController extends Controller
     public function search(Request $request)
     {
         //
-        $posts = LPost::orderBy('id', 'desc')->where('state', 1)->where('title', 'like', '%'.$request->s.'%')->orWhere('sub_title', 'like', '%'.$request->s.'%')->orWhere('discription', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
+        $posts = LPost::orderBy('view_date', 'desc')->where('state', 1)->where('title', 'like', '%'.$request->s.'%')->orWhere('sub_title', 'like', '%'.$request->s.'%')->orWhere('discription', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
 
         $limit = 30;
         $skip = 0;
@@ -113,7 +113,7 @@ class LPostController extends Controller
 
         $posts_count = $posts->count();
         $page_max = $posts_count % $limit > 0 ? floor($posts_count / $limit) + 1: $posts_count / $limit;
-        $posts = $posts->with('LCategory')->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
+        $posts = $posts->with('LCategory')->orderBy('view_date', 'desc')->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
 
         $allarray = [
             'posts' => $posts,
@@ -149,7 +149,7 @@ class LPostController extends Controller
 
         $posts_count = $posts->count();
         $page_max = $posts_count % $limit > 0 ? floor($posts_count / $limit) + 1: $posts_count / $limit;
-        $posts = $posts->with('LCategory')->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
+        $posts = $posts->with('LCategory')->orderBy('view_date', 'desc')->skip($skip)->limit($limit)->get()->makeHidden(['discription','sub_title','content']);
 
         $allarray = [
             'posts' => $posts,

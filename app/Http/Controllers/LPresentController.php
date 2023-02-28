@@ -8,6 +8,8 @@ use App\Models\LPickup;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLPresentRequest;
 use App\Http\Requests\UpdateLPresentRequest;
+use App\Mail\LPresentMail;
+use Mail;
 
 class LPresentController extends Controller
 {
@@ -182,5 +184,14 @@ class LPresentController extends Controller
         $title = LPresent::find($id)->title;
         LPresent::find($id)->delete();
         return $title."は削除されました";
+    }
+
+    public function sendMail(Request $request, $id)
+    {
+        $data = $request;
+        $present = LPresent::find($request->l_present_id);
+        $data['present_title'] = $present->title;
+        Mail::to('yamauchi@ai-communication.jp')->send(new LPresentMail($data));
+        return 'メールが送信されました';
     }
 }

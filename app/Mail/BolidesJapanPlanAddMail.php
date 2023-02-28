@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactMail extends Mailable
+class DellamallContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,9 +29,9 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.contact')
-        ->subject('リオンドールからのお問い合わせです')
-        ->from('sample@sample.com')
+        return $this->view('mail.bolides_japan_plan_add')
+        ->subject('企業アカウントの申請です')
+        ->from('info@bolides-japan.com')
         ->with('data', $this->data);
     }
 }
