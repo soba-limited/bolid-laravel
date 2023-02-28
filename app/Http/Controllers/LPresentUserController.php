@@ -6,6 +6,9 @@ use App\Models\LPresentUser;
 use App\Http\Requests\StoreLPresentUserRequest;
 use App\Http\Requests\UpdateLPresentUserRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\LPresentMail;
+use App\Models\LPresent;
+use Mail;
 
 class LPresentUserController extends Controller
 {
@@ -82,6 +85,13 @@ class LPresentUserController extends Controller
             'child' => $request->child,
             'income' => $request->income,
         ]);
+
+        $data = $request;
+        $present = LPresent::find($request->l_present_id);
+        $data['present_title'] = $present->title;
+        Mail::to('yamauchi@ai-communication.jp')->send(new LPresentMail($data));
+        return 'メールが送信されました';
+
         return '応募が完了しました';
     }
 

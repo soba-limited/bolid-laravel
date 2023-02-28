@@ -401,8 +401,6 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/liondor/present', [LPresentController::class,'index'])->name('l_present.index');
     Route::get('/liondor/present/{id}', [LPresentController::class,'show'])->name('l_present.show');
 
-    Route::post('/liondor/present/{id}/mail', [LPresentController::class,'sendMail']);
-
     Route::get('/liondor/series/{id}', [LSeriesController::class,'show'])->name('l_series.show');
 
     Route::get('/liondor/faq', [LFaqController::class,'index'])->name('l_faq.index');
