@@ -208,7 +208,6 @@ class UsersTableSeeder extends Seeder
                 'l_profile_id' => '3',
                 'account_type' => '2',
             ],
-            */
             [
                 'name' => 'testuser25',
                 'email' => 'm.office7@bolides.co.jp',
@@ -220,6 +219,31 @@ class UsersTableSeeder extends Seeder
                 'email' => 'm.office8@bolides.co.jp',
                 'password' => Hash::make('bolidestest'),
                 'account_type' => '3',
+            ],
+            */
+            [
+                'name' => 'testuser27',
+                'email' => 'm.office9@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '0',
+            ],
+            [
+                'name' => 'testuser28',
+                'email' => 'm.office10@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '0',
+            ],
+            [
+                'name' => 'testuser29',
+                'email' => 'm.office11@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '1',
+            ],
+            [
+                'name' => 'testuser30',
+                'email' => 'm.office12@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '1',
             ],
         ];
 
