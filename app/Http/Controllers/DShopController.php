@@ -375,6 +375,7 @@ class DShopController extends Controller
                 'keyword'=>$keyword,
             ];
 
+            /*
             $screenshot = Http::withToken("xlbYNVjnspZDsengFs4F6FmNuhjPMduZtYOhWeUh")->get("https://screendot.io/api/standard?url=".$request->url."&delay=5000&browserWidth=1400&browserHeight=2100&width=470&format=webp&refresh=true&response=json")->body();
 
             $imgsrc = json_decode($screenshot);
@@ -386,7 +387,58 @@ class DShopController extends Controller
                 'imgsrc' => $imgsrc->url,
                 'imgname' => $imgsrc->id,
             ];
+
+            */
+
+            // set optional parameters (leave blank if unused)
+            $params['width'] = '470';
+            $params['viewport']  = '1400x2100';
+            $params['format'] = 'jpg';
+            $params['delay'] = '5';
+
+            // capture
+            $call = DShopController::screenshotlayer($url, $params);
+
+            //dd($call);
+
+            $screenshot = Http::get($call)->body();
+
+            $allarray = [
+                'title'=>$title,
+                'description'=>$description,
+                'keyword'=>$keyword,
+                'imgsrc' => $call,
+                'imgname' => substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789"), 0, 16),
+            ];
+
             return $this->jsonResponse($allarray);
         }
+    }
+
+    public static function screenshotlayer($url, $args)
+    {
+        // set access key
+        $access_key = "6a8fee5ff3253cbddf6564252ebef9d4";
+
+        // set secret keyword (defined in account dashboard)
+        $secret_keyword = "bolides20230303Japan";
+
+        // encode target URL
+        $params['url'] = urlencode($url);
+
+        $params += $args;
+
+        // create the query string based on the options
+        foreach ($params as $key => $value) {
+            $parts[] = "$key=$value";
+        }
+
+        // compile query string
+        $query = implode("&", $parts);
+
+        // generate secret key from target URL and secret keyword
+        $secret_key = md5($url . $secret_keyword);
+
+        return "https://api.screenshotlayer.com/api/capture?access_key=$access_key&secret_key=$secret_key&$query";
     }
 }
