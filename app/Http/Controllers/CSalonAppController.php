@@ -6,6 +6,10 @@ use App\Models\CSalonApp;
 use App\Http\Requests\StoreCSalonAppRequest;
 use App\Http\Requests\UpdateCSalonAppRequest;
 use Illuminate\Http\Request;
+use App\Mail\CorapuraSalonAppMail;
+use App\Models\CSalon;
+use App\Models\User;
+use Mail;
 
 class CSalonAppController extends Controller
 {
@@ -43,6 +47,14 @@ class CSalonAppController extends Controller
             'c_salon_id'=>$request->c_salon_id,
         ]);
         $c_salon_apps = CSalonApp::where('user_id', $request->user_id)->pluck('c_salon_id');
+        $user = User::find($request->user_id);
+        $salon = CSalon::find($request->c_salon_id);
+        $data = [
+            'salon_title' => $salon->title,
+            'user_name' => $user->name,
+            'salon_id' => $salon->id,
+        ];
+        Mail::to($user->email)->send(new CorapuraSalonAppMail($data));
         return $this->jsonResponse($c_salon_apps);
     }
 

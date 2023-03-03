@@ -8,6 +8,8 @@ use App\Http\Requests\StoreCSalonRequest;
 use App\Http\Requests\UpdateCSalonRequest;
 use App\Models\CTag;
 use Illuminate\Http\Request;
+use App\Mail\CorapuraSalonCreateMail;
+use Mail;
 
 class CSalonController extends Controller
 {
@@ -156,6 +158,16 @@ class CSalonController extends Controller
                 $c_salon->CTags()->attach($tag_id);
             }
         }
+
+        $user = User::find($request->user_id);
+
+        $data = [
+            'salon_title' => $c_salon->title,
+            'user_name' => $user->name,
+            'salon_id' => $c_salon->id,
+        ];
+
+        Mail::to('yamauchi@ai-communication.jp')->send(new CorapuraSalonCreateMail($data));
 
         return $this->jsonResponse($c_salon);
     }
