@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DellamallContactMail extends Mailable
+class CorapuraSalonAppMail extends Mailable
 {
     use Queueable, SerializesModels;
 

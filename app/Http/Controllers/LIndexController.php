@@ -9,13 +9,13 @@ use App\Models\LPresent;
 use App\Models\LSidebar;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\LiondorContactMail;
 use App\Mail\LiondorAdMail;
 use App\Models\CSalon;
 use App\Models\LCollection;
 use App\Models\LFirst;
+use Mail;
 
 class LIndexController extends Controller
 {
