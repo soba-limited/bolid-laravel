@@ -1,6 +1,6 @@
 <h2>リオンドール、お問い合わせフォームよりお問い合わせがありました。</h2>
 
-<p>お問い合わせ内容：{{ $data['content'] }}</p>
+<p>お問い合わせ内容<br>@foreach($data['content'] as $single){{ $single }},@endforeach</p>
 <p>氏名：{{ $data['name'] }}</p>
 <p>フリガナ：{{ $data['furigana'] }}</p>
 <p>メールアドレス：{{ $data['mail'] }}</p>
