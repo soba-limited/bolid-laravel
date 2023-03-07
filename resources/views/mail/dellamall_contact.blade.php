@@ -1,6 +1,6 @@
 <h2>デラモール、お問い合わせフォームよりお問い合わせがありました。</h2>
 
-<p>お問い合わせ種別：{{ $data['type'] }}</p>
+<p>お問い合わせ種別<br>@foreach($data['type'] as $single){{ $single }},@endforeach</p>
 <p>URL：{{ $data['url'] }}</p>
 <p>氏名：{{ $data['name'] }}</p>
 <p>フリガナ：{{ $data['furigana'] }}</p>
