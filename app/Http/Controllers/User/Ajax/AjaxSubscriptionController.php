@@ -24,7 +24,6 @@ class AjaxSubscriptionController extends Controller
                 $user->fill(['coupon' => '2'])->save();
             } else {
                 $user->newSubscription($request->db_name, $plan)->create($payment_method);
-                $user->fill(['coupon' => '3'])->save();
             }
             //$user->load($request->db_name);
         }
@@ -67,7 +66,6 @@ class AjaxSubscriptionController extends Controller
             $user->fill(['coupon' => '2'])->save();
         } else {
             $user->subscription($request->db_name)->swap($plan);
-            $user->fill(['coupon' => '3'])->save();
         }
 
         return $this->status($user_id, $request->db_name);
