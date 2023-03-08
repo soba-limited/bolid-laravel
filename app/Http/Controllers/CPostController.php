@@ -319,6 +319,11 @@ class CPostController extends Controller
             'suporter' =>$request->suporter != 'null' ? $request->suporter : null,
             'amount_of_suport' =>$request->amount_of_suport != 'null' ? $request->amount_of_suport : null,
             'medium' =>$request->medium != 'null' ? $request->medium : null,
+
+            'brand' =>$request->brand != 'null' ? $request->brand : null,
+            'size' =>$request->size != 'null' ? $request->size : null,
+            'item_state' =>$request->item_state != 'null' ? $request->item_state : null,
+
             'content' =>$request->content != 'null' ? $request->content : null,
         ]);
 
@@ -412,6 +417,11 @@ class CPostController extends Controller
             'suporter' =>$request->suporter != 'null' ? $request->suporter : null,
             'amount_of_suport' =>$request->amount_of_suport != 'null' ? $request->amount_of_suport : null,
             'medium' =>$request->medium != 'null' ? $request->medium : null,
+
+            'brand' =>$request->brand != 'null' ? $request->brand : null,
+            'size' =>$request->size != 'null' ? $request->size : null,
+            'item_state' =>$request->item_state != 'null' ? $request->item_state : null,
+
             'content' =>$request->content != 'null' ? $request->content : null,
         ]);
 

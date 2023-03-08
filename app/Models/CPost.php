@@ -27,6 +27,11 @@ class CPost extends Model
         'suporter',
         'amount_of_suport',
         'medium',
+
+        'brand',
+        'size',
+        'item_state',
+
         'content',
     ];
 

@@ -97,9 +97,7 @@ class CUserProfileController extends Controller
                 $skill_single = CUserSkill::firstOrCreate(['name'=>$skill]);
                 array_push($skill_ids, $skill_single->id);
             }
-            foreach ($skill_ids as $skill_id) {
-                $c_user_profile->CUserSkills()->attach($skill_id);
-            }
+            $c_user_profile->CUserSkills()->sync($skill_ids);
         }
 
 

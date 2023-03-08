@@ -29,6 +29,11 @@ return new class extends Migration {
             $table->string('suporter')->nullable();
             $table->string('amount_of_suport')->nullable();
             $table->string('medium')->nullable();
+
+            $table->string('brand')->nullable();
+            $table->string('size')->nullable();
+            $table->string('item_state')->nullable();
+
             $table->longText('content')->nullable();
             $table->timestamps();
             $table->softDeletes();
