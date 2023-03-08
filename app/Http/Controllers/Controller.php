@@ -21,11 +21,4 @@ class Controller extends BaseController
             JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES,
         );
     }
-
-    public function user_destroy($user_id)
-    {
-        $user = User::find($user_id);
-        $user->delete();
-        return 'ユーザー情報を削除しました';
-    }
 }

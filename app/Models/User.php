@@ -9,10 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Cashier\Billable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Cashier\Subscription;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, Billable;
+    use HasApiTokens, HasFactory, Notifiable, Billable,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -62,6 +64,13 @@ class User extends Authenticatable
         'd_profile_id' => 'integer',
         'point' => 'integer',
     ];
+
+    protected $dates = ['deleted_at'];
+
+    public function Subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 
     //Liondor リレーション
     public function LPost()

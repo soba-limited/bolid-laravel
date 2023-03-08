@@ -83,7 +83,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::group(['middleware'=>['api']], function () {
     //user root
 
-    Route::delete('/delete/user/{user_id}', [Controller::class,'user_destroy']);
+    Route::get('/administar/user', [BolidesJapanController::class,'administar_user_index']);
+    Route::post('/administar/user', [BolidesJapanController::class,'administar_user_search']);
+    Route::delete('/delete/user/{user_id}', [BolidesJapanController::class,'user_destroy']);
+    Route::delete('/hard_delete/user/{user_id}', [BolidesJapanController::class,'user_hard_destroy']);
 
     //stripe
     Route::get('/subscription/{user_id}', [SubscriptionController::class,'index']);

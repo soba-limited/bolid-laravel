@@ -26,7 +26,7 @@
                     $table->integer('point')->default(0);
                     $table->integer('coupon')->nullable();
                     $table->timestamps();
-
+                    $table->softDeletes();
 
                     //*********************************
                     // Foreign KEY [ Uncomment if you want to use!! ]
