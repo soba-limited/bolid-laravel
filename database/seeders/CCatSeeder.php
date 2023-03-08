@@ -22,7 +22,7 @@ class CCatSeeder extends Seeder
 
         $params = [
             [
-                'name' => 'その他',
+                'name' => 'その他の案件',
                 'slug' => 'c_cat1',
             ],
             [
