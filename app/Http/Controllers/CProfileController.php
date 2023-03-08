@@ -110,6 +110,10 @@ class CProfileController extends Controller
             $company = $company->having('c_likes_count', '>', 0);
         }
 
+        if (!empty($request->coupon)) {
+            $company = $company->having('c_coupons_count', '>', 0);
+        }
+
         if (!empty($request->business_informaition)) {
             $company = $company->having('c_business_informaitions_count', '>', 0);
         }
