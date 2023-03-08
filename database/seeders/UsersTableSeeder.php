@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         //DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 1 ");
 
         $params = [
-            /*
+
             [
                 'name' => 'MaoYamauchi',
                 'email' => 'yamauchi@ai-communication.jp',
@@ -220,7 +220,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('bolidestest'),
                 'account_type' => '3',
             ],
-            */
+
             [
                 'name' => 'testuser27',
                 'email' => 'm.office9@bolides.co.jp',
