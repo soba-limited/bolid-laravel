@@ -178,9 +178,7 @@ class DShopController extends Controller
                 $tag_single = DTag::firstOrCreate(['name'=>$tag]);
                 array_push($tag_ids, $tag_single->id);
             }
-            foreach ($tag_ids as $tag_id) {
-                $d_shop->DTags()->attach($tag_id);
-            }
+            $d_shop->DTags()->syncWithoutDetaching($tag_ids);
         }
 
         return $this->jsonResponse($d_shop);
@@ -275,9 +273,7 @@ class DShopController extends Controller
                 $tag_single = DTag::firstOrCreate(['name'=>$tag]);
                 array_push($tag_ids, $tag_single->id);
             }
-            foreach ($tag_ids as $tag_id) {
-                $d_shop->DTags()->syncWithoutDetaching($tag_id);
-            }
+            $d_shop->DTags()->syncWithoutDetaching($tag_ids);
         }
 
         return $this->jsonResponse($d_shop);
