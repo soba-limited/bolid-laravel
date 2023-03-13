@@ -479,8 +479,8 @@ class CProfileController extends Controller
         $allarray = [];
         if ($c_profile->user->account_type == 0) {
             $c_profile_option = CUserProfile::where('c_profile_id', $c_profile->id)->with('CUserSocials', 'CUserSkills')->first();
-            $c_cards = CCard::where('c_profile_id', $c_profile->id)->get();
-            $c_likes = CLike::where('c_profile_id', $c_profile->id)->get();
+            $c_cards = CCard::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_likes = CLike::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
             $allarray = [
                 'c_profile' => $c_profile,
                 'c_profile_option' => $c_profile_option,
@@ -489,14 +489,14 @@ class CProfileController extends Controller
             ];
         } elseif ($c_profile->user->account_type == 1) {
             $c_profile_option = CCompanyProfile::where('c_profile_id', $c_profile->id)->with('CCompanySocials')->first();
-            $c_president = CPresident::where('c_profile_id', $c_profile->id)->get();
-            $c_likes = CLike::where('c_profile_id', $c_profile->id)->get();
-            $c_susts = CSust::where('c_profile_id', $c_profile->id)->get();
-            $c_offices = COffice::where('c_profile_id', $c_profile->id)->get();
-            $c_coupons = CCoupon::where('c_profile_id', $c_profile->id)->get();
-            $c_cards = CCard::where('c_profile_id', $c_profile->id)->get();
-            $c_items = CItem::where('c_profile_id', $c_profile->id)->get();
-            $c_business_informations = CBusinessInformaition::where('c_profile_id', $c_profile->id)->get();
+            $c_president = CPresident::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_likes = CLike::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_susts = CSust::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_offices = COffice::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_coupons = CCoupon::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_cards = CCard::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_items = CItem::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
+            $c_business_informations = CBusinessInformaition::where('c_profile_id', $c_profile->id)->orderBy('created_at', 'desc')->get();
 
             $allarray = [
                 'c_profile' => $c_profile,

@@ -54,7 +54,7 @@ class CCouponController extends Controller
             $c_coupon->save();
         }
 
-        $c_coupons = CCoupon::where('c_profile_id', $request->c_profile_id)->get();
+        $c_coupons = CCoupon::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_coupons);
     }
 
@@ -109,7 +109,7 @@ class CCouponController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_coupons = CCoupon::where('c_profile_id', $request->c_profile_id)->get();
+        $c_coupons = CCoupon::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_coupons);
     }
 

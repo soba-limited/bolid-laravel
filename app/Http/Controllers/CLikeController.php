@@ -54,7 +54,7 @@ class CLikeController extends Controller
             $c_like->save();
         }
 
-        $c_likes = CLike::where('c_profile_id', $request->c_profile_id)->get();
+        $c_likes = CLike::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_likes);
     }
 
@@ -109,7 +109,7 @@ class CLikeController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_likes = CLike::where('c_profile_id', $request->c_profile_id)->get();
+        $c_likes = CLike::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_likes);
     }
 

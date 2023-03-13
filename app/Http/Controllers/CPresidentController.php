@@ -56,7 +56,7 @@ class CPresidentController extends Controller
             $c_president->save();
         }
 
-        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id)->get();
+        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_presidents);
     }
 
@@ -112,7 +112,7 @@ class CPresidentController extends Controller
             'thumbs' => $request->hasFile('thumbs') ? $thumbs : $request->thumbs,
         ]);
 
-        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id)->get();
+        $c_presidents = CPresident::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_presidents);
     }
 

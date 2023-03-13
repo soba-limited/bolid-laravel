@@ -45,7 +45,7 @@ class COfficeController extends Controller
             'content' => $request->content,
         ]);
 
-        $c_offices = COffice::where('c_profile_id', $request->c_profile_id)->get();
+        $c_offices = COffice::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_offices);
     }
 
@@ -92,7 +92,7 @@ class COfficeController extends Controller
             'content' => $request->content,
         ]);
 
-        $c_offices = COffice::where('c_profile_id', $request->c_profile_id)->get();
+        $c_offices = COffice::where('c_profile_id', $request->c_profile_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($c_offices);
     }
 
