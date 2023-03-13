@@ -27,7 +27,7 @@ class CPostController extends Controller
         });
 
         $post = $post->where('state', '<', 4);
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         $limit = 12;
 
@@ -55,7 +55,7 @@ class CPostController extends Controller
             $query->from('users')->select('id')->where('account_type', 1);
         });
 
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         if (!empty($request->zip)) {
             $post = $post->whereHas('user', function ($query) use ($request) {
@@ -143,7 +143,7 @@ class CPostController extends Controller
         });
 
         $post = $post->where('state', '<', 4);
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         $limit = 12;
 
@@ -172,7 +172,7 @@ class CPostController extends Controller
             $query->from('users')->select('id')->where('account_type', 0);
         });
 
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         if (!empty($request->zip)) {
             $post = $post->whereHas('user', function ($query) use ($request) {
