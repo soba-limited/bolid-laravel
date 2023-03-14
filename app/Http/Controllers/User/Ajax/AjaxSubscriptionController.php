@@ -17,10 +17,10 @@ class AjaxSubscriptionController extends Controller
             $payment_method = $request->payment_method;
             $plan = $request->plan;
             if ($request->coupon == "U2S6GWTR") {
-                $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MHR9kLPvAJPNlRsUHx8pewj')->create($payment_method);
+                $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1Ml6XUBTOnvlAmdYCJ9DO1D0')->create($payment_method);
                 $user->fill(['coupon' => '1'])->save();
             } elseif ($request->coupon == "B1N4F5AP") {
-                $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1MI7x2LPvAJPNlRsoNhtsTkp')->create($payment_method);
+                $user->newSubscription($request->db_name, $plan)->withPromotionCode('promo_1Ml6VsBTOnvlAmdYRbJyxMui')->create($payment_method);
                 $user->fill(['coupon' => '2'])->save();
             } else {
                 $user->newSubscription($request->db_name, $plan)->create($payment_method);
@@ -56,12 +56,12 @@ class AjaxSubscriptionController extends Controller
 
         if ($request->coupon == "U2S6GWTR") {
             $user->subscription($request->db_name)->swap($plan, [
-                'coupon' => 'promo_1MHR9kLPvAJPNlRsUHx8pewj'
+                'coupon' => 'promo_1Ml6XUBTOnvlAmdYCJ9DO1D0'
             ]);
             $user->fill(['coupon' => '1'])->save();
         } elseif ($request->coupon == "B1N4F5AP") {
             $user->subscription($request->db_name)->swap($plan, [
-                'coupon' => 'promo_1MI7x2LPvAJPNlRsoNhtsTkp'
+                'coupon' => 'promo_1Ml6VsBTOnvlAmdYRbJyxMui'
             ]);
             $user->fill(['coupon' => '2'])->save();
         } else {
