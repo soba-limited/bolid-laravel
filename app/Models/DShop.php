@@ -110,6 +110,6 @@ class DShop extends Model
 
     public function DOfficial()
     {
-        return $this->belongsTo(User::class, 'official_user_id', 'user_id');
+        return $this->belongsTo(User::class, 'official_user_id');
     }
 }
