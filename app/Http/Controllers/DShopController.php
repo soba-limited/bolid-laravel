@@ -122,11 +122,12 @@ class DShopController extends Controller
         $count = $shop->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->get();
+        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->with(['user.DProfile','DOfficial'])->get();
 
         $allarray = [
             'shop' => $shop,
             'page_max' => $page_max,
+            'now_page' => $request->page,
         ];
 
         return $this->jsonResponse($allarray);

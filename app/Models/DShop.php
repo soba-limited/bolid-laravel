@@ -32,7 +32,7 @@ class DShop extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'created_at',
+        //'created_at',
         'description',
     ];
 
@@ -106,5 +106,10 @@ class DShop extends Model
     public function DInstaApiTokens()
     {
         return $this->hasMany(DInstaApiToken::class);
+    }
+
+    public function DOfficial()
+    {
+        return $this->belongsTo(User::class, 'official_user_id', 'user_id');
     }
 }
