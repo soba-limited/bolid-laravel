@@ -122,7 +122,7 @@ class DShopController extends Controller
         $count = $shop->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->with(['user.DProfile','DOfficial'])->get();
+        $shop = $shop->limit($limit)->skip($skip)->withCount('DGoods')->withCount('DMalls')->withCount('DComments')->with(['user.DProfile','DOfficial.DProfile'])->get();
 
         $allarray = [
             'shop' => $shop,
