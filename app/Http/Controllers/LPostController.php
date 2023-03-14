@@ -100,7 +100,7 @@ class LPostController extends Controller
 
     public function editor_index($id, Request $request)
     {
-        $posts = LPost::withTrashed()->where('user_id', $id)->orderBy('id', 'desc');
+        $posts = LPost::where('user_id', $id)->orderBy('id', 'desc');
 
         $limit = 30;
         $skip = 0;
@@ -127,7 +127,7 @@ class LPostController extends Controller
     public function editor_index_post($id, Request $request)
     {
         $posts = new LPost;
-        $posts = $posts->withTrashed()->where('user_id', $id)->orderBy('id', 'desc');
+        $posts = $posts->where('user_id', $id)->orderBy('id', 'desc');
 
         $limit = 30;
         $skip = 0;
