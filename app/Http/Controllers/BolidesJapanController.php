@@ -24,6 +24,7 @@ class BolidesJapanController extends Controller
         $allarray = [
             'users' => $users,
             'page_max' => $page_max,
+            'now_page' => 1,
         ];
         return $this->jsonResponse($allarray);
     }
@@ -46,6 +47,7 @@ class BolidesJapanController extends Controller
         $allarray = [
             'users' => $users,
             'page_max' => $page_max,
+            'now_page' => $request->page,
         ];
         return $this->jsonResponse($allarray);
     }
