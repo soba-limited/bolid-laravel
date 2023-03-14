@@ -47,7 +47,7 @@ class User extends Authenticatable
         //'l_profile_id',
         //'c_profile_id',
         //'d_profile_id',
-        'created_at',
+        //'created_at',
         'updated_at',
     ];
 

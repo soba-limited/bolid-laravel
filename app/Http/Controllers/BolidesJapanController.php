@@ -18,7 +18,7 @@ class BolidesJapanController extends Controller
 
         $users_count = $users->count();
         $page_max = $users_count % $limit > 0 ? floor($users_count / $limit) + 1: $users_count / $limit;
-        $users = $users->with('Subscriptions')->skip($skip)->limit($limit)->get();
+        $users = $users->with(['Subscriptions','CProfile','DProfile','LProfile'])->skip($skip)->limit($limit)->get();
 
         //それぞれを配列に入れる
         $allarray = [
@@ -41,7 +41,7 @@ class BolidesJapanController extends Controller
 
         $users_count = $users->count();
         $page_max = $users_count % $limit > 0 ? floor($users_count / $limit) + 1: $users_count / $limit;
-        $users = $users->with('Subscriptions')->skip($skip)->limit($limit)->get();
+        $users = $users->with(['Subscriptions','CProfile','DProfile','LProfile'])->skip($skip)->limit($limit)->get();
 
         //それぞれを配列に入れる
         $allarray = [

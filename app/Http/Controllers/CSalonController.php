@@ -30,7 +30,7 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->orderBy('created_at', 'desc')->limit($limit)->with('CTags,user')->get();
+        $salon = $salon->orderBy('created_at', 'desc')->limit($limit)->with(['CTags','user'])->get();
 
         $allarray = [
             'salon' => $salon,
@@ -63,7 +63,7 @@ class CSalonController extends Controller
         $count = $salon->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $salon = $salon->orderBy('created_at', 'desc')->limit($limit)->skip($skip)->with('CTags,user')->get();
+        $salon = $salon->orderBy('created_at', 'desc')->limit($limit)->skip($skip)->with(['CTags','user'])->get();
 
         $allarray = [
             'salon' => $salon,
