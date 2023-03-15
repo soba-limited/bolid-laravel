@@ -40,7 +40,7 @@ class LCategoryseeder extends Seeder
                 'depth' => '0',
             ],
             [
-                'name' => 'Lifestyle',
+                'name' => 'Life style',
                 'slug' => 'lifestyle',
                 'depth' => '0',
             ],
@@ -50,7 +50,7 @@ class LCategoryseeder extends Seeder
                 'depth' => '0',
             ],
             [
-                'name' => 'TopLeader',
+                'name' => 'Top Leader',
                 'slug' => 'topleader',
                 'depth' => '0',
             ],
@@ -135,13 +135,13 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'trend'
             ],
             [
-                'name' => 'metaverse',
+                'name' => 'Metaverse',
                 'slug' => 'metaverse',
                 'depth' => '1',
                 'parent_slug' => 'trend'
             ],
             [
-                'name' => 'virtualcurrency',
+                'name' => 'Virtual Currency',
                 'slug' => 'virtualcurrency',
                 'depth' => '1',
                 'parent_slug' => 'trend'
@@ -159,7 +159,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'trend'
             ],
             [
-                'name' => 'spaceBusiness',
+                'name' => 'Space Business',
                 'slug' => 'spacebusiness',
                 'depth' => '1',
                 'parent_slug' => 'trend'
@@ -195,7 +195,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'lifestyle'
             ],
             [
-                'name' => 'RealEstate',
+                'name' => 'Real Estate',
                 'slug' => 'realestate',
                 'depth' => '1',
                 'parent_slug' => 'lifestyle'
@@ -231,7 +231,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'wedding'
             ],
             [
-                'name' => 'Weddinghall',
+                'name' => 'Wedding Hall',
                 'slug' => 'weddinghall',
                 'depth' => '1',
                 'parent_slug' => 'wedding'
