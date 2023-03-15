@@ -93,7 +93,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'fashion'
             ],
             [
-                'name' => 'FirstClass',
+                'name' => 'First Class',
                 'slug' => 'firstclass_fashion',
                 'depth' => '1',
                 'parent_slug' => 'fashion'
@@ -123,7 +123,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'beauty'
             ],
             [
-                'name' => 'FirstClass',
+                'name' => 'First Class',
                 'slug' => 'firstclass_beauty',
                 'depth' => '1',
                 'parent_slug' => 'beauty'
@@ -165,7 +165,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'trend'
             ],
             [
-                'name' => 'FirstClass',
+                'name' => 'First Class',
                 'slug' => 'firstclass_trend',
                 'depth' => '1',
                 'parent_slug' => 'trend'
@@ -213,7 +213,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'lifestyle'
             ],
             [
-                'name' => 'FirstClass',
+                'name' => 'First Class',
                 'slug' => 'firstclass_lifestyle',
                 'depth' => '1',
                 'parent_slug' => 'lifestyle'
@@ -255,7 +255,7 @@ class LCategoryseeder extends Seeder
                 'parent_slug' => 'wedding'
             ],
             [
-                'name' => 'FirstClass',
+                'name' => 'First Class',
                 'slug' => 'firstclass_wedding',
                 'depth' => '1',
                 'parent_slug' => 'wedding'
