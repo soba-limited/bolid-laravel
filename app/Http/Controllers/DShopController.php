@@ -61,7 +61,7 @@ class DShopController extends Controller
         }
 
         if (!empty($request->s)) {
-            $shop = $shop->where('name', 'like', '%'.$request->s.'%');
+            $shop = $shop->where('name', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%');
         } elseif (!empty($request->tag_id)) {
             $shop = $shop::whereHas('DTags', function ($query) use ($request) {
                 $query->where('d_tag_id', $request->tag_id);
@@ -109,7 +109,7 @@ class DShopController extends Controller
         }
 
         if (!empty($request->s)) {
-            $shop = $shop->where('name', 'like', '%'.$request->s.'%');
+            $shop = $shop->where('name', 'like', '%'.$request->s.'%')->orWhere('description', 'like', '%'.$request->s.'%');
         } elseif (!empty($request->tag_id)) {
             $shop = $shop::whereHas('DTags', function ($query) use ($request) {
                 $query->where('d_tag_id', $request->tag_id);
@@ -131,7 +131,8 @@ class DShopController extends Controller
             'now_page' => $request->page,
         ];
 
-        return $this->jsonResponse($allarray);
+        return $this->jsonResponse($request);
+        //return $this->jsonResponse($allarray);
     }
 
     /**
