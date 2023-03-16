@@ -86,9 +86,39 @@ class UsersTableSeeder extends Seeder
                 'account_type' => '1',
             ],*/
             [
-                'name' => 'bolides8',
-                'email' => 'm.office12@bolides.co.jp',
+                'name' => '編集アカウント1',
+                'email' => 'm.office13@bolides.co.jp',
                 'password' => Hash::make('bolidestest'),
+                'account_type' => '2',
+            ],
+            [
+                'name' => '編集アカウント2',
+                'email' => 'm.office14@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '2',
+            ],
+            [
+                'name' => '編集アカウント3',
+                'email' => 'm.office15@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '2',
+            ],
+            [
+                'name' => '編集アカウント4',
+                'email' => 'm.office16@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '2',
+            ],
+            [
+                'name' => '編集アカウント5',
+                'email' => 'm.office17@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '2',
+            ],
+            [
+                'name' => '株式会社伊藤リホ',
+                'email' => 'aic.riho.ito@gmail.com',
+                'password' => Hash::make('aic1226test'),
                 'account_type' => '1',
             ],
         ];
