@@ -61,7 +61,7 @@ class BolidesJapanController extends Controller
 
     public function user_restore($user_id)
     {
-        $user = User::find($user_id);
+        $user = User::withTrashed()->find($user_id);
         $user->restore();
         return 'ユーザー情報を復旧しました';
     }
