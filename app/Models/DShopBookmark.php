@@ -25,7 +25,6 @@ class DShopBookmark extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'created_at',
         'updated_at'
     ];
 

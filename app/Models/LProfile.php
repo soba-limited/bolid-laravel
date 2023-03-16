@@ -43,7 +43,6 @@ class LProfile extends Model
         'work_type',
         'industry',
         'occupation',
-        'created_at',
         'updated_at',
         'deleted_at'
     ];
