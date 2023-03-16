@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
 
         $params = [
 
-            [
+            /**[
                 'name' => 'MaoYamauchi',
                 'email' => 'yamauchi@ai-communication.jp',
                 'password' => Hash::make('yamauchi'),
@@ -79,6 +79,12 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('bolidestest'),
                 'account_type' => '1',
             ],
+            [
+                'name' => 'bolides8',
+                'email' => 'm.office12@bolides.co.jp',
+                'password' => Hash::make('bolidestest'),
+                'account_type' => '1',
+            ],*/
             [
                 'name' => 'bolides8',
                 'email' => 'm.office12@bolides.co.jp',

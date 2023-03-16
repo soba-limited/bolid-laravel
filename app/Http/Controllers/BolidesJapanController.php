@@ -59,6 +59,13 @@ class BolidesJapanController extends Controller
         return 'ユーザー情報を凍結しました';
     }
 
+    public function user_restore($user_id)
+    {
+        $user = User::find($user_id);
+        $user->restore();
+        return 'ユーザー情報を復旧しました';
+    }
+
     public function user_hard_destroy($user_id)
     {
         $user = User::find($user_id);

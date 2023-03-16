@@ -86,6 +86,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::get('/administar/user', [BolidesJapanController::class,'administar_user_index']);
     Route::post('/administar/user', [BolidesJapanController::class,'administar_user_search']);
     Route::delete('/delete/user/{user_id}', [BolidesJapanController::class,'user_destroy']);
+    Route::post('/restore/user/{user_id}', [BolidesJapanController::class,'user_restore']);
     Route::delete('/hard_delete/user/{user_id}', [BolidesJapanController::class,'user_hard_destroy']);
 
     //stripe
