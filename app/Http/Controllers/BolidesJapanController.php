@@ -12,7 +12,7 @@ class BolidesJapanController extends Controller
     //
     public function administar_user_index()
     {
-        $users = User::orderBy('id', 'asc');
+        $users = User::orderBy('id', 'asc')::withTrashed();
         $limit = 30;
         $skip = 0;
 
@@ -31,7 +31,7 @@ class BolidesJapanController extends Controller
 
     public function administar_user_search(Request $request)
     {
-        $users = User::orderBy('id', 'asc');
+        $users = User::orderBy('id', 'asc')::withTrashed();
         $limit = 30;
         $skip = 0;
 
