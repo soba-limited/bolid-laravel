@@ -131,8 +131,7 @@ class DShopController extends Controller
             'now_page' => $request->page,
         ];
 
-        return $this->jsonResponse($request);
-        //return $this->jsonResponse($allarray);
+        return $this->jsonResponse($allarray);
     }
 
     /**
