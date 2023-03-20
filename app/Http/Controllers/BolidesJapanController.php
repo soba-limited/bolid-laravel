@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
+use App\Mail\BolidesJapanContactFormMail;
+use App\Mail\BolidesJapanAdFormMail;
 use App\Mail\BolidesJapanPlanAddMail;
+use App\Mail\BolidesJapanPlanChangeMail;
 use App\Models\User;
 
 class BolidesJapanController extends Controller
@@ -73,6 +76,20 @@ class BolidesJapanController extends Controller
         return 'ユーザー情報を削除しました';
     }
 
+    public function contact_form(Request $request)
+    {
+        $data = $request;
+        Mail::to('info@bolides-japan.com')->send(new BolidesJapanContactFormMail($data));
+        return 'メールが送信されました';
+    }
+
+    public function ad_form(Request $request)
+    {
+        $data = $request;
+        Mail::to('info@bolides-japan.com')->send(new BolidesJapanAdFormMail($data));
+        return 'メールが送信されました';
+    }
+
     public function plan_add(Request $request)
     {
         $data = $request;
@@ -83,7 +100,7 @@ class BolidesJapanController extends Controller
     public function plan_change(Request $request)
     {
         $data = $request;
-        Mail::to('info@bolides-japan.com')->send(new BolidesJapanPlanAddMail($data));
+        Mail::to('info@bolides-japan.com')->send(new BolidesJapanPlanChangeMail($data));
         return 'メールが送信されました';
     }
 }

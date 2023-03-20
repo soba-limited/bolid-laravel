@@ -496,6 +496,8 @@ Route::group(['middleware'=>['api']], function () {
 
     //bjc
 
+    Route::post('/bolides_japan/contact_form', [BolidesJapanController::class,'contact_form']);
+    Route::post('/bolides_japan/ad_form', [BolidesJapanController::class,'ad_form']);
     Route::post('/bolides_japan/plan_add', [BolidesJapanController::class,'plan_add']);
     Route::post('/bolides_japan/plan_change', [BolidesJapanController::class,'plan_change']);
 });
