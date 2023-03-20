@@ -23,7 +23,7 @@ class CIndexController extends Controller
     {
         $posts = CPost::with(['user'=>function ($query) {
             $query->with(['CProfile']);
-        }])->with('CTags', 'CCat')->orderBy('id', 'desc')->limit(20)->get();
+        }])->with('CTags', 'CCat')->where('state', 0)->orderBy('id', 'desc')->limit(20)->get();
 
         $company = User::where('account_type', '1')->where('c_profile_id', '!=', null)->limit(12)->with(['CProfile'=>function ($query) {
             $query->with('CCompanyProfile', 'CTags');

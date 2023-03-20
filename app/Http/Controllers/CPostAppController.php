@@ -29,7 +29,7 @@ class CPostAppController extends Controller
 
     public function my_compleate_post($user_id)
     {
-        $app = CPostApp::where('user_id', $user_id)->where('state', 1)->with('CPost')->get();
+        $app = CPostApp::where('user_id', $user_id)->where('state', '!=', 4)->with('CPost')->get();
         return $this->jsonResponse($app);
     }
 
