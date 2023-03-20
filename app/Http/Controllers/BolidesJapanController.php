@@ -76,14 +76,14 @@ class BolidesJapanController extends Controller
     public function plan_add(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new BolidesJapanPlanAddMail($data));
+        Mail::to('info@bolides-japan.com')->send(new BolidesJapanPlanAddMail($data));
         return 'メールが送信されました';
     }
 
     public function plan_change(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new BolidesJapanPlanAddMail($data));
+        Mail::to('info@bolides-japan.com')->send(new BolidesJapanPlanAddMail($data));
         return 'メールが送信されました';
     }
 }

@@ -29,7 +29,7 @@ class CPostAppController extends Controller
 
     public function my_compleate_post($user_id)
     {
-        $app = CPostApp::where('user_id', $user_id)->where('state', '!=', 4)->with('CPost')->get();
+        $app = CPostApp::where('user_id', $user_id)->with('CPost')->get();
         return $this->jsonResponse($app);
     }
 
@@ -130,7 +130,7 @@ class CPostAppController extends Controller
         $app = CPostApp::find($c_post_app_id);
         $app->state = 2;
         $app->save();
-        $apps = CPostApp::where('user_id', $app->user_id)->where('state', 1)->with('CPost')->get();
+        $apps = CPostApp::where('user_id', $app->user_id)->with('CPost')->get();
         return $this->jsonResponse($apps);
     }
 

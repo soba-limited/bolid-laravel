@@ -89,7 +89,7 @@ class DOfficialController extends Controller
     public function sendMail(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new DellamallOfficialRequestMail($data));
+        Mail::to('dellamall@bolides-japan.com')->send(new DellamallOfficialRequestMail($data));
         return 'メールが送信されました';
     }
 }

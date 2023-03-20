@@ -23,7 +23,7 @@ class CSalonController extends Controller
         //
         $salon = new CSalon;
 
-        $salon = $salon->where('state', '>', 0);
+        $salon = $salon->where('state', '>', 0)->where('stripe_api_id', '!=', null);
 
         $limit = 12;
 
@@ -46,7 +46,7 @@ class CSalonController extends Controller
         //
         $salon = new CSalon;
 
-        $salon = $salon->where('state', '>', 0);
+        $salon = $salon->where('state', '>', 0)->where('stripe_api_id', '!=', null);
 
         if (!empty($request->s)) {
             $salon = $salon->where('title', 'like', '%'.$request->s.'%')->orWhere('content', 'like', '%'.$request->s.'%');
@@ -167,7 +167,7 @@ class CSalonController extends Controller
             'salon_id' => $c_salon->id,
         ];
 
-        Mail::to('yamauchi@ai-communication.jp')->send(new CorapuraSalonCreateMail($data));
+        Mail::to('corapura@bolides-japan.com')->send(new CorapuraSalonCreateMail($data));
 
         return $this->jsonResponse($c_salon);
     }

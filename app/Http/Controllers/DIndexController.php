@@ -47,14 +47,14 @@ class DIndexController extends Controller
     public function sendMail(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new DellamallContactMail($data));
+        Mail::to('dellamall@bolides-japan.com')->send(new DellamallContactMail($data));
         return 'メールが送信されました';
     }
 
     public function sendMail_report(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new DellamallReportMail($data));
+        Mail::to('dellamall@bolides-japan.com')->send(new DellamallReportMail($data));
         return 'メールが送信されました';
     }
 }

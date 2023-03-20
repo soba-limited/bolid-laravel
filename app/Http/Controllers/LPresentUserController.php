@@ -92,7 +92,7 @@ class LPresentUserController extends Controller
         $data['hobby'] = $hobby_text;
         $data['brand'] = $brand_text;
         $data['cosmetic'] = $cosmetic_text;
-        Mail::to('yamauchi@ai-communication.jp')->send(new LPresentMail($data));
+        Mail::to('liondor@bolides-japan.com')->send(new LPresentMail($data));
         return 'メールが送信されました';
 
         return '応募が完了しました';

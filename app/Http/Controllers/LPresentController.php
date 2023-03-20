@@ -191,7 +191,7 @@ class LPresentController extends Controller
         $data = $request;
         $present = LPresent::find($request->l_present_id);
         $data['present_title'] = $present->title;
-        Mail::to('yamauchi@ai-communication.jp')->send(new LPresentMail($data));
+        Mail::to('liondor@bolides-japan.com')->send(new LPresentMail($data));
         return 'メールが送信されました';
     }
 }

@@ -65,14 +65,14 @@ class LIndexController extends Controller
     public function sendMail(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new LiondorContactMail($data));
+        Mail::to('liondor@bolides-japan.com')->send(new LiondorContactMail($data));
         return 'メールが送信されました';
     }
 
     public function sendMail_ad(Request $request)
     {
         $data = $request;
-        Mail::to('yamauchi@ai-communication.jp')->send(new LiondorAdMail($data));
+        Mail::to('liondor@bolides-japan.com')->send(new LiondorAdMail($data));
         return 'メールが送信されました';
     }
 }
