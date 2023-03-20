@@ -40,7 +40,7 @@ class CProfileController extends Controller
     public function company_index()
     {
         $company = new CProfile;
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         $company = $company->whereHas('user', function ($query) {
             $query->where('account_type', 1);
@@ -68,7 +68,7 @@ class CProfileController extends Controller
     public function company_search(Request $request)
     {
         $company = new CProfile;
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         $company = $company->whereHas('user', function ($query) {
             $query->where('account_type', 1);
@@ -166,7 +166,7 @@ class CProfileController extends Controller
     {
         $user = new CProfile;
         $skill = CUserSkill::get();
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         $user = $user->whereHas('user', function ($query) {
             $query->where('account_type', 0);
@@ -196,7 +196,7 @@ class CProfileController extends Controller
     {
         $user = new CProfile;
         $skill = CUserSkill::get();
-        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->limit(20)->get();
+        $tag_list = CTag::withCount('CPosts')->orderBy('c_posts_count', 'desc')->get();
 
         $user = $user->whereHas('user', function ($query) {
             $query->where('account_type', 0);

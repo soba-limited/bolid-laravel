@@ -65,13 +65,13 @@ class CIndexController extends Controller
             $query->whereHas('user', function ($query) {
                 $query->where('account_type', 1);
             });
-        })->with('CProfile')->orderBy('id', 'desc')->limit(5)->get();
+        })->with('CProfile.user')->orderBy('id', 'desc')->limit(5)->get();
 
         $like = CLike::whereHas('CProfile', function ($query) {
             $query->whereHas('user', function ($query) {
                 $query->where('account_type', 0);
             });
-        })->with('CProfile')->orderBy('id', 'desc')->limit(5)->get();
+        })->with('CProfile.user')->orderBy('id', 'desc')->limit(5)->get();
 
 
         $allarray = [

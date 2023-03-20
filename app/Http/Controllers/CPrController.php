@@ -30,7 +30,7 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->get();
 
         $allarray = [
             'pr' => $pr,
@@ -80,7 +80,7 @@ class CPrController extends Controller
 
         $pr = $pr->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
 
-        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->get();
 
         $allarray = [
             'pr' => $pr,
@@ -119,7 +119,7 @@ class CPrController extends Controller
             $pr = $pr->limit($limit)->with('CTags')->with(['user.CProfile'])->get();
         }
 
-        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->limit(10)->get();
+        $tags = CTag::withCount('CPrs')->orderBy('c_prs_count', 'desc')->get();
 
         $allarray = [
             'pr' => $pr,
