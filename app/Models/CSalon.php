@@ -23,6 +23,12 @@ class CSalon extends Model
         'stripe_api_id',
     ];
 
+    protected $softCascade = [
+        "CTags",
+        "CSalonBookmarks",
+        "CSalonApps",
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

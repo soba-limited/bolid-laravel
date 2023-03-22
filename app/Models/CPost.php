@@ -35,6 +35,13 @@ class CPost extends Model
         'content',
     ];
 
+    protected $softCascade = [
+        "CCat",
+        "CTags",
+        "CPostApps",
+        "CPostBookmark",
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

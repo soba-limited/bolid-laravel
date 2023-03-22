@@ -41,6 +41,11 @@ class DMall extends Model
         'lock' => 'integer'
     ];
 
+    protected $softCascade = [
+        "DMallIn",
+        "DMallBookmarkUser",
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

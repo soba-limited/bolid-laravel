@@ -54,6 +54,11 @@ class LPost extends Model
         'l_series_id'=>'integer',
     ];
 
+    protected $softCascade = [
+        "LBookmark",
+        "LPickup",
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

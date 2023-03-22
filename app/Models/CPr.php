@@ -22,6 +22,11 @@ class CPr extends Model
         'count'
     ];
 
+    protected $softCascade = [
+        "CTags",
+        "CPrCounts",
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
