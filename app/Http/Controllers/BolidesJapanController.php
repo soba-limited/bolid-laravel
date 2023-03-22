@@ -8,6 +8,9 @@ use App\Mail\BolidesJapanContactFormMail;
 use App\Mail\BolidesJapanAdFormMail;
 use App\Mail\BolidesJapanPlanAddMail;
 use App\Mail\BolidesJapanPlanChangeMail;
+use App\Models\CProfile;
+use App\Models\DProfile;
+use App\Models\LProfile;
 use App\Models\User;
 
 class BolidesJapanController extends Controller
@@ -58,6 +61,18 @@ class BolidesJapanController extends Controller
     public function user_destroy($user_id)
     {
         $user = User::find($user_id);
+        if (!empty($user->l_profile_id)) {
+            $l_profile = LProfile::find($user->l_profile_id);
+            $l_profile->delete();
+        }
+        if (!empty($user->d_profile_id)) {
+            $d_profile = DProfile::find($user->d_profile_id);
+            $d_profile->delete();
+        }
+        if (!empty($user->c_profile_id)) {
+            $c_profile = CProfile::find($user->c_profile_id);
+            $c_profile->delete();
+        }
         $user->delete();
         return 'ユーザー情報を凍結しました';
     }
