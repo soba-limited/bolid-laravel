@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Cashier\Billable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Cashier\Subscription;
+use App\Notifications\Api\Auth\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,15 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     public function Subscriptions()
     {

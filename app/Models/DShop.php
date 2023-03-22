@@ -47,6 +47,8 @@ class DShop extends Model
         'official_user_id',
     ];
 
+    protected $softCascade = ['DTags', 'DMalls','DGoods','DComments','DPickups','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
