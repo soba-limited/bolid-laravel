@@ -87,6 +87,17 @@ class BolidesJapanController extends Controller
     public function user_hard_destroy($user_id)
     {
         $user = User::find($user_id);
+        if (!empty($user->l_profile_id)) {
+            $l_profile = LProfile::find($user->l_profile_id);
+            $l_profile->delete();
+        }
+        if (!empty($user->d_profile_id)) {
+            $d_profile = DProfile::find($user->d_profile_id);
+            $d_profile->delete();
+        }
+        if (!empty($user->c_profile_id)) {
+            $c_profile = CProfile::find($user->c_profile_id);
+        }
         $user->forceDelete();
         return 'ユーザー情報を削除しました';
     }

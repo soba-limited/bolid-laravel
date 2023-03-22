@@ -10,6 +10,8 @@ class CSalon extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+
 
     protected $fillable = [
         'user_id',

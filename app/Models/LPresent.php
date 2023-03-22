@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class LPresent extends Model
 {
     use HasFactory;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+
 
     /**
      * The attributes that are mass assignable.

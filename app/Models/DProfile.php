@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DProfile extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
 
     /**
      * The attributes that are mass assignable.

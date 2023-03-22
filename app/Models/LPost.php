@@ -10,6 +10,8 @@ class LPost extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+
 
     /**
      * The attributes that are mass assignable.

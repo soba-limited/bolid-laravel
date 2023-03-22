@@ -16,6 +16,7 @@ use App\Notifications\Api\Auth\ResetPasswordNotification;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Billable,SoftDeletes;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
     /**
      * The attributes that are mass assignable.
