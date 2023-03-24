@@ -163,7 +163,7 @@ class User extends Authenticatable
 
     public function DOfficial()
     {
-        return $this->hasOne(DShop::class, 'official_user_id');
+        return $this->hasMany(DShop::class, 'official_user_id');
     }
 
     public function DShopBookmark()
