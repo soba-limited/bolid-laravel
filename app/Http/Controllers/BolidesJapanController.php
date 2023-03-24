@@ -61,6 +61,18 @@ class BolidesJapanController extends Controller
     public function user_destroy($user_id)
     {
         $user = User::find($user_id);
+        if (!empty($user->LProfile)) {
+            $l_profile = LProfile::find($user->l_profile_id);
+            $l_profile->delete();
+        }
+        if (!empty($user->DProfile)) {
+            $d_profile = DProfile::find($user->d_profile_id);
+            $d_profile->delete();
+        }
+        if (!empty($user->CProfile)) {
+            $c_profile = CProfile::find($user->c_profile_id);
+            $c_profile->delete();
+        }
         $user->delete();
         return 'ユーザー情報を凍結しました';
     }
@@ -68,6 +80,18 @@ class BolidesJapanController extends Controller
     public function user_restore($user_id)
     {
         $user = User::withTrashed()->find($user_id);
+        if (!empty(LProfile::withTrashed()->find($user->l_profile_id)->deleted_at)) {
+            $l_profile = LProfile::withTrashed()->find($user->l_profile_id);
+            $l_profile->restore();
+        }
+        if (!empty(DProfile::withTrashed()->find($user->d_profile_id)->deleted_at)) {
+            $d_profile = DProfile::withTrashed()->find($user->d_profile_id);
+            $d_profile->restore();
+        }
+        if (!empty(CProfile::withTrashed()->find($user->c_profile_id)->deleted_at)) {
+            $c_profile = CProfile::withTrashed()->find($user->c_profile_id);
+            $c_profile->restore();
+        }
         $user->restore();
         return 'ユーザー情報を復旧しました';
     }

@@ -33,28 +33,6 @@ class LProfileSeeder extends Seeder
                 'industry'=>'サービス業',
                 'occupation'=>'通信事業',
             ],
-            [
-                'nicename' => 'こーじなかーの',
-                'sex'=> '男',
-                'zipcode'=> '0000000',
-                'zip'=>'愛知県',
-                'other_address'=>'名古屋市',
-                'age'=>'22',
-                'work_type'=>'見習い',
-                'industry'=>'残業',
-                'occupation'=>'通話',
-            ],
-            [
-                'nicename' => 'ボリード編集者アカウントテスト',
-                'sex'=> '男',
-                'zipcode'=> '0000000',
-                'zip'=>'愛知県',
-                'other_address'=>'名古屋市',
-                'age'=>'22',
-                'work_type'=>'テスト',
-                'industry'=>'テスト',
-                'occupation'=>'テスト',
-            ],
         ];
 
         $now = Carbon::now();

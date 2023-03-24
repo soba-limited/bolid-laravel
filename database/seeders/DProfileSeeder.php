@@ -25,10 +25,6 @@ class DProfileSeeder extends Seeder
                 'nicename' => 'ai-yamauchi',
                 'profile' => 'プロフィールテストプロフィールテストプロフィールテストプロフィールテストプロフィールテスト',
             ],
-            [
-                'nicename' => 'こーじなかーの',
-                'profile' => 'プロフィールテストプロフィールテストプロフィールテストプロフィールテストプロフィールテスト',
-            ],
         ];
 
         $now = Carbon::now();

@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            //LProfileSeeder::class,
-            //DProfileSeeder::class,
-            //CProfileSeeder::class,
+            LProfileSeeder::class,
+            DProfileSeeder::class,
+            CProfileSeeder::class,
             UsersTableSeeder::class,
             //LSeriesSeeder::class,
             //LCategorySeeder::class,

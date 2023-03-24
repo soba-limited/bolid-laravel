@@ -23,12 +23,16 @@ class UsersTableSeeder extends Seeder
 
         $params = [
 
-            /**[
+            [
                 'name' => 'MaoYamauchi',
                 'email' => 'yamauchi@ai-communication.jp',
                 'password' => Hash::make('yamauchi'),
                 'account_type' => '3',
+                'l_profile_id' => '1',
+                'd_profile_id' => '1',
+                'c_profile_id' => '1',
             ],
+            /*
             [
                 'name' => 'KojiNakano',
                 'email' => 'koji.nakano@ai-communication.jp',
@@ -84,7 +88,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'm.office12@bolides.co.jp',
                 'password' => Hash::make('bolidestest'),
                 'account_type' => '1',
-            ],*/
+            ],
             [
                 'name' => '編集アカウント1',
                 'email' => 'm.office13@bolides.co.jp',
@@ -120,7 +124,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'aic.riho.ito@gmail.com',
                 'password' => Hash::make('aic1226test'),
                 'account_type' => '1',
-            ],
+            ],*/
         ];
 
         $now = Carbon::now();

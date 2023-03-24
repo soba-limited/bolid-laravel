@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LPresent extends Model
 {
-    use HasFactory;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+    use HasFactory,SoftDeletes;
 
 
     /**
