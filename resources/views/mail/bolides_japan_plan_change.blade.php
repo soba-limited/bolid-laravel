@@ -1,5 +1,6 @@
 <p>企業アカウントのプラン変更の申請です</p>
 
+<p>ユーザーID：{{ $data['user_id'] }}</p>
 <p>会社名：{{ $data['c_name'] }}</p>
 <p>役職名：{{ $data['position'] }}</p>
 <p>名前:{{ $data['name'] }}</p>
