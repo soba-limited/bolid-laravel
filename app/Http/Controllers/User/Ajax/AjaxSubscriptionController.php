@@ -54,12 +54,12 @@ class AjaxSubscriptionController extends Controller
 
         $user = User::find($user_id);
 
-        if ($request->coupon == "U2S6GWTR") {
+        if ($request->coupon == "5MWBJXHC") {
             $user->subscription($request->db_name)->swap($plan, [
                 'coupon' => 'promo_1Ml6XUBTOnvlAmdYCJ9DO1D0'
             ]);
             $user->fill(['coupon' => '1'])->save();
-        } elseif ($request->coupon == "B1N4F5AP") {
+        } elseif ($request->coupon == "N6SY9EUD") {
             $user->subscription($request->db_name)->swap($plan, [
                 'coupon' => 'promo_1Ml6VsBTOnvlAmdYRbJyxMui'
             ]);
