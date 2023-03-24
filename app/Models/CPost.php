@@ -38,8 +38,6 @@ class CPost extends Model
     ];
 
     protected $softCascade = [
-        "CCat",
-        "CTags",
         "CPostApps",
         "CPostBookmark",
     ];

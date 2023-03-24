@@ -94,9 +94,9 @@ class User extends Authenticatable
         "CCommentSends",
         "CCommentRecives",
         "CPrCounts",
-        'LProfile',
-        'DProfile',
-        'CProfile',
+        //'LProfile',
+        //'DProfile',
+        //'CProfile',
     ];
 
     /**
