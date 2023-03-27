@@ -35,7 +35,7 @@ class CIndexController extends Controller
             $query->with('CProfile');
         }])->withCount('CPrCounts')->with('CTags')->orderBy('id', 'desc')->limit(12)->get();
 
-        $salon = CSalon::limit(5)->get();
+        $salon = CSalon::limit(5)->where('state', '>', 0)->where('stripe_api_id', '!=', null)->get();
 
         $coupon = CCoupon::with(['CProfile'=>function ($query) {
             $query->with('user');

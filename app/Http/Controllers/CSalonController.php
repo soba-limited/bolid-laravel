@@ -293,7 +293,7 @@ class CSalonController extends Controller
 
     public function tab_return(Request $request)
     {
-        $salon = CSalon::where('user_id', $request->user_id)->orderBy('created_at', 'desc')->get();
+        $salon = CSalon::where('user_id', $request->user_id)->where('state', '>', 0)->where('stripe_api_id', '!=', null)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($salon);
     }
 }
