@@ -24,7 +24,7 @@ class CProfile extends Model
     ];
 
     protected $softCascade = [
-        'CPresident',
+        //'CPresident',
         'CLikes',
         'CSusts',
         'COffices',
