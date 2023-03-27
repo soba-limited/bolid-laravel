@@ -49,7 +49,7 @@ class DShop extends Model
         'official_user_id',
     ];
 
-    protected $softCascade = ['DMalls','DComments','DPickups','DOverviews','DInfos','DCoupons','DItems','DSocials','DInstaApiTokens'];
+    protected $softCascade = ['DMalls','DComments','DPickups','DOverviews','DInfos','DCoupons','DItems','DSocials'];
 
     public function user()
     {
