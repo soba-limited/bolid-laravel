@@ -207,7 +207,7 @@ class DShopController extends Controller
         $kanren = DShop::inRandomOrder()->limit(4)->get();
         $salon = null;
         if (!empty($shop->official_user_id)) {
-            $salon = CSalon::where('user_id', $shop->official_user_id)->get();
+            $salon = CSalon::where('user_id', $shop->official_user_id)->where('state', '>', 0)->where('stripe_api_id', '!=', null)->get();
         }
 
         $allarray = [
