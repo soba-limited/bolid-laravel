@@ -70,15 +70,21 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     protected $softCascade = [
+        "LPost",
         //"LPresent",
         //"LBookmark",
         //"DFollowing",
         //"DFollowed",
+        "DShop",
+        "DMall",
         //"DMallBookmark",
         //"DOfficial",
         //"DShopBookmark",
         //"DGoods",
         //"DCommentGoods",
+        "CPosts",
+        "CSalons",
+        "CPrs",
         //"CPostApps",
         //"CPostBookmarks",
         //"CSalonBookmarks",

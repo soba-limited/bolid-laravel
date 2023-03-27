@@ -10,7 +10,6 @@ class DMall extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
     /**
@@ -43,10 +42,6 @@ class DMall extends Model
         'lock' => 'integer'
     ];
 
-    protected $softCascade = [
-        "DMallIn",
-        "DMallBookmarkUser",
-    ];
 
     public function user()
     {

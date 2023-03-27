@@ -10,7 +10,6 @@ class DShop extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
     /**
@@ -49,7 +48,7 @@ class DShop extends Model
         'official_user_id',
     ];
 
-    protected $softCascade = ['DMalls','DComments','DPickups','DOverviews','DInfos','DCoupons','DItems','DSocials'];
+    protected $softCascade = ['DComments','DPickups','DOverviews','DInfos','DCoupons','DItems','DSocials'];
 
     public function user()
     {
