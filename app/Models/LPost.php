@@ -57,8 +57,8 @@ class LPost extends Model
     ];
 
     protected $softCascade = [
-        "LBookmark",
-        "LPickup",
+        //"LBookmark",
+        //"LPickup",
     ];
 
     public function user()
