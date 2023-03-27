@@ -72,7 +72,7 @@ class User extends Authenticatable
     protected $softCascade = [
         "LPost",
         //"LPresent",
-        "LBookmark",
+        //"LBookmark",
         "DFollowing",
         "DFollowed",
         "DShop",
@@ -80,7 +80,7 @@ class User extends Authenticatable
         "DMallBookmark",
         "DOfficial",
         "DShopBookmark",
-        "DGoods",
+        //"DGoods",
         //"DCommentGoods",
         "CPosts",
         "CSalons",

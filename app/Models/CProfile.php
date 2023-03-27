@@ -23,6 +23,13 @@ class CProfile extends Model
         'title',
     ];
 
+    protected $softCascade = [
+        'CPresident',
+        'CLikes',
+        'CSusts',
+        'COffices',
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class);

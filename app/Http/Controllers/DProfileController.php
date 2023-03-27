@@ -153,7 +153,7 @@ class DProfileController extends Controller
 
     public function create_shop(Request $request)
     {
-        $shop = DShop::where('user_id', $request->user_id)->orderBy('created_at', 'desc')->get();
+        $shop = DShop::where('user_id', $request->user_id)->orWhere('official_user_id', $request->user_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($shop);
     }
 
