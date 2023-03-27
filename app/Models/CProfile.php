@@ -28,6 +28,10 @@ class CProfile extends Model
         'CLikes',
         'CSusts',
         'COffices',
+        'CCoupons',
+        'CCards',
+        'CItems',
+        'CBusinessInformaitions',
     ];
 
     public function user()
