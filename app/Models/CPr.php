@@ -10,7 +10,6 @@ class CPr extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
     protected $fillable = [
@@ -24,10 +23,6 @@ class CPr extends Model
         'count'
     ];
 
-    protected $softCascade = [
-        "CTags",
-        "CPrCounts",
-    ];
 
     public function user()
     {

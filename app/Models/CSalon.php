@@ -10,7 +10,6 @@ class CSalon extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
     protected $fillable = [
@@ -23,12 +22,6 @@ class CSalon extends Model
         'number_of_people',
         'content',
         'stripe_api_id',
-    ];
-
-    protected $softCascade = [
-        "CTags",
-        "CSalonBookmarks",
-        "CSalonApps",
     ];
 
     public function user()

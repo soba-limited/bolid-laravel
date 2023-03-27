@@ -10,7 +10,6 @@ class CPost extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
     protected $fillable = [
@@ -37,10 +36,6 @@ class CPost extends Model
         'content',
     ];
 
-    protected $softCascade = [
-        "CPostApps",
-        "CPostBookmark",
-    ];
 
     public function user()
     {

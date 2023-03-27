@@ -10,7 +10,6 @@ class LPost extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
     /**
@@ -56,10 +55,6 @@ class LPost extends Model
         'l_series_id'=>'integer',
     ];
 
-    protected $softCascade = [
-        //"LBookmark",
-        //"LPickup",
-    ];
 
     public function user()
     {
