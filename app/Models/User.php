@@ -97,6 +97,12 @@ class User extends Authenticatable
         //'LProfile',
         //'DProfile',
         //'CProfile',
+        'DFollowing',
+        'DFollowed',
+        'CCommentSends',
+        'CFollowings',
+        'CFolloweds',
+        'CPostApps',
     ];
 
     /**
