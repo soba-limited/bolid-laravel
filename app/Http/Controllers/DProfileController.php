@@ -79,7 +79,7 @@ class DProfileController extends Controller
     {
         //
         $profile = User::where('id', $user_id)->withCount('DFollowing')->withCount('DFollowed')->with('DProfile')->first();
-        $create_shop = DShop::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
+        $create_shop = DShop::where('user_id', $user_id)->orWhere('official_user_id', $user_id)->orderBy('created_at', 'desc')->get();
         $allarray = [
             'profile' => $profile,
             'create_shop' => $create_shop,
