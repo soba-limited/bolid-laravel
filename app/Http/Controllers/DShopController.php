@@ -129,7 +129,7 @@ class DShopController extends Controller
         $allarray = [
             'shop' => $shop,
             'page_max' => $page_max,
-            'now_page' => $request->page,
+            'now_page' => $page,
         ];
 
         return $this->jsonResponse($allarray);
