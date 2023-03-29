@@ -204,13 +204,7 @@ class DShopController extends Controller
         $comments_count = $shop->DComments->count();
         $good_count = $shop->DGoods->count();
         $mall_count = $shop->DMalls->count();
-
-        $tags = $shop->Dtags->pluck('name')->toArray();
-
-        $kanren = DShop::whereHas(['DTags',function ($query) use ($tags) {
-            $query->whereIn('name', $tags);
-        }])->inRandomOrder()->limit(4)->get();
-
+        $kanren = DShop::inRandomOrder()->limit(4)->get();
         $salon = null;
         if (!empty($shop->official_user_id)) {
             $salon = CSalon::where('user_id', $shop->official_user_id)->where('state', '>', 0)->where('stripe_api_id', '!=', null)->get();
