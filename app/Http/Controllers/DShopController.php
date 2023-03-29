@@ -118,6 +118,7 @@ class DShopController extends Controller
 
 
         $limit = 28;
+        $page = (int) $page;
         $skip = ($page - 1) * $limit;
 
         $count = $shop->count();
