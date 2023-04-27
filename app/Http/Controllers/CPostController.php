@@ -34,7 +34,7 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags', 'user.CProfile')->get();
+        $post = $post->limit($limit)->with('CTags', 'CCat', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
@@ -113,7 +113,7 @@ class CPostController extends Controller
             });
         }
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->get();
+        $post = $post->limit($limit)->skip($skip)->with('CTags', 'CCat', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
@@ -150,7 +150,7 @@ class CPostController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->with('CTags', 'user.CProfile')->get();
+        $post = $post->limit($limit)->with('CTags', 'CCat', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
@@ -231,7 +231,7 @@ class CPostController extends Controller
             });
         }
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags', 'user.CProfile')->get();
+        $post = $post->limit($limit)->skip($skip)->with('CTags', 'CCat', 'user.CProfile')->get();
 
         $allarray = [
             'post' => $post,
