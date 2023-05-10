@@ -162,6 +162,7 @@ Route::group(['middleware'=>['api']], function () {
     Route::post('/liondor/post/editor_index/{id}', [LPostController::class,'editor_index_post']);
     Route::get('/liondor/post/create', [LPostController::class,'create'])->name('l_post.create');
     Route::post('/liondor/post/imagesave', [LPostController::class,'imagesave'])->name('l_post.imagesave');
+    Route::post('/liondor/post/image_destroy/{id}', [LPostController::class,'image_destroy'])->name('l_post.image_destroy');
     Route::post('/liondor/post/store', [LPostController::class,'store'])->name('l_post.store');
     Route::get('/liondor/post/edit/{id}', [LPostController::class,'edit'])->name('l_post.edit');
     Route::post('/liondor/post/update/{id}', [LPostController::class,'update'])->name('l_post.update');

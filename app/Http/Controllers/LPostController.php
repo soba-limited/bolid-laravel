@@ -13,6 +13,7 @@ use App\Models\LSeries;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LPostController extends Controller
 {
@@ -360,4 +361,29 @@ class LPostController extends Controller
             return $image;
         }
     }
+
+	public function image_destroy(Request $request, $id)
+	{
+		$l_post = LPost::find($id);
+
+		if (!$l_post) {
+			return response()->json(['error' => '投稿が見つかりません'], 404);
+		}
+
+		if ($l_post->thumbs && $request->type == 'thumbs') {
+			// Storage::disk('public')->delete($l_post->thumbs);
+
+			$l_post->thumbs = null;
+		}
+
+		if ($l_post->mv && $request->type == 'mv') {
+			// Storage::disk('public')->delete($l_post->mv);
+
+			$l_post->mv = null;
+		}
+
+		$l_post->save();
+
+		return $request->type;
+	}
 }

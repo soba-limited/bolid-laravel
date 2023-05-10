@@ -349,7 +349,8 @@ class DShopController extends Controller
     public function shop_create_url(Request $request)
     {
         $url = $request->url;
-        $page_check = DShop::where('url', 'like', '%'.$url.'%')->first();
+        $domain = parse_url($request->url, PHP_URL_HOST);
+        $page_check = DShop::where('url', 'like', '%'.$domain.'%')->first();
         if (!empty($page_check->id)) {
             return "すでにショップがあります";
         } else {
