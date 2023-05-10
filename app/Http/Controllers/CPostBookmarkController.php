@@ -64,7 +64,7 @@ class CPostBookmarkController extends Controller
         $count = $post->count();
         $page_max = $count % $limit > 0 ? floor($count / $limit) + 1: $count / $limit;
 
-        $post = $post->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
+        $post = $post->orderBy('id', 'desc')->limit($limit)->skip($skip)->with('CTags')->with(['user.CProfile'])->get();
 
         $allarray = [
             'post' => $post,
