@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\DShop;
 use App\Models\DComment;
 use App\Models\DMall;
+use App\Models\DGood;
 use App\Models\DMallBookmarks;
 use App\Http\Requests\StoreDProfileRequest;
 use App\Http\Requests\UpdateDProfileRequest;
@@ -167,7 +168,7 @@ class DProfileController extends Controller
 
     public function save_shop(Request $request)
     {
-        $shop_id = DMallIn::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
+        $shop_id = DGood::where('user_id', $request->user_id)->orderBy('d_shop_id', 'asc')->pluck('d_shop_id');
         $shop = DShop::whereIn('id', $shop_id)->orderBy('created_at', 'desc')->get();
         return $this->jsonResponse($shop);
     }

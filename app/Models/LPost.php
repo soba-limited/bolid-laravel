@@ -74,6 +74,6 @@ class LPost extends Model
     }
     public function LPickup()
     {
-        return $this->hasOne(LPickup::class);
+        return $this->belongsTo(LPickup::class);
     }
 }
