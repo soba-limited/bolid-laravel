@@ -38,6 +38,8 @@ class LPostController extends Controller
         $sort_key = 'view_date';
         $order_key = 'desc';
 
+		$posts = $posts->where($sort_key, '<=', date('Y-m-d\TH:i:s'));
+
         if (!empty($request->sort)) {
             $sort_key = $request->sort;
         }
