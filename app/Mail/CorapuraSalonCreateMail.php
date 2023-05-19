@@ -30,7 +30,7 @@ class CorapuraSalonCreateMail extends Mailable
     public function build()
     {
         return $this->view('mail.corapura_salon_create')
-        ->subject('【サロンが追加されました】')
+        ->subject('【サロンが公開されました】')
         ->from('info@bolides-japan.com')
         ->with('data', $this->data);
     }

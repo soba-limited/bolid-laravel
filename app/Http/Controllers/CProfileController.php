@@ -460,10 +460,9 @@ class CProfileController extends Controller
 
     public function matching_user(Request $request)
     {
-        $myposts = User::whereHas('CPostApps', function ($query) {
-            $query->where('c_post_apps.state', '<>', 0);
-        })->with('CPostApps.user.CProfile')->find($request->user_id);
-        return $this->jsonResponse($myposts);
+		$ids = CPostApp::where('user_id', $request->user_id)->where('state', '>', 0)->where('state', '<', 5)->pluck('c_post_id');
+		$myposts = CPost::whereIn('id', $ids)->get();
+		return $this->jsonResponse($myposts);
     }
 
 

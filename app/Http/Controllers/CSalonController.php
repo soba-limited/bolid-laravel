@@ -167,7 +167,9 @@ class CSalonController extends Controller
             'salon_id' => $c_salon->id,
         ];
 
-        Mail::to('corapura@bolides-japan.com')->send(new CorapuraSalonCreateMail($data));
+		if ($c_salon->state == 1) {
+			Mail::to('corapura@bolides-japan.com')->send(new CorapuraSalonCreateMail($data));
+		}
 
         return $this->jsonResponse($c_salon);
     }
@@ -253,6 +255,18 @@ class CSalonController extends Controller
                 $c_salon->CTags()->syncWithoutDetaching($tag_id);
             }
         }
+
+		$user = User::find($request->user_id);
+
+		$data = [
+            'salon_title' => $c_salon->title,
+            'user_name' => $user->name,
+            'salon_id' => $c_salon->id,
+        ];
+
+		if ($c_salon->state == 1 && is_null($c_salon->stripe_api_id)) {
+			Mail::to('corapura@bolides-japan.com')->send(new CorapuraSalonCreateMail($data));
+		}
 
         return $this->jsonResponse($c_salon);
     }

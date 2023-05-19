@@ -33,11 +33,10 @@ class LIndexController extends Controller
         $video = \Commons::LPost_Category('video');
         $present = LPresent::limit(5)->orderBy('id', 'desc')->get();
         $salon = CSalon::where('state', '>', 0)->where('stripe_api_id', '!=', null)->limit(5)->orderBy('id', 'desc')->get();
-        $special = LPickup::with(['LPost'=>function ($query) {
-            $query->with(['user'=>function ($query) {
-                $query->with('LProfile');
-            }])->with('LCategory');
-        }])->limit(12)->orderBy('id', 'desc')->get();
+		$ids = LPickup::select('*')->pluck('l_post_id');
+		$special = LPost::whereIn('id', $ids)->with(['user'=>function ($query) {
+			$query->with('LProfile');
+		}])->with('LCategory')->limit(12)->orderBy('view_date', 'desc')->get();
         $first = LFirst::with('LCategory')->with('user.LProfile')->get();
         $collection = LCollection::with('LCategory')->with('user.LProfile')->get();
 
